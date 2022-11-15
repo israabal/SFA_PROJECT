@@ -10,7 +10,7 @@ Dribbble: www.dribbble.com/keenthemes
 Like: www.facebook.com/keenthemes
 License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
 -->
-<html lang="en">
+<html @if (app()->getLocale()=='en') lang="en" @else lang="ar" @endif >
 	<!--begin::Head-->
 	<head><base href=""/>
         <title>Metronic| @yield('title')</title>
@@ -35,7 +35,15 @@ License: For each use you must have a valid license purchased only from above li
 		<!--end::Vendor Stylesheets-->
 		<!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
 		<link href="{{ asset("cms/assets/plugins/global/plugins.bundle.css") }}" rel="stylesheet" type="text/css" />
-		<link href="{{ asset("cms/assets/css/style.bundle.css") }}" rel="stylesheet" type="text/css" />
+
+@if (app()->getLocale()=='ar')
+<link href="{{ asset("cms/assets/css/style.bundle.rtl.css") }}" rel="stylesheet" type="text/css" />
+
+@else
+<link href="{{ asset("cms/assets/css/style.bundle.css") }}" rel="stylesheet" type="text/css" />
+
+@endif
+
         @yield('styles')
 		<!--end::Global Stylesheets Bundle-->
 	</head>
@@ -88,12 +96,12 @@ License: For each use you must have a valid license purchased only from above li
 											<span class="menu-arrow d-lg-none"></span>
 										</span>
 										<!--end:Menu link-->
-									
+
 									</div>
 									<!--end:Menu item-->
-								
-								
-								
+
+
+
 								</div>
 								<!--end::Menu-->
 							</div>
@@ -107,7 +115,7 @@ License: For each use you must have a valid license purchased only from above li
 										<!--begin::Search toggle-->
 										<div class="d-flex align-items-center" data-kt-search-element="toggle" id="kt_header_search_toggle">
 											<div class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px">
-											
+
 											</div>
 										</div>
 										<!--end::Search toggle-->
@@ -151,7 +159,7 @@ License: For each use you must have a valid license purchased only from above li
 													<div class="position-absolute top-50 end-0 translate-middle-y" data-kt-search-element="toolbar">
 														<!--begin::Preferences toggle-->
 														<div data-kt-search-element="preferences-show" class="btn btn-icon w-20px btn-sm btn-active-color-primary me-1" data-bs-toggle="tooltip" title="Show search preferences">
-														
+
 														</div>
 														<!--end::Preferences toggle-->
 														<!--begin::Advanced search toggle-->
@@ -830,10 +838,10 @@ License: For each use you must have a valid license purchased only from above li
 									<!--end::Search-->
 								</div>
 								<!--end::Search-->
-							
-							
-							
-							
+
+
+
+
 								<!--begin::Theme mode-->
 								<div class="app-navbar-item ms-1 ms-lg-3">
 									<!--begin::Menu toggle-->
@@ -1038,46 +1046,28 @@ License: For each use you must have a valid license purchased only from above li
 											<!--begin::Menu sub-->
 											<div class="menu-sub menu-sub-dropdown w-175px py-4">
 												<!--begin::Menu item-->
+
+
+
+
 												<div class="menu-item px-3">
-													<a href="{{ url("../../demo1/dist/account/settings.html") }}" class="menu-link d-flex px-5 active">
+													<a href="{{ LaravelLocalization::getLocalizedURL('en', null, [], true) }}" class="menu-link d-flex px-5 active">
 													<span class="symbol symbol-20px me-4">
 														<img class="rounded-1" src="{{ asset("cms/assets/media/flags/united-states.svg") }}" alt="" />
 													</span>English</a>
 												</div>
-												<!--end::Menu item-->
-												<!--begin::Menu item-->
+
+
+
+
 												<div class="menu-item px-3">
-													<a href="{{ url("../../demo1/dist/account/settings.html") }}" class="menu-link d-flex px-5">
+													<a href="{{ LaravelLocalization::getLocalizedURL('ar', null, [], true) }}" class="menu-link d-flex px-5 active">
 													<span class="symbol symbol-20px me-4">
-														<img class="rounded-1" src="{{ asset("cms/assets/media/flags/spain.svg") }}" alt="" />
-													</span>Spanish</a>
+														<img class="rounded-1" src="{{ asset("cms/assets/media/flags/saudi-arabia.svg") }}" alt="" />
+													</span>العربية</a>
 												</div>
-												<!--end::Menu item-->
-												<!--begin::Menu item-->
-												<div class="menu-item px-3">
-													<a href="{{ url("../../demo1/dist/account/settings.html") }}" class="menu-link d-flex px-5">
-													<span class="symbol symbol-20px me-4">
-														<img class="rounded-1" src="{{ asset("cms/assets/media/flags/germany.svg") }}" alt="" />
-													</span>German</a>
-												</div>
-												<!--end::Menu item-->
-												<!--begin::Menu item-->
-												<div class="menu-item px-3">
-													<a href="{{ url("../../demo1/dist/account/settings.html") }}" class="menu-link d-flex px-5">
-													<span class="symbol symbol-20px me-4">
-														<img class="rounded-1" src="{{ asset("cms/assets/media/flags/japan.svg") }}" alt="" />
-													</span>Japanese</a>
-												</div>
-												<!--end::Menu item-->
-												<!--begin::Menu item-->
-												<div class="menu-item px-3">
-													<a href="{{ url("../../demo1/dist/account/settings.html") }}" class="menu-link d-flex px-5">
-													<span class="symbol symbol-20px me-4">
-														<img class="rounded-1" src="{{ asset("cms/assets/media/flags/france.svg") }}" alt="" />
-													</span>French</a>
-												</div>
-												<!--end::Menu item-->
-											</div>
+
+                                                </div>
 											<!--end::Menu sub-->
 										</div>
 										<!--end::Menu item-->
@@ -1145,12 +1135,12 @@ License: For each use you must have a valid license purchased only from above li
 						</div>
 						<!--end::Logo-->
 						<!--begin::sidebar menu-->
-						<div class="app-sidebar-menu overflow-hidden flex-column-fluid">
+						<div  class="app-sidebar-menu overflow-hidden flex-column-fluid">
 							<!--begin::Menu wrapper-->
 							<div id="kt_app_sidebar_menu_wrapper" class="app-sidebar-wrapper hover-scroll-overlay-y my-5" data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_app_sidebar_logo, #kt_app_sidebar_footer" data-kt-scroll-wrappers="#kt_app_sidebar_menu" data-kt-scroll-offset="5px" data-kt-scroll-save-state="true">
 								<!--begin::Menu-->
 								<div class="menu menu-column menu-rounded menu-sub-indention px-3" id="#kt_app_sidebar_menu" data-kt-menu="true" data-kt-menu-expand="false">
-								
+
 									<!--begin:Menu item-->
 									<div class="menu-item pt-5">
 										<!--begin:Menu content-->
@@ -1160,12 +1150,12 @@ License: For each use you must have a valid license purchased only from above li
 										<!--end:Menu content-->
 									</div>
 									<!--end:Menu item-->
-							
-							
-							
-							
-								
-									
+
+
+
+
+
+
 									<!--begin:Menu item-->
 									<div class="menu-item">
 										<!--begin:Menu link-->
@@ -1208,7 +1198,7 @@ License: For each use you must have a valid license purchased only from above li
 												</span>
 												<!--end::Svg Icon-->
 											</span>
-											<span class="menu-title">Components</span>
+											<span class="menu-title">العناصر</span>
 										</a>
 										<!--end:Menu link-->
 									</div>
@@ -1232,14 +1222,14 @@ License: For each use you must have a valid license purchased only from above li
 										<!--end:Menu link-->
 									</div>
 									<!--end:Menu item-->
-								
+
 								</div>
 								<!--end::Menu-->
 							</div>
 							<!--end::Menu wrapper-->
 						</div>
 						<!--end::sidebar menu-->
-					
+
 					</div>
 					<!--end::Sidebar-->
 					<!--begin::Main-->
@@ -1252,7 +1242,7 @@ License: For each use you must have a valid license purchased only from above li
 								<div id="kt_app_toolbar_container" class="app-container container-fluid d-flex flex-stack">
 									<!--begin::Page title-->
 									<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
-										
+
 										<!--begin::Breadcrumb-->
 										<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
 											<!--begin::Item-->
@@ -1272,7 +1262,7 @@ License: For each use you must have a valid license purchased only from above li
 										<!--end::Breadcrumb-->
 									</div>
 									<!--end::Page title-->
-									
+
 								</div>
 								<!--end::Toolbar container-->
 							</div>
@@ -1726,10 +1716,10 @@ License: For each use you must have a valid license purchased only from above li
 		<!--end::Chat drawer-->
 		<!--end::Drawers-->
 		<!--begin::Engage drawers-->
-	
+
 
 		<!--end::Engage drawers-->
-	
+
 		<!--begin::Scrolltop-->
 		<div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
 			<!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
