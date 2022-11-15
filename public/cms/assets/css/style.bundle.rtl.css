@@ -68,12 +68,15 @@
   --bs-link-hover-color: #0095e8;
   --bs-code-color: #b93993;
   --bs-highlight-bg: #fff3cd;
+
+
 }
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+  direction: rtl;
 }
 
 body {
@@ -46676,6 +46679,7 @@ html:not([data-theme=dark]) {
     flex-shrink: 0;
   }
   .app-sidebar-menu .menu > .menu-item {
+    direction: rtl;
     margin-right: 0.115rem;
   }
 }
