@@ -68,14 +68,14 @@ License: For each use you must have a valid license purchased only from above li
 	<!--begin::Root-->
 	<div class="d-flex flex-column flex-root" id="kt_app_root">
 		<!--begin::Page bg image-->
-		<!-- <style>
+		<style>
 			body {
 				background-image: url('{{asset('cms/assets/media/auth/bg4.jpg')}}');
 			}
 
 			[data-theme="dark"] body {
 				background-image: url('{{asset('cms/assets/media/auth/bg4-dark.jpg')}}');
-			} -->
+			}
 		</style>
 		<!--end::Page bg image-->
 		<!--begin::Authentication - Sign-in -->
@@ -107,7 +107,7 @@ License: For each use you must have a valid license purchased only from above li
 							<!--begin::Heading-->
 							<div class="text-center mb-11">
 								<!--begin::Title-->
-								<h1 class="text-dark fw-bolder mb-3">Sign In</h1>
+								<h1 class="text-dark fw-bolder mb-3">{{__('cms.Sign_In')}}</h1>
 								<!--end::Title-->
 
 							</div>
@@ -115,13 +115,13 @@ License: For each use you must have a valid license purchased only from above li
 							<!--begin::Input group=-->
 							<div class="fv-row mb-8">
 								<!--begin::Email-->
-								<input type="text" placeholder="Email" name="email" id="email" autocomplete="off" class="form-control bg-transparent" />
+								<input type="text" placeholder="{{__('cms.email')}}" name="email" id="email" autocomplete="off" class="form-control bg-transparent" />
 								<!--end::Email-->
 							</div>
 							<!--end::Input group=-->
 							<div class="fv-row mb-3">
 								<!--begin::Password-->
-								<input type="password" placeholder="Password" name="password" id="password" autocomplete="off" class="form-control bg-transparent" />
+								<input type="password" placeholder="{{__('cms.password')}}" name="password" id="password" autocomplete="off" class="form-control bg-transparent" />
 								<!--end::Password-->
 							</div>
 							<!--end::Input group=-->
@@ -131,11 +131,11 @@ License: For each use you must have a valid license purchased only from above li
 								<div>
 									<label class="form-check form-check-sm form-check-custom form-check-solid">
 										<input id="remember" class="form-check-input" type="checkbox" value="2" checked="checked">
-										<span class="form-check-label">remember_me</span>
+										<span class="form-check-label">{{__('cms.remember_me')}}</span>
 									</label>
 								</div>
 								<!--begin::Link-->
-								<a href="../../demo1/dist/authentication/layouts/creative/reset-password.html" class="link-primary">Forgot Password ?</a>
+								<a href="../../demo1/dist/authentication/layouts/creative/reset-password.html" class="link-primary">{{__('cms.Forgot_Password')}}?</a>
 								<!--end::Link-->
 							</div>
 							<!--end::Wrapper-->
@@ -143,10 +143,10 @@ License: For each use you must have a valid license purchased only from above li
 							<div class="d-grid mb-10">
 								<button onclick="login()" type="button" class="btn btn-primary">
 									<!--begin::Indicator label-->
-									<span class="indicator-label">Sign In</span>
+									<span class="indicator-label">{{__('cms.Sign_In')}}</span>
 									<!--end::Indicator label-->
 									<!--begin::Indicator progress-->
-									<span class="indicator-progress">Please wait...
+									<span class="indicator-progress">{{__('cms.Please_wait')}}...
 										<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 									<!--end::Indicator progress-->
 								</button>
@@ -189,7 +189,7 @@ License: For each use you must have a valid license purchased only from above li
 
 		axios.post('/cms/login', data).then(function(response) {
 				console.log('200');
-				window.location.href = '/test';
+				window.location.href = '/home';
 			})
 			.catch(function(error) {
 				console.log(error);

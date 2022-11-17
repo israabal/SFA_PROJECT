@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 
 class AuthController extends Controller
 {
@@ -42,6 +44,37 @@ class AuthController extends Controller
             return response()->json(['message' => $validator->getMessageBag()->first()], Response::HTTP_BAD_REQUEST);
         }
     }
+    public function editPassword()
+    {
+        return response()->view('cms.auth.edit-password');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $validator = Validator($request->all(), [
+            'password' => 'required|current_password:' . 'admin',
+            'new_password' => ['required', 'confirmed', Password::min(8)->letters()->symbols()->numbers()->mixedCase()->uncompromised()],
+
+        ]);
+        if (!$validator->fails()) {
+            $admin = $request->Admin();
+            $admin->forceFill(
+                ['password' => Hash::make($request->input('new_password'))]
+            );
+            $isSaved = $admin->save();
+
+            return response()->json(
+                ['message' => $isSaved ? 'Updated successfully' : 'Updated Failed!'],
+                $isSaved ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST
+            );
+        } else {
+            return response()->json(
+                ["message" => $validator->getMessageBag()->first()],
+                Response::HTTP_BAD_REQUEST
+            );
+        }
+    }
+
     public function logout(Request $request)
     {
         $guard = session('guard');
@@ -49,4 +82,4 @@ class AuthController extends Controller
         $request->session()->invalidate();
         return redirect()->route('cms.login', $guard);
     }
-   }
+}
