@@ -1,6 +1,14 @@
 <?php
 
 use App\Http\Controllers\AdminProfileConroller;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\RolePermissionController;
+use App\Http\Controllers\PermissionController;
+
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ResetPasswordController;
@@ -39,10 +47,29 @@ Route::group(
         });
 
         Route::middleware('auth:admin')->group(function () {
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function(){ //...
 
+
+
+        Route::resource('admins', AdminController::class);
+        Route::resource('categories', CategoryController::class);
+        Route::resource('subcategories', SubCategoryController::class);
+
+
+
+
+
+        Route::get('/', function () {return view('cms.parent'); });
+
+        Route::resource('roles',RoleController::class);
+        Route::resource('permissions',PermissionController::class);
 
             Route::get('/admin/editPassword', [AuthController::class, 'editPassword'])->name('admin.editPassword');
             Route::post('/admin/updatePassword', [AuthController::class, 'updatePassword'])->name('admin.updatePassword');
+        
+
+        Route::resource('permissions/role', RolePermissionController::class);
 
             Route::get('/admin/logout', [AuthController::class, 'logout'])->name('admin.logout');
         });  // end Middleware admin
@@ -59,3 +86,4 @@ Route::group(
     }
 
 );
+

@@ -4,9 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Admin extends Authenticatable
+class SubCategory extends Model
 {
     use HasFactory;
     public function getActiveStatusAttribute()
@@ -14,9 +13,7 @@ class Admin extends Authenticatable
         
        return $this->active ? 'Active' : 'InActive';
     }
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    public function category(){
+        return $this->belongsto(Category::class ,'category_id','id');
+    }
 }

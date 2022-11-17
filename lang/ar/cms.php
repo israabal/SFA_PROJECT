@@ -58,6 +58,30 @@ return [
      'current_password'=>'كلمة المرور الحالية',
      'new_password'=>'كلمة المرورالجديدة',
      'new_password_confirmation'=>'تأكيد كلمة المرور',
+    'Category_image'=>'صورة البراند',
+    'create_new_prand'=>'انشاء براند جديدة  ',
+    'subcategories'=>' الفئات الفرعية',
+    'subcategories_list'=>' قائمة الفئات الفرعية'  ,
+    'create_subcategory'=>' انشاء فئة فرعية',
+    'subCategory_image'=>'صورة الفئة الفرعية',
+    'create_new_subcategory'=>'انشاء فئة فرعية جديدة  ',
+    'category'=>'الفئة',
+    'image'=>'الصورة',
+
+
+
+
+    'Serial_Number'=>'الرقم التسلسلي ',
+    'password' => ' كلمة المرور',
+
+    'save'=>'حفظ',
+
+
+
+
+
+
+
 
 
 
@@ -65,6 +89,32 @@ return [
 
     'add_admin'=>'اضافة ادمن'
 
+
+  
+  
+      'read_role'=> ' قراءة الصلاحيات',
+    'home'=> 'الرئيسية',
+    'role_Management'=>'صلاحيات المسمى الوظيفي',
+    'roles'=>'المسمى الوظيفي',
+    'create_role'=>'انشاء مسمى وظيفي',
+    'guard_name'=>'نوع المستخدم',
+    'permission'=>'الصلاحيات',
+    'actions'=>'الاحدات',
+    'toast_title'=>'هل انت متاكد؟',
+    'toast_text'=> '!لايمكنك التراجع ',
+    'cancelButtonText'=>'الغاء',
+    'name'=>'الاسم',
+    'username'=>'اسم المستخدم',
+    'select-guard'=>' فضلا! اختار نوع المستخدم',
+    'admin'=>'ادمن',
+    'agent'=>'وكيل',
+    'client'=>'عميل',
+    'technical'=>'تقني',
+    'save'=>'حفظ',
+    'role_permission'=>'الصلاحيات',
+    'status'=>'الحالة',
+    'create_success'=>'تم الانشاء بنجاح',
+    'create_failed'=>' فشل الانشاء',
 
 
 ];
