@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'read_role'=> ' Read Roles',
+    'home'=> 'Home',
+    'role_Management'=>'Role Management',
+    'roles'=>'Roles',
+    'create_role'=>'create Role',
+    'guard_name'=>'Guard Name',
+    'permission'=>'Permission',
+    'actions'=>'Actions',
+    'toast_title'=>'Are you sure?',
+    'toast_text'=> 'You wont be able to revert this!',
+    'confirmButtonText'=>'Yes, delete it!',
+    'cancelButtonText'=>'cancel',
+    'name'=>'Name',
+    'username'=>'UserName',
+    'select-guard'=>' Please Select a Guard Name',
+    'admin'=>'Admin',
+    'agent'=>'Agent',
+    'client'=>'client',
+    'technical'=>'Technical',
+    'save'=>'Save',
+    'role_permission'=>'Permissions',
+    'status'=>'Status',
+    'create_success'=>' Created succesfully',
+    'create_failed'=>' Created Failed',
+];
