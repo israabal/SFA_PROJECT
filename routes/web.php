@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\PermissionController;
@@ -25,7 +28,6 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 
 
-
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
@@ -33,6 +35,10 @@ Route::group(
     ], function(){ //...
 
 
+
+        Route::resource('admins', AdminController::class);
+        Route::resource('categories', CategoryController::class);
+        Route::resource('subcategories', SubCategoryController::class);
 
 
 
