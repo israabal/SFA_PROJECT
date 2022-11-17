@@ -3,6 +3,11 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\RolePermissionController;
+use App\Http\Controllers\PermissionController;
+
+
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -16,7 +21,6 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 
 
 
@@ -40,13 +44,16 @@ Route::group(
 
 
 
-        Route::get('/', function () {
-            return view('cms.parent');
-        });
+        Route::get('/', function () {return view('cms.parent'); });
 
+        Route::resource('roles',RoleController::class);
+        Route::resource('permissions',PermissionController::class);
 
+        
 
+        Route::resource('permissions/role', RolePermissionController::class);
 
 
     });
+
 

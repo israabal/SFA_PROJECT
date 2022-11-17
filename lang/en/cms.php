@@ -1,91 +1,93 @@
 <?php
-
 return [
-    'content_management' => 'Content Management',
-    'cities' => 'Cities',
-    'create' => 'Create',
-    'index' => 'Index',
-    'create_city' => 'Create City',
-    'name_en' => 'Engilsh Name',
-    'name_ar' => 'Arabic Name',
-    'active' => 'Active',
-    'actions' => 'Actions',
-    'light'=>'light',
-    'dark'=>'Dark',
-    'system'=>'System',
-    'category'=>'Category',
-    'Category_image'=>'Prand Image',
-    'create_new_prand'=>'Create New Prand',
-    'Serial_Number'=>'Serial Number',
-    
-    
-    'My_Profile'=>'My Profile',
-    'account_setting'=>'Account Setting',
-    'sign_out'=>' Sign Out',
-    'english'=>'English',
-     'arabic'=>'Arabic',
-     'categories'=>'Categories',
-     'categories_list'=>' Categories List',
-     'create_category'=>'Create Category',
-
-     'subcategories'=>'SubCategories',
-     'subcategories_list'=>' SubCategories List',
-     'create_subcategory'=>'Create SubCategory  ',
-     'subCategory_image'=>'SubCategory Image ',
-     'create_new_subcategory'=>' Create New SubCategory ',
-
-
-
-
-
-    'settings' => 'Settings',
-    'created_at' => 'Created At',
-    'updated_at' => 'Updated At',
-    'save' => 'Save',
-    'edit_city' => 'Edit City',
-    'hr' => 'Human Resources',
-    'user' => 'User',
-    'users' => 'Users',
-    'create_user' => 'Create User',
-    'edit_user' => 'Edit User',
-    'name' => 'Name',
-    'email' => 'Email',
-    'city' => 'City',
-    'admins' => 'Admins',
-    'language'=>'Language',
-    'create_admin' => 'Create Admin',
-
-    'edit_admin' => 'Edit Admin',
-    'logout' => 'Logout',
-    'roles' => 'Roles',
-    'role' => 'Role',
-    'create_role' => 'Create Role',
-    'update_role' => 'Update Role',
-    'user_type' => 'User Type',
-    'roles_permissions' => 'Roles & Permissions',
-    'admin' => 'Admin',
-    'JOINED_DATE' => 'JOINED DATE	',
-    'Admin_Management'=>'Admin Management',
-    'home'=>'Home',
-    'Dashboards'=>'Dashboards ',
+    'content_management' => 'إدارة المحتوى',
+    'cities' => 'المدن',
+    'create' => 'إنشاء',
+    'index' => 'عرض',
+    'create_city' => 'إنشاء مدينة',
+    'edit_admin' => 'تعديل بيانات الادمن',
+    'name' => 'الاسم',
+    'email' => 'الايميل',
+    'Update_avatar'=>'تعديل الصورة',
+    'admins'=>'ادمن',
+    'read_admin'=>'قائمة الادمن ',
+    'JOINED_DATE' => ' تاريخ الانضمام	',
+    'Admin_Management'=>'ادارة الادمن',
+    'home'=>'الصفحة الرئيسية',
+    'hr'=>'موارد بشرية',
+    'Dashboards'=>'لوحة التحكم',
+    'active' => 'فعال',
+    'actions'=>'اجراءات',
+    'light'=>'ضوء',
+    'dark'=>'معتم',
+    'system'=>'نظامي',
+    'My_Profile'=>'بروفايل',
+    'language'=>'اللغة',
+    'account_setting'=>'اعدادات الحساب',
+    'sign_out'=>' تسجيل خروج ',
+    'english'=>'الانجليزية',
+    'arabic'=>'العربية',
+    'categories'=>'الفئات',
+    'categories_list'=>'قائمة الفئات',
+    'create_category'=>'انشاء فئة ',
+    'Category_image'=>'صورة البراند',
+    'create_new_prand'=>'انشاء براند جديدة  ',
+    'subcategories'=>' الفئات الفرعية',
+    'subcategories_list'=>' قائمة الفئات الفرعية'  ,
+    'create_subcategory'=>' انشاء فئة فرعية',
+    'subCategory_image'=>'صورة الفئة الفرعية',
+    'create_new_subcategory'=>'انشاء فئة فرعية جديدة  ',
+    'category'=>'الفئة',
+    'image'=>'الصورة',
 
 
-    'user' => 'User',
-    'permissions' => 'Permissions',
-    'assigned' => 'Assigned',
-    'password' => ' Password',
 
-    'edit_password' => 'Edit Password',
-    'new_password' => 'New Password',
-    'new_password_confirmation' => 'New Password Confirmation',
-    'current_password' => 'Current Password',
-    'image' => 'Image',
-    'notifications' => 'Notifications',
-    'title' => 'Title',
-    'message' => 'Message',
-    'read_at' => 'Read At',
-    'sent_at' => 'Sent At' ,
-    'Update_avatar'=> 'Update Avatar',
-    'read_admin'=>'Admins List',
-    'add_admin'=>'Add Admin'
+
+    'Serial_Number'=>'الرقم التسلسلي ',
+    'password' => ' كلمة المرور',
+
+    'save'=>'حفظ',
+
+
+
+
+
+
+
+
+
+
+    'admin' => 'ادمن',
+
+    'add_admin'=>'اضافة ادمن'
+
+
+  
+  
+      'read_role'=> ' قراءة الصلاحيات',
+    'home'=> 'الرئيسية',
+    'role_Management'=>'صلاحيات المسمى الوظيفي',
+    'roles'=>'المسمى الوظيفي',
+    'create_role'=>'انشاء مسمى وظيفي',
+    'guard_name'=>'نوع المستخدم',
+    'permission'=>'الصلاحيات',
+    'actions'=>'الاحدات',
+    'toast_title'=>'هل انت متاكد؟',
+    'toast_text'=> '!لايمكنك التراجع ',
+    'confirmButtonText'=>'نعم ،تاكيد الحذف',
+    'cancelButtonText'=>'الغاء',
+    'name'=>'الاسم',
+    'username'=>'اسم المستخدم',
+    'select-guard'=>' فضلا! اختار نوع المستخدم',
+    'admin'=>'ادمن',
+    'agent'=>'وكيل',
+    'client'=>'عميل',
+    'technical'=>'تقني',
+    'save'=>'حفظ',
+    'role_permission'=>'الصلاحيات',
+    'status'=>'الحالة',
+    'create_success'=>'تم الانشاء بنجاح',
+    'create_failed'=>' فشل الانشاء',
+
+
 ];
