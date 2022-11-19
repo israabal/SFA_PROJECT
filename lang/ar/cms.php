@@ -67,10 +67,15 @@ return [
     'create_new_subcategory'=>'انشاء فئة فرعية جديدة  ',
     'category'=>'الفئة',
     'image'=>'الصورة',
+    'edit_profile' =>'تعديل الملف الشخصي',
+'cancel'=>'إلغاء',
+'Enter_your_email_to_reset_your_password'=>'قم بكتابة الإيميل لتغيير كلمة المرور',
+
     'Serial_Number'=>'الرقم التسلسلي ',
     'password' => ' كلمة المرور',
     'save'=>'حفظ',
     'admin' => 'ادمن',
+
     'add_admin'=>'اضافة ادمن',
     'read_role'=> ' قراءة الصلاحيات',
     'home'=> 'الرئيسية',

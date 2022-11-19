@@ -104,24 +104,25 @@
                     <div class="fv-plugins-message-container invalid-feedback"></div>
                 </div>
                
-                <div class="fv-row mb-7 fv-plugins-icon-container">
+                <div class="row mb-6">
                     <!--begin::Label-->
-                    <label class="fs-6 fw-semibold form-label mt-3">
+                    <label class="col-lg-4 col-form-label required fw-semibold fs-6">
                         <span class="required">{{__('cms.roles')}}</span>
                         <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" aria-label="Enter the contact's name." data-bs-original-title="Enter the contact's name." data-kt-initialized="1"></i>
                     </label>
                     <!--end::Label-->
                     <!--begin::Input-->
-                    <select class="form-select-solid" data-control="select2" name="roles" id="roles" data-select2-id="select2-data-10-uyhn">
-                        <option value="" data-select2-id="select2-data-12-0cmm">{{__('cms.choose')}}</option>
-                        <option value="superadmin">{{__('cms.superadmin')}} </option>
-                        <option value="agent"> {{__('cms.agent')}} </option>
-                        <option value="technical"> {{__('cms.technical')}}</option>
-                        <option value="customers"> {{__('cms.customers')}}</option>
-                    </select>
-                    <!--end::Input-->
-                    <div class="fv-plugins-message-container invalid-feedback"></div>
-                </div>
+                    <div class="col-lg-8 fv-row">
+                    <select class="form-select form-select-solid form-select-lg" data-control="select2" name="roles" id="roles" data-select2-id="select2-data-10-uyhn">
+                                                        <option value="" data-select2-id="select2-data-12-0cmm">{{__('cms.choose')}}</option>
+                                                        <option value="superadmin"> {{__('cms.superadmin')}}</option>
+                                                        <option value="agent">  {{__('cms.agent')}} </option>
+                                                        <option value="technical"> {{__('cms.technical')}}</option>
+                                                        <option value="customers"> {{__('cms.customers')}}</option>
+                                                    </select>                    <!--end::Input-->
+                                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+ <!--end::Hint-->
+                        </div>
                 <!--end::Separator-->
                 <!--begin::Action buttons-->
                 <div class="d-flex justify-content-end">

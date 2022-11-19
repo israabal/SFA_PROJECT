@@ -101,6 +101,10 @@ return [
     'status' => 'status',
     'create_success' => 'Created Success',
     'create_failed' => 'Created Failed',
+    'edit_profile' =>'Edit Profile',
+'Forgot_Password'=>'Forgot Password',
+'Enter_your_email_to_reset_your_password'=>'Enter your email to reset your password',
+'cancel'=>'Cancel',
     'app_name'=>'maintenance',
 
 

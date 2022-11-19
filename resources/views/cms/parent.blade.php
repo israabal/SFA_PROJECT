@@ -971,11 +971,12 @@ License: For each use you must have a valid license purchased only from above li
 											<div class="menu-content d-flex align-items-center px-3">
 												<!--begin::Avatar-->
 												<div class="symbol symbol-50px me-5">
-													<img alt="Logo" src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" />
+													<img alt="Logo" src="{{ Auth::user()->image }}" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Username-->
 												<div class="d-flex flex-column">
+
 													<div class="fw-bold d-flex align-items-center fs-5">{{ auth()->user()->name }}
 													<span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Pro</span></div>
 													<a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{ auth()->user()->email }}</a>
@@ -989,7 +990,7 @@ License: For each use you must have a valid license purchased only from above li
 										<!--end::Menu separator-->
 										<!--begin::Menu item-->
 										<div class="menu-item px-5">
-											<a href="../../demo1/dist/account/overview.html" class="menu-link px-5">{{__('cms.My_Profile')}}</a>
+											<a href="{{route('profile.edit')}}" class="menu-link px-5">{{__('cms.My_Profile')}}</a>
 										</div>
 										<!--end::Menu item-->
 										<!--begin::Menu item-->
@@ -1031,12 +1032,12 @@ License: For each use you must have a valid license purchased only from above li
 										<!--end::Menu item-->
 										<!--begin::Menu item-->
 										<div class="menu-item px-5 my-1">
-											<a href="../../demo1/dist/account/settings.html" class="menu-link px-5">{{__('cms.account_setting')}}</a>
+											<a href="{{route('admin.editPassword')}}" class="menu-link px-5">{{__('cms.account_setting')}}</a>
 										</div>
 										<!--end::Menu item-->
 										<!--begin::Menu item-->
 										<div class="menu-item px-5">
-											<a href="../../demo1/dist/authentication/layouts/corporate/sign-in.html" class="menu-link px-5">{{__('cms.sign_out')}} </a>
+											<a href="{{route('admin.logout','guard')}}" class="menu-link px-5">{{__('cms.sign_out')}} </a>
 										</div>
 										<!--end::Menu item-->
 									</div>
