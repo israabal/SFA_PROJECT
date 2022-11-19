@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Models;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class ModelsController extends Controller
 {
@@ -26,8 +27,8 @@ class ModelsController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-        $subcategories = SubCategory::all();
+        $categories = Category::where('active', '=', true)->get();
+        $subcategories = SubCategory::where('active', '=', true)->get();
 
         return response()->view('cms.modelss.create', ['categories' => $categories,'subcategories'=>$subcategories]);    }
 
@@ -39,8 +40,34 @@ class ModelsController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $validator = Validator($request->all(), [
+            'name' => 'required|string|min:3',
+            'sup_category_id'=>'required|numeric|exists:sup_categories,id',
+            // 'vendor_id'=>'required|numeric|exists:vendors,id',
+            'description' => 'required|string|min:3',
+            'price' => 'required|string|min:3',
+            'active'=> 'required | boolean',
+            'image' => 'required|image|mimes:png,jpg,jpeg',
+
+          
+        ]);
+
+        if (!$validator->fails()) {
+            $model = new Models();
+            $model->name = $request->input('name');
+            $model->sub_category_id = $request->input('sub_category_id');
+            $model->category_id = $request->input('category_id');
+
+            $model->admin_id = $request->input('admin_id');
+      
+            $model->active = $request->input('active');
+          
+
+
+
+          
+        }
+       }
 
     /**
      * Display the specified resource.
