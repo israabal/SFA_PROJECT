@@ -159,11 +159,11 @@
        }
        formData.append('_method','PUT');
 
-       axios.post('/categories/{{$category->id}}', formData)
+       axios.post('/cms/categories/{{$category->id}}', formData)
        .then(function (response) {
            console.log(response);
            toastr.success(response.data.message);
-           window.location.href = '/categories';
+           window.location.href = '/cms/categories';
        })
        .catch(function (error) {
            console.log(error.response);

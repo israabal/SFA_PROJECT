@@ -1,49 +1,12 @@
 @extends('cms.parent');
+@section('title',__('cms.permission'))
+@section('page-lg',__('cms.home'))
+@section('main-pg-md',__('cms.role_Management'))
+@section('page-md',__('cms.permission'))
 @section('Content')
 <div class="d-flex flex-column flex-column-fluid">
     <!--begin::Toolbar-->
     <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
-        <!--begin::Toolbar container-->
-        <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
-            <!--begin::Page title-->
-            <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
-                <!--begin::Title-->
-                <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
-                    {{__('cms.permission')}}</h1>
-                <!--end::Title-->
-                <!--begin::Breadcrumb-->
-                <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
-                    <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">
-                        <a href="../../demo1/dist/index.html"
-                            class="text-muted text-hover-primary">{{__('cms.home')}}</a>
-                    </li>
-                    <!--end::Item-->
-                    <!--begin::Item-->
-                    <li class="breadcrumb-item">
-                        <span class="bullet bg-gray-400 w-5px h-2px"></span>
-                    </li>
-                    <!--end::Item-->
-                    <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">{{__('cms.role_permission')}} </li>
-                    <!--end::Item-->
-                    <!--begin::Item-->
-                    <li class="breadcrumb-item">
-                        <span class="bullet bg-gray-400 w-5px h-2px"></span>
-                    </li>
-                    <!--end::Item-->
-                    <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">{{__('cms.permission')}}</li>
-                    <!--end::Item-->
-                </ul>
-                <!--end::Breadcrumb-->
-            </div>
-            <!--end::Page title-->
-            <!--begin::Actions-->
-
-            <!--end::Actions-->
-        </div>
-        <!--end::Toolbar container-->
     </div>
     <!--end::Toolbar-->
     <!--begin::Content-->
@@ -164,6 +127,64 @@
 
 <script>
     $(function () { bsCustomFileInput.init() });
+</script>
+   function performStore() {
+        var formData = new FormData();
+        formData.append('name', document.getElementById('name').value);
+        formData.append('email', document.getElementById('email').value);
+        formData.append('active', document.getElementById('active').checked ? 1:0);
+        formData.append('image',document.getElementById('role_image').files[0]);
+       axios.post('/cms/roles', formData)
+       .then(function (response) {
+           console.log(response);
+           toastr.success(response.data.message);
+           document.getElementById('create-form').reset();
+       })
+       .catch(function (error) {
+           console.log(error.response);
+           toastr.error(error.response.data.message);
+       });}
+</script>
+<script>
+    function confirmDelete(id, reference) {
+        Swal.fire({
+
+          title: "{{__('cms.toast_title')}}",
+            text: "{{__('cms.toast_text')}}",
+            icon: 'warning',
+            showCancelButton: true,
+            cancelButtonColor: '#d33',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: "{{__('cms.confirmButtonText')}}"
+        }).then((result) => {
+        if (result.isConfirmed) {
+            performDelete(id, reference);
+        }
+        });
+    }
+
+    function performDelete(id, reference) {
+        axios.delete('/cms/roles/'+id)
+        .then(function (response) {
+            console.log(response);
+            toastr.success(response.data.message);
+            reference.closest('tr').remove();
+            showMessage(response.data);
+        })
+        .catch(function (error) {
+            console.log(error.response);
+            toastr.error(error.response.data.message);
+            showMessage(error.response.data);
+        });
+    }
+
+    // function showMessage(data) {
+    //     Swal.fire(
+    //         data.title,
+    //         data.text,
+    //         data.icon
+    //     );
+    // }
 </script>
 
 @endsection

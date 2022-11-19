@@ -52,22 +52,13 @@
                             <select id="guard_name"
                              name="language" aria-label={{__('cms.select-guard')}}
                              data-control="select2" data-placeholder="{{__('cms.select-guard')}}" class="form-select form-select-solid form-select-lg">
-                                <option value="">{{__('cms.guard_name')}}</option>
+                                <option value="-1" selected>{{__('cms.guard_name')}}</option>
 
                                 <option value="admin" @if($role->guard_name == 'admin') selected
                                     @endif>{{__('cms.admin')}}
                                 </option>
-                                <option value="agent" @if($role->guard_name == 'agent') selected
-                                    @endif>{{__('cms.agent')}}</option>
-
-                                    <option value="client" @if($role->guard_name == 'client') selected
-                                        @endif>{{__('cms.client')}}
-                                    </option>
-                                    <option value="technical" @if($role->guard_name == 'technical') selected
-                                        @endif>{{__('cms.technical')}}</option>
-
-
-
+                                <option value="user" @if($role->guard_name == 'user') selected
+                                    @endif>{{__('cms.user')}}</option>
                             </select>
                             <!--end::Input-->
                             <!--begin::Hint-->
@@ -99,14 +90,14 @@
 @section('scripts')
 <script>
     function performUpdate() {
-        axios.put('/roles/{{$role->id}}', {
+        axios.put('/cms/roles/{{$role->id}}', {
             name: document.getElementById('name').value,
             guard_name: document.getElementById('guard_name').value,
         })
         .then(function (response) {
             console.log(response);
             toastr.success(response.data.message);
-            window.location.href = '/roles'
+            window.location.href = '/cms/roles'
         })
         .catch(function (error) {
             console.log(error.response);

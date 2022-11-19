@@ -77,7 +77,7 @@ return [
     'admin' => 'ادمن',
 
     'add_admin'=>'اضافة ادمن',
-    'read_role'=> ' قراءة الصلاحيات',
+      'read_role'=> ' قراءة الصلاحيات',
     'home'=> 'الرئيسية',
     'role_Management'=>'صلاحيات المسمى الوظيفي',
     'roles'=>'المسمى الوظيفي',
@@ -100,6 +100,11 @@ return [
     'status'=>'الحالة',
     'create_success'=>'تم الانشاء بنجاح',
     'create_failed'=>' فشل الانشاء',
+    'status'=>'الحالة',
+    'Updated_success'=>'تم التعديل بنجاح',
+    'Updated_failed'=>' فشل التعديل',
+    'Deleted_successfully'=>'تم الحذف بنجاح ',
+    'Delete_failed!'=>'فشل الحذف !'
     'app_name'=>'صيانة',
 
 

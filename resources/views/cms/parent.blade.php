@@ -13,7 +13,7 @@ License: For each use you must have a valid license purchased only from above li
 <html @if (app()->getLocale()=='en') lang="en" @else lang="ar" @endif >
 	<!--begin::Head-->
 	<head><base href=""/>
-        <title>{{__('cms.app_name')}}| @yield('title')</title>
+        <title>Metronic| @yield('title')</title>
 
 		<meta charset="utf-8" />
 		<meta name="description" content="The most advanced Bootstrap Admin Theme on Themeforest trusted by 100,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue, Asp.Net Core, Rails, Spring, Blazor, Django, Flask & Laravel versions. Grab your copy now and get life-time updates for free." />
@@ -53,7 +53,7 @@ License: For each use you must have a valid license purchased only from above li
 		<!--begin::Theme mode setup on page load-->
 		<script>var defaultThemeMode = "light"; var themeMode; if ( document.documentElement ) { if ( document.documentElement.hasAttribute("data-theme-mode")) { themeMode = document.documentElement.getAttribute("data-theme-mode"); } else { if ( localStorage.getItem("data-theme") !== null ) { themeMode = localStorage.getItem("data-theme"); } else { themeMode = defaultThemeMode; } } if (themeMode === "system") { themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } document.documentElement.setAttribute("data-theme", themeMode); }</script>
 		<!--end::Theme mode setup on page load-->
-
+		
 
 
 		<div class="d-flex flex-column flex-root app-root" id="kt_app_root">
@@ -99,12 +99,12 @@ License: For each use you must have a valid license purchased only from above li
 										</span>
 										<!--end:Menu link-->
 										<!--begin:Menu sub-->
-
+									
 										<!--end:Menu sub-->
 									</div>
 									<!--end:Menu item-->
 									<!--begin:Menu item-->
-
+								
 									<!--end:Menu item-->
 								</div>
 								<!--end::Menu-->
@@ -857,10 +857,10 @@ License: For each use you must have a valid license purchased only from above li
 								</div>
 								<!--end::Search-->
 								<!--begin::Activities-->
-
+							
 								<!--end::Notifications-->
 								<!--begin::Chat-->
-
+								
 								<!--end::My apps links-->
 								<!--begin::Theme mode-->
 								<div class="app-navbar-item ms-1 ms-lg-3">
@@ -971,15 +971,14 @@ License: For each use you must have a valid license purchased only from above li
 											<div class="menu-content d-flex align-items-center px-3">
 												<!--begin::Avatar-->
 												<div class="symbol symbol-50px me-5">
-													<img alt="Logo" src="{{ Auth::user()->image }}" />
+													<img alt="Logo" src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Username-->
 												<div class="d-flex flex-column">
-
-													<div class="fw-bold d-flex align-items-center fs-5">{{ auth()->user()->name }}
+													<div class="fw-bold d-flex align-items-center fs-5">Max Smith
 													<span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Pro</span></div>
-													<a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{ auth()->user()->email }}</a>
+													<a href="#" class="fw-semibold text-muted text-hover-primary fs-7">max@kt.com</a>
 												</div>
 												<!--end::Username-->
 											</div>
@@ -990,11 +989,11 @@ License: For each use you must have a valid license purchased only from above li
 										<!--end::Menu separator-->
 										<!--begin::Menu item-->
 										<div class="menu-item px-5">
-											<a href="{{route('profile.edit')}}" class="menu-link px-5">{{__('cms.My_Profile')}}</a>
+											<a href="../../demo1/dist/account/overview.html" class="menu-link px-5">{{__('cms.My_Profile')}}</a>
 										</div>
 										<!--end::Menu item-->
 										<!--begin::Menu item-->
-
+								
 										<!--end::Menu item-->
 										<!--begin::Menu separator-->
 										<!--end::Menu separator-->
@@ -1024,7 +1023,7 @@ License: For each use you must have a valid license purchased only from above li
 												</div>
 												<!--end::Menu item-->
 												<!--begin::Menu item-->
-
+											
 												<!--end::Menu item-->
 											</div>
 											<!--end::Menu sub-->
@@ -1032,12 +1031,12 @@ License: For each use you must have a valid license purchased only from above li
 										<!--end::Menu item-->
 										<!--begin::Menu item-->
 										<div class="menu-item px-5 my-1">
-											<a href="{{route('admin.editPassword')}}" class="menu-link px-5">{{__('cms.account_setting')}}</a>
+											<a href="{{route('admin.editPassword')}}" class="menu-link px-5">{{__('cms.Change_password')}}</a>
 										</div>
 										<!--end::Menu item-->
 										<!--begin::Menu item-->
 										<div class="menu-item px-5">
-											<a href="{{route('admin.logout','guard')}}" class="menu-link px-5">{{__('cms.sign_out')}} </a>
+											<a href="{{route('admin.logout')}}" class="menu-link px-5">{{__('cms.sign_out')}} </a>
 										</div>
 										<!--end::Menu item-->
 									</div>
@@ -1102,10 +1101,10 @@ License: For each use you must have a valid license purchased only from above li
 									<!--begin:Menu item-->
 									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 										<!--begin:Menu link-->
-
+									
 										<!--end:Menu link-->
 										<!--begin:Menu sub-->
-
+										
 										<!--end:Menu sub-->
 									</div>
 									<!--end:Menu item-->
@@ -1139,10 +1138,10 @@ License: For each use you must have a valid license purchased only from above li
 										<!--begin:Menu sub-->
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-
+											
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-
+										
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 											<div class="menu-item">
@@ -1157,16 +1156,16 @@ License: For each use you must have a valid license purchased only from above li
 											</div>
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-
+										
 											<!--end:Menu item-->
 										</div>
 
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-
+											
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-
+										
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 											<div class="menu-item">
@@ -1181,13 +1180,196 @@ License: For each use you must have a valid license purchased only from above li
 											</div>
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-
+										
 											<!--end:Menu item-->
 										</div>
 										<!--end:Menu sub-->
 									</div>
 
 
+									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+										<!--begin:Menu link-->
+										<span class="menu-link">
+											<span class="menu-icon">
+												<!--begin::Svg Icon | path: icons/duotune/communication/com005.svg-->
+												<span class="svg-icon svg-icon-2">
+													<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<path d="M20 14H18V10H20C20.6 10 21 10.4 21 11V13C21 13.6 20.6 14 20 14ZM21 19V17C21 16.4 20.6 16 20 16H18V20H20C20.6 20 21 19.6 21 19ZM21 7V5C21 4.4 20.6 4 20 4H18V8H20C20.6 8 21 7.6 21 7Z" fill="currentColor" />
+														<path opacity="0.3" d="M17 22H3C2.4 22 2 21.6 2 21V3C2 2.4 2.4 2 3 2H17C17.6 2 18 2.4 18 3V21C18 21.6 17.6 22 17 22ZM10 7C8.9 7 8 7.9 8 9C8 10.1 8.9 11 10 11C11.1 11 12 10.1 12 9C12 7.9 11.1 7 10 7ZM13.3 16C14 16 14.5 15.3 14.3 14.7C13.7 13.2 12 12 10.1 12C8.10001 12 6.49999 13.1 5.89999 14.7C5.59999 15.3 6.19999 16 7.39999 16H13.3Z" fill="currentColor" />
+													</svg>
+												</span>
+												<!--end::Svg Icon-->
+											</span>
+											<span class="menu-title">{{__('cms.users')}}</span>
+											<span class="menu-arrow"></span>
+										</span>
+										<!--end:Menu link-->
+										<!--begin:Menu sub-->
+										<div class="menu-sub menu-sub-accordion">
+											<!--begin:Menu item-->
+											
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+										
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+											<div class="menu-item">
+												<!--begin:Menu link-->
+												<a class="menu-link" href="{{route('users.index')}}" >
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+													<span class="menu-title">{{__('cms.index_user')}}</span>
+												</a>
+												<!--end:Menu link-->
+											</div>
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+										
+											<!--end:Menu item-->
+										</div>
+
+										<div class="menu-sub menu-sub-accordion">
+											<!--begin:Menu item-->
+											
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+										
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+											<div class="menu-item">
+												<!--begin:Menu link-->
+												<a class="menu-link" href="{{route('users.create')}}" >
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+													<span class="menu-title">{{__('cms.user_create')}}</span>
+												</a>
+												<!--end:Menu link-->
+											</div>
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+										
+											<!--end:Menu item-->
+										</div>
+										<!--end:Menu sub-->
+									</div>
+
+
+
+									<div class="menu-item pt-5">
+										<!--begin:Menu content-->
+										<div class="menu-content">
+											<span class="menu-heading fw-bold text-uppercase fs-7">{{__('cms.role_Management')}}</span>
+										</div>
+										<!--end:Menu content-->
+									</div>
+
+
+								
+
+
+
+									
+									<!--end:Menu item-->
+									<!--begin:Menu item-->
+									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+										<!--begin:Menu link-->
+										<span class="menu-link">
+											<span class="menu-icon">
+												<!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
+												<span class="svg-icon svg-icon-2">
+													<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<path d="M18 21.6C16.6 20.4 9.1 20.3 6.3 21.2C5.7 21.4 5.1 21.2 4.7 20.8L2 18C4.2 15.8 10.8 15.1 15.8 15.8C16.2 18.3 17 20.5 18 21.6ZM18.8 2.8C18.4 2.4 17.8 2.20001 17.2 2.40001C14.4 3.30001 6.9 3.2 5.5 2C6.8 3.3 7.4 5.5 7.7 7.7C9 7.9 10.3 8 11.7 8C15.8 8 19.8 7.2 21.5 5.5L18.8 2.8Z" fill="currentColor" />
+														<path opacity="0.3" d="M21.2 17.3C21.4 17.9 21.2 18.5 20.8 18.9L18 21.6C15.8 19.4 15.1 12.8 15.8 7.8C18.3 7.4 20.4 6.70001 21.5 5.60001C20.4 7.00001 20.2 14.5 21.2 17.3ZM8 11.7C8 9 7.7 4.2 5.5 2L2.8 4.8C2.4 5.2 2.2 5.80001 2.4 6.40001C2.7 7.40001 3.00001 9.2 3.10001 11.7C3.10001 15.5 2.40001 17.6 2.10001 18C3.20001 16.9 5.3 16.2 7.8 15.8C8 14.2 8 12.7 8 11.7Z" fill="currentColor" />
+													</svg>
+												</span>
+												<!--end::Svg Icon-->
+											</span>
+											<span class="menu-title">{{__('cms.roles')}}</span>
+											<span class="menu-arrow"></span>
+										</span>
+										<!--end:Menu link-->
+										<!--begin:Menu sub-->
+										<div class="menu-sub menu-sub-accordion">
+											<!--begin:Menu item-->
+		
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+											<div class="menu-item">
+												<!--begin:Menu link-->
+												<a class="menu-link" href="{{route('roles.index')}}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+													<span class="menu-title">{{__('cms.roles')}}</span>
+												</a>
+												<!--end:Menu link-->
+											</div>
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+											<div class="menu-item">
+												<!--begin:Menu link-->
+												<a class="menu-link" href="{{route('roles.create')}}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+													<span class="menu-title">{{__('cms.create_role')}}</span>
+												</a>
+												<!--end:Menu link-->
+											</div>
+											<!--end:Menu item-->
+										</div>
+										<!--end:Menu sub-->
+									</div>
+									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+										<!--begin:Menu link-->
+										<span class="menu-link">
+											<span class="menu-icon">
+												<!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
+												<span class="svg-icon svg-icon-2">
+													<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<path d="M18 21.6C16.6 20.4 9.1 20.3 6.3 21.2C5.7 21.4 5.1 21.2 4.7 20.8L2 18C4.2 15.8 10.8 15.1 15.8 15.8C16.2 18.3 17 20.5 18 21.6ZM18.8 2.8C18.4 2.4 17.8 2.20001 17.2 2.40001C14.4 3.30001 6.9 3.2 5.5 2C6.8 3.3 7.4 5.5 7.7 7.7C9 7.9 10.3 8 11.7 8C15.8 8 19.8 7.2 21.5 5.5L18.8 2.8Z" fill="currentColor" />
+														<path opacity="0.3" d="M21.2 17.3C21.4 17.9 21.2 18.5 20.8 18.9L18 21.6C15.8 19.4 15.1 12.8 15.8 7.8C18.3 7.4 20.4 6.70001 21.5 5.60001C20.4 7.00001 20.2 14.5 21.2 17.3ZM8 11.7C8 9 7.7 4.2 5.5 2L2.8 4.8C2.4 5.2 2.2 5.80001 2.4 6.40001C2.7 7.40001 3.00001 9.2 3.10001 11.7C3.10001 15.5 2.40001 17.6 2.10001 18C3.20001 16.9 5.3 16.2 7.8 15.8C8 14.2 8 12.7 8 11.7Z" fill="currentColor" />
+													</svg>
+												</span>
+												<!--end::Svg Icon-->
+											</span>
+											<span class="menu-title">{{__('cms.permission')}}</span>
+											<span class="menu-arrow"></span>
+										</span>
+										<!--end:Menu link-->
+										<!--begin:Menu sub-->
+										<div class="menu-sub menu-sub-accordion">
+											<!--begin:Menu item-->
+		
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+											<div class="menu-item">
+												<!--begin:Menu link-->
+												<a class="menu-link" href="{{route('permissions.index')}}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+													<span class="menu-title">{{__('cms.role_permission')}}</span>
+												</a>
+												<!--end:Menu link-->
+											</div>
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+											
+											<!--end:Menu item-->
+										</div>
+										<!--end:Menu sub-->
+									</div>
+									
+							
 									<div class="menu-item pt-5">
 										<!--begin:Menu content-->
 										<div class="menu-content">
@@ -1195,6 +1377,13 @@ License: For each use you must have a valid license purchased only from above li
 										</div>
 										<!--end:Menu content-->
 									</div>
+
+
+								
+
+
+
+									
 									<!--end:Menu item-->
 									<!--begin:Menu item-->
 									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
@@ -1217,7 +1406,7 @@ License: For each use you must have a valid license purchased only from above li
 										<!--begin:Menu sub-->
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-
+		
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 
@@ -1269,7 +1458,7 @@ License: For each use you must have a valid license purchased only from above li
 										<!--begin:Menu sub-->
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-
+		
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 
@@ -1302,6 +1491,9 @@ License: For each use you must have a valid license purchased only from above li
 										<!--end:Menu sub-->
 									</div>
 
+
+									
+							
 								</div>
 								<!--end::Menu-->
 							</div>
@@ -1309,14 +1501,74 @@ License: For each use you must have a valid license purchased only from above li
 						</div>
 						<!--end::sidebar menu-->
 						<!--begin::Footer-->
-
+					
 						<!--end::Footer-->
 					</div>
 					<!--end::Sidebar-->
 					<!--begin::Main-->
-					<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+					<div class="app-main flex-column flex-row-fluid" id="kt_app_main">						
+                       
+<div class="d-flex flex-column flex-column-fluid">
+    <!--begin::Toolbar-->
+    <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+        <!--begin::Toolbar container-->
+        <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
+            <!--begin::Page title-->
+            <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+                <!--begin::Title-->
+                <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
+                    @yield('title')</h1>
+                <!--end::Title-->
+                <!--begin::Breadcrumb-->
+                <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item text-muted">
+                        <a href="../../demo1/dist/index.html"
+                            class="text-muted text-hover-primary">@yield('page-lg')</a>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item">
+                        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item text-muted">@yield('main-pg-md') </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item">
+                        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item text-muted">@yield('page-md')</li>
+                    <!--end::Item-->
+                </ul>
+                <!--end::Breadcrumb-->
+            </div>
+            <!--end::Page title-->
+            <!--begin::Actions-->
 
-						@yield('Content')
+            <!--end::Actions-->
+        </div>
+        <!--end::Toolbar container-->
+    </div>
+    <!--end::Toolbar-->
+    <!--begin::Content-->
+    <div id="kt_app_content" class="app-content flex-column-fluid">
+<div id="kt_app_content_container" class="app-container container-xxl">
+
+        <!--begin::Content container-->
+		@yield('Content')
+
+        
+        <!--end::Content container-->
+    </div>
+</div>
+
+    <!--end::Content-->
+</div>
+						
 
 						<!--begin::Footer-->
 
@@ -3031,7 +3283,7 @@ License: For each use you must have a valid license purchased only from above li
 		<!--end::Help drawer-->
 		<!--end::Engage drawers-->
 		<!--begin::Engage toolbar-->
-
+	
 		<!--end::Engage toolbar-->
 		<!--begin::Scrolltop-->
 		<div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
@@ -6287,6 +6539,8 @@ License: For each use you must have a valid license purchased only from above li
 		<script src="{{ asset("cms/assets/js/custom/utilities/modals/create-app.js") }}"></script>
 		<script src="{{ asset("cms/assets/js/custom/utilities/modals/new-target.js") }}"></script>
 		<script src="{{ asset("cms/assets/js/custom/utilities/modals/users-search.js") }}"></script>
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
         @yield('scripts')
 		<!--end::Custom Javascript-->
 		<!--end::Javascript-->

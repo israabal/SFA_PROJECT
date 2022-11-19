@@ -1,4 +1,8 @@
 @extends('cms.parent')
+@section('title',__('cms.roles'))
+@section('page-lg',__('cms.home'))
+@section('main-pg-md',__('cms.role_Management'))
+@section('page-md',__('cms.create_role'))
 @section('styles')
 	<!--begin::Vendor Stylesheets(used for this page only)-->
     <link href="{{ asset('cms/assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
@@ -85,7 +89,7 @@
 @section('scripts')
 <script>
     function performStore() {
-        axios.post('/roles', {
+        axios.post('/cms/roles', {
             name: document.getElementById('name').value,
             guard_name: document.getElementById('guard_name').value,
         })

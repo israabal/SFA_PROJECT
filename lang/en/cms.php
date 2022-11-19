@@ -5,7 +5,7 @@ return [
     'User_Management' => 'User Management',
     'users' => 'Users',
     'user_create' => 'Create User',
-    'index_user' => 'Index User',
+    'index_user' => 'Read Users',
     'roles' => 'Roles',
     'Status' => 'Status',
     'edit_user' => 'Edit User',
@@ -43,7 +43,7 @@ return [
     'name' => 'name',
     'email' => 'email',
     'Update_avatar' => 'Update Avatar ',
-    'admins' => 'admins',
+    'admins' => 'Admins',
     'read_admin' => ' Read Admin ',
     'JOINED_DATE' => ' JOINED DATE 	',
     'Admin_Management' => 'Admin Management ',
@@ -61,6 +61,7 @@ return [
     'english' => 'english',
     'arabic' => 'arabic',
     'categories' => 'categories',
+
     'categories_list' => 'Categories_list ',
     'create_category' => ' Create Category ',
     'Category_image' => 'Category  Image ',
@@ -76,10 +77,13 @@ return [
     'password' => ' password ',
     'save' => 'save',
     'admin' => 'Admin',
-    'add_admin' => ' Add Admin',
+    'add_admin' => ' Create Admin',
     'read_role' => '  Read Role',
     'home' => 'Home',
     'role_Management' => '  Role Management',
+    'categories_Management' => '  Categories Management',
+    'subcategories_Management' => '  SubCategories Management',
+
     'roles' => 'Role ',
     'create_role' => ' Create Role ',
     'guard_name' => 'Guard Name ',
@@ -101,11 +105,13 @@ return [
     'status' => 'status',
     'create_success' => 'Created Success',
     'create_failed' => 'Created Failed',
+    'Updated_success'=>'Updated Successfully  ',
+    'Updated_failed'=>' Updated failed!',
+    'Deleted_successfully'=>'Deleted successfully',
+    'Delete_failed!'=>'Delete failed!'
     'edit_profile' =>'Edit Profile',
 'Forgot_Password'=>'Forgot Password',
 'Enter_your_email_to_reset_your_password'=>'Enter your email to reset your password',
 'cancel'=>'Cancel',
     'app_name'=>'maintenance',
-
-
 ];

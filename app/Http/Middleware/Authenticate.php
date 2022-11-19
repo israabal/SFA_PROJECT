@@ -14,7 +14,7 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        $guard = session('guard')??'admin';
+        $guard = session('guard')??'admin ';
         if (!$request->expectsJson()) {
             return route('cms.login', $guard);
         }

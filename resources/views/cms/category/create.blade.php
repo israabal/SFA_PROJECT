@@ -1,4 +1,8 @@
 @extends('cms.parent')
+@section('title',__('cms.categories'))
+@section('page-lg',__('cms.home'))
+@section('main-pg-md',__('cms.categories_Management'))
+@section('page-md',__('cms.create_category'))
 @section('Content')
 <div class="col-xl-12">
     <!--begin::Contacts-->
@@ -154,7 +158,7 @@
 
         formData.append('image',document.getElementById('category_image').files[0]);
 
-       axios.post('/categories', formData)         
+       axios.post('/cms/categories', formData)         
        .then(function (response) {
            console.log(response);
            toastr.success(response.data.message);

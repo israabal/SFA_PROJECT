@@ -1,4 +1,8 @@
 @extends('cms.parent')
+@section('title',__('cms.users'))
+@section('page-lg',__('cms.home'))
+@section('main-pg-md',__('cms.User_Management'))
+@section('page-md',__('cms.user_create'))
 @section('Content')
 <div class="col-xl-12">
     <!--begin::Contacts-->
@@ -159,7 +163,7 @@
         formData.append('email', document.getElementById('email').value);
         formData.append('image', document.getElementById('user_image').files[0]);
         formData.append('roles', document.getElementById('roles').value);
-        axios.post('/users', formData)
+        axios.post('/cms/users', formData)
             .then(function(response) {
                 console.log(response);
                 toastr.success(response.data.message);

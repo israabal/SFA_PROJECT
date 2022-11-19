@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('name',45);
             $table->string('image')->nullable();
             $table->string('code');
+             $table->foreignId('admin_id')->constrained()->restrictOnDelete();
+
 
 
             $table->timestamps();
