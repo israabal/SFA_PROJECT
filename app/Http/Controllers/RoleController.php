@@ -101,13 +101,13 @@ class RoleController extends Controller
         //
         $validator = Validator($request->all(), [
             'name' => 'required|string|min:3|max:40',
-            // 'guard_name' => 'required|string',
+            'guard_name' => 'required|string|in:admin,user',
         ]);
 
         if (!$validator->fails()) {
             $role = Role::findOrFail($id);
             $role->name = $request->get('name');
-            // $role->guard_name = 'admin';
+            $role->guard_name =  $request->get('guard_name');
             $isSaved = $role->save();
             return response()->json(['message' => $isSaved ? __('cms.create_success') : __('cms.create_failed')], $isSaved ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST);
         } else {

@@ -87,7 +87,7 @@ return [
 
     'admin' => 'ادمن',
 
-    'add_admin'=>'اضافة ادمن'
+    'add_admin'=>'اضافة ادمن',
 
 
   
@@ -115,6 +115,11 @@ return [
     'status'=>'الحالة',
     'create_success'=>'تم الانشاء بنجاح',
     'create_failed'=>' فشل الانشاء',
+    'status'=>'الحالة',
+    'Updated_success'=>'تم التعديل بنجاح',
+    'Updated_failed'=>' فشل التعديل',
+    'Deleted_successfully'=>'تم الحذف بنجاح ',
+    'Delete_failed!'=>'فشل الحذف !'
 
 
 ];

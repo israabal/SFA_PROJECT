@@ -67,7 +67,7 @@ class AdminController extends Controller
           
             $isSaved = $admin->save();
             return response()->json(
-                ['message' => $isSaved ? 'Saved successfully' : 'Save failed!'],
+                ['message' => $isSaved ? __('cms.create_success') : __('cms.create_failed')],
                 $isSaved ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST
             );
         } 
@@ -137,7 +137,7 @@ class AdminController extends Controller
             }
             $isSaved = $admin->save();
             return response()->json(
-                ['message' => $isSaved ? 'Updated Successfully' : 'Update failed!'],
+                ['message' => $isSaved ? __('cms.Updated_success') : __('cms.Updated_failed')],
                 $isSaved ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST
             );
         } else {
@@ -158,7 +158,7 @@ class AdminController extends Controller
             Storage::delete($admin->image);
         }
         return response()->json(
-            ['message' => $deleted ? 'Deleted successfully' : 'Delete failed!'],
+            ['message' => $deleted ? __('cms.Deleted_successfully') : __('cms.Delete_failed!')],
             $deleted ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST
         );  
     }

@@ -1,4 +1,8 @@
 @extends('cms.parent');
+@section('title',__('cms.categories'))
+@section('page-lg',__('cms.home'))
+@section('main-pg-md',__('cms.categories_Management'))
+@section('page-md',__('cms.categories_list'))
 @section('Content')
 <div id="kt_app_content" class="app-content flex-column-fluid">
     <!--begin::Content container-->
@@ -36,7 +40,7 @@
                             <th class="min-w-200px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="Product: activate to sort column ascending" style="width: 206.828px;">{{__('cms.categories')}}</th>
                             <th class="text-end min-w-70px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="Qty: activate to sort column ascending" style="width: 93.1875px;">{{__('cms.Serial_Number')}}</th>
                             <th class="text-end min-w-100px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="SKU: activate to sort column ascending" style="width: 103.562px;">{{__('cms.JOINED_DATE')}}</th>
-                            <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users" rowspan="1" colspan="1" aria-label="Two-step: activate to sort column ascending" style="width: 125px;">{{__('cms.active')}}</th> 
+                            <th class="text-end sorting" tabindex="0" aria-controls="kt_table_users" rowspan="1" colspan="1" aria-label="Two-step: activate to sort column ascending" style="width: 125px;">{{__('cms.active')}}</th> 
 
 
                             <th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 99.5938px;">{{__('cms.actions')}}</th></tr>
@@ -80,7 +84,7 @@
                             <td class="text-end pe-0" data-order="16">
                                 <span class="fw-bold ms-3">{{$category->created_at}}</span>
                             </td>
-                            <td><span class="badge @if($category->active) bg-success @else bg-danger @endif">{{$category->active_status}}</span>
+                            <td class="text-end pe-0"><span class="badge @if($category->active) bg-success @else bg-danger @endif">{{$category->active_status}}</span>
 
                             <td>
                                 <div class="d-flex justify-content-end flex-shrink-0">
@@ -152,7 +156,7 @@
     }
 
     function performDelete(id, reference) {
-        axios.delete('/categories/'+id)
+        axios.delete('/cms/categories/'+id)
         .then(function (response) {
             console.log(response);
             // toastr.success(response.data.message);

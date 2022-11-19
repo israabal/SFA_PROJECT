@@ -4,6 +4,11 @@
 		<link href="{{asset('cms/assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
 		<!--end::Vendor Stylesheets-->
 @endsection
+
+@section('title',__('cms.admins'))
+@section('page-lg',__('cms.home'))
+@section('main-pg-md',__('cms.Admin_Management'))
+@section('page-md',__('cms.add_admin'))
 @section('Content')
 <div class="col-xl-12">
     <!--begin::Contacts-->
@@ -183,7 +188,7 @@
          formData.append('email', document.getElementById('email').value);
          formData.append('active', document.getElementById('active').checked ? 1:0);
          formData.append('image',document.getElementById('admin_image').files[0]);
-        axios.post('/admins', formData)         
+        axios.post('/cms/admins', formData)         
         .then(function (response) {
             console.log(response);
             toastr.success(response.data.message);
