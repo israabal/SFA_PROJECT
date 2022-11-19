@@ -47,34 +47,40 @@ Route::group(
         });
 
 
-        Route::resource('admins', AdminController::class);
-        Route::resource('categories', CategoryController::class);
-        Route::resource('subcategories', SubCategoryController::class);
+        Route::prefix('cms')->middleware('auth:admin')->group(function () {
+
+
+            Route::resource('admins', AdminController::class);
+            Route::resource('categories', CategoryController::class);
+            Route::resource('subcategories', SubCategoryController::class);
 
 
 
 
 
-        Route::resource('roles',RoleController::class);
-        Route::resource('permissions',PermissionController::class);
+            Route::resource('roles',RoleController::class);
+            Route::resource('permissions',PermissionController::class);
 
-            Route::get('/admin/editPassword', [AuthController::class, 'editPassword'])->name('admin.editPassword');
-            Route::post('/admin/updatePassword', [AuthController::class, 'updatePassword'])->name('admin.updatePassword');
+                Route::get('/admin/editPassword', [AuthController::class, 'editPassword'])->name('admin.editPassword');
+                Route::post('/admin/updatePassword', [AuthController::class, 'updatePassword'])->name('admin.updatePassword');
 
 
-        Route::resource('permissions/role', RolePermissionController::class);
+            Route::resource('permissions/role', RolePermissionController::class);
 
-            Route::get('/admin/logout', [AuthController::class, 'logout'])->name('admin.logout');
+                Route::get('/admin/logout', [AuthController::class, 'logout'])->name('admin.logout');
 
-        Route::middleware('guest')->group(function () {
-            Route::get('/forgot-password', [ResetPasswordController::class, 'requestPasswordReset'])->name('password.request');
-            Route::post('/forgot-password', [ResetPasswordController::class, 'sendResetEmail'])->name('password.email');
-            Route::get('/reset-password/{token}', [ResetPasswordController::class, 'resetPassword'])->name('password.reset');
-            Route::post('/reset-password', [ResetPasswordController::class, 'updatePassword'])->name('password.update');
+            Route::middleware('guest')->group(function () {
+                Route::get('/forgot-password', [ResetPasswordController::class, 'requestPasswordReset'])->name('password.request');
+                Route::post('/forgot-password', [ResetPasswordController::class, 'sendResetEmail'])->name('password.email');
+                Route::get('/reset-password/{token}', [ResetPasswordController::class, 'resetPassword'])->name('password.reset');
+                Route::post('/reset-password', [ResetPasswordController::class, 'updatePassword'])->name('password.update');
+            });
+
+            Route::resource('users', UserController::class);
+            Route::post('user/change-status/{id}', [UserController::class, 'UserActive'])->name('users.UserActive');
+
         });
 
-        Route::resource('users', UserController::class);
-        Route::post('user/change-status/{id}', [UserController::class, 'UserActive'])->name('users.UserActive');
     }
 
 

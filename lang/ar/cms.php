@@ -67,32 +67,12 @@ return [
     'create_new_subcategory'=>'انشاء فئة فرعية جديدة  ',
     'category'=>'الفئة',
     'image'=>'الصورة',
-
-
-
-
     'Serial_Number'=>'الرقم التسلسلي ',
     'password' => ' كلمة المرور',
-
     'save'=>'حفظ',
-
-
-
-
-
-
-
-
-
-
     'admin' => 'ادمن',
-
-    'add_admin'=>'اضافة ادمن'
-
-
-  
-  
-      'read_role'=> ' قراءة الصلاحيات',
+    'add_admin'=>'اضافة ادمن',
+    'read_role'=> ' قراءة الصلاحيات',
     'home'=> 'الرئيسية',
     'role_Management'=>'صلاحيات المسمى الوظيفي',
     'roles'=>'المسمى الوظيفي',
@@ -115,6 +95,7 @@ return [
     'status'=>'الحالة',
     'create_success'=>'تم الانشاء بنجاح',
     'create_failed'=>' فشل الانشاء',
+    'app_name'=>'صيانة',
 
 
 ];
