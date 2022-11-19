@@ -18,7 +18,7 @@ class AuthController extends Controller
         ]);
         session()->put('guard', $request->input('guard'));
         if (!$validator->fails()) {
-            return response()->view('cms.auth.login');
+            return response()->view('cms.auth.login', ['guard' => $request->guard]);
         } else {
             abort(404);
         }
@@ -48,7 +48,6 @@ class AuthController extends Controller
     {
         return response()->view('cms.auth.edit-password');
     }
-
     public function updatePassword(Request $request)
     {
         $validator = Validator($request->all(), [
@@ -57,11 +56,11 @@ class AuthController extends Controller
 
         ]);
         if (!$validator->fails()) {
-            $admin = $request->Admin();
-            $admin->forceFill(
+            $user = $request->user();
+            $user->forceFill(
                 ['password' => Hash::make($request->input('new_password'))]
             );
-            $isSaved = $admin->save();
+            $isSaved = $user->save();
 
             return response()->json(
                 ['message' => $isSaved ? 'Updated successfully' : 'Updated Failed!'],
@@ -74,7 +73,6 @@ class AuthController extends Controller
             );
         }
     }
-
     public function logout(Request $request)
     {
         $guard = session('guard');

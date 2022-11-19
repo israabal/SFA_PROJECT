@@ -38,6 +38,13 @@ Route::group(
         'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
     ],
     function () { //...
+        Route::middleware('guest:admin,user')->group(function () {
+            Route::get('{guard}/forgot-password', [ResetPasswordController::class, 'showForgotPassword'])->name('password.request');
+            Route::post('forgot-password', [ResetPasswordController::class, 'emailForgetPassword'])->name('password.email');
+            Route::get('{guard}/reset-password/{token}', [ResetPasswordController::class, 'showResetPassword'])->name('password.reset');
+            Route::post('reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.update');
+        });
+
         Route::prefix('cms')->middleware('guest:admin')->group(function () {
             Route::get('login/{guard}', [AuthController::class, 'showLogin'])->name('cms.login');
             Route::post('/login', [AuthController::class, 'login']);
@@ -46,44 +53,35 @@ Route::group(
             return view('cms.parent');
         });
 
-        Route::middleware('auth:admin')->group(function () {
-        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
-    ], function(){ //...
+
+        Route::prefix('cms')->middleware('auth:admin')->group(function () {
+
+
+            Route::resource('admins', AdminController::class);
+            Route::resource('categories', CategoryController::class);
+            Route::resource('subcategories', SubCategoryController::class);
+            Route::resource('users', UserController::class);
 
 
 
-        Route::resource('admins', AdminController::class);
-        Route::resource('categories', CategoryController::class);
-        Route::resource('subcategories', SubCategoryController::class);
 
 
-
-
-
-        Route::get('/', function () {return view('cms.parent'); });
-
-        Route::resource('roles',RoleController::class);
-        Route::resource('permissions',PermissionController::class);
+            Route::resource('roles', RoleController::class);
+            Route::resource('permissions', PermissionController::class);
 
             Route::get('/admin/editPassword', [AuthController::class, 'editPassword'])->name('admin.editPassword');
             Route::post('/admin/updatePassword', [AuthController::class, 'updatePassword'])->name('admin.updatePassword');
-        
 
-        Route::resource('permissions/role', RolePermissionController::class);
+
+            Route::resource('permissions/role', RolePermissionController::class);
 
             Route::get('/admin/logout', [AuthController::class, 'logout'])->name('admin.logout');
-        });  // end Middleware admin
+            Route::get('/admin/profileEdite', [AdminProfileConroller::class, 'EditProfile'])->name('profile.edit');
 
-        Route::middleware('guest')->group(function () {
-            Route::get('/forgot-password', [ResetPasswordController::class, 'requestPasswordReset'])->name('password.request');
-            Route::post('/forgot-password', [ResetPasswordController::class, 'sendResetEmail'])->name('password.email');
-            Route::get('/reset-password/{token}', [ResetPasswordController::class, 'resetPassword'])->name('password.reset');
-            Route::post('/reset-password', [ResetPasswordController::class, 'updatePassword'])->name('password.update');
+
+            Route::post('user/change-status/{id}', [UserController::class, 'UserActive'])->name('users.UserActive');
         });
-
-        Route::resource('users', UserController::class);
-        Route::post('user/change-status/{id}', [UserController::class, 'UserActive'])->name('users.UserActive');
     }
 
-);
 
+);
