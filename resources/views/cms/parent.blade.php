@@ -13,7 +13,7 @@ License: For each use you must have a valid license purchased only from above li
 <html @if (app()->getLocale()=='en') lang="en" @else lang="ar" @endif >
 	<!--begin::Head-->
 	<head><base href=""/>
-        <title>Metronic| @yield('title')</title>
+        <title>{{__('cms.app_name')}}| @yield('title')</title>
 
 		<meta charset="utf-8" />
 		<meta name="description" content="The most advanced Bootstrap Admin Theme on Themeforest trusted by 100,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue, Asp.Net Core, Rails, Spring, Blazor, Django, Flask & Laravel versions. Grab your copy now and get life-time updates for free." />
@@ -53,7 +53,7 @@ License: For each use you must have a valid license purchased only from above li
 		<!--begin::Theme mode setup on page load-->
 		<script>var defaultThemeMode = "light"; var themeMode; if ( document.documentElement ) { if ( document.documentElement.hasAttribute("data-theme-mode")) { themeMode = document.documentElement.getAttribute("data-theme-mode"); } else { if ( localStorage.getItem("data-theme") !== null ) { themeMode = localStorage.getItem("data-theme"); } else { themeMode = defaultThemeMode; } } if (themeMode === "system") { themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } document.documentElement.setAttribute("data-theme", themeMode); }</script>
 		<!--end::Theme mode setup on page load-->
-		
+
 
 
 		<div class="d-flex flex-column flex-root app-root" id="kt_app_root">
@@ -99,12 +99,12 @@ License: For each use you must have a valid license purchased only from above li
 										</span>
 										<!--end:Menu link-->
 										<!--begin:Menu sub-->
-									
+
 										<!--end:Menu sub-->
 									</div>
 									<!--end:Menu item-->
 									<!--begin:Menu item-->
-								
+
 									<!--end:Menu item-->
 								</div>
 								<!--end::Menu-->
@@ -857,10 +857,10 @@ License: For each use you must have a valid license purchased only from above li
 								</div>
 								<!--end::Search-->
 								<!--begin::Activities-->
-							
+
 								<!--end::Notifications-->
 								<!--begin::Chat-->
-								
+
 								<!--end::My apps links-->
 								<!--begin::Theme mode-->
 								<div class="app-navbar-item ms-1 ms-lg-3">
@@ -976,9 +976,10 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end::Avatar-->
 												<!--begin::Username-->
 												<div class="d-flex flex-column">
-													<div class="fw-bold d-flex align-items-center fs-5">{{ Auth::user()->name }}
+
+													<div class="fw-bold d-flex align-items-center fs-5">{{ auth()->user()->name }}
 													<span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Pro</span></div>
-													<a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{ Auth::user()->email }}</a>
+													<a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{ auth()->user()->email }}</a>
 												</div>
 												<!--end::Username-->
 											</div>
@@ -993,7 +994,7 @@ License: For each use you must have a valid license purchased only from above li
 										</div>
 										<!--end::Menu item-->
 										<!--begin::Menu item-->
-								
+
 										<!--end::Menu item-->
 										<!--begin::Menu separator-->
 										<!--end::Menu separator-->
@@ -1023,7 +1024,7 @@ License: For each use you must have a valid license purchased only from above li
 												</div>
 												<!--end::Menu item-->
 												<!--begin::Menu item-->
-											
+
 												<!--end::Menu item-->
 											</div>
 											<!--end::Menu sub-->
@@ -1101,10 +1102,10 @@ License: For each use you must have a valid license purchased only from above li
 									<!--begin:Menu item-->
 									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 										<!--begin:Menu link-->
-									
+
 										<!--end:Menu link-->
 										<!--begin:Menu sub-->
-										
+
 										<!--end:Menu sub-->
 									</div>
 									<!--end:Menu item-->
@@ -1138,10 +1139,10 @@ License: For each use you must have a valid license purchased only from above li
 										<!--begin:Menu sub-->
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-											
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-										
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 											<div class="menu-item">
@@ -1156,16 +1157,16 @@ License: For each use you must have a valid license purchased only from above li
 											</div>
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-										
+
 											<!--end:Menu item-->
 										</div>
 
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-											
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-										
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 											<div class="menu-item">
@@ -1180,13 +1181,13 @@ License: For each use you must have a valid license purchased only from above li
 											</div>
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-										
+
 											<!--end:Menu item-->
 										</div>
 										<!--end:Menu sub-->
 									</div>
-									
-							
+
+
 									<div class="menu-item pt-5">
 										<!--begin:Menu content-->
 										<div class="menu-content">
@@ -1216,7 +1217,7 @@ License: For each use you must have a valid license purchased only from above li
 										<!--begin:Menu sub-->
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-		
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 
@@ -1268,7 +1269,7 @@ License: For each use you must have a valid license purchased only from above li
 										<!--begin:Menu sub-->
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-		
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 
@@ -1300,7 +1301,7 @@ License: For each use you must have a valid license purchased only from above li
 										</div>
 										<!--end:Menu sub-->
 									</div>
-							
+
 								</div>
 								<!--end::Menu-->
 							</div>
@@ -1308,13 +1309,13 @@ License: For each use you must have a valid license purchased only from above li
 						</div>
 						<!--end::sidebar menu-->
 						<!--begin::Footer-->
-					
+
 						<!--end::Footer-->
 					</div>
 					<!--end::Sidebar-->
 					<!--begin::Main-->
-					<div class="app-main flex-column flex-row-fluid" id="kt_app_main">						
-                       
+					<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+
 						@yield('Content')
 
 						<!--begin::Footer-->
@@ -3030,7 +3031,7 @@ License: For each use you must have a valid license purchased only from above li
 		<!--end::Help drawer-->
 		<!--end::Engage drawers-->
 		<!--begin::Engage toolbar-->
-	
+
 		<!--end::Engage toolbar-->
 		<!--begin::Scrolltop-->
 		<div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
