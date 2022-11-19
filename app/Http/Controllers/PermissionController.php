@@ -25,7 +25,7 @@ class PermissionController extends Controller
         // $Permissions = Role::withCount('permissions')->get();
          $permissions = permission::get();
 
-        return response()->view('cms.spatie.Permissions.index', ['roles' => $permissions]);
+        return response()->view('cms.spatie.Permissions.index', ['permissions' => $permissions]);
     }
 
     /**

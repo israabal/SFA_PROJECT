@@ -61,12 +61,13 @@ return [
     'english' => 'english',
     'arabic' => 'arabic',
     'categories' => 'categories',
-    'categories_list' => 'Read Categories ',
+
+    'categories_list' => 'Categories_list ',
     'create_category' => ' Create Category ',
     'Category_image' => 'Category  Image ',
     'create_new_prand' => 'create New Prand  ',
-    'subcategories' => ' Subcategories ',
-    'subcategories_list' => 'Read subcategories ',
+    'subcategories' => ' subcategories ',
+    'subcategories_list' => 'subcategories List',
     'create_subcategory' => ' Create Subcategory',
     'subCategory_image' => 'SubCategory Image  ',
     'create_new_subcategory' => 'create new subcategory  ',
@@ -82,7 +83,6 @@ return [
     'role_Management' => '  Role Management',
     'categories_Management' => '  Categories Management',
     'subcategories_Management' => '  SubCategories Management',
-
 
     'roles' => 'Role ',
     'create_role' => ' Create Role ',
@@ -109,6 +109,9 @@ return [
     'Updated_failed'=>' Updated failed!',
     'Deleted_successfully'=>'Deleted successfully',
     'Delete_failed!'=>'Delete failed!'
-
-
+    'edit_profile' =>'Edit Profile',
+'Forgot_Password'=>'Forgot Password',
+'Enter_your_email_to_reset_your_password'=>'Enter your email to reset your password',
+'cancel'=>'Cancel',
+    'app_name'=>'maintenance',
 ];
