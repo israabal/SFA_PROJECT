@@ -15,7 +15,7 @@
         <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
             <!--begin::Card title-->
             <div class="card-title m-0">
-                <h3 class="fw-bold m-0">"{{__('cms.create_role')}}"</h3>
+                <h3 class="fw-bold m-0">{{__('cms.create_role')}}</h3>
             </div>
             <!--end::Card title-->
         </div>
@@ -56,9 +56,9 @@
                              name="language" aria-label="{{__('cms.select-guard')}}" data-control="select2" data-placeholder="{{__('cms.select-guard')}}" class="form-select form-select-solid form-select-lg">
                                 <option value="">"{{__('cms.guard_name')}}" </option>
                                 <option data-kt-flag="flags/indonesia.svg" value="admin">{{__('cms.admin')}}</option>
-                                <option data-kt-flag="flags/malaysia.svg" value="agent">{{__('cms.agent')}}</option>
-                                <option data-kt-flag="flags/indonesia.svg" value="client">{{__('cms.client')}}</option>
-                                <option data-kt-flag="flags/malaysia.svg" value="technical">{{__('cms.technical')}}</option>
+                                <option data-kt-flag="flags/malaysia.svg" value="user">{{__('cms.user')}}</option>
+                                {{-- <option data-kt-flag="flags/indonesia.svg" value="client">{{__('cms.client')}}</option>
+                                <option data-kt-flag="flags/malaysia.svg" value="technical">{{__('cms.technical')}}</option> --}}
 
 
                             </select>

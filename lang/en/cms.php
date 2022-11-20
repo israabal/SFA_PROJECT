@@ -108,10 +108,12 @@ return [
     'Updated_success'=>'Updated Successfully  ',
     'Updated_failed'=>' Updated failed!',
     'Deleted_successfully'=>'Deleted successfully',
-    'Delete_failed!'=>'Delete failed!'
+    'Delete_failed!'=>'Delete failed!',
     'edit_profile' =>'Edit Profile',
 'Forgot_Password'=>'Forgot Password',
 'Enter_your_email_to_reset_your_password'=>'Enter your email to reset your password',
 'cancel'=>'Cancel',
     'app_name'=>'maintenance',
+    'user'=>'user',
+
 ];

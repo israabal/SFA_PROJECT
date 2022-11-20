@@ -14,7 +14,7 @@
                 <!--begin::Card title-->
                 <div class="card-title">
                     <!--begin::Search-->
-                
+
                     <!--end::Search-->
                 </div>
                 <!--end::Card title-->
@@ -36,11 +36,11 @@
                     <thead>
                         <!--begin::Table row-->
                         <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-                        
+
                             <th class="min-w-200px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="Product: activate to sort column ascending" style="width: 206.828px;">{{__('cms.categories')}}</th>
                             <th class="text-end min-w-70px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="Qty: activate to sort column ascending" style="width: 93.1875px;">{{__('cms.Serial_Number')}}</th>
                             <th class="text-end min-w-100px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="SKU: activate to sort column ascending" style="width: 103.562px;">{{__('cms.JOINED_DATE')}}</th>
-                            <th class="text-end sorting" tabindex="0" aria-controls="kt_table_users" rowspan="1" colspan="1" aria-label="Two-step: activate to sort column ascending" style="width: 125px;">{{__('cms.active')}}</th> 
+                            <th class="text-end sorting" tabindex="0" aria-controls="kt_table_users" rowspan="1" colspan="1" aria-label="Two-step: activate to sort column ascending" style="width: 125px;">{{__('cms.active')}}</th>
 
 
                             <th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 99.5938px;">{{__('cms.actions')}}</th></tr>
@@ -51,11 +51,11 @@
                     <tbody class="fw-semibold text-gray-600">
                         @foreach ($categories as $category)
 
-                  
+
                     <tr class="odd">
 
                             <!--begin::Checkbox-->
-                         
+
                             <!--end::Checkbox-->
                             <!--begin::Category=-->
                             <td>
@@ -88,7 +88,7 @@
 
                             <td>
                                 <div class="d-flex justify-content-end flex-shrink-0">
-                                    
+
                                     <a  href="{{route('categories.edit', $category->id )}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                         <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                                         <span class="svg-icon svg-icon-3">
@@ -122,7 +122,7 @@
             <div class="row">
                 <div class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start">
                 </div>
-               
+
             </div>
         </div>
     </div>
@@ -178,6 +178,6 @@
         );
     }
 </script>
-    
+
 @endsection
 

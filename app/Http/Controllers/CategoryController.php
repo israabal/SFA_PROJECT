@@ -16,6 +16,11 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+     $this-> authorizeResource(Category::class, 'category');
+    }
     public function index()
     {
         $categories=Category::all();
@@ -32,7 +37,7 @@ class CategoryController extends Controller
     public function create()
     {
 
-        return response()->view('cms.category.create'); 
+        return response()->view('cms.category.create');
        }
 
     /**
@@ -50,7 +55,7 @@ class CategoryController extends Controller
 
            'image' => 'required|image|mimes:png,jpg,jpeg',
 
-         
+
        ]);
 
        if (!$validator->fails()) {
@@ -59,8 +64,6 @@ class CategoryController extends Controller
            $category->name = $request->input('name');
            $category->active = $request->input('active');
 
-           
-
            if ($request->hasFile('image')) {
                $file = $request->file('image');
                $imagetitle =  time().'_category_image.' . $file->getClientOriginalExtension();
@@ -68,8 +71,7 @@ class CategoryController extends Controller
                $imagePath = 'images/categories/' . $imagetitle;
                $category->image = $imagePath;
             }
-            $isSaved = $category->save();
-
+            $isSaved = $request->user()->categories()->save($category);
            return response()->json(
                ['message' => $isSaved ? 'Saved successfully' : 'Save failed!'],
                $isSaved ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST
@@ -122,12 +124,12 @@ class CategoryController extends Controller
             'image' => 'image|mimes:png,jpg,jpeg',
         ]);
         if (!$validator->fails()) {
-            
+
             $category->name = $request->input('name');
             $category->code = $request->input('code');
             $category->active = $request->input('active');
 
-  
+
 
             if ($request->hasFile('image')) {
                 //Delete category previous image.

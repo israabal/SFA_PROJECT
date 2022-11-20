@@ -12,7 +12,7 @@ class AdminProfileConroller extends Controller
     public function EditProfile()
     {
         return response()->view('cms.admin.admin_profile_view');
-    }  
+    }
     public function profileUpdate(Request $request){
         $request->validate([
             'name' =>'required|min:4|string|max:255',

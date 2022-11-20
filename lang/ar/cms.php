@@ -104,8 +104,8 @@ return [
     'Updated_success'=>'تم التعديل بنجاح',
     'Updated_failed'=>' فشل التعديل',
     'Deleted_successfully'=>'تم الحذف بنجاح ',
-    'Delete_failed!'=>'فشل الحذف !'
+    'Delete_failed!'=>'فشل الحذف !',
     'app_name'=>'صيانة',
-
+    'user'=>'مستخدم',
 
 ];

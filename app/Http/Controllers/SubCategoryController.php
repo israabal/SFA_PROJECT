@@ -15,10 +15,16 @@ class SubCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->authorizeResource(SubCategory::class);
+    }
     public function index()
     {
         $sub_categories = SubCategory::with('category')->get();
-        return response()->view('cms.subcategories.index', ['sub_categories' => $sub_categories]);    }
+        return response()->view('cms.subcategories.index', ['sub_categories' => $sub_categories]);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -40,50 +46,51 @@ class SubCategoryController extends Controller
     public function store(Request $request)
     {
         $validator = Validator($request->all(), [
-           'category_id'=>'required|numeric|exists:categories,id',
-           'name' => 'required|string|min:2',
-           'code'=> 'required | string|min:2',
-           'active'=> 'required | boolean',
+            'category_id' => 'required|numeric|exists:categories,id',
+            'name' => 'required|string|min:2',
+            'code' => 'required | string|min:2',
+            'active' => 'required | boolean',
 
-           'image' => 'required|image|mimes:png,jpg,jpeg',
-
-         
-       ]);
-
-       if (!$validator->fails()) {
-        
-           $subcategory = new SubCategory();
-           $subcategory->name = $request->input('name');
-           $subcategory->code = $request->input('code');
-           $subcategory->active = $request->input('active');
-
-           
-           $subcategory->category_id = $request->input('category_id');
-           if ($request->hasFile('image')) {
-            
-               $file = $request->file('image');
-               $imagetitle =  time().'_subcategory_image.' . $file->getClientOriginalExtension();
-               $status = $request->file('image')->storePubliclyAs('images/subcategories', $imagetitle);
-               $imagePath = 'images/subcategories/' . $imagetitle;
-               $subcategory->image = $imagePath;}
+            'image' => 'required|image|mimes:png,jpg,jpeg',
 
 
-         
-           $isSaved = $subcategory->save();
-           // $category=Category::fideOrFail($request->input('category_id'));
-           // $isSaved = $category->subcategories()->save($subcategory);
+        ]);
 
-           return response()->json(
-               ['message' => $isSaved ? 'Saved successfully' : 'Save failed!'],
-               $isSaved ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST
-           );
-       } else {
-           return response()->json(
-               ['message' => $validator->getMessageBag()->first()],
-               Response::HTTP_BAD_REQUEST,
-           );
-       }
-   }
+        if (!$validator->fails()) {
+
+            $subcategory = new SubCategory();
+            $subcategory->name = $request->input('name');
+            $subcategory->code = $request->input('code');
+            $subcategory->active = $request->input('active');
+
+
+            $subcategory->category_id = $request->input('category_id');
+            if ($request->hasFile('image')) {
+
+                $file = $request->file('image');
+                $imagetitle =  time() . '_subcategory_image.' . $file->getClientOriginalExtension();
+                $status = $request->file('image')->storePubliclyAs('images/subcategories', $imagetitle);
+                $imagePath = 'images/subcategories/' . $imagetitle;
+                $subcategory->image = $imagePath;
+            }
+
+
+
+            $isSaved = $subcategory->save();
+            // $category=Category::fideOrFail($request->input('category_id'));
+            // $isSaved = $category->subcategories()->save($subcategory);
+
+            return response()->json(
+                ['message' => $isSaved ? 'Saved successfully' : 'Save failed!'],
+                $isSaved ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST
+            );
+        } else {
+            return response()->json(
+                ['message' => $validator->getMessageBag()->first()],
+                Response::HTTP_BAD_REQUEST,
+            );
+        }
+    }
 
     /**
      * Display the specified resource.
@@ -106,8 +113,8 @@ class SubCategoryController extends Controller
     {
         $categories = Category::all();
 
-        return response()->view('cms.subcategories.edit', ['subcategory' => $subCategory,'categories' => $categories]);  
-      }
+        return response()->view('cms.subcategories.edit', ['subcategory' => $subCategory, 'categories' => $categories]);
+    }
 
     /**
      * Update the specified resource in storage.
@@ -119,24 +126,24 @@ class SubCategoryController extends Controller
     public function update(Request $request, SubCategory $subCategory)
     {
         $validator = Validator($request->all(), [
-            'category_id'=>'required|numeric|exists:categories,id',
+            'category_id' => 'required|numeric|exists:categories,id',
             'name' => 'required|string|min:3',
-            'code'=> 'required | string|min:2',
+            'code' => 'required | string|min:2',
             'active' => 'required|boolean',
 
-           
+
 
 
         ]);
         if (!$validator->fails()) {
-            
+
             $subCategory->name = $request->input('name');
             $subCategory->code = $request->input('code');
             $subCategory->category_id = $request->input('category_id');
             $subCategory->active = $request->input('active');
 
 
-  
+
 
             if ($request->hasFile('image')) {
                 //Delete category previous image.
