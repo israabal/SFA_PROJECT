@@ -4,21 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
-use App\Helpers\Messages;
 use Symfony\Component\HttpFoundation\Response;
 
 class RoleController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->authorizeResource(Role::class, 'role');
-    // }
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+
+    public function __construct()
+    {
+     $this-> authorizeResource(Role::class, 'role');
+    }
     public function index()
     {
 

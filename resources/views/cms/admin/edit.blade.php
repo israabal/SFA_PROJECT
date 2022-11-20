@@ -1,4 +1,8 @@
 @extends('cms.parent')
+@section('title',__('cms.admins'))
+@section('page-lg',__('cms.home'))
+@section('main-pg-md',__('cms.Admin_Management'))
+@section('page-md',__('cms.edit_admin'))
 @section('Content')
 <div class="col-xl-12">
     <!--begin::Contacts-->

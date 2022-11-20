@@ -13,7 +13,7 @@ class SubCategory extends Model
         
        return $this->active ? 'Active' : 'InActive';
     }
-    public function category(){
-        return $this->belongsto(Category::class ,'category_id','id');
+    public function admin(){
+        return $this->belongsto(Admin::class ,'admin_id','id');
     }
 }

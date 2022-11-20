@@ -11,6 +11,7 @@ use App\Http\Controllers\PermissionController;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProductModelController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\SparePartController;
 use App\Http\Controllers\UserController;
@@ -52,27 +53,25 @@ Route::group(
         });
 
         Route::prefix('cms')->middleware('auth:admin')->group(function () {
-            Route::resource('admins', AdminController::class);
-            Route::resource('categories', CategoryController::class);
-            Route::resource('subcategories', SubCategoryController::class);
-            Route::resource('users', UserController::class);
+
+            Route::resource('/admins', AdminController::class);
+            Route::resource('/categories', CategoryController::class);
+            Route::resource('/subcategories', SubCategoryController::class);
+            Route::resource('/users', UserController::class);
+            Route::resource('/productmodels', ProductModelController::class);
             Route::resource('spareparts', SparePartController::class);
 
 
+
             Route::resource('roles', RoleController::class);
-            Route::resource('permissions', PermissionController::class);
-
-           
-
+            Route::get('/admin/editPassword', [AuthController::class, 'editPassword'])->name('admin.editPassword');
+            Route::post('/admin/updatePassword', [AuthController::class, 'updatePassword'])->name('admin.updatePassword');
             Route::resource('permissions/role', RolePermissionController::class);
 
-            // Route::get('/profileEdit', [AdminProfileConroller::class, 'EditProfile'])->name('profile.edit');
-            // Route::put('/profile/Update', [AdminProfileConroller::class, 'profileUpdate'])->name('profile.update');
+
+                Route::get('/admin/logout', [AuthController::class, 'logout'])->name('admin.logout');
 
 
-
-
-            Route::resource('users', UserController::class);
             Route::post('user/change-status/{id}', [UserController::class, 'UserActive'])->name('users.UserActive');
         });
         Route::prefix('cms')->middleware('auth:admin,user')->group(function () {

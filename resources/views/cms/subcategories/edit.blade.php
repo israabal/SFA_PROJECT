@@ -1,4 +1,8 @@
 @extends('cms.parent')
+@section('title',__('cms.subcategories'))
+@section('page-lg',__('cms.home'))
+@section('main-pg-md',__('cms.subcategories_Management'))
+@section('page-md',__('cms.edit_subcategory'))
 @section('styles')
     	<!--begin::Vendor Stylesheets(used for this page only)-->
 		<link href="{{asset('cms/assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
@@ -30,28 +34,7 @@
             <!--begin::Form-->
             <form id="create-form" class="form fv-plugins-bootstrap5 fv-plugins-framework" >
                 @csrf
-                <div class="row">
-                    <div class="col-6">
-                        <div class="fv-row w-100 flex-md-root fv-plugins-icon-container" data-select2-id="select2-data-131-74d4">
-                            <!--begin::Label-->
-                            <label class="required form-label">{{__('cms.categories')}}</label>
-        
-                            <select class="form-select mb-2 " name="tax" id="category_id" >
-                                @foreach ($categories as $category)
-                                <option value="{{$category->id}}" @if($subcategory->category_id == $category->id) selected @endif>{{$category->name}}
-                                </option>
-                                @endforeach
-                            </select>
-                               
-                            <!--end::Select2-->
-                            <!--begin::Description-->
-                            <div class="text-muted fs-7">Set the product tax class.</div>
-                            <!--end::Description-->
-                        <div class="fv-plugins-message-container invalid-feedback"></div>
-                    </div>
-
-                    </div>
-                </div>
+             
       
                 <!--begin::Input group-->
               
@@ -152,7 +135,7 @@
                 <label class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
                     <!--begin::Input-->
                     <input class="form-check-input" id="active" type="checkbox" 
-                    @if($category->active) checked @endif >
+                    @if($subcategory->active) checked @endif >
 
                     <!--end::Input-->
                     <!--begin::Label-->
@@ -204,9 +187,6 @@
       formData.append('name',document.getElementById('name').value);
       formData.append('code',document.getElementById('code').value);
       formData.append('active', document.getElementById('active').checked ?1:0);
-
-      formData.append('category_id', document.getElementById('category_id').value);
-
 
       if(document.getElementById('subcategory_image').files[0] != undefined) {
           formData.append('image',document.getElementById('subcategory_image').files[0]);

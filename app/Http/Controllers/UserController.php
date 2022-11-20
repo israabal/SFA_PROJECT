@@ -11,11 +11,22 @@ use Str;
 
 class UserController extends Controller
 {
+
+
+
+    public function __construct()
+    {
+     $this-> authorizeResource(User::class, 'user');
+    }
+
+
     public function index()
     {
         $users = User::all();
         return response()->view('cms.users.index', ['users' => $users]);
     }
+
+
     public function create()
     {
         return response()->view('cms.users.create');
@@ -108,7 +119,7 @@ class UserController extends Controller
         $user = User::Where('id', '=', $id)->first();
 
         $user->status = !$user->status;
-        $user->save(); 
+        $user->save();
         return response()->json(
             ['message' => $user ? 'Change Status successfully' : 'Change Status failed!'],
             $user ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST

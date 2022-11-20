@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\permission;
+use Spatie\Permission\Models\Permission;
 use Symfony\Component\HttpFoundation\Response;
 
 class PermissionController extends Controller
@@ -13,7 +13,10 @@ class PermissionController extends Controller
     // {
     //     $this->authorizeResource(Role::class, 'role');
     // }
-
+    public function __construct()
+    {
+     $this-> authorizeResource(Permission::class, 'permission');
+    }
     /**
      * Display a listing of the resource.
      *
