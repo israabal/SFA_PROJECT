@@ -38,7 +38,6 @@
                         <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                         
                             <th class="min-w-200px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="Product: activate to sort column ascending" style="width: 206.828px;">{{__('cms.subcategories')}}</th>
-                            <th class=" min-w-70px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="Qty: activate to sort column ascending" style="width: 93.1875px;">{{__('cms.category')}}</th>
 
                             <th class="text-end min-w-70px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="Qty: activate to sort column ascending" style="width: 93.1875px;">{{__('cms.Serial_Number')}}</th>
                             <th class="text-end min-w-100px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="SKU: activate to sort column ascending" style="width: 103.562px;">{{__('cms.JOINED_DATE')}}</th>
@@ -76,9 +75,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="">
-                                <span class="fw-bold">{{$subcategory->category->name}}</span>
-                            </td>
+                   
                             <!--end::Category=-->
                             <!--begin::SKU=-->
                             <td class="text-end pe-0">

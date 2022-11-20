@@ -16,6 +16,16 @@ class Admin extends Authenticatable
     {
        return $this->active ? 'Active' : 'InActive';
     }
+    public function categories(){
+        return $this ->hasmany(Category::class ,'admin_id','id');
+    }
+    public function subcategories(){
+        return $this ->hasmany(SubCategory::class ,'admin_id','id');
+    }
+
+    public function models(){
+        return $this ->hasmany(ProductModel::class ,'admin_id','id');
+    }
     protected $fillable = [
         'name',
         'email',

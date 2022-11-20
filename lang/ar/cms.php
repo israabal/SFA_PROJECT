@@ -17,6 +17,12 @@ return [
     'home'=>'الصفحة الرئيسية',
     'hr'=>'موارد بشرية',
     'Dashboards'=>'لوحة التحكم',
+    'edit_category' => ' تعديل الفئة ',
+    'edit_subcategory'=>'تعديل الفئة الفرعية ',
+    'edit_model'=>'تعديل الموديل ',
+
+
+
     'active' => 'فعال',
     'actions'=>'اجراءات',
     'light'=>'ضوء',
@@ -107,5 +113,11 @@ return [
     'Delete_failed!'=>'فشل الحذف !',
     'app_name'=>'صيانة',
     'user'=>'مستخدم',
+    'subcategory'=>'الفئة الفرعية',
+    'model'=>'موديلات',
+    'model_mangment'=>'ادارة الموديلات',
+    'model_list'=>'قائمة الموديلات',
+    'create_model'=>'انشاء موديل'
+
 
 ];
