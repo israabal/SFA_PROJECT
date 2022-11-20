@@ -34,27 +34,7 @@
             <!--begin::Form-->
             <form id="create-form" class="form fv-plugins-bootstrap5 fv-plugins-framework" >
                 @csrf
-                <div class="row">
-                    <div class="col-6">
-                        <div class="fv-row w-100 flex-md-root fv-plugins-icon-container" data-select2-id="select2-data-131-74d4">
-                            <!--begin::Label-->
-                            <label class="required form-label">{{__('cms.categories')}}</label>
-        
-                            <select class="form-select mb-2 " name="tax" id="category_id" >
-                                @foreach ($categories as $category)
-                                <option value="{{$category->id}}">{{$category->name}}</option>
-                                @endforeach
-                            </select>
-                               
-                            <!--end::Select2-->
-                            <!--begin::Description-->
-                            <div class="text-muted fs-7">Set the product tax class.</div>
-                            <!--end::Description-->
-                        <div class="fv-plugins-message-container invalid-feedback"></div>
-                    </div>
-
-                    </div>
-                </div>
+       
       
                 <!--begin::Input group-->
               
@@ -202,7 +182,6 @@
    function performStore() {
     
         var formData = new FormData();
-        formData.append('category_id', document.getElementById('category_id').value);
 
         formData.append('name', document.getElementById('name').value);
         formData.append('code', document.getElementById('code').value);

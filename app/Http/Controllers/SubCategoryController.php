@@ -17,7 +17,7 @@ class SubCategoryController extends Controller
      */
     public function index()
     {
-        $sub_categories = SubCategory::with('category')->get();
+        $sub_categories = SubCategory::all();
         return response()->view('cms.subcategories.index', ['sub_categories' => $sub_categories]);    }
 
     /**
@@ -27,8 +27,7 @@ class SubCategoryController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-        return response()->view('cms.subcategories.create', ['categories' => $categories]);
+        return response()->view('cms.subcategories.create');
     }
 
     /**
@@ -40,7 +39,6 @@ class SubCategoryController extends Controller
     public function store(Request $request)
     {
         $validator = Validator($request->all(), [
-           'category_id'=>'required|numeric|exists:categories,id',
            'name' => 'required|string|min:2',
            'code'=> 'required | string|min:2',
            'active'=> 'required | boolean',
@@ -58,7 +56,6 @@ class SubCategoryController extends Controller
            $subcategory->active = $request->input('active');
 
            
-           $subcategory->category_id = $request->input('category_id');
            if ($request->hasFile('image')) {
             
                $file = $request->file('image');
@@ -69,7 +66,7 @@ class SubCategoryController extends Controller
 
 
          
-           $isSaved = $subcategory->save();
+               $isSaved = $request->user()->subcategories()->save($subcategory);
            // $category=Category::fideOrFail($request->input('category_id'));
            // $isSaved = $category->subcategories()->save($subcategory);
 
@@ -102,11 +99,13 @@ class SubCategoryController extends Controller
      * @param  \App\Models\SubCategory  $subCategory
      * @return \Illuminate\Http\Response
      */
-    public function edit(SubCategory $subCategory)
+    public function edit( $id)
     {
-        $categories = Category::all();
 
-        return response()->view('cms.subcategories.edit', ['subcategory' => $subCategory,'categories' => $categories]);  
+        $subCategory=SubCategory::where('id',$id)->first();
+
+
+        return response()->view('cms.subcategories.edit', ['subcategory' => $subCategory]);  
       }
 
     /**
@@ -119,7 +118,6 @@ class SubCategoryController extends Controller
     public function update(Request $request, SubCategory $subCategory)
     {
         $validator = Validator($request->all(), [
-            'category_id'=>'required|numeric|exists:categories,id',
             'name' => 'required|string|min:3',
             'code'=> 'required | string|min:2',
             'active' => 'required|boolean',
@@ -132,7 +130,6 @@ class SubCategoryController extends Controller
             
             $subCategory->name = $request->input('name');
             $subCategory->code = $request->input('code');
-            $subCategory->category_id = $request->input('category_id');
             $subCategory->active = $request->input('active');
 
 
@@ -148,7 +145,7 @@ class SubCategoryController extends Controller
                 $imagePath = 'images/subcategories/' . $imageName;
                 $subCategory->image = $imagePath;
             }
-            $isSaved = $subCategory->save();
+            $isSaved = $request->user()->subcategories()->save($subCategory);
             return response()->json(
                 ['message' => $isSaved ? 'Updated Successfully' : 'Update failed!'],
                 $isSaved ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST
@@ -164,11 +161,15 @@ class SubCategoryController extends Controller
      * @param  \App\Models\SubCategory  $subCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SubCategory $subCategory)
+    public function destroy($id)
     {
-        $deleted = $subCategory->delete();
+
+
+        $subcategory=SubCategory::where('id',$id)->first();
+
+        $deleted = $subcategory->delete();
         if ($deleted) {
-            Storage::delete($subCategory->image);
+            Storage::delete($subcategory->image);
         }
         return response()->json(
             [

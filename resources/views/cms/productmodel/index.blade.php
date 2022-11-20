@@ -1,8 +1,8 @@
 @extends('cms.parent');
-@section('title',__('cms.subcategories'))
+@section('title',__('cms.model'))
 @section('page-lg',__('cms.home'))
-@section('main-pg-md',__('cms.subcategories_Management'))
-@section('page-md',__('cms.subcategories_list'))
+@section('main-pg-md',__('cms.model_mangment'))
+@section('page-md',__('cms.model_list'))
 @section('Content')
 <div id="kt_app_content" class="app-content flex-column-fluid">
     <!--begin::Content container-->
@@ -22,7 +22,7 @@
                 <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
                 
                     <!--begin::Add product-->
-                    <a href="{{route('subcategories.create' )}}" class="btn btn-primary">{{__('cms.create_new_subcategory')}}</a>
+                    <a href="{{route('productmodels.create' )}}" class="btn btn-primary">{{__('cms.create_model')}}</a>
                     <!--end::Add product-->
                 </div>
                 <!--end::Card toolbar-->
@@ -37,10 +37,10 @@
                         <!--begin::Table row-->
                         <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                         
-                            <th class="min-w-200px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="Product: activate to sort column ascending" style="width: 206.828px;">{{__('cms.subcategories')}}</th>
+                            <th class="min-w-200px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="Product: activate to sort column ascending" style="width: 206.828px;">{{__('cms.model')}}</th>
                             <th class=" min-w-70px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="Qty: activate to sort column ascending" style="width: 93.1875px;">{{__('cms.category')}}</th>
 
-                            <th class="text-end min-w-70px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="Qty: activate to sort column ascending" style="width: 93.1875px;">{{__('cms.Serial_Number')}}</th>
+                            <th class="text-end min-w-70px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="Qty: activate to sort column ascending" style="width: 93.1875px;">{{__('cms.subcategory')}}</th>
                             <th class="text-end min-w-100px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="SKU: activate to sort column ascending" style="width: 103.562px;">{{__('cms.JOINED_DATE')}}</th>
                             <th class="text-end sorting" tabindex="0" aria-controls="kt_table_users" rowspan="1" colspan="1" aria-label="Two-step: activate to sort column ascending" style="width: 125px;">{{__('cms.active')}}</th> 
 
@@ -51,7 +51,7 @@
                     <!--end::Table head-->
                     <!--begin::Table body-->
                     <tbody class="fw-semibold text-gray-600">
-                        @foreach ($sub_categories as $subcategory)
+                        @foreach ($product_models as $productModel)
 
                   
                     <tr class="odd">
@@ -65,37 +65,37 @@
                                     <!--begin::Thumbnail-->
                                     <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="symbol symbol-50px">
                                         <div class="symbol-label">
-                                            <img src="{{Storage::url($subcategory->image ?? '')}}"  alt="Emma Smith" class="w-100">
+                                            <img src="{{Storage::url($productModel->main_image ?? '')}}"  alt="Emma Smith" class="w-100">
                                         </div>
                                     </a>
                                     <!--end::Thumbnail-->
                                     <div class="ms-5">
                                         <!--begin::Title-->
-                                        <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary fs-5 fw-bold" data-kt-ecommerce-product-filter="product_name">{{$subcategory->name}}</a>
+                                        <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary fs-5 fw-bold" data-kt-ecommerce-product-filter="product_name">{{$productModel->name}}</a>
                                         <!--end::Title-->
                                     </div>
                                 </div>
                             </td>
                             <td class="">
-                                <span class="fw-bold">{{$subcategory->category->name}}</span>
+                                <span class="fw-bold">{{$productModel->category->name}}</span>
                             </td>
                             <!--end::Category=-->
                             <!--begin::SKU=-->
                             <td class="text-end pe-0">
-                                <span class="fw-bold">{{$subcategory->code}}</span>
+                                <span class="fw-bold">{{$productModel->subcategory->name}}</span>
                             </td>
                             <!--end::SKU=-->
                             <!--begin::Qty=-->
                             <td class="text-end pe-0" data-order="16">
-                                <span class="fw-bold ms-3">{{$subcategory->created_at}}</span>
+                                <span class="fw-bold ms-3">{{$productModel->created_at}}</span>
                             </td>
-                            <td class="text-end pe-0"><span class="badge @if($subcategory->active) bg-success @else bg-danger @endif">{{$subcategory->active_status}}</span>
+                            <td class="text-end pe-0"><span class="badge @if($productModel->active) bg-success @else bg-danger @endif">{{$productModel->active_status}}</span>
 
               
                             <td>
                                 <div class="d-flex justify-content-end flex-shrink-0">
                                     
-                                    <a  href="{{route('subcategories.edit', $subcategory->id )}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                    <a  href="{{route('productmodels.edit', $productModel->id )}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                         <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                                         <span class="svg-icon svg-icon-3">
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -105,7 +105,7 @@
                                         </span>
                                         <!--end::Svg Icon-->
                                     </a>
-                                    <a href="#" onclick="confirmDelete('{{$subcategory->id}}', this)"  class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
+                                    <a href="#" onclick="confirmDelete('{{$productModel->id}}', this)"  class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
                                         <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                                         <span class="svg-icon svg-icon-3">
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -142,7 +142,6 @@
 </div>
 @endsection
 @section('scripts')
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     function confirmDelete(id, reference) {
@@ -162,7 +161,7 @@
     }
 
     function performDelete(id, reference) {
-        axios.delete('/cms/subcategories/'+id)
+        axios.delete('/cms/productmodels/'+id)
         .then(function (response) {
             console.log(response);
             // toastr.success(response.data.message);

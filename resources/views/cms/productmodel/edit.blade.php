@@ -1,4 +1,8 @@
 @extends('cms.parent')
+@section('title',__('cms.model'))
+@section('page-lg',__('cms.home'))
+@section('main-pg-md',__('cms.model_mangment'))
+@section('page-md',__('cms.edit_model'))
 @section('styles')
     	<!--begin::Vendor Stylesheets(used for this page only)-->
 		<link href="{{asset('cms/assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
@@ -20,7 +24,7 @@
                     </svg>
                 </span>
                 <!--end::Svg Icon-->
-                <h2>{{__('cms.create_new_subcategory')}}</h2>
+                <h2>{{__('cms.edit_model')}}</h2>
             </div>
             <!--end::Card title-->
         </div>
@@ -38,7 +42,29 @@
         
                             <select class="form-select mb-2 " name="tax" id="category_id" >
                                 @foreach ($categories as $category)
-                                <option value="{{$category->id}}" @if($subcategory->category_id == $category->id) selected @endif>{{$category->name}}
+                                <option value="{{$category->id}}" @if($productModel->category_id == $category->id) selected @endif>{{$category->name}}
+                                </option>
+                                @endforeach
+                            </select>
+                               
+                            <!--end::Select2-->
+                            <!--begin::Description-->
+                            <div class="text-muted fs-7">Set the product tax class.</div>
+                            <!--end::Description-->
+                        <div class="fv-plugins-message-container invalid-feedback"></div>
+                      </div>
+                    </div>
+
+
+
+                    <div class="col-6">
+                        <div class="fv-row w-100 flex-md-root fv-plugins-icon-container" data-select2-id="select2-data-131-74d4">
+                            <!--begin::Label-->
+                            <label class="required form-label">{{__('cms.categories')}}</label>
+        
+                            <select class="form-select mb-2 " name="tax" id="subcategory_id" >
+                                @foreach ($subcategories as $subcategory)
+                                <option value="{{$subcategory->id}}" @if($productModel->sub_category_id == $subcategory->id) selected @endif>{{$subcategory->name}}
                                 </option>
                                 @endforeach
                             </select>
@@ -67,25 +93,12 @@
                         </label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <input type="text" class="form-control form-control-solid" id="name" value="{{$subcategory->name}}">
+                        <input type="text" class="form-control form-control-solid" id="name" value="{{$productModel->name}}">
                         <!--end::Input-->
                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                  </div>
 
-                    <div class="col-6">
-                        <div class="fv-row mb-7 fv-plugins-icon-container">
-                            <!--begin::Label-->
-                            <label class="fs-6 fw-semibold form-label mt-3">
-                                <span class="required">
-                                    {{__('cms.Serial_Number')}} </span>
-                                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" aria-label="Enter the contact's email." data-bs-original-title="Enter the contact's email." data-kt-initialized="1"></i>
-                            </label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <input type="number" class="form-control form-control-solid" id="code" value="{{$subcategory->code}}" >
-                            <!--end::Input-->
-                        <div class="fv-plugins-message-container invalid-feedback"></div></div>
-                   </div>
+                
 
 
                 </div>
@@ -109,7 +122,7 @@
                         <div class="card-body  pt-0">
                             <!--begin::Image input-->
                             <!--begin::Image input placeholder-->
-                            <style>.image-input-placeholder { background-image: url({{Storage::url($subcategory->image ?? '')}}); } [data-theme="dark"] .image-input-placeholder { background-image: url('assets/media/svg/files/blank-image-dark.svg'); }</style>
+                            <style>.image-input-placeholder { background-image: url({{Storage::url($productModel->image ?? '')}}); } [data-theme="dark"] .image-input-placeholder { background-image: url('assets/media/svg/files/blank-image-dark.svg'); }</style>
                             <!--end::Image input placeholder-->
                             <div class="image-input image-input-empty image-input-outline image-input-placeholder mb-3" data-kt-image-input="true">
                                 <!--begin::Preview existing avatar-->
@@ -119,7 +132,7 @@
                                 <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" aria-label="Change avatar" data-bs-original-title="Change avatar" data-kt-initialized="1">
                                     <i class="bi bi-pencil-fill fs-7"></i>
                                     <!--begin::Inputs-->
-                                    <input type="file" id="subcategory_image" accept=".png, .jpg, .jpeg">
+                                    <input type="file" id="image" accept=".png, .jpg, .jpeg">
                                     <input type="hidden" name="avatar_remove">
                                     <!--end::Inputs-->
                                 </label>
@@ -152,7 +165,7 @@
                 <label class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
                     <!--begin::Input-->
                     <input class="form-check-input" id="active" type="checkbox" 
-                    @if($category->active) checked @endif >
+                    @if($productModel->active) checked @endif >
 
                     <!--end::Input-->
                     <!--begin::Label-->
@@ -167,7 +180,7 @@
                     <!--begin::Button-->
                     <!--end::Button-->
                     <!--begin::Button-->
-                    <button type="button" onclick="performUpdate('{{$subcategory->id}}')"  class="btn btn-primary">
+                    <button type="button" onclick="performUpdate('{{$productModel->id}}')"  class="btn btn-primary">
                         <span class="indicator-label">{{__('cms.save')}}</span>
                         <span class="indicator-progress">Please wait...
                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -201,23 +214,23 @@
     function performUpdate(id) {
   
   var formData = new FormData();
-      formData.append('name',document.getElementById('name').value);
-      formData.append('code',document.getElementById('code').value);
-      formData.append('active', document.getElementById('active').checked ?1:0);
+        formData.append('category_id', document.getElementById('category_id').value);
+        formData.append('sub_category_id', document.getElementById('subcategory_id').value);
+        formData.append('name', document.getElementById('name').value);
+        formData.append('active', document.getElementById('active').checked ? 1:0);
+        formData.append('image_1', document.getElementById('image').files[0]);
+        formData.append('image_2', document.getElementById('image').files[1]);
+        formData.append('image_3', document.getElementById('image').files[2]);
+        formData.append('image_4', document.getElementById('image').files[3]);
+        formData.append('image_5', document.getElementById('image').files[4]);
 
-      formData.append('category_id', document.getElementById('category_id').value);
-
-
-      if(document.getElementById('subcategory_image').files[0] != undefined) {
-          formData.append('image',document.getElementById('subcategory_image').files[0]);
-      }
       formData.append('_method','PUT');
 
-      axios.post('/cms/subcategories/{{$subcategory->id}}', formData)
+      axios.post(`/cms/productmodels/${id}`, formData)
       .then(function (response) {
           console.log(response);
           toastr.success(response.data.message);
-          window.location.href = '/cms/subcategories';
+          window.location.href = '/cms/productmodels';
       })
       .catch(function (error) {
           console.log(error.response);

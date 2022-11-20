@@ -1,8 +1,8 @@
 @extends('cms.parent')
-@section('title',__('cms.subcategories'))
+@section('title',__('cms.model'))
 @section('page-lg',__('cms.home'))
-@section('main-pg-md',__('cms.subcategories_Management'))
-@section('page-md',__('cms.create_subcategory'))
+@section('main-pg-md',__('cms.model_mangment'))
+@section('page-md',__('cms.create_model'))
 @section('styles')
     	<!--begin::Vendor Stylesheets(used for this page only)-->
 		<link href="{{asset('cms/assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
@@ -24,7 +24,7 @@
                     </svg>
                 </span>
                 <!--end::Svg Icon-->
-                <h2>{{__('cms.create_new_subcategory')}}</h2>
+                <h2>{{__('cms.create_model')}}</h2>
             </div>
             <!--end::Card title-->
         </div>
@@ -51,7 +51,26 @@
                             <div class="text-muted fs-7">Set the product tax class.</div>
                             <!--end::Description-->
                         <div class="fv-plugins-message-container invalid-feedback"></div>
+                        </div>
+
                     </div>
+                    <div class="col-6">
+                        <div class="fv-row w-100 flex-md-root fv-plugins-icon-container" data-select2-id="select2-data-131-74d4">
+                            <!--begin::Label-->
+                            <label class="required form-label">{{__('cms.subcategories')}}</label>
+        
+                            <select class="form-select mb-2 " name="tax" id="subcategory_id" >
+                                @foreach ($subcategories as $subcategory)
+                                <option value="{{$subcategory->id}}">{{$subcategory->name}}</option>
+                                @endforeach
+                            </select>
+                               
+                            <!--end::Select2-->
+                            <!--begin::Description-->
+                            <div class="text-muted fs-7">Set the product tax class.</div>
+                            <!--end::Description-->
+                        <div class="fv-plugins-message-container invalid-feedback"></div>
+                        </div>
 
                     </div>
                 </div>
@@ -75,20 +94,7 @@
                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                  </div>
 
-                    <div class="col-6">
-                        <div class="fv-row mb-7 fv-plugins-icon-container">
-                            <!--begin::Label-->
-                            <label class="fs-6 fw-semibold form-label mt-3">
-                                <span class="required">
-                                    {{__('cms.Serial_Number')}} </span>
-                                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" aria-label="Enter the contact's email." data-bs-original-title="Enter the contact's email." data-kt-initialized="1"></i>
-                            </label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <input type="number" class="form-control form-control-solid" id="code" >
-                            <!--end::Input-->
-                        <div class="fv-plugins-message-container invalid-feedback"></div></div>
-                   </div>
+                  
 
 
                 </div>
@@ -122,7 +128,7 @@
                                 <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" aria-label="Change avatar" data-bs-original-title="Change avatar" data-kt-initialized="1">
                                     <i class="bi bi-pencil-fill fs-7"></i>
                                     <!--begin::Inputs-->
-                                    <input type="file" id="subcategory_image" accept=".png, .jpg, .jpeg">
+                                    <input type="file" id="image" accept=".png, .jpg, .jpeg" multiple>
                                     <input type="hidden" name="avatar_remove">
                                     <!--end::Inputs-->
                                 </label>
@@ -145,6 +151,10 @@
                         </div>
                         <!--end::Card body-->
                     </div>
+
+
+                 
+
                
                     <!--end::Image input wrapper-->
                 </div>
@@ -203,15 +213,17 @@
     
         var formData = new FormData();
         formData.append('category_id', document.getElementById('category_id').value);
-
+        formData.append('sub_category_id', document.getElementById('subcategory_id').value);
         formData.append('name', document.getElementById('name').value);
-        formData.append('code', document.getElementById('code').value);
+
         formData.append('active', document.getElementById('active').checked ? 1:0);
+        formData.append('image_1', document.getElementById('image').files[0]);
+        formData.append('image_2', document.getElementById('image').files[1]);
+        formData.append('image_3', document.getElementById('image').files[2]);
+        formData.append('image_4', document.getElementById('image').files[3]);
+        formData.append('image_5', document.getElementById('image').files[4]);
 
-        formData.append('image',document.getElementById('subcategory_image').files[0]);
-
-       axios.post('/cms/subcategories', formData)    
-            
+       axios.post('/cms/productmodels', formData)     
        .then(function (response) {
            console.log(response);
            toastr.success(response.data.message);
