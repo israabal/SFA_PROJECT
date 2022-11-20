@@ -68,7 +68,7 @@ class CategoryController extends Controller
                $imagePath = 'images/categories/' . $imagetitle;
                $category->image = $imagePath;
             }
-            $isSaved = $category->save();
+            $isSaved = $request->user()->categories()->save($category);
 
            return response()->json(
                ['message' => $isSaved ? 'Saved successfully' : 'Save failed!'],
@@ -115,10 +115,8 @@ class CategoryController extends Controller
     {
         $validator = Validator($request->all(), [
             'name' => 'required|string|min:3',
-
             'code' => 'required|string|min:3',
             'active'=> 'required | boolean',
-
             'image' => 'image|mimes:png,jpg,jpeg',
         ]);
         if (!$validator->fails()) {
