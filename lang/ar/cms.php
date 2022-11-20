@@ -112,8 +112,8 @@ return [
     'Deleted_successfully'=>'تم الحذف بنجاح ',
     'Delete_failed!'=>'فشل الحذف !',
     'app_name'=>'صيانة',
+    'user'=>'مستخدم',
     'subcategory'=>'الفئة الفرعية',
-
     'model'=>'موديلات',
     'model_mangment'=>'ادارة الموديلات',
     'model_list'=>'قائمة الموديلات',

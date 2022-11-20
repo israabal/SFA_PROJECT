@@ -119,8 +119,10 @@ return [
 'cancel'=>'Cancel',
 'subcategory'=>'SubCategory',
     'app_name'=>'maintenance',
+    'user'=>'user',
     'model'=>'Models',
     'model_mangment'=>'Model Management',
     'model_list'=>'Read Models',
     'create_model'=>'Create Model'
+
 ];

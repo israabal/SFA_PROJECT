@@ -16,6 +16,11 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+     $this-> authorizeResource(Category::class, 'category');
+    }
     public function index()
     {
         $categories=Category::all();
@@ -32,7 +37,7 @@ class CategoryController extends Controller
     public function create()
     {
 
-        return response()->view('cms.category.create'); 
+        return response()->view('cms.category.create');
        }
 
     /**
@@ -50,7 +55,7 @@ class CategoryController extends Controller
 
            'image' => 'required|image|mimes:png,jpg,jpeg',
 
-         
+
        ]);
 
        if (!$validator->fails()) {
@@ -58,8 +63,6 @@ class CategoryController extends Controller
            $category->code = $request->input('code');
            $category->name = $request->input('name');
            $category->active = $request->input('active');
-
-           
 
            if ($request->hasFile('image')) {
                $file = $request->file('image');
@@ -120,12 +123,12 @@ class CategoryController extends Controller
             'image' => 'image|mimes:png,jpg,jpeg',
         ]);
         if (!$validator->fails()) {
-            
+
             $category->name = $request->input('name');
             $category->code = $request->input('code');
             $category->active = $request->input('active');
 
-  
+
 
             if ($request->hasFile('image')) {
                 //Delete category previous image.

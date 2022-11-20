@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 use Laravel\Sanctum\HasApiTokens;
@@ -11,11 +10,10 @@ use Illuminate\Notifications\Notifiable;
 class Admin extends Authenticatable
 {
 
-    use HasApiTokens, HasFactory, Notifiable,HasRoles;  
-    public function getActiveStatusAttribute()
+    use HasApiTokens, HasFactory, Notifiable,HasRoles;
 
+    public function getActiveStatusAttribute()
     {
-        
        return $this->active ? 'Active' : 'InActive';
     }
     public function categories(){
@@ -33,4 +31,9 @@ class Admin extends Authenticatable
         'email',
         'password',
     ];
+
+
+    public function categories(){
+        return $this->hasmany(Category::class,'admin_id','id');
+    }
 }

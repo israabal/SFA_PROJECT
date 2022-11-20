@@ -6,9 +6,9 @@ use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
-use Carbon\Carbon;
-use DateTime;
+
 use Illuminate\Support\Facades\Storage;
+use Spatie\Permission\Models\Role;
 
 class AdminController extends Controller
 {
@@ -17,10 +17,15 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function __construct()
+     {
+      $this-> authorizeResource(Admin::class, 'admin');
+     }
     public function index()
     {
         $admins = Admin::all();
-        return response()->view('cms.admin.index', ['admins' => $admins]); 
+        return response()->view('cms.admin.index', ['admins' => $admins]);
        }
 
     /**
@@ -30,7 +35,8 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return response()->view('cms.admin.create');
+        $roles=Role::where('guard_name','admin')->get();
+        return response()->view('cms.admin.create',['roles'=>$roles]);
     }
 
     /**
@@ -41,12 +47,13 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-      
+
             //
             $validator = Validator($request->all(), [
                 'name' => 'required|string|min:3',
                 'email' => 'required|email|unique:admins',
                 'active'=> 'required | boolean',
+                'role_id'=>'required',
                 'image' => 'required|image|mimes:png,jpg,jpeg',
             ]);
             if (!$validator->fails()) {
@@ -56,7 +63,7 @@ class AdminController extends Controller
             $admin->active = $request->input('active');
             $admin->password = Hash::make(12345);
             if ($request->hasFile('image')) {
-             
+
                 $file = $request->file('image');
                 $imagetitle =  time().'_admin_image.' . $file->getClientOriginalExtension();
                 $status = $request->file('image')->storePubliclyAs('images/admins', $imagetitle);
@@ -64,21 +71,25 @@ class AdminController extends Controller
                 $admin->image = $imagePath;}
 
 
-          
+
             $isSaved = $admin->save();
+
+            if($isSaved){
+                $admin->assignRole(Role::findById($request->get('role_id')));
+            }
             return response()->json(
                 ['message' => $isSaved ? __('cms.create_success') : __('cms.create_failed')],
                 $isSaved ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST
             );
-        } 
+        }
         else {
             return response()->json(
                 ['message' => $validator->getMessageBag()->first()],
                 Response::HTTP_BAD_REQUEST,
             );
 
-       
-          
+
+
      }
     }
 
@@ -120,7 +131,7 @@ class AdminController extends Controller
             'image' => 'image|mimes:png,jpg,jpeg',
         ]);
         if (!$validator->fails()) {
-            
+
             $admin->name = $request->input('name');
             $admin->email = $request->input('email');
             $admin->active = $request->input('active');
@@ -153,13 +164,21 @@ class AdminController extends Controller
      */
     public function destroy(Admin $admin)
     {
-        $deleted = $admin->delete();
-        if ($deleted) {
-            Storage::delete($admin->image);
+        if(!auth('admin')->user()->id!=$admin->id){
+            $deleted = $admin->delete();
+            if ($deleted) {
+                Storage::delete($admin->image);
+            }
+            return response()->json(
+                ['message' => $deleted ? __('cms.Deleted_successfully') : __('cms.Delete_failed!')],
+                $deleted ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST
+            );
+        }else{
+            return response()->json(
+                ['message' => 'You Can\'t Delete Your Self '],
+                 Response::HTTP_BAD_REQUEST
+            );
         }
-        return response()->json(
-            ['message' => $deleted ? __('cms.Deleted_successfully') : __('cms.Delete_failed!')],
-            $deleted ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST
-        );  
+
     }
 }
