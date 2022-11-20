@@ -10,11 +10,15 @@ use Illuminate\Validation\Rules\Password;
 
 class AuthController extends Controller
 {
+    public function indexAuth()
+    {
+        return response()->view('cms.parent');
+    }
     public function showLogin(Request $request)
     {
         $request->merge(['guard' => $request->guard]);
         $validator = Validator($request->all(), [
-            'guard' => 'required|string|in:admin,user,store'
+            'guard' => 'required|string|in:admin,user'
         ]);
         session()->put('guard', $request->input('guard'));
         if (!$validator->fails()) {
@@ -27,7 +31,7 @@ class AuthController extends Controller
     {
         $validator = Validator($request->all(), [
             'email' => 'required|string',
-            'password' => 'required|string|min:3|max:10',
+            'password' => 'required|string|min:3',
             'remember' => 'required|boolean',
         ]);
 
@@ -35,7 +39,6 @@ class AuthController extends Controller
         $credentials = ['email' => $request->get('email'), 'password' => $request->get('password')];
         if (!$validator->fails()) {
             if (Auth::guard($guard)->attempt($credentials, $request->get('remember'))) {
-                // Language::all();
                 return response()->json(['message' => 'Logged in successfully'], Response::HTTP_OK);
             } else {
                 return response()->json(['message' => 'Error credentials, please try again'], Response::HTTP_BAD_REQUEST);
@@ -51,7 +54,7 @@ class AuthController extends Controller
     public function updatePassword(Request $request)
     {
         $validator = Validator($request->all(), [
-            'password' => 'required|current_password:' . 'admin',
+            'password' => 'required|current_password:',
             'new_password' => ['required', 'confirmed', Password::min(8)->letters()->symbols()->numbers()->mixedCase()->uncompromised()],
 
         ]);

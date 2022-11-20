@@ -6,7 +6,7 @@ return [
     'users' => 'Users',
     'user_create' => 'Create User',
     'index_user' => 'Read Users',
-    'roles' => 'Roles',
+    'user_type' => 'User Type',
     'Status' => 'Status',
     'edit_user' => 'Edit User',
     'Save' => 'Save',
@@ -109,6 +109,7 @@ return [
     'status' => 'status',
     'create_success' => 'Created Success',
     'create_failed' => 'Created Failed',
+
     'Updated_success'=>'Updated Successfully  ',
     'Updated_failed'=>' Updated failed!',
     'Deleted_successfully'=>'Deleted successfully',

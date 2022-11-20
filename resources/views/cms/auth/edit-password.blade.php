@@ -114,9 +114,9 @@ function performUpdate() {
         new_password_confirmation: document.getElementById('new_password_confirmation').value,
 
     };
-    axios.post('/cms/admin/updatePassword', data).then(function(response) {
+    axios.post('/cms/updatePassword', data).then(function(response) {
             console.log('200');
-            window.location.href = '/home';
+            window.location.href = '/cms/dashboard';
         })
         .catch(function(error) {
             console.log(error);

@@ -77,11 +77,10 @@ return [
 'cancel'=>'إلغاء',
 'Enter_your_email_to_reset_your_password'=>'قم بكتابة الإيميل لتغيير كلمة المرور',
 
-    'Serial_Number'=>'الرقم التسلسلي ',
-    'password' => ' كلمة المرور',
-    'save'=>'حفظ',
-    'admin' => 'ادمن',
-
+  'Serial_Number' => 'الرقم التسلسلي ',
+  'password' => ' كلمة المرور',
+  'save' => 'حفظ',
+  'admin' => 'ادمن',
     'add_admin'=>'اضافة ادمن',
       'read_role'=> ' قراءة الصلاحيات',
     'home'=> 'الرئيسية',
@@ -118,6 +117,7 @@ return [
     'model_mangment'=>'ادارة الموديلات',
     'model_list'=>'قائمة الموديلات',
     'create_model'=>'انشاء موديل'
+
 
 
 ];
