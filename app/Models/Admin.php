@@ -13,8 +13,8 @@ class Admin extends Authenticatable
 
     use HasApiTokens, HasFactory, Notifiable,HasRoles;  
 
+    public function getActiveStatusAttribute()
     {
-        
        return $this->active ? 'Active' : 'InActive';
     }
     protected $fillable = [

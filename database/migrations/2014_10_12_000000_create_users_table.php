@@ -20,8 +20,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('image');
-            $table->enum('roles',['superadmin', 'agent', 'technical', 'customers']);
-            $table->integer('status')->default(0);
+            $table->enum('user_type',['agent', 'technical', 'customers']);
+            $table->boolean('status')->default(false);
             $table->rememberToken();
             $table->timestamps();
             $table->SoftDeletes();
