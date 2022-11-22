@@ -20,6 +20,12 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+
+     public function maintinance()
+     {
+         return $this->belongsTo(MaintinanceApp::class);
+     }
     protected $fillable = [
         'name',
         'email',

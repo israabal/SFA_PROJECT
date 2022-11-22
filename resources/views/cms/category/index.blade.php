@@ -20,10 +20,12 @@
                 <!--end::Card title-->
                 <!--begin::Card toolbar-->
                 <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
-                
+                    @can('Create-Category')
+
                     <!--begin::Add product-->
                     <a href="{{route('categories.create' )}}" class="btn btn-primary">{{__('cms.create_category')}}</a>
                     <!--end::Add product-->
+                    @endcan
                 </div>
                 <!--end::Card toolbar-->
             </div>
@@ -61,15 +63,23 @@
                             <td>
                                 <div class="d-flex align-items-center">
                                     <!--begin::Thumbnail-->
+
+                                    @can('Update-Category')
+
+
                                     <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="symbol symbol-50px">
                                         <div class="symbol-label">
                                             <img src="{{Storage::url($category->image ?? '')}}"  alt="Emma Smith" class="w-100">
                                         </div>
-                                    </a>
+                                    </a>     @endcan
                                     <!--end::Thumbnail-->
                                     <div class="ms-5">
                                         <!--begin::Title-->
+                                        @can('Delete-Category')
+
                                         <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary fs-5 fw-bold" data-kt-ecommerce-product-filter="product_name">{{$category->name}}</a>
+
+                                        @endcan
                                         <!--end::Title-->
                                     </div>
                                 </div>

@@ -11,6 +11,7 @@ use App\Http\Controllers\PermissionController;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MaintinanceController;
 use App\Http\Controllers\ProductModelController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\UserController;
@@ -45,7 +46,7 @@ Route::group(
             Route::get('{guard}/reset-password/{token}', [ResetPasswordController::class, 'showResetPassword'])->name('password.reset');
             Route::post('reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.update');
         });
- 
+
         Route::prefix('cms')->middleware('guest:admin')->group(function () {
             Route::get('login/{guard}', [AuthController::class, 'showLogin'])->name('cms.login');
             Route::post('/login', [AuthController::class, 'login']);
@@ -72,10 +73,14 @@ Route::group(
                 Route::get('/admin/profileEdite', [AdminProfileConroller::class, 'EditProfile'])->name('profile.edit');
 
 
-   
+
 
             Route::resource('users', UserController::class);
             Route::post('user/change-status/{id}', [UserController::class, 'UserActive'])->name('users.UserActive');
+
+
+            // Route::resource('maintinance', man)
+            Route::resource('main',MaintinanceController::class);
 
         });
 

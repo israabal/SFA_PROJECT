@@ -36,7 +36,7 @@
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col-lg-8 fv-row">
-                            <input  id="name" type="text" name="username" class="form-control form-control-lg form-control-solid" placeholder="{{__('cms.username')}}" value="Keenthemes" />
+                            <input  id="name" type="text" name="username" class="form-control form-control-lg form-control-solid" placeholder="{{__('cms.username')}}"  />
                         </div>
                         <!--end::Col-->
                     </div>

@@ -123,6 +123,18 @@ return [
     'model'=>'Models',
     'model_mangment'=>'Model Management',
     'model_list'=>'Read Models',
-    'create_model'=>'Create Model'
+    'create_model'=>'Create Model',
+
+
+    'maintenance'=>'Maintenance',
+    'maintenance_list'=>'Maintenance List',
+    'create_maintenance'=>'Create Maintenance',
+    'log'=>'longitude',
+    'lat'=>'Latitude',
+    'pending'=>'Pending',
+    'accepted'=>'Accepted',
+    'refused'=>'Refused',
+    'maintenance_management'=>'Maintenance Management',
+    'edit_maintenance'=>'Edit Maintenance'
 
 ];

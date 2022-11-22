@@ -6,7 +6,7 @@
 @section('Content')
 <div class="d-flex flex-column flex-column-fluid">
     <!--begin::Toolbar-->
-   
+
     <!--end::Toolbar-->
     <!--begin::Content-->
     <div id="kt_app_content" class="app-content flex-column-fluid">
@@ -27,7 +27,7 @@
                     <div class="card-toolbar">
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-
+                            @can('Create-User')
 
                             <!--begin::Add user-->
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
@@ -39,8 +39,12 @@
                                     </svg>
                                 </span>
                                 <!--end::Svg Icon-->
-                                <a href="{{route('users.create')}}" style="color: white;"> {{__('cms.user_create')}}</a>
 
+
+
+
+                                <a href="{{route('users.create')}}" style="color: white;"> {{__('cms.user_create')}}</a>
+                                @endcan
                             </button>
                             <!--end::Add user-->
                         </div>
@@ -120,7 +124,7 @@
                                         <!--begin::Two step=-->
                                         <td><span class="badge @if($user->status==1) badge badge-light-success @else badge-light-danger @endif">{{$user->status}}</span>
 
-                                        <td><span class="badge @if($user->roles=='agent') badge-light-danger @elseif($user->roles=='customers') badge badge-light-success 
+                                        <td><span class="badge @if($user->roles=='agent') badge-light-danger @elseif($user->roles=='customers') badge badge-light-success
                                         @elseif($user->roles=='superadmin') badge-light-primary @else badge-light-warning @endif">{{$user->roles}}</span>
 
                                             <!--end::Two step=-->
@@ -130,6 +134,8 @@
                                         <!--begin::Action=-->
                                         <td>
                                             <div class="d-flex justify-content-end flex-shrink-0">
+@can('Update-User	')
+
 
                                                 <a href="{{route('users.edit', $user->id )}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                                     <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
@@ -141,6 +147,12 @@
                                                     </span>
                                                     <!--end::Svg Icon-->
                                                 </a>
+
+                                                @endcan
+
+                                                @can('Delete-User')
+
+
                                                 <a href="#" onclick="confirmDelete('{{$user->id}}', this)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
                                                     <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                                                     <span class="svg-icon svg-icon-3">
@@ -152,6 +164,8 @@
                                                     </span>
                                                     <!--end::Svg Icon-->
                                                 </a>
+
+                                                @endcan
                                                 @if($user->status==1)
                                                 <a onclick="changeStatus('{{$user->id}}')" class="btn btn-icon btn btn-danger btn-active-color-primary btn-sm" title=" فعال الان">
                                                     <i class="fa-solid fa-lock"></i> </a>

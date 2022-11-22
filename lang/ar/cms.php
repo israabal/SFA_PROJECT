@@ -117,7 +117,19 @@ return [
     'model'=>'موديلات',
     'model_mangment'=>'ادارة الموديلات',
     'model_list'=>'قائمة الموديلات',
-    'create_model'=>'انشاء موديل'
+    'create_model'=>'انشاء موديل',
+
+    'maintenance'=>'صيانة',
+    'maintenance_list'=>'قائمة الصيانة',
+    'create_maintenance'=>'انشاء صيانة',
+    'log'=>'خط الطول',
+    'lat'=>'خط العرض',
+    'pending'=>'معلق',
+    'accepted'=>'مقبول',
+    'refused'=>'مرفوض',
+    'maintenance_management'=>'ادارة الصيانة',
+    'edit_maintenance'=>'تعديل صيانة'
+
 
 
 ];

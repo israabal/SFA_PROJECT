@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\CategoryTranslations;
-use App\Models\Language;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
