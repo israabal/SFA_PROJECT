@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('spare_part_details', function (Blueprint $table) {
+        Schema::create('countries', function (Blueprint $table) {
             $table->id();
-            $table->string('value',20);
-            $table->string('unit',20);
-            $table->foreignId('spare_part_id')->constrained()->restrictOnDelete();
-            $table->foreignId('model_id')->constrained()->restrictOnDelete();
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('spare_part_details');
+        Schema::dropIfExists('countries');
     }
 };

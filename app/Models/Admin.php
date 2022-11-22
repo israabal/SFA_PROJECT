@@ -31,9 +31,4 @@ class Admin extends Authenticatable
         'email',
         'password',
     ];
-
-
-    public function categories(){
-        return $this->hasmany(Category::class,'admin_id','id');
-    }
 }

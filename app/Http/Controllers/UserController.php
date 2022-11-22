@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Hash;
 use Str;
 
@@ -136,4 +137,33 @@ class UserController extends Controller
             $deleted ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST
         );
     }
+    public function registerview()
+    {
+        return response()->view('cms.register.create');
+    }
+    public function register(Request $request){
+        $validator = Validator($request->all(), [
+            'name' => 'required|string|min:3',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:3',
+            'image'=>'nullable',
+        ]);
+        if (!$validator->fails()) {
+            $user = new User();
+            $user->name = $request->input('name');
+            $user->user_type='customers';
+            $user->email = $request->input('email');
+            $user->password = Hash::make('password');;
+            $isSaved = $user->save();
+            return response()->json(
+             ['message' => $isSaved ? 'Saved successfully' : 'Save failed!'],
+              $isSaved ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST);
+        } else {
+            return response()->json(
+                ['message' => $validator->getMessageBag()->first()],
+                Response::HTTP_BAD_REQUEST,);
+        }
+    }
+   
 }
+

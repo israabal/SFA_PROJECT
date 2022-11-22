@@ -116,7 +116,8 @@ return [
     'model'=>'موديلات',
     'model_mangment'=>'ادارة الموديلات',
     'model_list'=>'قائمة الموديلات',
-    'create_model'=>'انشاء موديل'
+    'create_model'=>'انشاء موديل',
+    'Sign_Up'=>'إنشاء حساب جديد',
 
 
 

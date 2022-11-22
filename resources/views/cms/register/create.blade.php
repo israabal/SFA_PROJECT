@@ -93,7 +93,7 @@ License: For each use you must have a valid license purchased only from above li
                     </a>
                     <!--end::Logo-->
                     <!--begin::Title-->
-                    <h2 class="text-white fw-normal m-0">Login </h2>
+                    <h2 class="text-white fw-normal m-0">Register </h2>
                     <!--end::Title-->
                 </div>
                 <!--begin::Aside-->
@@ -106,16 +106,23 @@ License: For each use you must have a valid license purchased only from above li
                     <!--begin::Card body-->
                     <div class="card-body p-10 p-lg-20">
                         <!--begin::Form-->
-                        <form class="form w-100" id="kt_sign_in_form">
-                            <!--begin::Heading-->
+                        <form id="create-form" class="form fv-plugins-bootstrap5 fv-plugins-framework">
+                @csrf                            <!--begin::Heading-->
                             <div class="text-center mb-11">
                                 <!--begin::Title-->
-                                <h1 class="text-dark fw-bolder mb-3">{{__('cms.Sign_In')}}</h1>
+                                <h1 class="text-dark fw-bolder mb-3">{{__('cms.Sign_Up')}}</h1>
                                 <!--end::Title-->
 
                             </div>
                             <!--begin::Heading-->
                             <!--begin::Input group=-->
+                           
+                            <div class="fv-row mb-8">
+                                <!--begin::Email-->
+                                <input type="text" placeholder="{{__('cms.name')}}" name="name" id="name"
+                                    autocomplete="off" class="form-control bg-transparent" />
+                                <!--end::Email-->
+                            </div>
                             <div class="fv-row mb-8">
                                 <!--begin::Email-->
                                 <input type="text" placeholder="{{__('cms.email')}}" name="email" id="email"
@@ -131,25 +138,13 @@ License: For each use you must have a valid license purchased only from above li
                             </div>
                             <!--end::Input group=-->
                             <!--begin::Wrapper-->
-                            <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
-                                <div>
-                                    <label class="form-check form-check-sm form-check-custom form-check-solid">
-                                        <input id="remember" class="form-check-input" type="checkbox" value="2"
-                                            checked="checked">
-                                        <span class="form-check-label">{{__('cms.remember_me')}}</span>
-                                    </label>
-                                </div>
-                                <!--begin::Link-->
-                                <a href="{{route('password.request',$guard)}}"
-                                    class="link-primary">{{__('cms.Forgot_Password')}}?</a>
-                                <!--end::Link-->
-                            </div>
+                          
                             <!--end::Wrapper-->
                             <!--begin::Submit button-->
                             <div class="d-grid mb-10">
-                                <button onclick="login()" type="button" class="btn btn-primary">
+                                <button onclick="performStore()" type="button" class="btn btn-primary">
                                     <!--begin::Indicator label-->
-                                    <span class="indicator-label">{{__('cms.Sign_In')}}</span>
+                                    <span class="indicator-label">{{__('cms.Sign_Up')}}</span>
                                     <!--end::Indicator label-->
                                     <!--begin::Indicator progress-->
                                     <span class="indicator-progress">{{__('cms.Please_wait')}}...
@@ -157,8 +152,6 @@ License: For each use you must have a valid license purchased only from above li
                                     <!--end::Indicator progress-->
                                 </button>
                             </div>
-                            <div class="text-gray-500 text-center fw-semibold fs-6">{{__('cms.Not_aMember_yet?')}}'
-								<a href="{{route('customer.register')}}" class="link-primary">{{__('cms.Sign_up')}}</a></div>
                             <!--end::Submit button-->
                         </form>
                         <!--end::Form-->
@@ -188,23 +181,27 @@ License: For each use you must have a valid license purchased only from above li
 <!--end::Body-->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-function login() {
-    let data = {
-        email: document.getElementById('email').value,
-        password: document.getElementById('password').value,
-        remember: document.getElementById('remember').checked,
-    };
-    axios.post('/cms/login', data).then(function(response) {
-            console.log('200');
-            window.location.href = '/cms/dashboard';
+$(function() {
+    bsCustomFileInput.init()
+});
+</script>
+<script>
+function performStore() {
+    var formData = new FormData();
+    formData.append('name', document.getElementById('name').value);
+    formData.append('email', document.getElementById('email').value);
+    formData.append('password', document.getElementById('password').value);
+    axios.post('/cms/registers/store', formData)
+        .then(function(response) {
+            console.log(response);
+            toastr.success(response.data.message);
+            document.getElementById('create-form').reset();
+            
+            window.location.href = '/cms/verify';
         })
         .catch(function(error) {
-            console.log(error);
-            toastr.error(error.response.data.message)
+            console.log(error.response);
+            toastr.error(error.response.data.message);
         });
 }
 </script>
-</body>
-<!--end::Body-->
-
-</html>

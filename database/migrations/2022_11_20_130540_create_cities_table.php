@@ -13,14 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('spare_parts', function (Blueprint $table) {
+        Schema::create('cities', function (Blueprint $table) {
             $table->id();
-            $table->string('name',45);
-            $table->string('OEM_Part_Number',45);
-            $table->string('Katun_Part_Number',45);
-            $table->string('Local_Number',45);
-            $table->integer('price');
-            $table->text('Over_View');
+            $table->string('name');
+            $table->integer('country_id'); 
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('spare_parts');
+        Schema::dropIfExists('cities');
     }
 };

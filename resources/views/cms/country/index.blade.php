@@ -1,8 +1,8 @@
 @extends('cms.parent');
-@section('title',__('cms.subcategories'))
+@section('title',__('cms.countries'))
 @section('page-lg',__('cms.home'))
-@section('main-pg-md',__('cms.subcategories_Management'))
-@section('page-md',__('cms.subcategories_list'))
+@section('main-pg-md',__('cms.countries_Management'))
+@section('page-md',__('cms.countries_list'))
 @section('Content')
 <div id="kt_app_content" class="app-content flex-column-fluid">
     <!--begin::Content container-->
@@ -22,7 +22,7 @@
                 <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
                 
                     <!--begin::Add product-->
-                    <a href="{{route('subcategories.create' )}}" class="btn btn-primary">{{__('cms.create_new_subcategory')}}</a>
+                    <a href="{{route('countries.create' )}}" class="btn btn-primary">{{__('cms.create_new_countries')}}</a>
                     <!--end::Add product-->
                 </div>
                 <!--end::Card toolbar-->
@@ -36,48 +36,45 @@
                     <thead>
                         <!--begin::Table row-->
                         <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-                            <th class="min-w-200px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="Product: activate to sort column ascending" style="width: 206.828px;">{{__('cms.name')}}</th>
-                            <th class=" min-w-70px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="Qty: activate to sort column ascending" style="width: 93.1875px;">{{__('cms.OEM_Part_Number')}}</th>
-                            <th class="text-end min-w-70px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="Qty: activate to sort column ascending" style="width: 93.1875px;">{{__('cms.Katun_Part_Number')}}</th>
-                            <th class="text-end min-w-70px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="Qty: activate to sort column ascending" style="width: 93.1875px;">{{__('cms.Local_Number')}}</th>
-                            <th class="text-end min-w-70px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="Qty: activate to sort column ascending" style="width: 93.1875px;">{{__('cms.price')}}</th>
+                        
+                            <th class="min-w-200px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="Product: activate to sort column ascending" style="width: 206.828px;">{{__('cms.countries')}}</th>
+
                             <th class="text-end min-w-100px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="SKU: activate to sort column ascending" style="width: 103.562px;">{{__('cms.JOINED_DATE')}}</th>
+                            <th class="text-end min-w-100px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="SKU: activate to sort column ascending" style="width: 103.562px;"></th>
+
+
                             <th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 99.5938px;">{{__('cms.actions')}}</th></tr>
                         <!--end::Table row-->
                     </thead>
                     <!--end::Table head-->
                     <!--begin::Table body-->
                     <tbody class="fw-semibold text-gray-600">
-                        @foreach ($spareparts as $sparepart)
+                        @foreach ($countries as $country)
+
+                  
                     <tr class="odd">
 
-                    
+                            <!--begin::Checkbox-->
+                         
                           
-                            <td class="">
-                                <span class="fw-bold">{{$spare_part->name}}</span>
-                            </td>
+                   
                             <!--end::Category=-->
                             <!--begin::SKU=-->
-                            <td class="text-end pe-0">
-                                <span class="fw-bold">{{$spare_part->OEM_Part_Number}}</span>
-                            </td>
-                            <td class="text-end pe-0">
-                                <span class="fw-bold">{{$spare_part->Local_Number}}</span>
-                            </td> 
-                            <td class="text-end pe-0">
-                                <span class="fw-bold">{{$spare_part->price}}</span>
+                            <td class="text-left pe-0">
+                                <span class="fw-bold">{{$country->name}}</span>
                             </td>
                             <!--end::SKU=-->
                             <!--begin::Qty=-->
                             <td class="text-end pe-0" data-order="16">
-                                <span class="fw-bold ms-3">{{$spare_part->created_at}}</span>
+                                <span class="fw-bold ms-3">{{$country->created_at}}</span>
                             </td>
+                            <td class="text-end pe-0">
 
               
                             <td>
                                 <div class="d-flex justify-content-end flex-shrink-0">
                                     
-                                    <a  href="{{route('spareparts.edit', $sparepart->id )}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                    <a  href="{{route('countries.edit', $country->id )}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                         <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                                         <span class="svg-icon svg-icon-3">
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -87,7 +84,7 @@
                                         </span>
                                         <!--end::Svg Icon-->
                                     </a>
-                                    <a href="#" onclick="confirmDelete('{{$sparepart->id}}', this)"  class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
+                                    <a href="#" onclick="confirmDelete('{{$country->id}}', this)"  class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
                                         <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                                         <span class="svg-icon svg-icon-3">
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -144,7 +141,7 @@
     }
 
     function performDelete(id, reference) {
-        axios.delete('/cms/spareparts/'+id)
+        axios.delete('/cms/countries/'+id)
         .then(function (response) {
             console.log(response);
             // toastr.success(response.data.message);
@@ -166,4 +163,6 @@
         );
     }
 </script>
+    
 @endsection
+
