@@ -1,8 +1,8 @@
 @extends('cms.parent');
-@section('title',__('cms.admins'))
+@section('title',__('cms.language'))
 @section('page-lg',__('cms.home'))
-@section('main-pg-md',__('cms.Admin_Management'))
-@section('page-md',__('cms.read_admin'))
+@section('main-pg-md',__('cms.content_Management'))
+@section('page-md',__('cms.read_language'))
 @section('Content')
 <div class="d-flex flex-column flex-column-fluid">
     <!--begin::Toolbar-->
@@ -28,11 +28,10 @@
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
 
-                            @can('Create-Admin')
 
 
                             <!--begin::Add user-->
-                            <a href="{{route('admins.create')}}" class="btn btn-primary">
+                            <a href="{{route('languages.create')}}" class="btn btn-primary">
                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
                                 <span class="svg-icon svg-icon-2">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -43,9 +42,9 @@
                                         </rect>
                                     </svg>
                                 </span>
-                                <!--end::Svg Icon-->{{__('cms.add_admin')}}
+                                <!--end::Svg Icon-->{{__('cms.create_language')}}
                             </a>
-                            <!--end::Add user-->@endcan
+                            <!--end::Add user-->
                         </div>
                         <!--end::Toolbar-->
                         <!--begin::Group actions-->
@@ -82,7 +81,7 @@
 
                                         <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users"
                                             rowspan="1" colspan="1" aria-label="User: activate to sort column ascending"
-                                            style="width: 206.375px;">{{__('cms.admin')}}</th>
+                                            style="width: 206.375px;">{{__('cms.name')}}</th>
                                         {{-- <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users"
                                             rowspan="1" colspan="1" aria-label="Role: activate to sort column ascending"
                                             style="width: 125px;">Role</th>
@@ -92,7 +91,7 @@
                                             style="width: 125px;">Last login</th>--}}
                                         <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users"
                                             rowspan="1" colspan="1" aria-label="User: activate to sort column ascending"
-                                            style="width: 206.375px;">{{ __('cms.roles') }}</th>
+                                            style="width: 206.375px;">{{ __('cms.code') }}</th>
                                         <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users"
                                             rowspan="1" colspan="1"
                                             aria-label="Two-step: activate to sort column ascending"
@@ -109,7 +108,7 @@
                                 <!--end::Table head-->
                                 <!--begin::Table body-->
                                 <tbody class="text-gray-600 fw-semibold">
-                                    @foreach ($admins as $admin)
+                                    @foreach ($languages as $language)
 
 
                                     <tr class="odd">
@@ -118,26 +117,10 @@
 
                                         <!--end::Checkbox-->
                                         <!--begin::User=-->
-                                        <td class="d-flex align-items-center">
-                                            <!--begin:: Avatar -->
-                                            <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                                <a href="../../demo1/dist/apps/user-management/users/view.html">
-                                                    <div class="symbol-label">
-                                                        <img src="{{Storage::url($admin->image ?? '')}}"
-                                                            alt="Emma Smith" class="w-100">
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <!--end::Avatar-->
-                                            <!--begin::User details-->
-                                            <div class="d-flex flex-column">
-                                                <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                    class="text-gray-800 text-hover-primary mb-1">{{$admin->name}}</a>
-                                                <span>{{$admin->email}}</span>
-                                            </div>
-                                            <!--begin::User details-->
+                                
+                                        <td>{{ $language->lang_name  }}
                                         </td>
-                                        <td>{{ $admin->roles[0]->name ??'NULL' }}
+                                        <td>{{ $language->lang_code  }}
                                         </td>
                                         <!--end::User=-->
                                         <!--begin::Role=-->
@@ -150,18 +133,17 @@
                                         <!--end::Last login=-->
                                         <!--begin::Two step=-->
                                         <td><span
-                                                class="badge @if($admin->active) bg-success @else bg-danger @endif">{{$admin->active_status}}</span>
+                                                class="badge @if($language->active) bg-success @else bg-danger @endif">{{$language->active_status}}</span>
                                         </td>
                                         <!--end::Two step=-->
                                         <!--begin::Joined-->
-                                        <td data-order="2022-06-20T22:10:00+03:00">{{$admin->created_at->format('Y-m-d
+                                        <td data-order="2022-06-20T22:10:00+03:00">{{$language->created_at->format('Y-m-d
                                             H:ia')}}</td>
                                         <!--begin::Joined-->
                                         <!--begin::Action=-->
                                         <td>
                                             <div class="d-flex justify-content-end flex-shrink-0">
-                                                @can('Update-Admin')
-                                                <a href="{{route('admins.edit', $admin->id )}}"
+                                                <a href="{{route('languages.edit', $language->id )}}"
                                                     class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                                     <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                                                     <span class="svg-icon svg-icon-3">
@@ -178,11 +160,8 @@
                                                     <!--end::Svg Icon-->
                                                 </a>
 
-                                                @endcan
 
-                                                @can('Delete-Admin')
-                                                @if($admin->id != auth('admin')->user()->id)
-                                                <a href="#" onclick="confirmDelete('{{$admin->id}}', this)"
+                                                <a href="#" onclick="confirmDelete('{{$language->id}}', this)"
                                                     class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
                                                     <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                                                     <span class="svg-icon svg-icon-3">
@@ -201,8 +180,7 @@
                                                     </span>
                                                     <!--end::Svg Icon-->
                                                 </a>
-                                                @endif
-                                                @endcan
+                                            
                                             </div>
                                         </td>
                                         <!--end::Action=-->
@@ -262,24 +240,7 @@
 <script>
     $(function () { bsCustomFileInput.init() });
 </script>
-<script>
-    function performStore() {
-        var formData = new FormData();
-        formData.append('name', document.getElementById('name').value);
-        formData.append('email', document.getElementById('email').value);
-        formData.append('active', document.getElementById('active').checked ? 1:0);
-        formData.append('image',document.getElementById('admin_image').files[0]);
-       axios.post('/cms/admins', formData)
-       .then(function (response) {
-           console.log(response);
-           toastr.success(response.data.message);
-           document.getElementById('create-form').reset();
-       })
-       .catch(function (error) {
-           console.log(error.response);
-           toastr.error(error.response.data.message);
-       });}
-</script>
+
 <script>
     function confirmDelete(id, reference) {
         Swal.fire({
@@ -298,7 +259,7 @@
     }
 
     function performDelete(id, reference) {
-        axios.delete('/cms/admins/'+id)
+        axios.delete('/cms/languages/'+id)
         .then(function (response) {
             console.log(response);
             toastr.success(response.data.message);

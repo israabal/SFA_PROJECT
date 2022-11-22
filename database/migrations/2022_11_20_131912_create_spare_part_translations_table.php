@@ -13,18 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('spare_part_translations', function (Blueprint $table) {
             $table->id();
+            $table->string('Over_View');
             $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->string('image');
-            $table->enum('user_type',['agent', 'technical', 'customers']);
-            $table->boolean('status')->default(false);
-            $table->rememberToken();
+            
+            $table->foreignId('language_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('spare_part_id')->constrained()->cascadeOnDelete();
+
+
             $table->timestamps();
-            $table->SoftDeletes();
         });
     }
 
@@ -35,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('spare_part_translations');
     }
 };

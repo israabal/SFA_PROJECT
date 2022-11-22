@@ -11,11 +11,22 @@ use Str;
 
 class UserController extends Controller
 {
+
+
+
+    public function __construct()
+    {
+     $this-> authorizeResource(User::class, 'user');
+    }
+
+
     public function index()
     {
         $users = User::all();
         return response()->view('cms.users.index', ['users' => $users]);
     }
+
+
     public function create()
     {
         return response()->view('cms.users.create');
@@ -33,14 +44,14 @@ class UserController extends Controller
         $validator = Validator($request->all(), [
             'name' => 'required|string|min:3',
             'email' => 'required|email|unique:users,email',
-            'roles' => 'required',
+            'user_type' => 'required',
             'image' => 'required|image|mimes:png,jpg,jpeg',
         ]);
         if (!$validator->fails()) {
             $user = new User();
             $user->name = $request->input('name');
             $user->email = $request->input('email');
-            $user->roles = $request->input('roles');
+            $user->user_type = $request->input('user_type');
             // $user->password = Hash::make(12345);
             $user->password = Hash::make(Str::random(8));
 
@@ -78,13 +89,13 @@ class UserController extends Controller
         $validator = Validator($request->all(), [
             'name' => 'nullable|string|min:3',
             'email' => 'nullable|email|unique:users,email,' . $user->id,
-            'roles' => 'required',
+            'user_type' => 'required',
             'image' => 'nullable', 'image|mimes:png,jpg,jpeg',
         ]);
         if (!$validator->fails()) {
             $user->name = $request->input('name');
             $user->email = $request->input('email');
-            $user->roles = $request->input('roles');
+            $user->user_type = $request->input('user_type');
             if ($request->hasFile('image')) {
                 //Delete admin previous image.
                 Storage::delete($user->image);
@@ -108,7 +119,7 @@ class UserController extends Controller
         $user = User::Where('id', '=', $id)->first();
 
         $user->status = !$user->status;
-        $user->save(); 
+        $user->save();
         return response()->json(
             ['message' => $user ? 'Change Status successfully' : 'Change Status failed!'],
             $user ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST

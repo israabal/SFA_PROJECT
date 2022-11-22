@@ -15,8 +15,14 @@ class SubCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->authorizeResource(SubCategory::class);
+    }
     public function index()
     {
+
         $sub_categories = SubCategory::all();
         return response()->view('cms.subcategories.index', ['sub_categories' => $sub_categories]);    }
 
@@ -36,6 +42,7 @@ class SubCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
         $validator = Validator($request->all(), [
@@ -102,12 +109,12 @@ class SubCategoryController extends Controller
     public function edit( $id)
     {
 
+
         $subCategory=SubCategory::where('id',$id)->first();
-
-
         return response()->view('cms.subcategories.edit', ['subcategory' => $subCategory]);  
-      }
 
+
+      }
     /**
      * Update the specified resource in storage.
      *
@@ -119,21 +126,21 @@ class SubCategoryController extends Controller
     {
         $validator = Validator($request->all(), [
             'name' => 'required|string|min:3',
-            'code'=> 'required | string|min:2',
+            'code' => 'required | string|min:2',
             'active' => 'required|boolean',
 
-           
+
 
 
         ]);
         if (!$validator->fails()) {
-            
+
             $subCategory->name = $request->input('name');
             $subCategory->code = $request->input('code');
             $subCategory->active = $request->input('active');
 
 
-  
+
 
             if ($request->hasFile('image')) {
                 //Delete category previous image.

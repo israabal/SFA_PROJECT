@@ -31,6 +31,12 @@ class ProductModel extends Model
     public function subcategory(){
         return $this->belongsto(SubCategory::class ,'sub_category_id','id');
     }
+
+
+    public function spareparts()
+    {
+        return $this->belongsToMany(SparePart::class, SparePart_ProductModel::class,'product_model_id','spare_part_id');
+    }
     public function getImageUrlAttribute()
     {
         return url('storage/' . $this->images()->first()->url);

@@ -6,7 +6,7 @@ return [
     'users' => 'Users',
     'user_create' => 'Create User',
     'index_user' => 'Read Users',
-    'roles' => 'Roles',
+    'user_type' => 'User Type',
     'Status' => 'Status',
     'edit_user' => 'Edit User',
     'Save' => 'Save',
@@ -65,6 +65,10 @@ return [
     'categories_list' => 'Read Categories ',
     'create_category' => ' Create Category ',
     'edit_category' => ' Edit Category ',
+    'read_language'=>' Read Language',
+    'create_language'=>' Create Language',
+
+
 
     'Category_image' => 'Category  Image ',
     'create_new_prand' => 'create New Prand  ',
@@ -109,6 +113,7 @@ return [
     'status' => 'status',
     'create_success' => 'Created Success',
     'create_failed' => 'Created Failed',
+
     'Updated_success'=>'Updated Successfully  ',
     'Updated_failed'=>' Updated failed!',
     'Deleted_successfully'=>'Deleted successfully',
@@ -119,8 +124,20 @@ return [
 'cancel'=>'Cancel',
 'subcategory'=>'SubCategory',
     'app_name'=>'maintenance',
+    'user'=>'user',
     'model'=>'Models',
+    'models'=>'Models',
     'model_mangment'=>'Model Management',
     'model_list'=>'Read Models',
-    'create_model'=>'Create Model'
+    'create_model'=>'Create Model',
+
+    'OEM_Part_Number'=>'OEM Part Number',
+    'Katun_Part_Number'=>'Katun Part Number',
+    'Local_Number'=>'Local Number',
+    'price'=>'price',
+    'create_new_spare_part'=>'Create New Spare Part',
+    'spare_part'=>'Spare Part ',
+    'spare_part_Management'=>'  Spare Part Management',
+    'spareparts'=>'Spare parts'
+
 ];

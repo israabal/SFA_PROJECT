@@ -1,8 +1,8 @@
 @extends('cms.parent');
-@section('title',__('cms.categories'))
+@section('title',__('cms.subcategories'))
 @section('page-lg',__('cms.home'))
-@section('main-pg-md',__('cms.categories_Management'))
-@section('page-md',__('cms.categories_list'))
+@section('main-pg-md',__('cms.subcategories_Management'))
+@section('page-md',__('cms.subcategories_list'))
 @section('Content')
 <div id="kt_app_content" class="app-content flex-column-fluid">
     <!--begin::Content container-->
@@ -14,7 +14,7 @@
                 <!--begin::Card title-->
                 <div class="card-title">
                     <!--begin::Search-->
-
+                
                     <!--end::Search-->
                 </div>
                 <!--end::Card title-->
@@ -22,7 +22,7 @@
                 <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
                 
                     <!--begin::Add product-->
-                    <a href="{{route('categories.create' )}}" class="btn btn-primary">{{__('cms.create_category')}}</a>
+                    <a href="{{route('spareparts.create' )}}" class="btn btn-primary">{{__('cms.create_new_spare_part')}}</a>
                     <!--end::Add product-->
                 </div>
                 <!--end::Card toolbar-->
@@ -36,60 +36,69 @@
                     <thead>
                         <!--begin::Table row-->
                         <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+                        
+                            {{-- <th class="min-w-200px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="Product: activate to sort column ascending" style="width: 206.828px;">{{__('cms.spareparts')}}</th> --}}
+                            <th class=" min-w-70px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="Qty: activate to sort column ascending" style="width: 93.1875px;">{{__('cms.OEM_Part_Number')}}</th>
 
-                            <th class="min-w-200px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="Product: activate to sort column ascending" style="width: 206.828px;">{{__('cms.categories')}}</th>
-                            <th class="text-end min-w-70px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="Qty: activate to sort column ascending" style="width: 93.1875px;">{{__('cms.Serial_Number')}}</th>
-                            <th class="text-end min-w-100px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="SKU: activate to sort column ascending" style="width: 103.562px;">{{__('cms.JOINED_DATE')}}</th>
-                            <th class="text-end sorting" tabindex="0" aria-controls="kt_table_users" rowspan="1" colspan="1" aria-label="Two-step: activate to sort column ascending" style="width: 125px;">{{__('cms.active')}}</th>
+                            <th class=" min-w-70px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="Qty: activate to sort column ascending" style="width: 93.1875px;">{{__('cms.Katun_Part_Number')}}</th>
+                            <th class=" min-w-70px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="Qty: activate to sort column ascending" style="width: 93.1875px;">{{__('cms.Local_Number')}}</th>
+                            <th class=" min-w-70px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="Qty: activate to sort column ascending" style="width: 93.1875px;">{{__('cms.price')}}</th>
+                            <th class=" min-w-70px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="Qty: activate to sort column ascending" style="width: 93.1875px;">{{__('cms.models')}}</th>
 
 
-                            <th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 99.5938px;">{{__('cms.actions')}}</th></tr>
+
+                            <th class=" min-w-100px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="SKU: activate to sort column ascending" style="width: 103.562px;">{{__('cms.JOINED_DATE')}}</th>
+
+
+                            <th class=" min-w-70px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 99.5938px;">{{__('cms.actions')}}</th></tr>
                         <!--end::Table row-->
                     </thead>
                     <!--end::Table head-->
                     <!--begin::Table body-->
                     <tbody class="fw-semibold text-gray-600">
-                        @foreach ($categories as $category)
+                        @foreach ($spareparts as $sparepart)
 
-
+                  
                     <tr class="odd">
 
                             <!--begin::Checkbox-->
-
+                         
                             <!--end::Checkbox-->
                             <!--begin::Category=-->
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <!--begin::Thumbnail-->
-                                    <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="symbol symbol-50px">
-                                        <div class="symbol-label">
-                                            <img src="{{Storage::url($category->image ?? '')}}"  alt="Emma Smith" class="w-100">
-                                        </div>
-                                    </a>
-                                    <!--end::Thumbnail-->
-                                    <div class="ms-5">
-                                        <!--begin::Title-->
-                                        <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary fs-5 fw-bold" data-kt-ecommerce-product-filter="product_name">{{$category->name}}</a>
-                                        <!--end::Title-->
-                                    </div>
-                                </div>
+                          
+                            <td class="">
+                                <span class="fw-bold">{{$sparepart->OEM_Part_Number}}</span>
                             </td>
                             <!--end::Category=-->
                             <!--begin::SKU=-->
-                            <td class="text-end pe-0">
-                                <span class="fw-bold">{{$category->code}}</span>
+                            <td class=" pe-0">
+                                <span class="fw-bold">{{$sparepart->Katun_Part_Number}}</span>
+                            </td>
+                            <td class=" pe-0">
+                                <span class="fw-bold">{{$sparepart->Local_Number}}</span>
+                            </td>
+                            <td class=" pe-0">
+                                <span class="fw-bold">{{$sparepart->price}}</span>
+                            </td>
+                            <td>
+                                <a href="{{route('spareparts.edit-models',$sparepart->id)}}"
+                                    class="btn btn-app bg-info">
+                                    ( {{$sparepart->productmodels_count}})
+                                    {{__('cms.models')}}
+                                </a>
                             </td>
                             <!--end::SKU=-->
                             <!--begin::Qty=-->
-                            <td class="text-end pe-0" data-order="16">
-                                <span class="fw-bold ms-3">{{$category->created_at}}</span>
+                            <td class=" pe-0" data-order="16">
+                                <span class="fw-bold ms-3">{{$sparepart->created_at}}</span>
                             </td>
-                            <td class="text-end pe-0"><span class="badge @if($category->active) bg-success @else bg-danger @endif">{{$category->active_status}}</span>
+                   
 
+              
                             <td>
                                 <div class="d-flex justify-content-end flex-shrink-0">
-
-                                    <a  href="{{route('categories.edit', $category->id )}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                    
+                                    <a  href="{{route('spareparts.edit', $sparepart->id )}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                         <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                                         <span class="svg-icon svg-icon-3">
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -99,7 +108,7 @@
                                         </span>
                                         <!--end::Svg Icon-->
                                     </a>
-                                    <a href="#" onclick="confirmDelete('{{$category->id}}', this)"  class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
+                                    <a href="#" onclick="confirmDelete('{{$sparepart->id}}', this)"  class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
                                         <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                                         <span class="svg-icon svg-icon-3">
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -122,7 +131,7 @@
             <div class="row">
                 <div class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start">
                 </div>
-
+               
             </div>
         </div>
     </div>
@@ -156,7 +165,7 @@
     }
 
     function performDelete(id, reference) {
-        axios.delete('/cms/categories/'+id)
+        axios.delete('/cms/spareparts/'+id)
         .then(function (response) {
             console.log(response);
             // toastr.success(response.data.message);
@@ -178,6 +187,5 @@
         );
     }
 </script>
-
+    
 @endsection
-

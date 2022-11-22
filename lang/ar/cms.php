@@ -20,6 +20,7 @@ return [
     'edit_category' => ' تعديل الفئة ',
     'edit_subcategory'=>'تعديل الفئة الفرعية ',
     'edit_model'=>'تعديل الموديل ',
+    'read_language'=>'قراءة اللغات',
 
 
 
@@ -77,11 +78,10 @@ return [
 'cancel'=>'إلغاء',
 'Enter_your_email_to_reset_your_password'=>'قم بكتابة الإيميل لتغيير كلمة المرور',
 
-    'Serial_Number'=>'الرقم التسلسلي ',
-    'password' => ' كلمة المرور',
-    'save'=>'حفظ',
-    'admin' => 'ادمن',
-
+  'Serial_Number' => 'الرقم التسلسلي ',
+  'password' => ' كلمة المرور',
+  'save' => 'حفظ',
+  'admin' => 'ادمن',
     'add_admin'=>'اضافة ادمن',
       'read_role'=> ' قراءة الصلاحيات',
     'home'=> 'الرئيسية',
@@ -112,12 +112,18 @@ return [
     'Deleted_successfully'=>'تم الحذف بنجاح ',
     'Delete_failed!'=>'فشل الحذف !',
     'app_name'=>'صيانة',
+    'user'=>'مستخدم',
     'subcategory'=>'الفئة الفرعية',
-
     'model'=>'موديلات',
     'model_mangment'=>'ادارة الموديلات',
     'model_list'=>'قائمة الموديلات',
-    'create_model'=>'انشاء موديل'
+    'create_model'=>'انشاء موديل',
+
+    'create_new_spare_part'=>'انشاء قطعة غيار جديدة',
+    'spare_part'=>'قطع الغيار',
+    'spare_part_Management'=>'ادارة قطع الغيار'
+
+
 
 
 ];

@@ -2,21 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SparePartTranslation;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
-use Symfony\Component\HttpFoundation\Response;
 
-class PermissionController extends Controller
+class SparePartTranslationController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->authorizeResource(Role::class, 'role');
-    // }
-    public function __construct()
-    {
-     $this-> authorizeResource(Permission::class, 'permission');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -24,11 +14,7 @@ class PermissionController extends Controller
      */
     public function index()
     {
-
-        // $Permissions = Role::withCount('permissions')->get();
-         $permissions = permission::get();
-
-        return response()->view('cms.spatie.Permissions.index', ['permissions' => $permissions]);
+        //
     }
 
     /**
@@ -39,7 +25,6 @@ class PermissionController extends Controller
     public function create()
     {
         //
-
     }
 
     /**
@@ -50,16 +35,16 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\SparePartTranslation  $sparePartTranslation
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(SparePartTranslation $sparePartTranslation)
     {
         //
     }
@@ -67,34 +52,34 @@ class PermissionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\SparePartTranslation  $sparePartTranslation
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(SparePartTranslation $sparePartTranslation)
     {
-
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\SparePartTranslation  $sparePartTranslation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, SparePartTranslation $sparePartTranslation)
     {
-
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\SparePartTranslation  $sparePartTranslation
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $role)
+    public function destroy(SparePartTranslation $sparePartTranslation)
     {
-
+        //
     }
 }

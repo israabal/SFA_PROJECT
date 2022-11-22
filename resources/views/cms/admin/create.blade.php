@@ -36,9 +36,9 @@
             <form id="create-form" class="form fv-plugins-bootstrap5 fv-plugins-framework" >
                 @csrf
 
-      
+
                 <!--begin::Input group-->
-              
+
                 <!--end::Input group-->
                 <div class="row">
 
@@ -73,22 +73,79 @@
 
 
                 </div>
-          
+
                 <!--begin::Input group-->
-             
+
+   <!--begin::Input group-->
+   <div class="row mb-6">
+    <!--begin::Label-->
+    <label  for="name" class="col-lg-4 col-form-label required fw-semibold fs-6">{{__('cms.guard_name')}} </label>
+    <!--end::Label-->
+    <!--begin::Col-->
+    <div class="col-lg-8 fv-row">
+        <!--begin::Input-->
+        <select id="role_id"
+        name="role_id" aria-label={{__('cms.role')}} data-control="select2" data-placeholder={{__('cms.roles')}}class="form-select form-select-solid form-select-lg">
+           <option value="">{{__('cms.roles')}} </option>
+           @foreach ($roles as $role)
+           <option data-kt-flag="flags/indonesia.svg" value="{{ $role->id }}">{{$role->name}}</option>
+
+           @endforeach
+           {{-- <option data-kt-flag="flags/indonesia.svg" value="client">{{__('cms.client')}}</option>
+           <option data-kt-flag="flags/malaysia.svg" value="technical">{{__('cms.technical')}}</option> --}}
+
+       </select>
+
+
+        <!--end::Input-->
+        <!--begin::Hint-->
+        <div class="form-text">"{{__('cms.select-guard')}}"</div>
+        <!--end::Hint-->
+    </div>
+    <!--end::Col-->
+</div>
+<!--end::Input group-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
              <div class="row">
                 <div class="mb-7">
                     <!--begin::Label-->
                     <label class="fs-6 fw-semibold mb-3">
                         <span>{{__('cms.image')}}</span>
-                        
+
                         <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" aria-label="Allowed file types: png, jpg, jpeg." data-bs-original-title="Allowed file types: png, jpg, jpeg." data-kt-initialized="1"></i>
                     </label>
                     <!--end::Label-->
                     <!--begin::Image input wrapper-->
                     <div class="card card-flush py-4">
                         <!--begin::Card header-->
-              
+
                         <!--end::Card header-->
                         <!--begin::Card body-->
                         <div class="card-body  pt-0">
@@ -109,6 +166,34 @@
                                     <!--end::Inputs-->
                                 </label>
                                 <!--end::Label-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                 <!--begin::Cancel-->
                                 <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" aria-label="Cancel avatar" data-bs-original-title="Cancel avatar" data-kt-initialized="1">
                                     <i class="bi bi-x fs-2"></i>
@@ -127,7 +212,7 @@
                         </div>
                         <!--end::Card body-->
                     </div>
-               
+
                     <!--end::Image input wrapper-->
                 </div>
              </div>
@@ -179,16 +264,17 @@
 
  <script>
     $(function () { bsCustomFileInput.init() });
-  </script> 
+  </script>
 <script>
 
     function performStore() {
          var formData = new FormData();
          formData.append('name', document.getElementById('name').value);
+         formData.append('role_id', document.getElementById('role_id').value);
          formData.append('email', document.getElementById('email').value);
          formData.append('active', document.getElementById('active').checked ? 1:0);
          formData.append('image',document.getElementById('admin_image').files[0]);
-        axios.post('/cms/admins', formData)         
+        axios.post('/cms/admins', formData)
         .then(function (response) {
             console.log(response);
             toastr.success(response.data.message);

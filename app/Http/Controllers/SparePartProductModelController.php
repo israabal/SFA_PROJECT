@@ -2,33 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProductModel;
+use App\Models\SparePart;
+use App\Models\SparePart_ProductModel;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 use Symfony\Component\HttpFoundation\Response;
 
-class PermissionController extends Controller
+class SparePartProductModelController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->authorizeResource(Role::class, 'role');
-    // }
-    public function __construct()
-    {
-     $this-> authorizeResource(Permission::class, 'permission');
-    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+
+
+
+
+    public function index($request)
     {
 
-        // $Permissions = Role::withCount('permissions')->get();
-         $permissions = permission::get();
-
-        return response()->view('cms.spatie.Permissions.index', ['permissions' => $permissions]);
     }
 
     /**
@@ -39,7 +33,6 @@ class PermissionController extends Controller
     public function create()
     {
         //
-
     }
 
     /**
@@ -50,51 +43,56 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
+ 
 
-    }
+      
+  
+
+
+      }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\SparePart_ProductModel  $sparePart_ProductModel
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show( $id)
     {
-        //
+      
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\SparePart_ProductModel  $sparePart_ProductModel
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(SparePart_ProductModel $sparePart_ProductModel)
     {
-
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\SparePart_ProductModel  $sparePart_ProductModel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, SparePart_ProductModel $sparePart_ProductModel)
     {
-
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\SparePart_ProductModel  $sparePart_ProductModel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $role)
+    public function destroy(SparePart_ProductModel $sparePart_ProductModel)
     {
-
+        //
     }
 }
