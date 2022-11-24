@@ -16,9 +16,6 @@
             <div class="card">
 
                 <div class="card-body py-4">
-
-                    @can('Create-Role')
-
                 <a href="{{route('roles.create')}}" class="btn btn-primary" >
                     <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
                     <span class="svg-icon svg-icon-2">
@@ -28,7 +25,7 @@
                         </svg>
                     </span>
                     <!--end::Svg Icon-->{{__('cms.create_role')}}</a>
-                @endcan
+
                     <!--begin::Card body-->
 
                     <!--begin::Table-->
@@ -76,7 +73,7 @@
 
                                 <td>
                                     <a href="{{route('role.show',$role->id)}}"
-                                        class="btn btn-app bg-info">
+                                        class="btn btn-app bg-">
                                         ( {{$role->permissions_count}})
                                         {{__('cms.permission')}}
                                     </a>
@@ -86,7 +83,7 @@
                                 <!--begin::Action=-->
                                 <td>
                                     <div class="d-flex justify-content-end flex-shrink-0">
-                                        @can('Update-Role')
+
                                         <a  href="{{route('roles.edit', $role->id )}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                             <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                                             <span class="svg-icon svg-icon-3">
@@ -97,13 +94,6 @@
                                             </span>
                                             <!--end::Svg Icon-->
                                         </a>
-
-
-
-                                        @endcan
-                                        @can('Delete-Role')
-
-
                                         <a href="#"  onclick="confirmDelete('{{$role->id}}', this)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
                                             <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                                             <span class="svg-icon svg-icon-3">
@@ -115,7 +105,6 @@
                                             </span>
                                             <!--end::Svg Icon-->
                                         </a>
-                                        @endcan
                                     </div>
                                 </td>
                                 <!--end::Action=-->

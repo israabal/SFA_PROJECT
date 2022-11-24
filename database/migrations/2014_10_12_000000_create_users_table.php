@@ -19,9 +19,14 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('image');
-            $table->enum('roles',['superadmin', 'agent', 'technical', 'customers']);
-            $table->integer('status')->default(0);
+            $table->string('image')->default('not-found');;
+            $table->enum('user_type',['agent', 'technical', 'customers']);
+
+
+
+
+            $table->string('region');
+            $table->boolean('status')->default(true);
             $table->rememberToken();
             $table->timestamps();
             $table->SoftDeletes();

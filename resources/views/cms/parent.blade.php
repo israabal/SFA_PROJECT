@@ -53,7 +53,7 @@ License: For each use you must have a valid license purchased only from above li
 		<!--begin::Theme mode setup on page load-->
 		<script>var defaultThemeMode = "light"; var themeMode; if ( document.documentElement ) { if ( document.documentElement.hasAttribute("data-theme-mode")) { themeMode = document.documentElement.getAttribute("data-theme-mode"); } else { if ( localStorage.getItem("data-theme") !== null ) { themeMode = localStorage.getItem("data-theme"); } else { themeMode = defaultThemeMode; } } if (themeMode === "system") { themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } document.documentElement.setAttribute("data-theme", themeMode); }</script>
 		<!--end::Theme mode setup on page load-->
-
+		
 
 
 		<div class="d-flex flex-column flex-root app-root" id="kt_app_root">
@@ -99,12 +99,12 @@ License: For each use you must have a valid license purchased only from above li
 										</span>
 										<!--end:Menu link-->
 										<!--begin:Menu sub-->
-
+									
 										<!--end:Menu sub-->
 									</div>
 									<!--end:Menu item-->
 									<!--begin:Menu item-->
-
+								
 									<!--end:Menu item-->
 								</div>
 								<!--end::Menu-->
@@ -857,10 +857,10 @@ License: For each use you must have a valid license purchased only from above li
 								</div>
 								<!--end::Search-->
 								<!--begin::Activities-->
-
+							
 								<!--end::Notifications-->
 								<!--begin::Chat-->
-
+								
 								<!--end::My apps links-->
 								<!--begin::Theme mode-->
 								<div class="app-navbar-item ms-1 ms-lg-3">
@@ -993,7 +993,7 @@ License: For each use you must have a valid license purchased only from above li
 										</div>
 										<!--end::Menu item-->
 										<!--begin::Menu item-->
-
+								
 										<!--end::Menu item-->
 										<!--begin::Menu separator-->
 										<!--end::Menu separator-->
@@ -1023,7 +1023,7 @@ License: For each use you must have a valid license purchased only from above li
 												</div>
 												<!--end::Menu item-->
 												<!--begin::Menu item-->
-
+											
 												<!--end::Menu item-->
 											</div>
 											<!--end::Menu sub-->
@@ -1101,14 +1101,16 @@ License: For each use you must have a valid license purchased only from above li
 									<!--begin:Menu item-->
 									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 										<!--begin:Menu link-->
-
+									
 										<!--end:Menu link-->
 										<!--begin:Menu sub-->
-
+										
 										<!--end:Menu sub-->
 									</div>
 									<!--end:Menu item-->
 									<!--begin:Menu item-->
+									@canany(['Create-Admin','Create-User','Read-Users','Read-Admins'])
+
 									<div class="menu-item pt-5">
 										<!--begin:Menu content-->
 										<div class="menu-content">
@@ -1116,8 +1118,12 @@ License: For each use you must have a valid license purchased only from above li
 										</div>
 										<!--end:Menu content-->
 									</div>
+									@endcanany
+
 									<!--end:Menu item-->
 									<!--begin:Menu item-->
+									@canany(['Create-Admin', 'Read-Admins'])
+
 									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 										<!--begin:Menu link-->
 										<span class="menu-link">
@@ -1136,14 +1142,18 @@ License: For each use you must have a valid license purchased only from above li
 										</span>
 										<!--end:Menu link-->
 										<!--begin:Menu sub-->
+										@can('Read-Admins')
+
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-
+											
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-
+										
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
+											
+
 											<div class="menu-item">
 												<!--begin:Menu link-->
 												<a class="menu-link" href="{{route('admins.index')}}" >
@@ -1154,18 +1164,17 @@ License: For each use you must have a valid license purchased only from above li
 												</a>
 												<!--end:Menu link-->
 											</div>
-											<!--end:Menu item-->
-											<!--begin:Menu item-->
-
-											<!--end:Menu item-->
+										
 										</div>
+										@endcan
+                                        @can('Create-Admin')
 
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-
+											
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-
+										
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 											<div class="menu-item">
@@ -1180,12 +1189,16 @@ License: For each use you must have a valid license purchased only from above li
 											</div>
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-
+										
 											<!--end:Menu item-->
 										</div>
+										@endcan
+
 										<!--end:Menu sub-->
 									</div>
+									@endcanany
 
+									@canany(['Create-User', 'Read-Users'])
 
 									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 										<!--begin:Menu link-->
@@ -1205,12 +1218,14 @@ License: For each use you must have a valid license purchased only from above li
 										</span>
 										<!--end:Menu link-->
 										<!--begin:Menu sub-->
+										@can('Read-Users')
+
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-
+											
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-
+										
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 											<div class="menu-item">
@@ -1225,16 +1240,18 @@ License: For each use you must have a valid license purchased only from above li
 											</div>
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-
+										
 											<!--end:Menu item-->
 										</div>
+										@endcan
 
+                                        @can('Create-User')
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-
+											
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-
+										
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 											<div class="menu-item">
@@ -1249,13 +1266,17 @@ License: For each use you must have a valid license purchased only from above li
 											</div>
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-
+										
 											<!--end:Menu item-->
 										</div>
+										@endcan
+
 										<!--end:Menu sub-->
 									</div>
+									@endcanany
 
 
+									@canany(['Create-Role','Read-Roles','Read-Permissions'])
 
 									<div class="menu-item pt-5">
 										<!--begin:Menu content-->
@@ -1264,15 +1285,18 @@ License: For each use you must have a valid license purchased only from above li
 										</div>
 										<!--end:Menu content-->
 									</div>
+									@endcanany
+
+
+								
 
 
 
-
-
-
-
+									
 									<!--end:Menu item-->
 									<!--begin:Menu item-->
+									@canany(['Create-Role','Read-Roles'])
+
 									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 										<!--begin:Menu link-->
 										<span class="menu-link">
@@ -1293,12 +1317,14 @@ License: For each use you must have a valid license purchased only from above li
 										<!--begin:Menu sub-->
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-
+		
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
+											@can('Read-Roles')
+
 											<div class="menu-item">
 												<!--begin:Menu link-->
 												<a class="menu-link" href="{{route('roles.index')}}">
@@ -1309,8 +1335,11 @@ License: For each use you must have a valid license purchased only from above li
 												</a>
 												<!--end:Menu link-->
 											</div>
+											@endcan
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
+											@can('Create-Role')
+
 											<div class="menu-item">
 												<!--begin:Menu link-->
 												<a class="menu-link" href="{{route('roles.create')}}">
@@ -1321,10 +1350,15 @@ License: For each use you must have a valid license purchased only from above li
 												</a>
 												<!--end:Menu link-->
 											</div>
+											@endcan
+
 											<!--end:Menu item-->
 										</div>
 										<!--end:Menu sub-->
 									</div>
+									@endcanany
+									@can(['Read-Permissions'])
+
 									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 										<!--begin:Menu link-->
 										<span class="menu-link">
@@ -1345,7 +1379,7 @@ License: For each use you must have a valid license purchased only from above li
 										<!--begin:Menu sub-->
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-
+		
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 
@@ -1363,12 +1397,16 @@ License: For each use you must have a valid license purchased only from above li
 											</div>
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-
+											
 											<!--end:Menu item-->
 										</div>
 										<!--end:Menu sub-->
 									</div>
+									@endcan
 
+									@canany(['Create-Brand','Create-Spare-Part','Create-Category','Create-Model','Create-Language' ,
+									'Read-Brands','Read-Spare-Parts','Read-Models','Read-Languages','Read-Categories'
+									])
 
 									<div class="menu-item pt-5">
 										<!--begin:Menu content-->
@@ -1377,15 +1415,80 @@ License: For each use you must have a valid license purchased only from above li
 										</div>
 										<!--end:Menu content-->
 									</div>
+									@endcanany
+
+
+								
 
 
 
-
-
-
-
+									
 									<!--end:Menu item-->
 									<!--begin:Menu item-->
+									@canany(['Create-Brand','Read-Brands'])
+
+									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+										<!--begin:Menu link-->
+										<span class="menu-link">
+											<span class="menu-icon">
+												<!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
+												<span class="svg-icon svg-icon-2">
+													<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<path d="M18 21.6C16.6 20.4 9.1 20.3 6.3 21.2C5.7 21.4 5.1 21.2 4.7 20.8L2 18C4.2 15.8 10.8 15.1 15.8 15.8C16.2 18.3 17 20.5 18 21.6ZM18.8 2.8C18.4 2.4 17.8 2.20001 17.2 2.40001C14.4 3.30001 6.9 3.2 5.5 2C6.8 3.3 7.4 5.5 7.7 7.7C9 7.9 10.3 8 11.7 8C15.8 8 19.8 7.2 21.5 5.5L18.8 2.8Z" fill="currentColor" />
+														<path opacity="0.3" d="M21.2 17.3C21.4 17.9 21.2 18.5 20.8 18.9L18 21.6C15.8 19.4 15.1 12.8 15.8 7.8C18.3 7.4 20.4 6.70001 21.5 5.60001C20.4 7.00001 20.2 14.5 21.2 17.3ZM8 11.7C8 9 7.7 4.2 5.5 2L2.8 4.8C2.4 5.2 2.2 5.80001 2.4 6.40001C2.7 7.40001 3.00001 9.2 3.10001 11.7C3.10001 15.5 2.40001 17.6 2.10001 18C3.20001 16.9 5.3 16.2 7.8 15.8C8 14.2 8 12.7 8 11.7Z" fill="currentColor" />
+													</svg>
+												</span>
+												<!--end::Svg Icon-->
+											</span>
+											<span class="menu-title">{{__('cms.brands')}}</span>
+											<span class="menu-arrow"></span>
+										</span>
+										<!--end:Menu link-->
+										<!--begin:Menu sub-->
+										
+										<div class="menu-sub menu-sub-accordion">
+											<!--begin:Menu item-->
+		
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+											@can('Read-Brands')
+											<div class="menu-item">
+												<!--begin:Menu link-->
+												<a class="menu-link" href="{{route('brands.index')}}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+													<span class="menu-title">{{__('cms.brands_list')}}</span>
+												</a>
+												<!--end:Menu link-->
+											</div>
+											@endcan
+											
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+											@can('Create-Brand')
+											<div class="menu-item">
+												<!--begin:Menu link-->
+												<a class="menu-link" href="{{route('brands.create')}}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+													<span class="menu-title">{{__('cms.create_brand')}}</span>
+												</a>
+												<!--end:Menu link-->
+											</div>
+											@endcan
+											
+											<!--end:Menu item-->
+										</div>
+										<!--end:Menu sub-->
+									</div>
+									@endcanany
+									@canany(['Create-Category','Read-Categories'])
+
 									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 										<!--begin:Menu link-->
 										<span class="menu-link">
@@ -1406,12 +1509,13 @@ License: For each use you must have a valid license purchased only from above li
 										<!--begin:Menu sub-->
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-
+		
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
+											@can('Read-Categories')
 											<div class="menu-item">
 												<!--begin:Menu link-->
 												<a class="menu-link" href="{{route('categories.index')}}">
@@ -1422,8 +1526,11 @@ License: For each use you must have a valid license purchased only from above li
 												</a>
 												<!--end:Menu link-->
 											</div>
+											@endcan
+											
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
+											@can('Create-Category')
 											<div class="menu-item">
 												<!--begin:Menu link-->
 												<a class="menu-link" href="{{route('categories.create')}}">
@@ -1434,64 +1541,16 @@ License: For each use you must have a valid license purchased only from above li
 												</a>
 												<!--end:Menu link-->
 											</div>
+											@endcan
+										
 											<!--end:Menu item-->
 										</div>
 										<!--end:Menu sub-->
 									</div>
-									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-										<!--begin:Menu link-->
-										<span class="menu-link">
-											<span class="menu-icon">
-												<!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
-												<span class="svg-icon svg-icon-2">
-													<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-														<path d="M18 21.6C16.6 20.4 9.1 20.3 6.3 21.2C5.7 21.4 5.1 21.2 4.7 20.8L2 18C4.2 15.8 10.8 15.1 15.8 15.8C16.2 18.3 17 20.5 18 21.6ZM18.8 2.8C18.4 2.4 17.8 2.20001 17.2 2.40001C14.4 3.30001 6.9 3.2 5.5 2C6.8 3.3 7.4 5.5 7.7 7.7C9 7.9 10.3 8 11.7 8C15.8 8 19.8 7.2 21.5 5.5L18.8 2.8Z" fill="currentColor" />
-														<path opacity="0.3" d="M21.2 17.3C21.4 17.9 21.2 18.5 20.8 18.9L18 21.6C15.8 19.4 15.1 12.8 15.8 7.8C18.3 7.4 20.4 6.70001 21.5 5.60001C20.4 7.00001 20.2 14.5 21.2 17.3ZM8 11.7C8 9 7.7 4.2 5.5 2L2.8 4.8C2.4 5.2 2.2 5.80001 2.4 6.40001C2.7 7.40001 3.00001 9.2 3.10001 11.7C3.10001 15.5 2.40001 17.6 2.10001 18C3.20001 16.9 5.3 16.2 7.8 15.8C8 14.2 8 12.7 8 11.7Z" fill="currentColor" />
-													</svg>
-												</span>
-												<!--end::Svg Icon-->
-											</span>
-											<span class="menu-title">{{__('cms.subcategories')}}</span>
-											<span class="menu-arrow"></span>
-										</span>
-										<!--end:Menu link-->
-										<!--begin:Menu sub-->
-										<div class="menu-sub menu-sub-accordion">
-											<!--begin:Menu item-->
-
-											<!--end:Menu item-->
-											<!--begin:Menu item-->
-
-											<!--end:Menu item-->
-											<!--begin:Menu item-->
-											<div class="menu-item">
-												<!--begin:Menu link-->
-												<a class="menu-link" href="{{route('subcategories.index')}}">
-													<span class="menu-bullet">
-														<span class="bullet bullet-dot"></span>
-													</span>
-													<span class="menu-title">{{__('cms.subcategories_list')}}</span>
-												</a>
-												<!--end:Menu link-->
-											</div>
-											<!--end:Menu item-->
-											<!--begin:Menu item-->
-											<div class="menu-item">
-												<!--begin:Menu link-->
-												<a class="menu-link" href="{{route('subcategories.create')}}">
-													<span class="menu-bullet">
-														<span class="bullet bullet-dot"></span>
-													</span>
-													<span class="menu-title">{{__('cms.create_subcategory')}}</span>
-												</a>
-												<!--end:Menu link-->
-											</div>
-											<!--end:Menu item-->
-										</div>
-										<!--end:Menu sub-->
-									</div>
+									@endcanany
 
 
+									@canany(['Create-Model','Read-Models'])
 
 									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 										<!--begin:Menu link-->
@@ -1513,15 +1572,16 @@ License: For each use you must have a valid license purchased only from above li
 										<!--begin:Menu sub-->
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-
+		
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
+											@can('Read-Models')
 											<div class="menu-item">
 												<!--begin:Menu link-->
-												<a class="menu-link" href="{{route('productmodels.index')}}">
+												<a class="menu-link" href="{{route('smodels.index')}}">
 													<span class="menu-bullet">
 														<span class="bullet bullet-dot"></span>
 													</span>
@@ -1529,11 +1589,14 @@ License: For each use you must have a valid license purchased only from above li
 												</a>
 												<!--end:Menu link-->
 											</div>
+											@endcan
+											
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
+											@can('Create-Model')
 											<div class="menu-item">
 												<!--begin:Menu link-->
-												<a class="menu-link" href="{{route('productmodels.create')}}">
+												<a class="menu-link" href="{{route('smodels.create')}}">
 													<span class="menu-bullet">
 														<span class="bullet bullet-dot"></span>
 													</span>
@@ -1541,25 +1604,16 @@ License: For each use you must have a valid license purchased only from above li
 												</a>
 												<!--end:Menu link-->
 											</div>
+											@endcan
+											
 											<!--end:Menu item-->
-
-
-
-
-
-
-
-
-
-
 										</div>
 										<!--end:Menu sub-->
 									</div>
+									@endcanany
 
 
-
-
-
+									@canany(['Create-Spare-Part','Read-Spare-Parts'])
 
 									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 										<!--begin:Menu link-->
@@ -1574,58 +1628,436 @@ License: For each use you must have a valid license purchased only from above li
 												</span>
 												<!--end::Svg Icon-->
 											</span>
-											<span class="menu-title">{{__('cms.maintenance')}}</span>
+											<span class="menu-title">{{__('cms.spareparts')}}</span>
 											<span class="menu-arrow"></span>
 										</span>
 										<!--end:Menu link-->
 										<!--begin:Menu sub-->
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-
+		
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
+											@can('Read-Spare-Parts')
 											<div class="menu-item">
 												<!--begin:Menu link-->
-												<a class="menu-link" href="{{route('main.index')}}">
+												<a class="menu-link" href="{{route('spareparts.index')}}">
 													<span class="menu-bullet">
 														<span class="bullet bullet-dot"></span>
 													</span>
-													<span class="menu-title">{{__('cms.maintenance_list')}}</span>
+													<span class="menu-title">{{__('cms.read_sparepart')}}</span>
 												</a>
 												<!--end:Menu link-->
 											</div>
+											@endcan
+										
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
+											@can('Create-Spare-Part')
 											<div class="menu-item">
 												<!--begin:Menu link-->
-												<a class="menu-link" href="{{route('main.create')}}">
+												<a class="menu-link" href="{{route('spareparts.create')}}">
 													<span class="menu-bullet">
 														<span class="bullet bullet-dot"></span>
 													</span>
-													<span class="menu-title">{{__('cms.create_maintenance')}}</span>
+													<span class="menu-title">{{__('cms.create_new_spare_part')}}</span>
 												</a>
 												<!--end:Menu link-->
 											</div>
+											@endcan
+										
 											<!--end:Menu item-->
-
-
-
-
-
-
-
-
-
-
 										</div>
 										<!--end:Menu sub-->
 									</div>
+									@endcanany
 
 
 
+									@canany(['Create-Language','Read-Languages'])
+									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+										<!--begin:Menu link-->
+										<span class="menu-link">
+											<span class="menu-icon">
+												<!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
+												<span class="svg-icon svg-icon-2">
+													<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<path d="M18 21.6C16.6 20.4 9.1 20.3 6.3 21.2C5.7 21.4 5.1 21.2 4.7 20.8L2 18C4.2 15.8 10.8 15.1 15.8 15.8C16.2 18.3 17 20.5 18 21.6ZM18.8 2.8C18.4 2.4 17.8 2.20001 17.2 2.40001C14.4 3.30001 6.9 3.2 5.5 2C6.8 3.3 7.4 5.5 7.7 7.7C9 7.9 10.3 8 11.7 8C15.8 8 19.8 7.2 21.5 5.5L18.8 2.8Z" fill="currentColor" />
+														<path opacity="0.3" d="M21.2 17.3C21.4 17.9 21.2 18.5 20.8 18.9L18 21.6C15.8 19.4 15.1 12.8 15.8 7.8C18.3 7.4 20.4 6.70001 21.5 5.60001C20.4 7.00001 20.2 14.5 21.2 17.3ZM8 11.7C8 9 7.7 4.2 5.5 2L2.8 4.8C2.4 5.2 2.2 5.80001 2.4 6.40001C2.7 7.40001 3.00001 9.2 3.10001 11.7C3.10001 15.5 2.40001 17.6 2.10001 18C3.20001 16.9 5.3 16.2 7.8 15.8C8 14.2 8 12.7 8 11.7Z" fill="currentColor" />
+													</svg>
+												</span>
+												<!--end::Svg Icon-->
+											</span>
+											<span class="menu-title">{{__('cms.language')}}</span>
+											<span class="menu-arrow"></span>
+										</span>
+										<!--end:Menu link-->
+										<!--begin:Menu sub-->
+										<div class="menu-sub menu-sub-accordion">
+											<!--begin:Menu item-->
+		
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+											@can('Read-Languages')
+											<div class="menu-item">
+												<!--begin:Menu link-->
+												<a class="menu-link" href="{{route('languages.index')}}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+													<span class="menu-title">{{__('cms.read_language')}}</span>
+												</a>
+												<!--end:Menu link-->
+											</div>
+											@endcan
+											
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+											@can('Create-Language')
+											<div class="menu-item">
+												<!--begin:Menu link-->
+												<a class="menu-link" href="{{route('languages.create')}}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+													<span class="menu-title">{{__('cms.create_language')}}</span>
+												</a>
+												<!--end:Menu link-->
+											</div>
+											@endcan
+										
+											<!--end:Menu item-->
+										</div>
+										<!--end:Menu sub-->
+									</div>
+									@endcanany
+
+									@canany(['Create-Problem','Create-Repair','Create-Repair-Problem','Create-Problem-status' ,
+									'Read-Problems','Read-Repair','Read-Repair-Problems','Read-Problems-status'
+									])
+									<div class="menu-item pt-5">
+										<!--begin:Menu content-->
+										<div class="menu-content">
+											<span class="menu-heading fw-bold text-uppercase fs-7">{{__('cms.problem_management')}}</span>
+										</div>
+										<!--end:Menu content-->
+									</div>
+
+									@endcanany
+ 
+									@canany('Create-Problem','Read-Problems')
+									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+										<!--begin:Menu link-->
+										<span class="menu-link">
+											<span class="menu-icon">
+												<!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
+												<span class="svg-icon svg-icon-2">
+													<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<path d="M18 21.6C16.6 20.4 9.1 20.3 6.3 21.2C5.7 21.4 5.1 21.2 4.7 20.8L2 18C4.2 15.8 10.8 15.1 15.8 15.8C16.2 18.3 17 20.5 18 21.6ZM18.8 2.8C18.4 2.4 17.8 2.20001 17.2 2.40001C14.4 3.30001 6.9 3.2 5.5 2C6.8 3.3 7.4 5.5 7.7 7.7C9 7.9 10.3 8 11.7 8C15.8 8 19.8 7.2 21.5 5.5L18.8 2.8Z" fill="currentColor" />
+														<path opacity="0.3" d="M21.2 17.3C21.4 17.9 21.2 18.5 20.8 18.9L18 21.6C15.8 19.4 15.1 12.8 15.8 7.8C18.3 7.4 20.4 6.70001 21.5 5.60001C20.4 7.00001 20.2 14.5 21.2 17.3ZM8 11.7C8 9 7.7 4.2 5.5 2L2.8 4.8C2.4 5.2 2.2 5.80001 2.4 6.40001C2.7 7.40001 3.00001 9.2 3.10001 11.7C3.10001 15.5 2.40001 17.6 2.10001 18C3.20001 16.9 5.3 16.2 7.8 15.8C8 14.2 8 12.7 8 11.7Z" fill="currentColor" />
+													</svg>
+												</span>
+												<!--end::Svg Icon-->
+											</span>
+											<span class="menu-title">{{__('cms.problems')}}</span>
+											<span class="menu-arrow"></span>
+										</span>
+										<!--end:Menu link-->
+										<!--begin:Menu sub-->
+										<div class="menu-sub menu-sub-accordion">
+											<!--begin:Menu item-->
+		
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+											@can('Read-Problems')
+											<div class="menu-item">
+												<!--begin:Menu link-->
+												<a class="menu-link" href="{{route('problems.index')}}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+													<span class="menu-title">{{__('cms.problem_list')}}</span>
+												</a>
+												<!--end:Menu link-->
+											</div>
+											@endcan
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+											@can('Create-Problem')
+											<div class="menu-item">
+												<!--begin:Menu link-->
+												<a class="menu-link" href="{{route('problems.create')}}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+													<span class="menu-title">{{__('cms.create_problem')}}</span>
+												</a>
+												<!--end:Menu link-->
+											</div>
+											@endcan
+											<!--end:Menu item-->
+										</div>
+										<!--end:Menu sub-->
+									</div>
+									@endcanany
+
+									@canany('Create-Repair','Read-Repair')
+
+									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+										<!--begin:Menu link-->
+										<span class="menu-link">
+											<span class="menu-icon">
+												<!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
+												<span class="svg-icon svg-icon-2">
+													<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<path d="M18 21.6C16.6 20.4 9.1 20.3 6.3 21.2C5.7 21.4 5.1 21.2 4.7 20.8L2 18C4.2 15.8 10.8 15.1 15.8 15.8C16.2 18.3 17 20.5 18 21.6ZM18.8 2.8C18.4 2.4 17.8 2.20001 17.2 2.40001C14.4 3.30001 6.9 3.2 5.5 2C6.8 3.3 7.4 5.5 7.7 7.7C9 7.9 10.3 8 11.7 8C15.8 8 19.8 7.2 21.5 5.5L18.8 2.8Z" fill="currentColor" />
+														<path opacity="0.3" d="M21.2 17.3C21.4 17.9 21.2 18.5 20.8 18.9L18 21.6C15.8 19.4 15.1 12.8 15.8 7.8C18.3 7.4 20.4 6.70001 21.5 5.60001C20.4 7.00001 20.2 14.5 21.2 17.3ZM8 11.7C8 9 7.7 4.2 5.5 2L2.8 4.8C2.4 5.2 2.2 5.80001 2.4 6.40001C2.7 7.40001 3.00001 9.2 3.10001 11.7C3.10001 15.5 2.40001 17.6 2.10001 18C3.20001 16.9 5.3 16.2 7.8 15.8C8 14.2 8 12.7 8 11.7Z" fill="currentColor" />
+													</svg>
+												</span>
+												<!--end::Svg Icon-->
+											</span>
+											<span class="menu-title">{{__('cms.repairs')}}</span>
+											<span class="menu-arrow"></span>
+										</span>
+										<!--end:Menu link-->
+										<!--begin:Menu sub-->
+										<div class="menu-sub menu-sub-accordion">
+											<!--begin:Menu item-->
+		
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+											@can('Read-Repair')
+											<div class="menu-item">
+												<!--begin:Menu link-->
+												<a class="menu-link" href="{{route('repairs.index')}}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+													<span class="menu-title">{{__('cms.repairs_list')}}</span>
+												</a>
+												<!--end:Menu link-->
+											</div>
+											@endcan
+											
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+											@can('Create-Repair')
+											<div class="menu-item">
+												<!--begin:Menu link-->
+												<a class="menu-link" href="{{route('repairs.create')}}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+													<span class="menu-title">{{__('cms.create_repairs')}}</span>
+												</a>
+												<!--end:Menu link-->
+											</div>
+											@endcan
+											
+											<!--end:Menu item-->
+										</div>
+										<!--end:Menu sub-->
+									</div>
+									@endcanany
+
+
+
+									@canany('Create-Repair-Problem','Read-Repair-Problems')
+
+									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+										<!--begin:Menu link-->
+										<span class="menu-link">
+											<span class="menu-icon">
+												<!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
+												<span class="svg-icon svg-icon-2">
+													<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<path d="M18 21.6C16.6 20.4 9.1 20.3 6.3 21.2C5.7 21.4 5.1 21.2 4.7 20.8L2 18C4.2 15.8 10.8 15.1 15.8 15.8C16.2 18.3 17 20.5 18 21.6ZM18.8 2.8C18.4 2.4 17.8 2.20001 17.2 2.40001C14.4 3.30001 6.9 3.2 5.5 2C6.8 3.3 7.4 5.5 7.7 7.7C9 7.9 10.3 8 11.7 8C15.8 8 19.8 7.2 21.5 5.5L18.8 2.8Z" fill="currentColor" />
+														<path opacity="0.3" d="M21.2 17.3C21.4 17.9 21.2 18.5 20.8 18.9L18 21.6C15.8 19.4 15.1 12.8 15.8 7.8C18.3 7.4 20.4 6.70001 21.5 5.60001C20.4 7.00001 20.2 14.5 21.2 17.3ZM8 11.7C8 9 7.7 4.2 5.5 2L2.8 4.8C2.4 5.2 2.2 5.80001 2.4 6.40001C2.7 7.40001 3.00001 9.2 3.10001 11.7C3.10001 15.5 2.40001 17.6 2.10001 18C3.20001 16.9 5.3 16.2 7.8 15.8C8 14.2 8 12.7 8 11.7Z" fill="currentColor" />
+													</svg>
+												</span>
+												<!--end::Svg Icon-->
+											</span>
+											<span class="menu-title">{{__('cms.repair_problems')}}</span>
+											<span class="menu-arrow"></span>
+										</span>
+										<!--end:Menu link-->
+										<!--begin:Menu sub-->
+										<div class="menu-sub menu-sub-accordion">
+											<!--begin:Menu item-->
+		
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+											@can('Read-Repair-Problems')
+											<div class="menu-item">
+												<!--begin:Menu link-->
+												<a class="menu-link" href="{{route('repair_problems.index')}}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+													<span class="menu-title">{{__('cms.repair_problems_list')}}</span>
+												</a>
+												<!--end:Menu link-->
+											</div>
+											@endcan
+										
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+											@can('Create-Repair-Problem')
+											<div class="menu-item">
+												<!--begin:Menu link-->
+												<a class="menu-link" href="{{route('repair_problems.create')}}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+													<span class="menu-title">{{__('cms.create_repair_problems')}}</span>
+												</a>
+												<!--end:Menu link-->
+											</div>
+											@endcan
+											
+											<!--end:Menu item-->
+										</div>
+										<!--end:Menu sub-->
+									</div>
+									@endcanany
+
+									@canany('Create-Problem-status','Read-Problems-status')
+
+									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+										<!--begin:Menu link-->
+										<span class="menu-link">
+											<span class="menu-icon">
+												<!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
+												<span class="svg-icon svg-icon-2">
+													<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<path d="M18 21.6C16.6 20.4 9.1 20.3 6.3 21.2C5.7 21.4 5.1 21.2 4.7 20.8L2 18C4.2 15.8 10.8 15.1 15.8 15.8C16.2 18.3 17 20.5 18 21.6ZM18.8 2.8C18.4 2.4 17.8 2.20001 17.2 2.40001C14.4 3.30001 6.9 3.2 5.5 2C6.8 3.3 7.4 5.5 7.7 7.7C9 7.9 10.3 8 11.7 8C15.8 8 19.8 7.2 21.5 5.5L18.8 2.8Z" fill="currentColor" />
+														<path opacity="0.3" d="M21.2 17.3C21.4 17.9 21.2 18.5 20.8 18.9L18 21.6C15.8 19.4 15.1 12.8 15.8 7.8C18.3 7.4 20.4 6.70001 21.5 5.60001C20.4 7.00001 20.2 14.5 21.2 17.3ZM8 11.7C8 9 7.7 4.2 5.5 2L2.8 4.8C2.4 5.2 2.2 5.80001 2.4 6.40001C2.7 7.40001 3.00001 9.2 3.10001 11.7C3.10001 15.5 2.40001 17.6 2.10001 18C3.20001 16.9 5.3 16.2 7.8 15.8C8 14.2 8 12.7 8 11.7Z" fill="currentColor" />
+													</svg>
+												</span>
+												<!--end::Svg Icon-->
+											</span>
+											<span class="menu-title">{{__('cms.problem_status')}}</span>
+											<span class="menu-arrow"></span>
+										</span>
+										<!--end:Menu link-->
+										<!--begin:Menu sub-->
+										<div class="menu-sub menu-sub-accordion">
+											<!--begin:Menu item-->
+		
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+											@can('Read-Problems-status')
+											<div class="menu-item">
+												<!--begin:Menu link-->
+												<a class="menu-link" href="{{route('problem_status.index')}}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+													<span class="menu-title">{{__('cms.read_problem_status')}}</span>
+												</a>
+												<!--end:Menu link-->
+											</div>
+											@endcan
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+											@can('Create-Problem-status')
+											<div class="menu-item">
+												<!--begin:Menu link-->
+												<a class="menu-link" href="{{route('problem_status.create')}}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+													<span class="menu-title">{{__('cms.create_problem_status')}}</span>
+												</a>
+												<!--end:Menu link-->
+											</div>
+											@endcan
+										
+											<!--end:Menu item-->
+										</div>
+										<!--end:Menu sub-->
+									</div>
+									@endcanany
+
+
+									@canany('Create-user-model','Read-user-models')
+
+									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+										<!--begin:Menu link-->
+										<span class="menu-link">
+											<span class="menu-icon">
+												<!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
+												<span class="svg-icon svg-icon-2">
+													<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<path d="M18 21.6C16.6 20.4 9.1 20.3 6.3 21.2C5.7 21.4 5.1 21.2 4.7 20.8L2 18C4.2 15.8 10.8 15.1 15.8 15.8C16.2 18.3 17 20.5 18 21.6ZM18.8 2.8C18.4 2.4 17.8 2.20001 17.2 2.40001C14.4 3.30001 6.9 3.2 5.5 2C6.8 3.3 7.4 5.5 7.7 7.7C9 7.9 10.3 8 11.7 8C15.8 8 19.8 7.2 21.5 5.5L18.8 2.8Z" fill="currentColor" />
+														<path opacity="0.3" d="M21.2 17.3C21.4 17.9 21.2 18.5 20.8 18.9L18 21.6C15.8 19.4 15.1 12.8 15.8 7.8C18.3 7.4 20.4 6.70001 21.5 5.60001C20.4 7.00001 20.2 14.5 21.2 17.3ZM8 11.7C8 9 7.7 4.2 5.5 2L2.8 4.8C2.4 5.2 2.2 5.80001 2.4 6.40001C2.7 7.40001 3.00001 9.2 3.10001 11.7C3.10001 15.5 2.40001 17.6 2.10001 18C3.20001 16.9 5.3 16.2 7.8 15.8C8 14.2 8 12.7 8 11.7Z" fill="currentColor" />
+													</svg>
+												</span>
+												<!--end::Svg Icon-->
+											</span>
+											<span class="menu-title">{{__('cms.user_model')}}</span>
+											<span class="menu-arrow"></span>
+										</span>
+										<!--end:Menu link-->
+										<!--begin:Menu sub-->
+										<div class="menu-sub menu-sub-accordion">
+										@can('Read-user-models')
+										<div class="menu-item">
+												<!--begin:Menu link-->
+												<a class="menu-link" href="{{route('UsersEquipment.index')}}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+													<span class="menu-title">{{__('cms.read_user_models')}}</span>
+												</a>
+												<!--end:Menu link-->
+											</div>
+										@endcan
+											
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+											@can('Create-user-model')
+											<div class="menu-item">
+												<!--begin:Menu link-->
+												<a class="menu-link" href="{{route('users.create-models')}}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+													<span class="menu-title">{{__('cms.create_user_models')}}</span>
+												</a>
+												<!--end:Menu link-->
+											</div>
+											@endcan
+											
+											<!--end:Menu item-->
+										</div>
+										<!--end:Menu sub-->
+									</div>
+									@endcanany
+
+									
+
+
+									
+							
 								</div>
 								<!--end::Menu-->
 							</div>
@@ -1633,13 +2065,13 @@ License: For each use you must have a valid license purchased only from above li
 						</div>
 						<!--end::sidebar menu-->
 						<!--begin::Footer-->
-
+					
 						<!--end::Footer-->
 					</div>
 					<!--end::Sidebar-->
 					<!--begin::Main-->
-					<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
-
+					<div class="app-main flex-column flex-row-fluid" id="kt_app_main">						
+                       
 <div class="d-flex flex-column flex-column-fluid">
     <!--begin::Toolbar-->
     <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
@@ -1693,14 +2125,14 @@ License: For each use you must have a valid license purchased only from above li
         <!--begin::Content container-->
 		@yield('Content')
 
-
+        
         <!--end::Content container-->
     </div>
 </div>
 
     <!--end::Content-->
 </div>
-
+						
 
 						<!--begin::Footer-->
 
@@ -3415,7 +3847,7 @@ License: For each use you must have a valid license purchased only from above li
 		<!--end::Help drawer-->
 		<!--end::Engage drawers-->
 		<!--begin::Engage toolbar-->
-
+	
 		<!--end::Engage toolbar-->
 		<!--begin::Scrolltop-->
 		<div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">

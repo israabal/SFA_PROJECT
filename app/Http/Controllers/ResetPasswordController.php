@@ -40,6 +40,9 @@ class ResetPasswordController extends Controller
             if ($request->get('guard') == 'admin') {
                 $email =  Admin::where('email', $request->get('email'))->first();
                 $broker = 'admins';
+            }elseif($request->get('guard') == 'user') {
+                $email =  User::where('email', $request->get('email'))->first();
+                $broker = 'users';
             }
             if (!is_null($email)) {
                 $status = Password::broker($broker)->sendResetLink(
@@ -62,8 +65,6 @@ class ResetPasswordController extends Controller
     {
         return view('cms.auth.new-password', ['token' => $token, 'email' => $request->input('email')]);
     }
-
-
     public function resetPassword(Request $request)
     {
         $validator = Validator($request->all(), [
