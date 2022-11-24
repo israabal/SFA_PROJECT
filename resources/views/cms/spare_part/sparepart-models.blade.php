@@ -1,4 +1,8 @@
 @extends('cms.parent');
+@section('title',__('cms.spareparts'))
+@section('page-lg',__('cms.home'))
+@section('main-pg-md',__('cms.spare_part_Management'))
+@section('page-md',__('cms.models'))
 @section('styles')
     
 @endsection
@@ -37,19 +41,19 @@
                         <!--begin::Table body-->
                         <tbody class="text-gray-600 fw-semibold">
 
-                            @foreach ($product_models as $productmodel)
+                            @foreach ($smodels as $smodel)
                             <tr>
-                                <td>{{$productmodel->name}}</td>
+                                <td>{{$smodel->name}}</td>
                                 <td >
                                     <div class="form-group clearfix align-middle">
                                         <div class="icheck-success d-inline">
                                             <input class="form-check-input " type="checkbox"
-                                            onclick="performUpdate('{{$sparepart->id}}','{{$productmodel->id}}')"
-                                                id="models-{{$productmodel->id}}"
-                                              @checked($productmodel->assigned)
+                                            onclick="performUpdate('{{$sparepart->id}}','{{$smodel->id}}')"
+                                                id="models-{{$smodel->id}}"
+                                              @checked($smodel->assigned)
                                               
                                             >
-                                            <label class="form-check-label ms-3"  for="productmodel_{{$productmodel->id}}"></label>
+                                            <label class="form-check-label ms-3"  for="smodel_{{$smodel->id}}"></label>
                                         </div>
                                     </div>
                                 </td>
@@ -74,9 +78,9 @@
 </script>
 <script>
     function performUpdate(sparePartId,id) {
-        axios.put('/cms/spaerparts/product_models/edit', {
+        axios.put('/cms/spaerparts/models/edit', {
             sparePart_id: sparePartId,
-            productmodel_id: id,
+            s_model_id: id,
         })
         .then(function (response) {
             console.log(response);

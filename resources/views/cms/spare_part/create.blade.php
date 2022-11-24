@@ -1,5 +1,5 @@
 @extends('cms.parent')
-@section('title',__('cms.spare_part'))
+@section('title',__('cms.spareparts'))
 @section('page-lg',__('cms.home'))
 @section('main-pg-md',__('cms.spare_part_Management'))
 @section('page-md',__('cms.create_new_spare_part'))
@@ -100,6 +100,39 @@
                         <div class="fv-plugins-message-container invalid-feedback"></div></div>
                    </div>
 
+                   <div class="col-6">
+                    <div class="fv-row mb-7 fv-plugins-icon-container">
+                        <!--begin::Label-->
+                        <label class="fs-6 fw-semibold form-label mt-3">
+                            <span class="required">
+                                {{__('cms.value')}} </span>
+                            <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"  
+                             data-kt-initialized="1"></i>
+                        </label>
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        <input type="text" class="form-control form-control-solid" id="value"  >
+                        <!--end::Input-->
+                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
+               </div>
+            
+
+               <div class="col-6">
+                    <div class="fv-row mb-7 fv-plugins-icon-container">
+                        <!--begin::Label-->
+                        <label class="fs-6 fw-semibold form-label mt-3">
+                            <span class="required">
+                                {{__('cms.unit')}} </span>
+                            <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"  
+                             data-kt-initialized="1"></i>
+                        </label>
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        <input type="text" class="form-control form-control-solid" id="unit"  >
+                        <!--end::Input-->
+                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
+               </div>
+
 
 
                    <div class="col-6">
@@ -113,7 +146,7 @@
                         </label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <input type="text" class="form-control form-control-solid" id="over_view" >
+                        <input type="text" class="form-control form-control-solid" id="Over_view" >
                         <!--end::Input-->
                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                </div>
@@ -139,7 +172,7 @@
                <div class="col-6">
                 <div class="fv-row w-100 flex-md-root fv-plugins-icon-container" data-select2-id="select2-data-131-74d4">
                     <!--begin::Label-->
-                    <label class="required form-label">{{__('cms.languages')}}</label>
+                    <label class="required form-label">{{__('cms.language')}}</label>
 
                     <select class="form-select mb-2 "  id="language_id" >
                         @foreach ($languages as $language)
@@ -149,7 +182,6 @@
                        
                     <!--end::Select2-->
                     <!--begin::Description-->
-                    <div class="text-muted fs-7">Set the product tax class.</div>
                     <!--end::Description-->
                 <div class="fv-plugins-message-container invalid-feedback"></div>
                 </div>
@@ -157,24 +189,39 @@
             </div>
 
                 </div>
+                <div class="row">
+                    <div class="mb-7">
+                        <label class="fs-6 fw-semibold mb-3">
+                            <span>{{__('cms.image')}}</span>
+                            
+                            <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" aria-label="Allowed file types: png, jpg, jpeg." data-bs-original-title="Allowed file types: png, jpg, jpeg." data-kt-initialized="1"></i>
+                        </label>
+                 
+                        <div class="card card-flush py-4">
+                         
+                            <div class="card-body  pt-0">
+                            
+                                {{-- <style>.image-input-placeholder { background-image: url('assets/media/svg/files/blank-image.svg'); } [data-theme="dark"] .image-input-placeholder { background-image: url('assets/media/svg/files/blank-image-dark.svg'); }</style> --}}
+                                <!--end::Image input placeholder-->
+                                {{-- <div class="image-input image-input-empty image-input-outline image-input-placeholder mb-3" data-kt-image-input="true">
+                                    <div class="image-input-wrapper w-150px h-150px"></div> --}}
+                                 
+                                    
+                                        <input type="file" id="image" accept=".png, .jpg, .jpeg" multiple>
+                                        <input type="hidden" name="avatar_remove">
+                       
+                                <div class="text-muted fs-7">Set the product image. Only *.png, *.jpg and *.jpeg image files are accepted</div>
+                                        {{-- </div> --}}
+                             </div>
+                        <!--end::Image input wrapper-->
+                    </div>
+                 </div>
 
      <div class="col-6">
-    {{-- <label class="fs-6 fw-semibold form-label mt-3">
-        <span class="required">
-          models </span>
-        <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"  
-         data-kt-initialized="1"></i>
-    </label> --}}
+ 
 
       <br>
-    {{-- @foreach ($product_models as $product_model)
 
-    <div class="icheck-success d-inline">
-        <input class="form-check-input " type="checkbox" onclick="performUpdate('1')" id="permission_1" checked="">
-        <label class="form-check-label ms-3" for="permission_1">{{$product_model->name}}</label>
-
-    </div>
-    @endforeach --}}
 
             </div>
         
@@ -218,13 +265,20 @@
 
    function performStore() {
         var formData = new FormData();
-        formData.append('OEM_Part_Number',document.getElementById('OEM_Part_Number').value);
-        formData.append('Katun_Part_Number',document.getElementById('Katun_Part_Number').value);
-        formData.append('Local_Number', document.getElementById('Local_Number').value);
+        formData.append('oem_part_number',document.getElementById('OEM_Part_Number').value);
+        formData.append('katun_part_number',document.getElementById('Katun_Part_Number').value);
+        formData.append('local_number', document.getElementById('Local_Number').value);
         formData.append('price', document.getElementById('price').value);
         formData.append('name', document.getElementById('name').value);
-        formData.append('over_view', document.getElementById('over_view').value);
+        formData.append('value', document.getElementById('value').value);
+        formData.append('unit', document.getElementById('unit').value);
+        formData.append('over_view', document.getElementById('Over_view').value);
         formData.append('language_id', document.getElementById('language_id').value);
+        formData.append('image_1', document.getElementById('image').files[0]);
+        formData.append('image_2', document.getElementById('image').files[1]);
+        formData.append('image_3', document.getElementById('image').files[2]);
+        formData.append('image_4', document.getElementById('image').files[3]);
+        formData.append('image_5', document.getElementById('image').files[4]);
 
 
        axios.post('/cms/spareparts', formData)    

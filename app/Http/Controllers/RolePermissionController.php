@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SparePart_ProductModel;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -119,8 +118,4 @@ class RolePermissionController extends Controller
     {
         //
     }
-
-
-
-
 }

@@ -1,4 +1,8 @@
 @extends('cms.parent')
+@section('title',__('cms.spareparts'))
+@section('page-lg',__('cms.home'))
+@section('main-pg-md',__('cms.spare_part_Management'))
+@section('page-md',__('cms.edit_spare_part'))
 @section('styles')
     	<!--begin::Vendor Stylesheets(used for this page only)-->
 		<link href="{{asset('cms/assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
@@ -20,7 +24,7 @@
                     </svg>
                 </span>
                 <!--end::Svg Icon-->
-                <h2>{{__('cms.create_new_subcategory')}}</h2>
+                <h2>{{__('cms.edit_spare_part')}}</h2>
             </div>
             <!--end::Card title-->
         </div>
@@ -30,65 +34,24 @@
             <!--begin::Form-->
             <form id="create-form" class="form fv-plugins-bootstrap5 fv-plugins-framework" >
                 @csrf
-                <div class="row">
-                    <div class="col-6">
-                        <div class="fv-row w-100 flex-md-root fv-plugins-icon-container" data-select2-id="select2-data-131-74d4">
-                            <!--begin::Label-->
-                            <label class="required form-label">{{__('cms.categories')}}</label>
-        
-                            <select class="form-select mb-2 " name="tax" id="category_id" >
-                                @foreach ($categories as $category)
-                                <option value="{{$category->id}}" @if($subcategory->category_id == $category->id) selected @endif>{{$category->name}}
-                                </option>
-                                @endforeach
-                            </select>
-                               
-                            <!--end::Select2-->
-                            <!--begin::Description-->
-                            <div class="text-muted fs-7">Set the product tax class.</div>
-                            <!--end::Description-->
-                        <div class="fv-plugins-message-container invalid-feedback"></div>
-                    </div>
-
-                    </div>
-                </div>
-      
                 <!--begin::Input group-->
-              
                 <!--end::Input group-->
                 <div class="row">
-
                     <div class="col-6">
                            <div class="fv-row mb-7 fv-plugins-icon-container">
                         <!--begin::Label-->
                         <label class="fs-6 fw-semibold form-label mt-3">
-                            <span class="required">{{__('cms.name')}}</span>
+                            <span class="required">{{__('cms.OEM_Part_Number')}}</span>
                             <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" aria-label="Enter the contact's name." data-bs-original-title="Enter the contact's name." data-kt-initialized="1"></i>
                         </label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <input type="text" class="form-control form-control-solid" id="name" value="{{$spare_part->name}}">
+                        <input type="text" class="form-control form-control-solid" value="{{$sparePart->oem_part_number}}" id="OEM_Part_Number" >
                         <!--end::Input-->
                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                  </div>
 
                     <div class="col-6">
-                        <div class="fv-row mb-7 fv-plugins-icon-container">
-                            <!--begin::Label-->
-                            <label class="fs-6 fw-semibold form-label mt-3">
-                                <span class="required">
-                                    {{__('cms.OEM_Part_Number')}} </span>
-                                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" data-kt-initialized="1"></i>
-                            </label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <input type="text" class="form-control form-control-solid" id="OEM_Part_Number" value="{{$spare_part->OEM_Part_Number}}" >
-                            <!--end::Input-->
-                        <div class="fv-plugins-message-container invalid-feedback"></div></div>
-                   </div>
-                </div>
-                <!--begin::Input group-->
-                <div class="col-4">
                         <div class="fv-row mb-7 fv-plugins-icon-container">
                             <!--begin::Label-->
                             <label class="fs-6 fw-semibold form-label mt-3">
@@ -99,11 +62,12 @@
                             </label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input type="text" class="form-control form-control-solid" id="Katun_Part_Number" value="{{$spare_part->Katun_Part_Number}}" name="Katun_Part_Number" >
+                            <input type="text" class="form-control form-control-solid" id="Katun_Part_Number" value="{{$sparePart->katun_part_number}}" name="Katun_Part_Number" >
                             <!--end::Input-->
                         <div class="fv-plugins-message-container invalid-feedback"></div></div>
                    </div>
-                   <div class="col-4">
+
+                   <div class="col-6">
                         <div class="fv-row mb-7 fv-plugins-icon-container">
                             <!--begin::Label-->
                             <label class="fs-6 fw-semibold form-label mt-3">
@@ -114,12 +78,13 @@
                             </label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input type="text" class="form-control form-control-solid" id="Local_Number" name="Local_Number" value="{{$spare_part->Local_Number}}">
+                            <input type="text" class="form-control form-control-solid" value="{{$sparePart->local_number}}" id="Local_Number" name="Local_Number" >
                             <!--end::Input-->
                         <div class="fv-plugins-message-container invalid-feedback"></div></div>
                    </div>
+                
 
-                   <div class="col-4">
+                   <div class="col-6">
                         <div class="fv-row mb-7 fv-plugins-icon-container">
                             <!--begin::Label-->
                             <label class="fs-6 fw-semibold form-label mt-3">
@@ -130,27 +95,146 @@
                             </label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input type="text" class="form-control form-control-solid" id="price" name="price" value="{{$spare_part->price}}">
+                            <input type="text" class="form-control form-control-solid" value="{{$sparePart->price}}" id="price" name="price" >
                             <!--end::Input-->
                         <div class="fv-plugins-message-container invalid-feedback"></div></div>
                    </div>
 
-                </div>
-                <div class="d-flex flex-column mb-8">
-								<label class="fs-6 fw-semibold mb-2">{{__('cms.Over_View')}}</label>
-								<textarea class="form-control form-control-solid" rows="3" name="Over_View" id="Over_View" placeholder="{{__('cms.Over_View')}}">{{$spare_part->Over_View}}</textarea>
-							</div>
 
-           
-                <!--end::Separator-->
+
+                   <div class="col-6">
+                    <div class="fv-row mb-7 fv-plugins-icon-container">
+                        <!--begin::Label-->
+                        <label class="fs-6 fw-semibold form-label mt-3">
+                            <span class="required">
+                                {{__('cms.over_view')}} </span>
+                            <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"  
+                             data-kt-initialized="1"></i>
+                        </label>
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        <input type="text" class="form-control form-control-solid" value="{{$sparePart->over_view}}" id="Over_view" >
+                        <!--end::Input-->
+                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
+               </div>
+
+               <div class="col-6">
+                <div class="fv-row mb-7 fv-plugins-icon-container">
+                    <!--begin::Label-->
+                    <label class="fs-6 fw-semibold form-label mt-3">
+                        <span class="required">
+                            {{__('cms.value')}} </span>
+                        <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"  
+                         data-kt-initialized="1"></i>
+                    </label>
+                    <!--end::Label-->
+                    <!--begin::Input-->
+                    <input type="text" class="form-control form-control-solid" value="{{$sparePart->value}}" id="value" name="value" >
+                    <!--end::Input-->
+                <div class="fv-plugins-message-container invalid-feedback"></div></div>
+           </div>
+
+
+
+           <div class="col-6">
+            <div class="fv-row mb-7 fv-plugins-icon-container">
+                <!--begin::Label-->
+                <label class="fs-6 fw-semibold form-label mt-3">
+                    <span class="required">
+                        {{__('cms.unit')}} </span>
+                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"  
+                     data-kt-initialized="1"></i>
+                </label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-solid" value="{{$sparePart->unit}}" id="unit" >
+                <!--end::Input-->
+            <div class="fv-plugins-message-container invalid-feedback"></div></div>
+       </div>
+            
+
+               <div class="col-6">
+                    <div class="fv-row mb-7 fv-plugins-icon-container">
+                        <!--begin::Label-->
+                        <label class="fs-6 fw-semibold form-label mt-3">
+                            <span class="required">
+                                {{__('cms.name')}} </span>
+                            <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"  
+                             data-kt-initialized="1"></i>
+                        </label>
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        <input type="text" value="{{$sparePart->name}}" class="form-control form-control-solid" id="name"  >
+                        <!--end::Input-->
+                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
+               </div>
+
+
+               <div class="col-6">
+                <div class="fv-row w-100 flex-md-root fv-plugins-icon-container" data-select2-id="select2-data-131-74d4">
+                    <!--begin::Label-->
+                    <label class="required form-label">{{__('cms.language')}}</label>
+
+                    <select class="form-select mb-2 "  id="language_id" >
+                        @foreach ($languages as $language)
+                        <option value="{{$language->id}}">{{$language->lang_name}}</option>
+                        @endforeach
+                    </select>
+                       
+                    <!--end::Select2-->
+                    <!--begin::Description-->
+                    <!--end::Description-->
+                <div class="fv-plugins-message-container invalid-feedback"></div>
+                </div>
+
+            </div>
+
+                </div>
+                <div class="row">
+                    <div class="mb-7">
+                        <label class="fs-6 fw-semibold mb-3">
+                            <span>{{__('cms.image')}}</span>
+                            
+                            <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" aria-label="Allowed file types: png, jpg, jpeg." data-bs-original-title="Allowed file types: png, jpg, jpeg." data-kt-initialized="1"></i>
+                        </label>
+                 
+                        <div class="card card-flush py-4">
+                         
+                            <div class="card-body  pt-0">
+                            
+                                {{-- <style>.image-input-placeholder { background-image: url('assets/media/svg/files/blank-image.svg'); } [data-theme="dark"] .image-input-placeholder { background-image: url('assets/media/svg/files/blank-image-dark.svg'); }</style> --}}
+                                <!--end::Image input placeholder-->
+                                {{-- <div class="image-input image-input-empty image-input-outline image-input-placeholder mb-3" data-kt-image-input="true">
+                                    <div class="image-input-wrapper w-150px h-150px"></div> --}}
+                                 
+                                    
+                                        <input type="file" id="image" accept=".png, .jpg, .jpeg" multiple>
+                                        <input type="hidden" name="avatar_remove">
+                       
+                                <div class="text-muted fs-7">Set the product image. Only *.png, *.jpg and *.jpeg image files are accepted</div>
+                                        {{-- </div> --}}
+                             </div>
+                        <!--end::Image input wrapper-->
+                    </div>
+                 </div>
+
+     <div class="col-6">
+
+
+      <br>
+
+
+            </div>
+        
+             
                 <!--begin::Action buttons-->
                 <div class="d-flex justify-content-center">
                     <!--begin::Button-->
                     <!--end::Button-->
                     <!--begin::Button-->
-                    <button type="button" onclick="performUpdate('{{$spare_part->id}}')"  class="btn btn-primary">
+                    <button type="button" onclick="performUpdate('{{$sparePart->id}}')" class="btn btn-primary">
                         <span class="indicator-label">{{__('cms.save')}}</span>
-                        <span class="indicator-progress">Please wait...
+                        <span class="indicator-progress">{{__('cms.Please_wait')}}...
                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                     </button>
                     <!--end::Button-->
@@ -177,31 +261,39 @@
 
  <script>
     $(function () { bsCustomFileInput.init() });
-  </script>
-  <script>
-    function performUpdate(id) {
-  
-  var formData = new FormData();
-      formData.append('name',document.getElementById('name').value);
-      formData.append('OEM_Part_Number',document.getElementById('OEM_Part_Number').value);
-      formData.append('Katun_Part_Number', document.getElementById('Katun_Part_Number').value);
-      formData.append('Local_Number', document.getElementById('Local_Number').value);
-      formData.append('price', document.getElementById('price').value);
-      formData.append('Over_View', document.getElementById('Over_View').value);
+  </script> 
+<script>
 
-      formData.append('_method','PUT');
+   function performUpdate(id) {
+        var formData = new FormData();
+        formData.append('oem_part_number',document.getElementById('OEM_Part_Number').value);
+        formData.append('katun_part_number',document.getElementById('Katun_Part_Number').value);
+        formData.append('local_number', document.getElementById('Local_Number').value);
+        formData.append('price', document.getElementById('price').value);
+        formData.append('name', document.getElementById('name').value);
+        formData.append('value', document.getElementById('value').value);
+        formData.append('unit', document.getElementById('unit').value);
+        formData.append('over_view', document.getElementById('Over_view').value);
+        formData.append('language_id', document.getElementById('language_id').value);
+        formData.append('image_1',document.getElementById('image').files[0]);
+           formData.append('image_2', document.getElementById('image').files[1]);
+           formData.append('image_3', document.getElementById('image').files[2]);
+          formData.append('image_4', document.getElementById('image').files[3]);
+          formData.append('image_5', document.getElementById('image').files[4]);
 
-      axios.post('/cms/spareparts/{{$spare_part->id}}', formData)
-      .then(function (response) {
-          console.log(response);
-          toastr.success(response.data.message);
-          window.location.href = '/cms/spareparts';
-      })
-      .catch(function (error) {
-          console.log(error.response);
-          toastr.error(error.response.data.message);
-      });
- }
-</script> 
 
+
+        formData.append('_method','PUT');
+
+    axios.post(`/cms/spareparts/${id}`, formData)    
+   .then(function (response) {
+           console.log(response);
+           toastr.success(response.data.message);
+           window.location.href = '/cms/spareparts';
+       })
+       .catch(function (error) {
+           console.log(error.response);
+           toastr.error(error.response.data.message);
+       });}
+</script>
 @endsection

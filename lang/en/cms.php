@@ -3,6 +3,13 @@
 return [
     'view_user' => 'View Users',
     'User_Management' => 'User Management',
+    'problem_management' => 'Problem Management',
+    'problem'=>'Problem',
+    'problems'=>'Problems',
+    'create_problem'=>'Create Problem',
+
+
+
     'users' => 'Users',
     'user_create' => 'Create User',
     'index_user' => 'Read Users',
@@ -60,26 +67,26 @@ return [
     'sign_out' => '  Sign Out ',
     'english' => 'english',
     'arabic' => 'arabic',
-    'categories' => 'Categories',
+    'brands' => 'Brands',
 
-    'categories_list' => 'Read Categories ',
-    'create_category' => ' Create Category ',
-    'edit_category' => ' Edit Category ',
+    'brands_list' => 'Read Brands ',
+    'create_brand' => ' Create Brand ',
+    'edit_brand' => ' Edit Brand ',
     'read_language'=>' Read Language',
     'create_language'=>' Create Language',
 
 
 
-    'Category_image' => 'Category  Image ',
-    'create_new_prand' => 'create New Prand  ',
-    'subcategories' => ' SubCategories ',
-    'subcategories_list' => 'Read Subcategories ',
-    'create_subcategory' => ' Create Subcategory',
-    'subCategory_image' => 'SubCategory Image  ',
-    'create_new_subcategory' => 'create new subcategory  ',
-    'edit_subcategory'=>'Edit SubCategory',
+    'brand_image' => 'brand  Image ',
+    'create_new_brand' => 'create New Brand  ',
+    'categories' => ' Categories ',
+    'categories_list' => 'Read Categories ',
+    'create_category' => ' Create Category',
+    'category_image' => 'Category Image  ',
+    'create_new_category' => 'create new Category  ',
+    'edit_category'=>'Edit Category',
     'edit_model'=>'Edit Model',
-    'category' => 'Category',
+    'brand' => 'Brand',
     'image' => 'image',
     'Serial_Number' => 'Serial Number  ',
     'password' => ' password ',
@@ -89,8 +96,8 @@ return [
     'read_role' => '  Read Role',
     'home' => 'Home',
     'role_Management' => '  Role Management',
+    'brands_Management' => '  Brands Management',
     'categories_Management' => '  Categories Management',
-    'subcategories_Management' => '  SubCategories Management',
 
     'roles' => 'Role ',
     'create_role' => ' Create Role ',
@@ -122,7 +129,7 @@ return [
 'Forgot_Password'=>'Forgot Password',
 'Enter_your_email_to_reset_your_password'=>'Enter your email to reset your password',
 'cancel'=>'Cancel',
-'subcategory'=>'SubCategory',
+'category'=>'Category',
     'app_name'=>'maintenance',
     'user'=>'user',
     'model'=>'Models',
@@ -136,8 +143,14 @@ return [
     'Local_Number'=>'Local Number',
     'price'=>'price',
     'create_new_spare_part'=>'Create New Spare Part',
-    'spare_part'=>'Spare Part ',
+    'edit_spare_part'=>'Edit Spare Part',
+
     'spare_part_Management'=>'  Spare Part Management',
-    'spareparts'=>'Spare parts'
+    'spareparts'=>'Spare Part',
+    'read_sparepart'=>'Read Spare Part',
+    'over_view'=>'Over View',
+    'language'=>'Language',
+    'value'=>'Value',
+    'unit'=>'Unit'
 
 ];

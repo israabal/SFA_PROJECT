@@ -7,13 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
-    use SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -23,8 +21,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'password', 'roles',
-        'image'
+        'password',
+        'region',
     ];
 
     /**
@@ -45,4 +43,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function smodels()
+    {
+
+        return $this->belongsToMany(SModel::class, UserModel::class,'user_id','model_id');
+    }
 }

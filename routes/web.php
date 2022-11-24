@@ -3,20 +3,27 @@
 use App\Http\Controllers\AdminProfileConroller;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\PermissionController;
-
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CityController;
+use App\Http\Controllers\CountryController;
+use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\LanguageController;
-use App\Http\Controllers\ProductModelController;
+use App\Http\Controllers\ProblemController;
+use App\Http\Controllers\ProblemStatusController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\RepairController;
+use App\Http\Controllers\RepairProblemController;
+use App\Http\Controllers\RepairSparePartController;
 use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\SModelController;
 use App\Http\Controllers\SparePartController;
-use App\Http\Controllers\SparePartProductModelController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserModelController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
@@ -42,54 +49,104 @@ Route::group(
         'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
     ],
     function () { //...
+        Route::get('/country/{country_id}', [CountryController::class, 'getCity']);
+
         Route::middleware('guest:admin,user')->group(function () {
             Route::get('{guard}/forgot-password', [ResetPasswordController::class, 'showForgotPassword'])->name('password.request');
             Route::post('forgot-password', [ResetPasswordController::class, 'emailForgetPassword'])->name('password.email');
             Route::get('{guard}/reset-password/{token}', [ResetPasswordController::class, 'showResetPassword'])->name('password.reset');
             Route::post('reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.update');
-        });
 
-        Route::prefix('cms')->middleware('guest:admin,user')->group(function () {
             Route::get('login/{guard}', [AuthController::class, 'showLogin'])->name('cms.login');
             Route::post('/login', [AuthController::class, 'login']);
+            Route::get('/registers', [RegisterController::class, 'registerview'])->name('customer.register');
+            Route::post('/registers/store', [RegisterController::class, 'register'])->name('customer.store');
+        });
+
+
+        Route::prefix('auth')->middleware(['auth:user,admin'])->group(function () {
+
+            Route::get('/profileEdit', [ProfileController::class, 'EditProfile'])->name('profile.edit');
+            Route::put('/profile/Update', [ProfileController::class, 'profileUpdate'])->name('profile.update');
+            Route::get('/editPassword', [AuthController::class, 'editPassword'])->name('admin.editPassword');
+            Route::post('/updatePassword', [AuthController::class, 'updatePassword'])->name('admin.updatePassword');
+            Route::get('/logout', [AuthController::class, 'logout'])->name('admin.logout');
+
+
+        });
+
+        Route::prefix('cms')->middleware(['auth:user,admin'])->group(function () {
+            Route::resource('/smodels', SModelController::class);
+            Route::resource('/spareparts', SparePartController::class);
+
+
+            Route::get('/sparepartss/{spareparts}/models/edit', [SparePartController::class, 'editSparepartModels'])->name('spareparts.edit-models');
+            Route::get('/sparepartss/{spareparts}/details', [SparePartController::class, 'SparepartDetails'])->name('spareparts.details');
+
+            
+            Route::put('/spaerparts/models/edit', [SparePartController::class, 'updateSparepartModels']);
+
+            Route::get('/dashboard', [AuthController::class, 'indexAuth'])->name('auth.dashboard');
+
+
+            Route::get('/UserModel/index', [UserModelController::class, 'indexUserModels'])->name('UsersEquipment.index');
+            Route::get('/UserModel/create', [UserModelController::class, 'editUserModels'])->name('users.create-models');
+            Route::put('/UserModel/store', [UserModelController::class, 'updateUserModels'])->name('users.store-models');
+
+
         });
 
         Route::prefix('cms')->middleware('auth:admin')->group(function () {
 
             Route::resource('/admins', AdminController::class);
             Route::resource('/categories', CategoryController::class);
-            Route::resource('/subcategories', SubCategoryController::class);
+            Route::resource('/brands', BrandController::class);
             Route::resource('/users', UserController::class);
-            Route::resource('/productmodels', ProductModelController::class);
-            Route::resource('/spareparts', SparePartController::class);
-
-
 
             Route::resource('roles', RoleController::class);
-            Route::get('/admin/editPassword', [AuthController::class, 'editPassword'])->name('admin.editPassword');
-            Route::post('/admin/updatePassword', [AuthController::class, 'updatePassword'])->name('admin.updatePassword');
+
             Route::resource('permissions/role', RolePermissionController::class);
             Route::resource('permissions', PermissionController::class);
             Route::resource('languages', LanguageController::class);
-
-            Route::get('/sparepartss/{spareparts}/models/edit', [SparePartController::class, 'editSparepartModels'])->name('spareparts.edit-models');
-            Route::put('/spaerparts/product_models/edit', [SparePartController::class, 'updateSparepartModels']);
-
-
-
-
-            Route::get('/admin/logout', [AuthController::class, 'logout'])->name('admin.logout');
 
 
             Route::post('user/change-status/{id}', [UserController::class, 'UserActive'])->name('users.UserActive');
         });
         Route::prefix('cms')->middleware('auth:admin,user')->group(function () {
-            Route::get('/profileEdit', [AdminProfileConroller::class, 'EditProfile'])->name('profile.edit');
-            Route::put('/profile/Update', [AdminProfileConroller::class, 'profileUpdate'])->name('profile.update');
-            Route::get('/editPassword', [AuthController::class, 'editPassword'])->name('auth.editPassword');
-            Route::post('/updatePassword', [AuthController::class, 'updatePassword'])->name('auth.updatePassword');
-            Route::get('/dashboard', [AuthController::class, 'indexAuth'])->name('auth.dashboard');
-            Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+ 
+
+
+            
+
+            Route::resource('/countries', CountryController::class);
+            Route::resource('/cities', CityController::class);
+           
+
+            Route::resource('/problem_status', ProblemStatusController::class);
+            Route::post('/problem_status/change-status/{id}', [ProblemStatusController::class, 'ProblemStatusActive'])->name('ProblemStatus.status');
+
+
+
+
+        
+            Route::resource('problem',ProblemController::class);
+            Route::resource('repairs',RepairController::class);
+            Route::resource('repair_problems',RepairProblemController::class);
+            Route::resource('repair_spare_part', RepairSparePartController::class);
+
+
+            Route::prefix('cms')->middleware('auth:user')->group(function () {
+                //customer
+                Route::get('/UserModel/index', [UserModelController::class, 'indexUserModels'])->name('UsersEquipment.index');
+                Route::get('/UserModel/create', [UserModelController::class, 'editUserModels'])->name('users.create-models');
+                Route::put('/UserModel/store', [UserModelController::class, 'updateUserModels'])->name('users.store-models');
+            });
+
+            Route::prefix('cms')->middleware(['auth:user'])->group(function () {
+                Route::get('verify', [EmailVerificationController::class, 'notice'])->name('verification.notice');
+                Route::get('send-verification', [EmailVerificationController::class, 'send'])->name('verification.send');
+                Route::get('verify/{id}/{hash}', [EmailVerificationControllerr::class, 'verify'])->middleware('signed')->name('verification.verify');
+            });
 
         });
     }

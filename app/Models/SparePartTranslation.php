@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class SparePartTranslation extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name',
+        'over_view',
+        'language_id'
+        
+    ];
     
     public function language(){
         return $this->belongsto(Language::class ,'language_id','id');

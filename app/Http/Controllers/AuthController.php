@@ -34,11 +34,13 @@ class AuthController extends Controller
             'password' => 'required|string|min:3',
             'remember' => 'required|boolean',
         ]);
-
         $guard = session('guard');
+
         $credentials = ['email' => $request->get('email'), 'password' => $request->get('password')];
         if (!$validator->fails()) {
+
             if (Auth::guard($guard)->attempt($credentials, $request->get('remember'))) {
+
                 return response()->json(['message' => 'Logged in successfully'], Response::HTTP_OK);
             } else {
                 return response()->json(['message' => 'Error credentials, please try again'], Response::HTTP_BAD_REQUEST);

@@ -19,12 +19,12 @@ class Admin extends Authenticatable
     public function categories(){
         return $this ->hasmany(Category::class ,'admin_id','id');
     }
-    public function subcategories(){
-        return $this ->hasmany(SubCategory::class ,'admin_id','id');
+    public function brands(){
+        return $this ->hasmany(Brand::class ,'admin_id','id');
     }
 
     public function models(){
-        return $this ->hasmany(ProductModel::class ,'admin_id','id');
+        return $this ->hasmany(SModel::class ,'admin_id','id');
     }
     protected $fillable = [
         'name',
