@@ -129,6 +129,37 @@ License: For each use you must have a valid license purchased only from above li
                                     autocomplete="off" class="form-control bg-transparent" />
                                 <!--end::Email-->
                             </div>
+                            <div class="fv-row mb-8">
+                                <!--begin::Email-->
+                                <select class="form-select form-select-solid form-select-lg" data-control="select2" id="country_id" data-select2-id="select2-data-10-uyhn">
+                            <option value="-1" data-select2-id="select2-data-12-0cmm">{{__('cms.choose')}}</option>
+                            @foreach($countries as $country)
+                            <option value="{{$country->id}}"> 
+                                  @if (app()->getLocale()=='ar')
+                                        {{$country->name_ar}}
+                                        @else
+                                        {{$country->name_en}}
+                                        @endif </option>
+                            @endforeach
+                        </select>
+                                <!--end::Email-->
+                            </div>
+                          
+                            <div class="fv-row mb-8">
+                                <!--begin::Email-->
+                         
+                        <select class="form-select form-select-solid form-select-lg" data-control="select2" id="city_id" data-select2-id="select2-data-10-uyhn" disabled>
+                            <option value="-1" selected>Select Country</option>
+
+                        </select>
+                          
+                            </div>
+                            <div class="fv-row mb-8">
+                                <!--begin::Email-->
+                                <input type="text" placeholder="{{__('cms.region')}}" name="region" id="region"
+                                    autocomplete="off" class="form-control bg-transparent" />
+                                <!--end::Email-->
+                            </div>
                             <!--end::Input group=-->
                             <div class="fv-row mb-3">
                                 <!--begin::Password-->
@@ -185,18 +216,56 @@ $(function() {
     bsCustomFileInput.init()
 });
 </script>
+<script type="text/javascript">
+    $('#country_id').on('change', function() {
+        if (this.value == -1) {
+            $('#city_id').empty();
+            $("#city_id").append('<option value=-1>Select Country</option>');
+            $('#city_id').attr('disabled', true);
+        } else {
+            getCity(this.value);
+        }
+    });
+    function getCity(country_id) {
+var locale = document.getElementsByTagName("html")[0].getAttribute("lang");
+
+axios.get('/country/' + country_id)
+    .then(function(response) {
+        console.log(response);
+        console.log(response.data.cities);
+        $('#city_id').empty();
+        if (response.data.cities.length > 0) {
+            $.each(response.data.cities, function(i, item) {
+                console.log('Id: ' + item['id']);
+                if (locale == 'ar') {
+                    $('#city_id').append(new Option(item['name_ar'], item['id']));
+                } else {
+                    $('#city_id').append(new Option(item['name_en'], item['id']));
+                }
+                $('#city_id').attr('disabled', false);
+            });
+        } else {
+            $('#city_id').empty();
+            $('#city_id').attr('disabled', true);
+        }
+    })
+    .catch(function(error) {});
+}
+</script>
 <script>
 function performStore() {
     var formData = new FormData();
     formData.append('name', document.getElementById('name').value);
     formData.append('email', document.getElementById('email').value);
+    formData.append('country_id', document.getElementById('country_id').value);
+    formData.append('city_id', document.getElementById('city_id').value);
+    formData.append('region', document.getElementById('region').value);
     formData.append('password', document.getElementById('password').value);
-    axios.post('/cms/registers/store', formData)
+    axios.post('/registers/store', formData)
         .then(function(response) {
             console.log(response);
             toastr.success(response.data.message);
             document.getElementById('create-form').reset();
-            
             window.location.href = '/cms/verify';
         })
         .catch(function(error) {

@@ -157,8 +157,6 @@ License: For each use you must have a valid license purchased only from above li
                                     <!--end::Indicator progress-->
                                 </button>
                             </div>
-                            <div class="text-gray-500 text-center fw-semibold fs-6">{{__('cms.Not_aMember_yet?')}}'
-								<a href="{{route('customer.register')}}" class="link-primary">{{__('cms.Sign_up')}}</a></div>
                             <!--end::Submit button-->
                         </form>
                         <!--end::Form-->
@@ -194,7 +192,7 @@ function login() {
         password: document.getElementById('password').value,
         remember: document.getElementById('remember').checked,
     };
-    axios.post('/cms/login', data).then(function(response) {
+    axios.post('/login', data).then(function(response) {
             console.log('200');
             window.location.href = '/cms/dashboard';
         })

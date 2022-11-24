@@ -51,6 +51,7 @@ class CategoryPolicy
         : $this->deny('Don\'t have Permission ', 403);
 }
 
+
     /**
      * Determine whether the user can update the model.
      *

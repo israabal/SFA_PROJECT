@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Symfony\Component\HttpFoundation\Response;
-
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Response;
 use Spatie\Permission\Models\Role;
+
 
 class AdminController extends Controller
 {
@@ -17,16 +17,11 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-     public function __construct()
-     {
-      $this-> authorizeResource(Admin::class, 'admin');
-     }
     public function index()
     {
         $admins = Admin::all();
         return response()->view('cms.admin.index', ['admins' => $admins]);
-       }
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -36,8 +31,7 @@ class AdminController extends Controller
     public function create()
     {
         $roles=Role::where('guard_name','admin')->get();
-        return response()->view('cms.admin.create',['roles'=>$roles]);
-    }
+        return response()->view('cms.admin.create',['roles'=>$roles]);    }
 
     /**
      * Store a newly created resource in storage.
@@ -48,50 +42,50 @@ class AdminController extends Controller
     public function store(Request $request)
     {
 
-            //
-            $validator = Validator($request->all(), [
-                'name' => 'required|string|min:3',
-                'email' => 'required|email|unique:admins',
-                'active'=> 'required | boolean',
-                'role_id'=>'required',
-                'image' => 'required|image|mimes:png,jpg,jpeg',
-            ]);
-            if (!$validator->fails()) {
-            $admin = new Admin();
-            $admin->name = $request->input('name');
-            $admin->email = $request->input('email');
-            $admin->active = $request->input('active');
-            $admin->password = Hash::make(12345);
-            if ($request->hasFile('image')) {
+        //
+        $validator = Validator($request->all(), [
+            'name' => 'required|string|min:3',
+            'email' => 'required|email|unique:admins',
+            'active'=> 'required | boolean',
+            'role_id'=>'required|numeric|exists:roles,id',
+            'image' => 'required|image|mimes:png,jpg,jpeg',
+        ]);
+        if (!$validator->fails()) {
+        $admin = new Admin();
+        $admin->name = $request->input('name');
+        $admin->email = $request->input('email');
+        $admin->active = $request->input('active');
+        $admin->password = Hash::make(12345);
+        if ($request->hasFile('image')) {
 
-                $file = $request->file('image');
-                $imagetitle =  time().'_admin_image.' . $file->getClientOriginalExtension();
-                $status = $request->file('image')->storePubliclyAs('images/admins', $imagetitle);
-                $imagePath = 'images/admins/' . $imagetitle;
-                $admin->image = $imagePath;}
+            $file = $request->file('image');
+            $imagetitle =  time().'_admin_image.' . $file->getClientOriginalExtension();
+            $status = $request->file('image')->storePubliclyAs('images/admins', $imagetitle);
+            $imagePath = 'images/admins/' . $imagetitle;
+            $admin->image = $imagePath;}
 
 
 
-            $isSaved = $admin->save();
+        $isSaved = $admin->save();
 
-            if($isSaved){
-                $admin->assignRole(Role::findById($request->get('role_id')));
-            }
-            return response()->json(
-                ['message' => $isSaved ? __('cms.create_success') : __('cms.create_failed')],
-                $isSaved ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST
-            );
+        if($isSaved){
+            $admin->assignRole(Role::findById($request->get('role_id')));
         }
-        else {
-            return response()->json(
-                ['message' => $validator->getMessageBag()->first()],
-                Response::HTTP_BAD_REQUEST,
-            );
-
-
-
-     }
+        return response()->json(
+            ['message' => $isSaved ? __('cms.create_success') : __('cms.create_failed')],
+            $isSaved ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST
+        );
     }
+    else {
+        return response()->json(
+            ['message' => $validator->getMessageBag()->first()],
+            Response::HTTP_BAD_REQUEST,
+        );
+
+
+
+ }
+}
 
     /**
      * Display the specified resource.

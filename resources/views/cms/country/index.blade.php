@@ -38,7 +38,7 @@
                         <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                         
                             <th class="min-w-200px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="Product: activate to sort column ascending" style="width: 206.828px;">{{__('cms.countries')}}</th>
-
+                            <th class="min-w-200px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="Product: activate to sort column ascending" style="width: 206.828px;">{{__('cms.countries_en')}}</th>
                             <th class="text-end min-w-100px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="SKU: activate to sort column ascending" style="width: 103.562px;">{{__('cms.JOINED_DATE')}}</th>
                             <th class="text-end min-w-100px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="SKU: activate to sort column ascending" style="width: 103.562px;"></th>
 
@@ -61,7 +61,11 @@
                             <!--end::Category=-->
                             <!--begin::SKU=-->
                             <td class="text-left pe-0">
-                                <span class="fw-bold">{{$country->name}}</span>
+                                <span class="fw-bold">{{$country->name_ar}}</span>
+                            </td>
+
+                            <td class="text-left pe-0">
+                                <span class="fw-bold">{{$country->name_en}}</span>
                             </td>
                             <!--end::SKU=-->
                             <!--begin::Qty=-->

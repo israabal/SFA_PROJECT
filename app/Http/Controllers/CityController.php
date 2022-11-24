@@ -11,14 +11,14 @@ class CityController extends Controller
    
     public function index()
     {  
-        $country = Country::orderBy('name', 'ASC')->get();
+        $country = Country::orderBy('name_ar', 'ASC')->get();
         $cities = City::all();
         return response()->view('cms.city.index', ['cities' => $cities , 'country'=>$country]);
     }
 
     public function create()
     {
-        $countries = Country::orderBy('name', 'ASC')->get();
+        $countries = Country::orderBy('name_ar', 'ASC')->get();
         return response()->view('cms.city.create', ['countries'=>$countries]);
     }
     /**
@@ -30,12 +30,14 @@ class CityController extends Controller
     public function store(Request $request)
     {
     $validator = Validator($request->all(), [
-        'name' => 'required|string|min:3',
-        'country_id' => 'required|numaric|exists:countries,id',
+        'name_ar' => 'required|string|min:3',
+        'name_en' => 'required|string|min:3',
+        'country_id' => 'required|exists:countries,id',
         ]);
         if (!$validator->fails()) {
             $city = new City();
-            $city->name = $request->input('name');
+            $city->name_ar = $request->input('name_ar');
+            $city->name_en = $request->input('name_en');
             $city->country_id = $request->input('country_id');
             $isSaved = $city->save();
 
@@ -63,11 +65,13 @@ class CityController extends Controller
     public function update(Request $request, City $city)
     {
         $validator = Validator($request->all(), [
-            'name' => 'requierd|string|min:3',
-            'country_id' => 'required',
-        ]);
+            'name_ar' => 'required|string|min:3',
+            'name_en' => 'required|string|min:3',
+            'country_id' => 'required|exists:countries,id',
+            ]);
         if (!$validator->fails()) {
-            $city->name = $request->input('name');
+            $city->name_ar = $request->input('name_ar');
+            $city->name_en = $request->input('name_en');
             $city->country_id = $request->input('country_id');
             $isSaved = $city->save();
             return response()->json(
@@ -76,8 +80,7 @@ class CityController extends Controller
         } else {
             return response()->json(['message' => $validator->getMessageBag()->first()], Response::HTTP_BAD_REQUEST);
         }
-    }
-    
+    } 
     public function destroy(City $city)
     {
         $deleted = $city->delete();

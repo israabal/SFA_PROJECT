@@ -3,6 +3,11 @@
 @section('page-lg',__('cms.home'))
 @section('main-pg-md',__('cms.categories_Management'))
 @section('page-md',__('cms.create_category'))
+@section('styles')
+    	<!--begin::Vendor Stylesheets(used for this page only)-->
+		<link href="{{asset('cms/assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
+		<!--end::Vendor Stylesheets-->
+@endsection
 @section('Content')
 <div class="col-xl-12">
     <!--begin::Contacts-->
@@ -19,7 +24,7 @@
                     </svg>
                 </span>
                 <!--end::Svg Icon-->
-                <h2>{{__('cms.create_new_prand')}}</h2>
+                <h2>{{__('cms.create_new_category')}}</h2>
             </div>
             <!--end::Card title-->
         </div>
@@ -29,11 +34,52 @@
             <!--begin::Form-->
             <form id="create-form" class="form fv-plugins-bootstrap5 fv-plugins-framework" >
                 @csrf
+       
+      
                 <!--begin::Input group-->
+              
+                <!--end::Input group-->
+                <div class="row">
+
+                    <div class="col-6">
+                           <div class="fv-row mb-7 fv-plugins-icon-container">
+                        <!--begin::Label-->
+                        <label class="fs-6 fw-semibold form-label mt-3">
+                            <span class="required">{{__('cms.name')}}</span>
+                            <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" aria-label="Enter the contact's name." data-bs-original-title="Enter the contact's name." data-kt-initialized="1"></i>
+                        </label>
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        <input type="text" class="form-control form-control-solid" id="name" >
+                        <!--end::Input-->
+                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                 </div>
+
+                    <div class="col-6">
+                        <div class="fv-row mb-7 fv-plugins-icon-container">
+                            <!--begin::Label-->
+                            <label class="fs-6 fw-semibold form-label mt-3">
+                                <span class="required">
+                                    {{__('cms.Serial_Number')}} </span>
+                                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" aria-label="Enter the contact's email." data-bs-original-title="Enter the contact's email." data-kt-initialized="1"></i>
+                            </label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input type="number" class="form-control form-control-solid" id="code" >
+                            <!--end::Input-->
+                        <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                   </div>
+
+
+                </div>
+                <!--begin::Input group-->
+             
+             <div class="row">
                 <div class="mb-7">
                     <!--begin::Label-->
                     <label class="fs-6 fw-semibold mb-3">
-                        <span>{{__('cms.Category_image')}}</span>
+                        <span>{{__('cms.image')}}</span>
+                        
                         <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" aria-label="Allowed file types: png, jpg, jpeg." data-bs-original-title="Allowed file types: png, jpg, jpeg." data-kt-initialized="1"></i>
                     </label>
                     <!--end::Label-->
@@ -74,7 +120,6 @@
                             </div>
                             <!--end::Image input-->
                             <!--begin::Description-->
-                            <div class="text-muted fs-7">Set the product image. Only *.png, *.jpg and *.jpeg image files are accepted</div>
                             <!--end::Description-->
                         </div>
                         <!--end::Card body-->
@@ -82,44 +127,19 @@
                
                     <!--end::Image input wrapper-->
                 </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
-                <div class="fv-row mb-7 fv-plugins-icon-container">
-                    <!--begin::Label-->
-                    <label class="fs-6 fw-semibold form-label mt-3">
-                        <span class="required">{{__('cms.name')}}</span>
-                        <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" aria-label="Enter the contact's name." data-bs-original-title="Enter the contact's name." data-kt-initialized="1"></i>
-                    </label>
-                    <!--end::Label-->
+             </div>
+             <div class="d-flex justify-content-begin">
+                <!--begin::Switch-->
+                <label class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
                     <!--begin::Input-->
-                    <input type="text" class="form-control form-control-solid" id="name" >
+                    <input class="form-check-input" id="active" type="checkbox" checked="checked">
                     <!--end::Input-->
-                <div class="fv-plugins-message-container invalid-feedback"></div></div>
-            
-                <div class="fv-row mb-7 fv-plugins-icon-container">
                     <!--begin::Label-->
-                    <label class="fs-6 fw-semibold form-label mt-3">
-                        <span class="required">
-                            {{__('cms.Serial_Number')}} </span>
-                        <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" aria-label="Enter the contact's email." data-bs-original-title="Enter the contact's email." data-kt-initialized="1"></i>
-                    </label>
+                    <span class="form-check-label fw-semibold text-muted">{{__('cms.active')}}</span>
                     <!--end::Label-->
-                    <!--begin::Input-->
-                    <input type="text" class="form-control form-control-solid" id="code" >
-                    <!--end::Input-->
-                <div class="fv-plugins-message-container invalid-feedback"></div></div>
-                <div class="d-flex justify-content-begin">
-                    <!--begin::Switch-->
-                    <label class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
-                        <!--begin::Input-->
-                        <input class="form-check-input" id="active" type="checkbox" checked="checked">
-                        <!--end::Input-->
-                        <!--begin::Label-->
-                        <span class="form-check-label fw-semibold text-muted">{{__('cms.active')}}</span>
-                        <!--end::Label-->
-                    </label>
-                    <!--end::Switch-->
-                </div>
+                </label>
+                <!--end::Switch-->
+            </div>
                 <!--end::Separator-->
                 <!--begin::Action buttons-->
                 <div class="d-flex justify-content-center">
@@ -143,7 +163,15 @@
 </div>
 @endsection
 @section('scripts')
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{asset('cms/assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+<script src="{{asset('cms/assets/plugins/custom/formrepeater/formrepeater.bundle.js')}}"></script>
+<script src="{{asset('cms/assets/js/custom/apps/ecommerce/catalog/save-product.js')}}"></script>
+<script src="{{asset('cms/assets/js/widgets.bundle.js')}}"></script>
+<script src="{{asset('cms/assets/js/custom/widgets.js')}}"></script>
+<script src="{{asset('cms/assets/js/custom/apps/chat/chat.js')}}"></script>
+<script src="{{asset('cms/assets/js/custom/utilities/modals/upgrade-plan.js')}}"></script>
+<script src="{{asset('cms/assets/js/custom/utilities/modals/create-app.js')}}"></script>
+<script src="{{asset('cms/assets/js/custom/utilities/modals/users-search.js')}}"></script>
 
  <script>
     $(function () { bsCustomFileInput.init() });
@@ -151,14 +179,17 @@
 <script>
 
    function performStore() {
+    
         var formData = new FormData();
+
         formData.append('name', document.getElementById('name').value);
         formData.append('code', document.getElementById('code').value);
         formData.append('active', document.getElementById('active').checked ? 1:0);
 
         formData.append('image',document.getElementById('category_image').files[0]);
 
-       axios.post('/cms/categories', formData)         
+       axios.post('/cms/categories', formData)    
+            
        .then(function (response) {
            console.log(response);
            toastr.success(response.data.message);

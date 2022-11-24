@@ -46,8 +46,12 @@
                             <option value="" data-select2-id="select2-data-12-0cmm">{{__('cms.choose')}}</option>
                             @foreach($countries as $country)
                                     <option value="{{$country->id}}">
-                                        {{$country->name}}
-                                    </option>
+                                    @if (app()->getLocale()=='ar')
+                                        {{$country->name_ar}}
+                                        @else
+                                        {{$country->name_en}}
+                                        @endif
+                            </option>                               
                                     @endforeach
             </select>
                         <!--end::Input-->
@@ -59,12 +63,28 @@
                            <div class="fv-row mb-7 fv-plugins-icon-container">
                         <!--begin::Label-->
                         <label class="fs-6 fw-semibold form-label mt-3">
-                            <span class="required">{{__('cms.name')}}</span>
+                            <span class="required">{{__('cms.name_ar')}}</span>
                             <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" data-bs-original-title="Enter the  name." data-kt-initialized="1"></i>
                         </label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <input type="text" class="form-control form-control-solid" id="name" >
+                        <input type="text" class="form-control form-control-solid" id="name_ar" >
+                        <!--end::Input-->
+                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                 </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                           <div class="fv-row mb-7 fv-plugins-icon-container">
+                        <!--begin::Label-->
+                        <label class="fs-6 fw-semibold form-label mt-3">
+                            <span class="required">{{__('cms.name_en')}}</span>
+                            <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" data-bs-original-title="Enter the  name." data-kt-initialized="1"></i>
+                        </label>
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        <input type="text" class="form-control form-control-solid" id="name_en" >
                         <!--end::Input-->
                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                  </div>
@@ -108,7 +128,8 @@
 
    function performStore() {
         var formData = new FormData();
-        formData.append('name',document.getElementById('name').value);
+        formData.append('name_ar',document.getElementById('name_ar').value);
+        formData.append('name_en',document.getElementById('name_en').value);
         formData.append('country_id',document.getElementById('country_id').value);
        axios.post('/cms/cities', formData)    
        .then(function (response) {

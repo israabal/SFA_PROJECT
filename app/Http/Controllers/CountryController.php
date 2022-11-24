@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\City;
 use App\Models\Country;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,11 +28,13 @@ class CountryController extends Controller
     public function store(Request $request)
     {
         $validator = Validator($request->all(), [
-            'name' => 'required|string|min:3',
+            'name_en' => 'required|string|min:3',
+            'name_ar' => 'required|string|min:3',
         ]);
         if (!$validator->fails()) {
             $country = new Country();
-            $country->name = $request->input('name');
+            $country->name_en = $request->input('name_en');
+            $country->name_ar = $request->input('name_ar');
             $isSaved = $country->save();
             return response()->json(
              ['message' => $isSaved ? 'Saved successfully' : 'Save failed!'],
@@ -45,7 +49,11 @@ class CountryController extends Controller
     {
         return response()->view('cms.country.edit', ['country' => $country]);
     }
-
+    public function getCity($country_id)
+    {
+        $cities = City::where('country_id', $country_id)->get();
+        return response()->json(['cities' => $cities]);
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -55,10 +63,12 @@ class CountryController extends Controller
     public function update(Request $request, Country $country)
     {
         $validator = Validator($request->all(), [
-            'name' => 'nullable|string|min:3',           
+            'name_en' => 'nullable|string|min:3', 
+            'name_ar' => 'nullable|string|min:3',           
         ]);
         if (!$validator->fails()) {
-            $country->name = $request->input('name');
+            $country->name_en = $request->input('name_en');
+            $country->name_ar = $request->input('name_ar');
             $isSaved = $country->save();
             return response()->json(
                 ['message' => $isSaved ? 'Updated Successfully' : 'Update failed!'],

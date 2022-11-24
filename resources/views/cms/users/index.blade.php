@@ -313,11 +313,11 @@ function performDelete(id, reference) {
 }
 
 function changeStatus(id) {
-    axios.post('/user/change-status/' + id)
+    axios.post('/cms/user/change-status/' + id)
         .then(function(response) {
             console.log(response);
             toastr.success(response.data.message);
-            window.location.href = '/users';
+            window.location.href = '/cms/users';
         })
         .catch(function(error) {
             console.log(error.response);

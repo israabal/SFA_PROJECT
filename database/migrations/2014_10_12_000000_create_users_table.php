@@ -21,7 +21,12 @@ return new class extends Migration
             $table->string('password');
             $table->string('image')->default('not-found');;
             $table->enum('user_type',['agent', 'technical', 'customers']);
-            $table->boolean('status')->default(false);
+
+
+
+
+            $table->string('region');
+            $table->boolean('status')->default(true);
             $table->rememberToken();
             $table->timestamps();
             $table->SoftDeletes();
