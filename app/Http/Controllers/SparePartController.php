@@ -20,6 +20,9 @@ class SparePartController extends Controller
      */
     public function index()
     {
+
+        $this->authorize('viewAny', SparePart::class);
+
         $spareparts = SparePart::withCount('smodels')->withCount('spareparttranslation')->get();
 
         return response()->view('cms.spare_part.index', ['spareparts' => $spareparts]);     }
@@ -31,6 +34,8 @@ class SparePartController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', SparePart::class);
+
         $languages=Language::all();
         $models = SModel::where('active', '=', true)->get();
        return response()->view('cms.spare_part.create', ['models' => $models,'languages'=>$languages]);
@@ -44,6 +49,8 @@ class SparePartController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', SparePart::class);
+
         $validator = Validator($request->all(), [
             'oem_part_number' => 'required|string|min:3',
             'katun_part_number' => 'required|string|min:3',
@@ -195,6 +202,8 @@ class SparePartController extends Controller
     public function edit($id)
     {
         $sparePart=SparePart::where('id',$id)->first();
+        $this->authorize('update', $sparePart);
+
 
         $languages = Language::where('active', '=', true)->get();
         return response()->view('cms.spare_part.edit', ['sparePart' => $sparePart, 'languages' => $languages]);
@@ -217,8 +226,6 @@ class SparePartController extends Controller
             'price'=>'required|string|min:3',
             'value'=>'required|string|min:3',
             'unit'=>'required|string|min:3',
-
-
             'language_id'=>'required|numeric|exists:languages,id',
             'image_1' =>'nullable', 'image|mimes:png,jpg,jpeg',
             'image_2' => 'nullable', 'image|mimes:png,jpg,jpeg',
@@ -233,6 +240,8 @@ class SparePartController extends Controller
 
         if (!$validator->fails()) {
             $sparePart=SparePart::where('id',$id)->first();
+            $this->authorize('update', $sparePart);
+
 
             $sparePart->oem_part_number = $request->input('oem_part_number');
             $sparePart->katun_part_number = $request->input('katun_part_number');
@@ -276,6 +285,8 @@ class SparePartController extends Controller
     public function destroy($id)
     {
         $sparePart=SparePart::where('id',$id)->first();
+        $this->authorize('delete', $sparePart);
+
 
         $deleted = $sparePart->delete();
         if ($deleted) {

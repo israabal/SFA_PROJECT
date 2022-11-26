@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Problem extends Model
 {
     use HasFactory;
-    public function product_models()
+    public function models()
     {
-        return $this->hasOne(SModel::class);
+        return $this->hasOne(SModel::class,'id','model_id');
     }
 
    public function user()

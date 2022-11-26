@@ -15,13 +15,15 @@ class RepairController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-    {
+
+        $this->authorize('viewAny', Repair::class);
+
         $users=User::where('user_type', 'technical')->get();
         $repair=Repair::with('problem')->get();
         return response()->view('cms.repair.index', compact( 'users','repair'));
-    }
 }
 
     /**
@@ -32,6 +34,8 @@ class RepairController extends Controller
     public function create()
 
         {
+            $this->authorize('create', Repair::class);
+
             $problem=Problem::all();
             $users=User::where('user_type','technical')->get();
 
@@ -49,6 +53,8 @@ class RepairController extends Controller
     {
 
         //
+        $this->authorize('create', Repair::class);
+
         $validator = Validator($request->all(), [
             'problem_id' => 'required',
             'technecal_id' => 'required',
@@ -110,6 +116,8 @@ if($repair==null){
     {
         //
         $repair = Repair::findOrFail($id);
+        $this->authorize('update', $repair);
+
         $users=User::where('user_type','technical')->get();
         $problem=Problem::all();
 
@@ -136,6 +144,8 @@ if($repair==null){
         ]);
         if (!$validator->fails()) {
             $repair = Repair::findOrFail($id);
+            $this->authorize('update', $repair);
+
             $repair->problem_id = $request->input('problem_id');
             $repair->technecal_id = $request->input('technecal_id');
             $repair->app_status = $request->input('app_status');
@@ -171,6 +181,8 @@ if($repair==null){
     public function destroy( $id)
     {
         $repair=Repair::where('id',$id)->first();
+        $this->authorize('delete', $repair);
+
         $isDeleted = $repair->delete();
         return response()->json(['message' => 'Deleted successfully'], $isDeleted ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
     }

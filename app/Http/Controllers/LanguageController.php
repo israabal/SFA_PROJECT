@@ -13,6 +13,12 @@ class LanguageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+    public function __construct()
+    {
+        $this->authorizeResource(Language::class, 'language');
+    }
     public function index()
     {
         $languages=Language::all();

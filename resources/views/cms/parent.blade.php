@@ -79,7 +79,7 @@ License: For each use you must have a valid license purchased only from above li
 						<!--end::sidebar mobile toggle-->
 						<!--begin::Mobile logo-->
 						<div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
-							<a href="../../demo1/dist/index.html" class="d-lg-none">
+							<a href="{{route('auth.dashboard')}}" class="d-lg-none">
 								<img alt="Logo" src="{{asset('cms/assets/media/logos/default-small.svg')}}" class="h-30px" />
 							</a>
 						</div>
@@ -962,7 +962,7 @@ License: For each use you must have a valid license purchased only from above li
 								<div class="app-navbar-item ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
 									<!--begin::Menu wrapper-->
 									<div class="cursor-pointer symbol symbol-35px symbol-md-40px" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-										<img src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" alt="user" />
+										<img src="{{Storage::url(auth()->user()->image)}}" alt="user" />
 									</div>
 									<!--begin::User account menu-->
 									<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px" data-kt-menu="true">
@@ -971,14 +971,16 @@ License: For each use you must have a valid license purchased only from above li
 											<div class="menu-content d-flex align-items-center px-3">
 												<!--begin::Avatar-->
 												<div class="symbol symbol-50px me-5">
-													<img alt="Logo" src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" />
+													<img alt="Logo" src="{{Storage::url(auth()->user()->image)}}" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Username-->
 												<div class="d-flex flex-column">
-													<div class="fw-bold d-flex align-items-center fs-5">Max Smith
-													<span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Pro</span></div>
-													<a href="#" class="fw-semibold text-muted text-hover-primary fs-7">max@kt.com</a>
+													<div class="fw-bold d-flex align-items-center fs-5">{{auth()->user()->name}}
+													</div>
+													<a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{auth()->user()->email}}</a>
+													<a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{auth()->user()->roles[0]->name}}</a>
+
 												</div>
 												<!--end::Username-->
 											</div>
@@ -989,7 +991,7 @@ License: For each use you must have a valid license purchased only from above li
 										<!--end::Menu separator-->
 										<!--begin::Menu item-->
 										<div class="menu-item px-5">
-											<a href="../../demo1/dist/account/overview.html" class="menu-link px-5">{{__('cms.My_Profile')}}</a>
+											<a href="{{route('profile.edit')}}" class="menu-link px-5">{{__('cms.My_Profile')}}</a>
 										</div>
 										<!--end::Menu item-->
 										<!--begin::Menu item-->
@@ -1001,9 +1003,16 @@ License: For each use you must have a valid license purchased only from above li
 										<div class="menu-item px-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="left-start" data-kt-menu-offset="-15px, 0">
 											<a href="#" class="menu-link px-5">
 												<span class="menu-title position-relative">{{__('cms.language')}}
-												<span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">{{__('cms.english')}}
+												<span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">
+												@if (app()->isLocale('en'))
+												{{__('cms.english')}}
 												<img class="w-15px h-15px rounded-1 ms-2" src="{{asset('cms/assets/media/flags/united-states.svg')}}" alt="" /></span></span>
-											</a>
+											@else
+											{{__('cms.arabic')}}
+												<img class="w-15px h-15px rounded-1 ms-2" src="{{asset('cms/assets/media/flags/saudi-arabia.svg')}}" alt="" /></span></span>
+											
+												@endif
+										</a>
 											<!--begin::Menu sub-->
 											<div class="menu-sub menu-sub-dropdown w-175px py-4">
 												<!--begin::Menu item-->
@@ -1073,7 +1082,7 @@ License: For each use you must have a valid license purchased only from above li
 						<!--begin::Logo-->
 						<div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
 							<!--begin::Logo image-->
-							<a href="../../demo1/dist/index.html">
+							<a href="{{route('auth.dashboard')}}">
 								<img alt="Logo" src="{{asset('cms/assets/media/logos/default-dark.svg')}}" class="h-25px app-sidebar-logo-default" />
 								<img alt="Logo" src="{{asset('cms/assets/media/logos/default-small.svg')}}" class="h-20px app-sidebar-logo-minimize" />
 							</a>
@@ -1778,6 +1787,7 @@ License: For each use you must have a valid license purchased only from above li
 
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
+									
 											@can('Read-Problems')
 											<div class="menu-item">
 												<!--begin:Menu link-->
@@ -2087,7 +2097,7 @@ License: For each use you must have a valid license purchased only from above li
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                     <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">
-                        <a href="../../demo1/dist/index.html"
+                        <a href="{{route('auth.dashboard')}}"
                             class="text-muted text-hover-primary">@yield('page-lg')</a>
                     </li>
                     <!--end::Item-->
@@ -4999,7 +5009,7 @@ License: For each use you must have a valid license purchased only from above li
 													<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a card holder's name"></i>
 												</label>
 												<!--end::Label-->
-												<input type="text" class="form-control form-control-solid" placeholder="" name="card_name" value="Max Doe" />
+												<input type="text" class="form-control form-control-solid" placeholder="" name="card_name" value="max" />
 											</div>
 											<!--end::Input group-->
 											<!--begin::Input group-->
@@ -5310,17 +5320,17 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" />
+											<img alt="Pic" src="{{Storage::url(auth()->user()->image)}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
 										<div class="ms-6">
 											<!--begin::Name-->
-											<a href="#" class="d-flex align-items-center fs-5 fw-bold text-dark text-hover-primary">Max Smith
-											<span class="badge badge-light fs-8 fw-semibold ms-2">Software Enginer</span></a>
+											<a href="#" class="d-flex align-items-center fs-5 fw-bold text-dark text-hover-primary">{{auth()->user()->name}}
+											<span class="badge badge-light fs-8 fw-semibold ms-2">{{auth()->user()->roles[0]->name}}</span></a>
 											<!--end::Name-->
 											<!--begin::Email-->
-											<div class="fw-semibold text-muted">max@kt.com</div>
+											<div class="fw-semibold text-muted">{{auth()->user()->email}}</div>
 											<!--end::Email-->
 										</div>
 										<!--end::Details-->
@@ -5814,21 +5824,7 @@ License: For each use you must have a valid license purchased only from above li
 											<!--end::Info-->
 										</a>
 										<!--end::User-->
-										<!--begin::User-->
-										<a href="#" class="d-flex align-items-center p-3 rounded bg-state-light bg-state-opacity-50 mb-1">
-											<!--begin::Avatar-->
-											<div class="symbol symbol-35px symbol-circle me-5">
-												<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" />
-											</div>
-											<!--end::Avatar-->
-											<!--begin::Info-->
-											<div class="fw-semibold">
-												<span class="fs-6 text-gray-800 me-2">Max Smith</span>
-												<span class="badge badge-light">Software Enginer</span>
-											</div>
-											<!--end::Info-->
-										</a>
-										<!--end::User-->
+								
 										<!--begin::User-->
 										<a href="#" class="d-flex align-items-center p-3 rounded bg-state-light bg-state-opacity-50 mb-1">
 											<!--begin::Avatar-->
@@ -5950,13 +5946,16 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end::Checkbox-->
 												<!--begin::Avatar-->
 												<div class="symbol symbol-35px symbol-circle">
-													<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" />
+													<img alt="Pic" src="{{Storage::url(auth()->user()->image)}}" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Details-->
-												<div class="ms-5">
-													<a href="#" class="fs-5 fw-bold text-gray-900 text-hover-primary mb-2">Max Smith</a>
-													<div class="fw-semibold text-muted">max@kt.com</div>
+												<div class="d-flex flex-column">
+													<div class="fw-bold d-flex align-items-center fs-5">{{auth()->user()->name}}
+													</div>
+													<a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{auth()->user()->email}}</a>
+													<a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{auth()->user()->roles[0]->name}}</a>
+
 												</div>
 												<!--end::Details-->
 											</div>
@@ -6629,14 +6628,17 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" />
+											<img alt="Pic" src="{{Storage::url('images/auth/1669458484_auth_image.png')}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
-										<div class="ms-5">
-											<a href="#" class="fs-5 fw-bold text-gray-900 text-hover-primary mb-2">Max Smith</a>
-											<div class="fw-semibold text-muted">max@kt.com</div>
-										</div>
+										<div class="d-flex flex-column">
+													<div class="fw-bold d-flex align-items-center fs-5">{{auth()->user()->name}}
+													</div>
+													<a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{auth()->user()->email}}</a>
+													<a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{auth()->user()->roles[0]->name}}</a>
+
+												</div>
 										<!--end::Details-->
 									</div>
 									<!--end::Details-->

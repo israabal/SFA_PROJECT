@@ -82,6 +82,9 @@
                                         <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users"
                                             rowspan="1" colspan="1" aria-label="User: activate to sort column ascending"
                                             style="width: 206.375px;">{{__('cms.users')}}</th>
+                                            <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users"
+                                            rowspan="1" colspan="1" aria-label="User: activate to sort column ascending"
+                                            style="width: 206.375px;">{{__('cms.roles')}}</th>
                                         {{-- <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users" rowspan="1" colspan="1" aria-label="Role: activate to sort column ascending" style="width: 125px;">{{__('cms.Role')}}
                                         </th>
                                         <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users"
@@ -133,6 +136,7 @@
                                             </div>
                                             <!--begin::User details-->
                                         </td>
+                                        <td> {{$user->roles[0]->name ??""}}</td>
                                         <!--end::User=-->
                                         <!--begin::Role=-->
                                         {{-- <td>Users</td> --}}
@@ -174,7 +178,7 @@
                                                     </span>
                                                     <!--end::Svg Icon-->
                                                 </a>
-                                                <a href="#" onclick="confirmDelete('{{$user->id}}', this)"
+                                                <a onclick="confirmDelete('{{$user->id}}', this)"
                                                     class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
                                                     <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                                                     <span class="svg-icon svg-icon-3">
@@ -300,7 +304,7 @@ function confirmDelete(id, reference) {
 }
 
 function performDelete(id, reference) {
-    axios.delete('/users/' + id)
+    axios.delete('/cms/users/' + id)
         .then(function(response) {
             console.log(response);
             toastr.success(response.data.message);

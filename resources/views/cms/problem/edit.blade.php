@@ -139,17 +139,17 @@
 </script>
 <script>
  function performUpdate() {
-        axios.put('/cms/problem/{{$problem->id}}', {
+        axios.put('/cms/problems/{{$problem->id}}', {
             d_log: document.getElementById('d_log').value,
         d_lat: document.getElementById('d_lat').value,
         details: document.getElementById('details').value,
-        product_models_id: document.getElementById('product_models_id').value,
+        model_id: document.getElementById('product_models_id').value,
 
         })
         .then(function (response) {
             console.log(response);
             toastr.success(response.data.message);
-            window.location.href = '/cms/problem'
+            window.location.href = '/cms/problems'
         })
         .catch(function (error) {
             console.log(error.response);

@@ -82,7 +82,8 @@
                             <!--end::SKU=-->
                             <!--begin::Qty=-->
                             <td class="text-end pe-0" data-order="16">
-                                <span class="fw-bold ms-3">{{$brand->created_at}}</span>
+                                <span class="fw-bold ms-3">
+                                    {{date('D/m/Y', strtotime($brand->created_at))}}</span>
                             </td>
                             <td class="text-end pe-0"><span class="badge @if($brand->active) bg-success @else bg-danger @endif">{{$brand->active_status}}</span>
 

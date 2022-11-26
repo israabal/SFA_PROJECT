@@ -52,6 +52,9 @@ class RolePermissionController extends Controller
             if ($role->hasPermissionTo($permission)) {
                 $role->revokePermissionTo($permission);
             } else {
+
+
+
                 $role->givePermissionTo($permission);
             }
 

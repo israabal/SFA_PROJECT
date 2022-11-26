@@ -17,8 +17,15 @@ class SModelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    // public function __construct()
+    // {
+    //     $this->authorizeResource(SModel::class, 'sModel');
+    // }
     public function index()
     {
+        $this->authorize('viewAny', SModel::class);
+
         $models = SModel::all();
         return response()->view('cms.smodel.index', ['models' => $models]); 
        }
@@ -30,6 +37,9 @@ class SModelController extends Controller
      */
     public function create()
     {
+
+        $this->authorize('create', SModel::class);
+
         $brands = Brand::where('active', '=', true)->get();
         $categories = Category::where('active', '=', true)->get();
 
@@ -43,6 +53,8 @@ class SModelController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', SModel::class);
+
         $validator = Validator($request->all(), [
             'name' => 'required|string|min:3',
             'brand_id' => 'required|numeric|exists:brands,id',
@@ -102,6 +114,8 @@ class SModelController extends Controller
     public function edit( $id)
     {
         $sModel=SModel::where('id',$id)->first();
+        $this->authorize('update', $sModel);
+
 
         $categories = Category::where('active', '=', true)->get();
         $brands = Brand::where('active', '=', true)->get();
@@ -117,6 +131,7 @@ class SModelController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $validator = Validator($request->all(), [
             'name' => 'required|string|min:3',
             'brand_id' => 'required|numeric|exists:brands,id',
@@ -129,7 +144,11 @@ class SModelController extends Controller
             'image_5' => 'nullable', 'image|mimes:png,jpg,jpeg',
         ]);
         if (!$validator->fails()) {
-            $sModel=SModel::where('id',$id)->first();
+            $sModel = SModel::findOrFail($id);
+
+            // $sModel=SModel::where('id',$id)->first();
+            $this->authorize('update', $sModel);
+
 
             $sModel->name = $request->input('name');
             $sModel->brand_id = $request->input('brand_id');
@@ -162,7 +181,7 @@ class SModelController extends Controller
     {
         $sModel=SModel::where('id',$id)->first();
 
-
+        $this->authorize('delete', $sModel);
         $deleted = $sModel->delete();
         if ($deleted) {
             $this->deleteImages($sModel);

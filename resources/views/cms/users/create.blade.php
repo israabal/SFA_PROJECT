@@ -125,12 +125,69 @@
                             <option value="agent"> {{__('cms.agent')}} </option>
                             <option value="technical"> {{__('cms.technical')}}</option>
                             <option value="customers"> {{__('cms.customers')}}</option>
+                          
                         </select>
                         <!--end::Input-->
                         <div class="fv-plugins-message-container invalid-feedback"></div>
                         <!--end::Hint-->
                     </div>
+
+                    
                 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-2 col-form-label fw-semibold fs-6">
+                        <span class="required">{{__('cms.roles')}}</span>
+                        <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" aria-label="Enter the contact's name." data-bs-original-title="Enter the contact's name." data-kt-initialized="1"></i>
+                    </label>
+                    <!--end::Label-->
+                    <div class="col-lg-8 fv-row">
+                        <!--begin::Input-->
+                        <select id="user_role"
+                        name="role_id" aria-label={{__('cms.role')}} data-control="select2" data-placeholder={{__('cms.roles')}}class="form-select form-select-solid form-select-lg">
+                           <option value="">{{__('cms.roles')}} </option>
+                           @foreach ($roles as $role)
+                           <option value="{{ $role->id }}">{{$role->name}}</option>
+                           @endforeach
+    
+                
+                       </select>
+               
+                        <div class="form-text">"{{__('cms.select-guard')}}"</div>
+                    </div> 
+
+                    
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
                 <div class="row mb-6">
                     <!--begin::Label-->
                     <label class="col-lg-2 col-form-label  fw-semibold fs-6">
@@ -259,7 +316,9 @@
 </script>
 <script>
     function performStore() {
+        console.log(document.getElementById('user_role').value);
         var formData = new FormData();
+        formData.append('user_role', document.getElementById('user_role').value);
         formData.append('name', document.getElementById('name').value);
         formData.append('email', document.getElementById('email').value);
         formData.append('image', document.getElementById('user_image').files[0]);
@@ -267,6 +326,7 @@
         formData.append('country_id', document.getElementById('country_id').value);
         formData.append('city_id', document.getElementById('city_id').value);
         formData.append('region', document.getElementById('region').value);
+
         axios.post('/cms/users', formData)
             .then(function(response) {
                 console.log(response);

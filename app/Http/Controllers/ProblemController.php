@@ -16,11 +16,17 @@ class ProblemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->authorizeResource(Problem::class, 'problem');
+    }
     public function index()
     {
         $problems=Problem::all();
+        // $models=SModel::all();
 
-        return response()->view('cms.problem.index', ['problems'=>$problems]);
+        return response()->view('cms.problem.index', compact('problems'));
     }
 
     /**
@@ -134,7 +140,7 @@ class ProblemController extends Controller
         $problem = Problem::findOrFail($id);
         $problem->d_log = $request->input('d_log');
         $problem->d_lat = $request->input('d_lat');
-        $problem->product_models_id = $request->input('product_models_id');
+        $problem->model_id = $request->input('model_id');
         $problem->details = $request->input('details');
 
 

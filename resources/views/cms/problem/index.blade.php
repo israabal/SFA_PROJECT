@@ -41,10 +41,10 @@
 
 
 
-                             <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users"  aria-label="Two-step: activate to sort column ascending" style="width: 125px;">{{__('cms.user')}}</th>
+                             {{-- <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users"  aria-label="Two-step: activate to sort column ascending" style="width: 125px;">{{__('cms.user')}}</th> --}}
 
 
-                            <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users"  aria-label="Joined Date: activate to sort column ascending"  >{{__('cms.product_model')}}</th>
+                            <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users"  aria-label="Joined Date: activate to sort column ascending"  >{{__('cms.model')}}</th>
 
 
 
@@ -75,7 +75,7 @@
 
 
 
-                        <td class="d-flex align-items-center">
+                        {{-- <td class="d-flex align-items-center">
                             <!--begin:: Avatar -->
 
                             <!--end::Avatar-->
@@ -84,11 +84,12 @@
                                 <a href="../../demo1/dist/apps/user-management/users/view.html" class="text-gray-800 text-hover-primary mb-1">  {{ $problem->user->user_type ??'NULL' }}</a>
                                 </div>
                             <!--begin::User details-->
-                        </td>
+                        </td> --}}
 
                         <!--end::Two step=-->
                         <!--begin::Joined-->
                         <td> {{Auth::user()->name}}</td>
+                        {{-- <td> {{$problem->models->name}}</td> --}}
 
                         <td> {{$problem->d_log}}</td>
                         <td>   {{$problem->d_lat}}</td>
@@ -180,7 +181,7 @@
     }
 
     function performDelete(id, reference) {
-        axios.delete('/cms/problem/'+id)
+        axios.delete('/cms/problems/'+id)
         .then(function (response) {
             console.log(response);
             toastr.success(response.data.message);

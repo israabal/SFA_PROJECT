@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use Str;
 
 class UserController extends Controller
@@ -30,8 +32,10 @@ class UserController extends Controller
     }
     public function create()
     {
+        $roles=Role::where('guard_name','user')->get();
+
         $countries =  DB::table('countries')->get();
-        return response()->view('cms.users.create', ['countries' => $countries]);
+        return response()->view('cms.users.create', ['countries' => $countries,'roles'=>$roles]);
     }
    
 
@@ -43,6 +47,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->input('user_role'));
         $validator = Validator($request->all(), [
             'name' => 'required|string|min:3',
             'email' => 'required|email|unique:users,email',
@@ -50,6 +55,8 @@ class UserController extends Controller
             'country_id' => 'required',
             'city_id' => 'required',
             'region' => 'required|string|min:3',
+         'user_role'=>'required|numeric|exists:roles,id',
+
             'image' => 'required|image|mimes:png,jpg,jpeg',
         ]);
         if (!$validator->fails()) {
@@ -63,13 +70,18 @@ class UserController extends Controller
             $user->password = Hash::make(Str::random(8));
             $user->admin_id=auth()->user()->getAuthIdentifier();
             if ($request->hasFile('image')) {
-                $file = $request->file('image');
-                $imagetitle =  time() . '_auth_image.' . $file->getClientOriginalExtension();
-                $status = $request->file('image')->storePubliclyAs('images/auth', $imagetitle);
-                $imagePath = 'images/auth/' . $imagetitle;
-                $user->image = $imagePath;
+                $imagetitle =  time() . '_'. str_replace(' ','',$user->name).'.'. $request->file('image')->extension();
+                $request->file('image')->storePubliclyAs('users', $imagetitle,['disk'=>'public']);
+                $user->image = 'users/'.$imagetitle;
             }
             $isSaved = $user->save();
+             if($isSaved){
+               $role= Role::where('id',$request->get('user_role'))->first();
+                $user->assignRole($role);
+            }
+     
+
+        
             return response()->json(
                 ['message' => $isSaved ? 'Saved successfully' : 'Save failed!'],
                 $isSaved ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST
@@ -114,14 +126,15 @@ class UserController extends Controller
             $user->city_id = $request->input('city_id');
             $user->region = $request->input('region');
             $user->admin_id=auth()->user()->getAuthIdentifier();
+
+
             if ($request->hasFile('image')) {
                 Storage::delete($user->image);
-                $file = $request->file('image');
-                $imageName = time() . '_auth_image.' . $file->getClientOriginalExtension();
-                $request->file('image')->storePubliclyAs('images/auth', $imageName);
-                $imagePath = 'images/auth/' . $imageName;
-                $user->image = $imagePath;
+                $imagetitle =  time() . '_'. str_replace(' ','',$user->name).'.'. $request->file('image')->extension();
+                $request->file('image')->storePubliclyAs('users', $imagetitle,['disk'=>'public']);
+                $user->image = 'users/'.$imagetitle;
             }
+
             $isSaved = $user->save();
             return response()->json(
                 ['message' => $isSaved ? 'Updated Successfully' : 'Update failed!'],
@@ -145,7 +158,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $deleted = $user->delete();
-        if ($deleted) {
+        if ($deleted && $user->image!=null) {
             Storage::delete($user->image);
         }
         return response()->json(

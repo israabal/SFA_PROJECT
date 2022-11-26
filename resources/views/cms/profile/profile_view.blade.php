@@ -170,11 +170,11 @@ function performUpdate() {
         formData.append('image', document.getElementById('auth_image').files[0]);
     }
     formData.append('_method', 'PUT');
-    axios.post('/cms/profile/Update/', formData)
+    axios.post('/auth/profile/Update/', formData)
         .then(function(response) {
             console.log(response);
             toastr.success(response.data.message);
-            window.location.href = '/cms/profileEdit';
+            window.location.href = '/auth/profileEdit';
         })
         .catch(function(error) {
             console.log(error.response);

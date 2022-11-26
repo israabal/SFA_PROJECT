@@ -26,11 +26,11 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-// $allPermission= Permission::where('guard_name','admin')->get();
-// Role::create([
-//     'name'=>'Super-Admin',
-//     'guard_name'=>'admin'
-// ])->givePermissionTo($allPermission);
+$allPermission= Permission::where('guard_name','admin')->get();
+Role::create([
+    'name'=>'Super-Admin',
+    'guard_name'=>'admin'
+])->givePermissionTo($allPermission);
         Admin::create([
             'name' => 'Test',
             'email' =>'baraa@gmail.com',

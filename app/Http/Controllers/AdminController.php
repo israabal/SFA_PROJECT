@@ -6,6 +6,7 @@ use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Spatie\Permission\Models\Permission;
 use Symfony\Component\HttpFoundation\Response;
 use Spatie\Permission\Models\Role;
 
@@ -56,15 +57,12 @@ class AdminController extends Controller
         $admin->email = $request->input('email');
         $admin->active = $request->input('active');
         $admin->password = Hash::make(12345);
+
         if ($request->hasFile('image')) {
-
-            $file = $request->file('image');
-            $imagetitle =  time().'_admin_image.' . $file->getClientOriginalExtension();
-            $status = $request->file('image')->storePubliclyAs('images/admins', $imagetitle);
-            $imagePath = 'images/admins/' . $imagetitle;
-            $admin->image = $imagePath;}
-
-
+            $imagetitle =  time() . '_'. str_replace(' ','',$admin->name).'.'. $request->file('image')->extension();
+            $request->file('image')->storePubliclyAs('admins', $imagetitle,['disk'=>'public']);
+            $admin->image = 'admins/'.$imagetitle;
+        }
 
         $isSaved = $admin->save();
 
@@ -130,15 +128,12 @@ class AdminController extends Controller
             $admin->email = $request->input('email');
             $admin->active = $request->input('active');
 
+   
             if ($request->hasFile('image')) {
-                //Delete admin previous image.
                 Storage::delete($admin->image);
-                //Save new image.
-                $file = $request->file('image');
-                $imageName = time() . '_admin_image.' . $file->getClientOriginalExtension();
-                $request->file('image')->storePubliclyAs('images/admins', $imageName);
-                $imagePath = 'images/admins/' . $imageName;
-                $admin->image = $imagePath;
+                $imagetitle =  time() . '_'. str_replace(' ','',$admin->name).'.'. $request->file('image')->extension();
+                $request->file('image')->storePubliclyAs('admins', $imagetitle,['disk'=>'public']);
+                $admin->image = 'admins/'.$imagetitle;
             }
             $isSaved = $admin->save();
             return response()->json(
