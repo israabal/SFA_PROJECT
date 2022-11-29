@@ -53,7 +53,7 @@
                     <!--end::Table head-->
                     <!--begin::Table body-->
                     <tbody class="fw-semibold text-gray-600">
-                        @foreach ($problem_status as $problem_statu)
+                        @foreach ($problem_statuss as $problem_status)
 
                   
                     <tr class="odd">
@@ -65,18 +65,18 @@
                             <!--end::Category=-->
                             <!--begin::SKU=-->
                             <td class="text-left pe-0">
-                                <span class="fw-bold">{{$problem_statu->name_ar}}</span>
+                                <span class="fw-bold">{{$problem_status->name_ar}}</span>
                             </td>
 
                             <td class="text-left pe-0">
-                                <span class="fw-bold">{{$problem_statu->name_en}}</span>
+                                <span class="fw-bold">{{$problem_status->name_en}}</span>
                             </td>
-                            <td><span class="badge @if($problem_statu->status==true) badge badge-light-success @else badge-light-danger @endif">{{$problem_statu->status}}</span>
+                            <td><span class="badge @if($problem_status->status==true) badge badge-light-success @else badge-light-danger @endif">{{$problem_status->status}}</span>
 
                             <!--end::SKU=-->
                             <!--begin::Qty=-->
                             <td class="text-end pe-0" data-order="16">
-                                <span class="fw-bold ms-3">{{$problem_statu->created_at}}</span>
+                                <span class="fw-bold ms-3">{{$problem_status->created_at}}</span>
                             </td>
 
                             <td class="text-end pe-0">
@@ -85,7 +85,7 @@
                             <td>
                                 <div class="d-flex justify-content-end flex-shrink-0">
                                     
-                                    <a  href="{{route('problem_status.edit', $problem_statu->id )}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                    <a  href="{{route('problem_status.edit', $problem_status->id )}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                         <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                                         <span class="svg-icon svg-icon-3">
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -95,7 +95,7 @@
                                         </span>
                                         <!--end::Svg Icon-->
                                     </a>
-                                    <a href="#" onclick="confirmDelete('{{$problem_statu->id}}', this)"  class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
+                                    <a href="#" onclick="confirmDelete('{{$problem_status->id}}', this)"  class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
                                         <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                                         <span class="svg-icon svg-icon-3">
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -106,13 +106,13 @@
                                         </span>
                                         <!--end::Svg Icon-->
                                     </a>
-                                    @if($problem_statu->status==1)
-                                                <a onclick="changeStatus('{{$problem_statu->id}}')"
+                                    @if($problem_status->status==1)
+                                                <a onclick="changeStatus('{{$problem_status->id}}')"
                                                     class="btn btn-icon btn btn-danger btn-active-color-primary btn-sm"
                                                     title=" فعال الان">
                                                     <i class="fa-solid fa-lock"></i> </a>
                                                 @else
-                                                <a onclick="changeStatus('{{$problem_statu->id}}')"
+                                                <a onclick="changeStatus('{{$problem_status->id}}')"
                                                     class="btn btn-icon btn btn-success btn-active-color-primary btn-sm"
                                                     title="غير فعال">
                                                     <i class="fa-solid fa-unlock"></i>

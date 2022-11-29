@@ -1,5 +1,5 @@
 @extends('cms.parent')
-@section('title',__('cms.repair_problem'))
+@section('title',__('cms.repair_problems'))
 @section('page-lg',__('cms.home'))
 @section('main-pg-md',__('cms.repair_problem_management'))
 @section('page-md',__('cms.create_or_update_repair_problem'))
@@ -35,33 +35,35 @@
                 @csrf
 
                 <!--begin::Input group-->
-            <!--begin::Input group-->
+                <!--begin::Input group-->
 
                 <!--end::Input group-->
                 <div class="row">
 
                     <div class="row mb-6">
-                           <div class="fv-row mb-7 fv-plugins-icon-container">
-                        <!--begin::Label-->
-                        <label class="fs-6 fw-semibold form-label mt-3">
-                            <span class="required">{{__('cms.details')}}</span>
-                            <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" aria-label="Enter the details." data-bs-original-title="Enter the details." data-kt-initialized="1"></i>
-                        </label>
-                        <!--end::Label-->
-                        <!--begin::Input-->
+                        <div class="fv-row mb-7 fv-plugins-icon-container">
+                            <!--begin::Label-->
+                            <label class="fs-6 fw-semibold form-label mt-3">
+                                <span class="required">{{__('cms.details')}}</span>
+                                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"
+                                    aria-label="Enter the details." data-bs-original-title="Enter the details."
+                                    data-kt-initialized="1"></i>
+                            </label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
 
-                        <textarea name="details" class="form-control form-control-solid" id="details"
-                        value="{{  $repairProblem->details ??'' }}"
-                        ></textarea>
-
-
-
+                            <textarea name="details" class="form-control form-control-solid" id="details"
+                                value="{{  $repairProblem->details ??'' }}">{{ $repair_problem->details ??'' }}</textarea>
 
 
 
 
-                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
-                 </div>
+
+
+
+                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                        </div>
+                    </div>
 
 
 
@@ -83,21 +85,27 @@
                         <div class="col-6">
                             <select class="form-select form-select-solid form-select-lg" data-control="select2"
                                 name="app_status" id="app_status" data-select2-id="select2-data-10-uyhn">
-                                <option selected disabled data-select2-id="select2-data-12-0cmm">{{__('cms.choose')}}</option>
-                                <option value="Spare parts maintenance"> {{__('cms.Spare parts maintenance')}}</option>
-                                <option value="no maintenance required"> {{__('cms.no maintenance required')}} </option>
-                                <option value="software maintenance"> {{__('cms.software maintenance')}}</option>
-                                <option value="not suitable for use"> {{__('cms.not suitable for use')}}</option>
+                                <option selected disabled data-select2-id="select2-data-12-0cmm">{{__('cms.choose')}}
+                                </option>
+                                @foreach ($statuss as $status)
+                                <option value="{{ $status->id}}"@if($repair_problem!=null)
+                                    @selected($repair_problem->problem_status_id==$status->id )
+                                @endif >
+                                    @if (app()->isLocale('ar')) {{$status->name_ar}}
+                                    @else{{$status->name_en}}
+                                    @endif
+                                </option>
 
+                                @endforeach
 
                             </select>
                             <!--end::Input-->
 
 
-                                <!--end::Input-->
-                                <div class="fv-plugins-message-container invalid-feedback"></div>
-                                <!--end::Hint-->
-                            </div>
+                            <!--end::Input-->
+                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                            <!--end::Hint-->
+                        </div>
                     </div>
 
 
@@ -115,27 +123,27 @@
 
 
 
-                        <div class="fv-plugins-message-container invalid-feedback"></div>
-                        <!--end::Hint-->
+                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                    <!--end::Hint-->
+                </div>
+
+                <div class="row mb-6">
+
+                    <!--end::Separator-->
+                    <!--begin::Action buttons-->
+                    <div class="d-flex justify-content-end">
+                        <!--begin::Button-->
+                        <!--end::Button-->
+                        <!--begin::Button-->
+                        <button type="button" onclick="performStore('{{ $problem->id }}')" class="btn btn-primary"
+                            data-kt-users-modal-action="submit">
+                            <span class="indicator-label">{{__('cms.Save')}}</span>
+                            <span class="indicator-progress">{{__('cms.Please_wait')}}...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        </button>
+                        <!--end::Button-->
                     </div>
-
-                    <div class="row mb-6">
-
-                            <!--end::Separator-->
-                            <!--begin::Action buttons-->
-                            <div class="d-flex justify-content-end">
-                                <!--begin::Button-->
-                                <!--end::Button-->
-                                <!--begin::Button-->
-                                <button type="button" onclick="performStore()" class="btn btn-primary"
-                                    data-kt-users-modal-action="submit">
-                                    <span class="indicator-label">{{__('cms.Save')}}</span>
-                                    <span class="indicator-progress">{{__('cms.Please_wait')}}...
-                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                </button>
-                                <!--end::Button-->
-                            </div>
-                            <!--end::Action buttons-->
+                    <!--end::Action buttons-->
             </form>
             <!--end::Form-->
         </div>
@@ -152,13 +160,12 @@
     });
 </script>
 <script>
-
-function performStore() {
+    function performStore(id) {
     axios.post('/cms/repair_problems', {
         app_status: document.getElementById('app_status').value,
-        problem_id: {{ $problemId }},
-        repair_id: {{ $repair->id }},
+        problem_id:id,
         details: document.getElementById('details').value,
+        repair_id:{{ $repair->id}}
 
     })
     .then(function (response) {

@@ -1,17 +1,21 @@
 <?php
    namespace App\Http\Controllers;
-    
-   use App\Models\ProductModel;
+
 use App\Models\SModel;
 use App\Models\UserModel;
-use App\Models\UsersEquipment;
    use Illuminate\Http\Request;
    use Symfony\Component\HttpFoundation\Response;
-   
- 
+
+
 
 class UserModelController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->authorizeResource(UserModel::class, 'usermodel');
+    }
  public function indexUserModels()
 {
             $user_models = UserModel::all();
@@ -69,5 +73,5 @@ class UserModelController extends Controller
             $isDeleted = $models->delete();
         }
     }
-    
+
 

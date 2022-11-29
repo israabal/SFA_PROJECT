@@ -17,6 +17,11 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->authorizeResource(Admin::class, 'admin');
+    }
     public function index()
     {
         $admins = Admin::all();
@@ -30,8 +35,9 @@ class AdminController extends Controller
      */
     public function create()
     {
-        $roles=Role::where('guard_name','admin')->get();
-        return response()->view('cms.admin.create',['roles'=>$roles]);    }
+        $roles = Role::where('guard_name', 'admin')->get();
+        return response()->view('cms.admin.create', ['roles' => $roles]);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -46,46 +52,39 @@ class AdminController extends Controller
         $validator = Validator($request->all(), [
             'name' => 'required|string|min:3',
             'email' => 'required|email|unique:admins',
-            'active'=> 'required | boolean',
-            'role_id'=>'required|numeric|exists:roles,id',
+            'active' => 'required | boolean',
+            'role_id' => 'required|numeric|exists:roles,id',
             'image' => 'required|image|mimes:png,jpg,jpeg',
         ]);
         if (!$validator->fails()) {
-        $admin = new Admin();
-        $admin->name = $request->input('name');
-        $admin->email = $request->input('email');
-        $admin->active = $request->input('active');
-        $admin->password = Hash::make(12345);
-        if ($request->hasFile('image')) {
+            $admin = new Admin();
+            $admin->name = $request->input('name');
+            $admin->email = $request->input('email');
+            $admin->status = $request->input('active');
+            $admin->password = Hash::make(12345);
 
-            $file = $request->file('image');
-            $imagetitle =  time().'_admin_image.' . $file->getClientOriginalExtension();
-            $status = $request->file('image')->storePubliclyAs('images/admins', $imagetitle);
-            $imagePath = 'images/admins/' . $imagetitle;
-            $admin->image = $imagePath;}
+            if ($request->hasFile('image')) {
+                $imagetitle =  time() . '_' . str_replace(' ', '', $admin->name) . '.' . $request->file('image')->extension();
+                $request->file('image')->storePubliclyAs('admins', $imagetitle, ['disk' => 'public']);
+                $admin->image = 'admins/' . $imagetitle;
+            }
 
+            $isSaved = $admin->save();
 
-
-        $isSaved = $admin->save();
-
-        if($isSaved){
-            $admin->assignRole(Role::findById($request->get('role_id')));
+            if ($isSaved) {
+                $admin->syncRoles(Role::findById($request->get('role_id')));
+            }
+            return response()->json(
+                ['message' => $isSaved ? __('cms.create_success') : __('cms.create_failed')],
+                $isSaved ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST
+            );
+        } else {
+            return response()->json(
+                ['message' => $validator->getMessageBag()->first()],
+                Response::HTTP_BAD_REQUEST,
+            );
         }
-        return response()->json(
-            ['message' => $isSaved ? __('cms.create_success') : __('cms.create_failed')],
-            $isSaved ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST
-        );
     }
-    else {
-        return response()->json(
-            ['message' => $validator->getMessageBag()->first()],
-            Response::HTTP_BAD_REQUEST,
-        );
-
-
-
- }
-}
 
     /**
      * Display the specified resource.
@@ -106,7 +105,8 @@ class AdminController extends Controller
      */
     public function edit(Admin $admin)
     {
-        return response()->view('cms.admin.edit', ['admin' => $admin]);
+        $roles = Role::where('guard_name', 'admin')->get();
+        return response()->view('cms.admin.edit', ['admin' => $admin, 'roles' => $roles]);
     }
 
     /**
@@ -120,7 +120,7 @@ class AdminController extends Controller
     {
         $validator = Validator($request->all(), [
             'name' => 'required|string|min:3',
-            'email' => 'required|email|unique:admins,email,'. $admin->id,
+            'email' => 'required|email|unique:admins,email,' . $admin->id,
             'active' => 'required|boolean',
             'image' => 'image|mimes:png,jpg,jpeg',
         ]);
@@ -128,19 +128,19 @@ class AdminController extends Controller
 
             $admin->name = $request->input('name');
             $admin->email = $request->input('email');
-            $admin->active = $request->input('active');
+            $admin->status = $request->input('active');
+
 
             if ($request->hasFile('image')) {
-                //Delete admin previous image.
                 Storage::delete($admin->image);
-                //Save new image.
-                $file = $request->file('image');
-                $imageName = time() . '_admin_image.' . $file->getClientOriginalExtension();
-                $request->file('image')->storePubliclyAs('images/admins', $imageName);
-                $imagePath = 'images/admins/' . $imageName;
-                $admin->image = $imagePath;
+                $imagetitle =  time() . '_' . str_replace(' ', '', $admin->name) . '.' . $request->file('image')->extension();
+                $request->file('image')->storePubliclyAs('admins', $imagetitle, ['disk' => 'public']);
+                $admin->image = 'admins/' . $imagetitle;
             }
             $isSaved = $admin->save();
+            if ($isSaved) {
+                $admin->syncRoles(Role::findById($request->get('role_id')));
+            }
             return response()->json(
                 ['message' => $isSaved ? __('cms.Updated_success') : __('cms.Updated_failed')],
                 $isSaved ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST
@@ -158,7 +158,7 @@ class AdminController extends Controller
      */
     public function destroy(Admin $admin)
     {
-        if(!auth('admin')->user()->id!=$admin->id){
+        if (!auth('admin')->user()->id != $admin->id) {
             $deleted = $admin->delete();
             if ($deleted) {
                 Storage::delete($admin->image);
@@ -167,12 +167,11 @@ class AdminController extends Controller
                 ['message' => $deleted ? __('cms.Deleted_successfully') : __('cms.Delete_failed!')],
                 $deleted ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST
             );
-        }else{
+        } else {
             return response()->json(
                 ['message' => 'You Can\'t Delete Your Self '],
-                 Response::HTTP_BAD_REQUEST
+                Response::HTTP_BAD_REQUEST
             );
         }
-
     }
 }

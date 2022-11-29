@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\ProblemStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,7 +16,11 @@ return new class extends Migration
         Schema::create('repair_problems', function (Blueprint $table) {
             $table->id();
             $table->text('details');
-            $table->foreignId(ProblemStatus::class);
+
+            $table->foreignId('problem_status_id')->nullable();
+            $table->foreign('problem_status_id')->on('problem_statuses')->references('id')->cascadeOnDelete();
+
+
             $table->foreignId('problem_id');
             $table->foreign('problem_id')->on('problems')->references('id')->cascadeOnDelete();
             $table->foreignId('repair_id');

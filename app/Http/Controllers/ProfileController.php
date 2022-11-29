@@ -20,14 +20,16 @@ class ProfileController extends Controller
             $user = auth()->user();
             $user->name = $request->input('name');
             if ($request->hasFile('image')) {
-                //Delete admin previous image.
                 Storage::delete($user->image);
-                //Save new image.
-                $file = $request->file('image');
-                $imageName = time() . '_auth_image.' . $file->getClientOriginalExtension();
-                $request->file('image')->storePubliclyAs('images/auth', $imageName);
-                $imagePath = 'images/auth' . $imageName;
-                $user->image = $imagePath;
+                $imagetitle =  time() . '_'. str_replace(' ','',$user->name).'.'. $request->file('image')->extension();
+                if( auth('admin')->check()){
+                    $request->file('image')->storePubliclyAs('admins', $imagetitle,['disk'=>'public']);
+                    $user->image = 'admins/'.$imagetitle;
+                }else{
+                    $request->file('image')->storePubliclyAs('users', $imagetitle,['disk'=>'public']);
+                    $user->image = 'users/'.$imagetitle;
+                }
+
             }
             $isSaved = $user->save();
             return response()->json(

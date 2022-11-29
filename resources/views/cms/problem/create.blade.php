@@ -81,7 +81,7 @@
                     <div class="fv-plugins-message-container invalid-feedback"></div>
                 </div>
 
-                <div class="row mb-6">
+                <div class="row mb-12">
                     <!--begin::Label-->
                     <label class="col-lg-4 col-form-label required fw-semibold fs-6">
                         <span class="required">{{__('cms.product_model')}}</span>
@@ -91,7 +91,7 @@
                     </label>
                     <!--end::Label-->
                     <!--begin::Input-->
-                    <div class="col-lg-8 fv-row">
+                    <div class="col-lg-12 fv-row">
                         <select id="model_id"
                             class="form-select form-select-solid form-select-lg" data-control="select2"
                            data-select2-id="select2-data-10-uyhn">

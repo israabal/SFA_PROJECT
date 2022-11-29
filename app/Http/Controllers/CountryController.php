@@ -9,6 +9,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CountryController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Country::class, 'country');
+    }
     public function index()
     {
         $countries = Country::all();
@@ -37,12 +41,14 @@ class CountryController extends Controller
             $country->name_ar = $request->input('name_ar');
             $isSaved = $country->save();
             return response()->json(
-             ['message' => $isSaved ? 'Saved successfully' : 'Save failed!'],
-              $isSaved ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST);
+                ['message' => $isSaved ? 'Saved successfully' : 'Save failed!'],
+                $isSaved ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST
+            );
         } else {
             return response()->json(
                 ['message' => $validator->getMessageBag()->first()],
-                Response::HTTP_BAD_REQUEST,);
+                Response::HTTP_BAD_REQUEST,
+            );
         }
     }
     public function edit(Country $country)
@@ -63,8 +69,8 @@ class CountryController extends Controller
     public function update(Request $request, Country $country)
     {
         $validator = Validator($request->all(), [
-            'name_en' => 'nullable|string|min:3', 
-            'name_ar' => 'nullable|string|min:3',           
+            'name_en' => 'nullable|string|min:3',
+            'name_ar' => 'nullable|string|min:3',
         ]);
         if (!$validator->fails()) {
             $country->name_en = $request->input('name_en');
@@ -72,16 +78,17 @@ class CountryController extends Controller
             $isSaved = $country->save();
             return response()->json(
                 ['message' => $isSaved ? 'Updated Successfully' : 'Update failed!'],
-                $isSaved ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
+                $isSaved ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST
+            );
         } else {
             return response()->json(['message' => $validator->getMessageBag()->first()], Response::HTTP_BAD_REQUEST);
         }
     }
-    
+
     public function destroy(Country $country)
     {
         $deleted = $country->delete();
-        
+
         return response()->json(
             ['message' => $deleted ? 'Deleted successfully' : 'Delete failed!'],
             $deleted ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST

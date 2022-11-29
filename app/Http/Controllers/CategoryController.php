@@ -14,11 +14,16 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->authorizeResource(Category::class, 'category');
+    }
     public function index()
     {
         $categories = Category::all();
-        return response()->view('cms.category.index', ['categories' => $categories]);  
-      }
+        return response()->view('cms.category.index', ['categories' => $categories]);
+    }
 
 
     /**
@@ -40,47 +45,48 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $validator = Validator($request->all(), [
-           'name' => 'required|string|min:2',
-           'code'=> 'required | string|min:2',
-           'active'=> 'required | boolean',
+            'name' => 'required|string|min:2',
+            'code' => 'required | string|min:2',
+            'active' => 'required | boolean',
 
-           'image' => 'required|image|mimes:png,jpg,jpeg',
-
-         
-       ]);
-
-       if (!$validator->fails()) {
-        
-           $category = new Category();
-           $category->name = $request->input('name');
-           $category->code = $request->input('code');
-           $category->active = $request->input('active');
-
-           
-           if ($request->hasFile('image')) {
-            
-               $file = $request->file('image');
-               $imagetitle =  time().'_category_image.' . $file->getClientOriginalExtension();
-               $status = $request->file('image')->storePubliclyAs('images/categories', $imagetitle);
-               $imagePath = 'images/categories/' . $imagetitle;
-               $category->image = $imagePath;}
+            'image' => 'required|image|mimes:png,jpg,jpeg',
 
 
-         
-               $isSaved = $request->user()->categories()->save($category);
-      
+        ]);
 
-           return response()->json(
-               ['message' => $isSaved ? 'Saved successfully' : 'Save failed!'],
-               $isSaved ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST
-           );
-       } else {
-           return response()->json(
-               ['message' => $validator->getMessageBag()->first()],
-               Response::HTTP_BAD_REQUEST,
-           );
-       }
-   }
+        if (!$validator->fails()) {
+
+            $category = new Category();
+            $category->name = $request->input('name');
+            $category->code = $request->input('code');
+            $category->active = $request->input('active');
+
+
+            if ($request->hasFile('image')) {
+
+                $file = $request->file('image');
+                $imagetitle =  time() . '_category_image.' . $file->getClientOriginalExtension();
+                $status = $request->file('image')->storePubliclyAs('images/categories', $imagetitle);
+                $imagePath = 'images/categories/' . $imagetitle;
+                $category->image = $imagePath;
+            }
+
+
+
+            $isSaved = $request->user()->categories()->save($category);
+
+
+            return response()->json(
+                ['message' => $isSaved ? 'Saved successfully' : 'Save failed!'],
+                $isSaved ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST
+            );
+        } else {
+            return response()->json(
+                ['message' => $validator->getMessageBag()->first()],
+                Response::HTTP_BAD_REQUEST,
+            );
+        }
+    }
 
     /**
      * Display the specified resource.
@@ -101,7 +107,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return response()->view('cms.category.edit', ['category' => $category]);  
+        return response()->view('cms.category.edit', ['category' => $category]);
     }
 
     /**

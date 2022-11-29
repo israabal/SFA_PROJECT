@@ -82,6 +82,9 @@
                                         <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users"
                                             rowspan="1" colspan="1" aria-label="User: activate to sort column ascending"
                                             style="width: 206.375px;">{{__('cms.users')}}</th>
+                                            <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users"
+                                            rowspan="1" colspan="1" aria-label="User: activate to sort column ascending"
+                                            style="width: 206.375px;">{{__('cms.roles')}}</th>
                                         {{-- <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users" rowspan="1" colspan="1" aria-label="Role: activate to sort column ascending" style="width: 125px;">{{__('cms.Role')}}
                                         </th>
                                         <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users"
@@ -133,6 +136,7 @@
                                             </div>
                                             <!--begin::User details-->
                                         </td>
+                                        <td> {{$user->roles[0]->name ??""}}</td>
                                         <!--end::User=-->
                                         <!--begin::Role=-->
                                         {{-- <td>Users</td> --}}
@@ -146,7 +150,7 @@
                                         <td><span
                                                 class="badge @if($user->status==true) badge badge-light-success @else badge-light-danger @endif">{{$user->status}}</span>
 
-                                        <td><span class="badge @if($user->user_type=='agent') badge-light-danger @elseif($user->user_type=='customers') badge badge-light-success 
+                                        <td><span class="badge @if($user->user_type=='agent') badge-light-danger @elseif($user->user_type=='customers') badge badge-light-success
                                         @else badge-light-primary @endif">{{$user->user_type}}</span>
 
                                             <!--end::Two step=-->
@@ -174,7 +178,7 @@
                                                     </span>
                                                     <!--end::Svg Icon-->
                                                 </a>
-                                                <a href="#" onclick="confirmDelete('{{$user->id}}', this)"
+                                                <a onclick="confirmDelete('{{$user->id}}', this)"
                                                     class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
                                                     <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                                                     <span class="svg-icon svg-icon-3">
@@ -218,29 +222,7 @@
                             <div
                                 class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start">
                             </div>
-                            <div
-                                class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
-                                <div class="dataTables_paginate paging_simple_numbers" id="kt_table_users_paginate">
-                                    <ul class="pagination">
-                                        <li class="paginate_button page-item previous disabled"
-                                            id="kt_table_users_previous"><a href="#" aria-controls="kt_table_users"
-                                                data-dt-idx="0" tabindex="0" class="page-link"><i
-                                                    class="previous"></i></a></li>
-                                        <li class="paginate_button page-item active"><a href="#"
-                                                aria-controls="kt_table_users" data-dt-idx="1" tabindex="0"
-                                                class="page-link">1</a></li>
-                                        <li class="paginate_button page-item "><a href="#"
-                                                aria-controls="kt_table_users" data-dt-idx="2" tabindex="0"
-                                                class="page-link">2</a></li>
-                                        <li class="paginate_button page-item "><a href="#"
-                                                aria-controls="kt_table_users" data-dt-idx="3" tabindex="0"
-                                                class="page-link">3</a></li>
-                                        <li class="paginate_button page-item next" id="kt_table_users_next"><a href="#"
-                                                aria-controls="kt_table_users" data-dt-idx="4" tabindex="0"
-                                                class="page-link"><i class="next"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
+                         
                         </div>
                     </div>
                     <!--end::Table-->
@@ -300,7 +282,7 @@ function confirmDelete(id, reference) {
 }
 
 function performDelete(id, reference) {
-    axios.delete('/users/' + id)
+    axios.delete('/cms/users/' + id)
         .then(function(response) {
             console.log(response);
             toastr.success(response.data.message);

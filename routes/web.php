@@ -11,10 +11,12 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\CountryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ProblemController;
 use App\Http\Controllers\ProblemStatusController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RepairController;
 use App\Http\Controllers\RepairProblemController;
@@ -83,10 +85,10 @@ Route::group(
             Route::get('/sparepartss/{spareparts}/models/edit', [SparePartController::class, 'editSparepartModels'])->name('spareparts.edit-models');
             Route::get('/sparepartss/{spareparts}/details', [SparePartController::class, 'SparepartDetails'])->name('spareparts.details');
 
-            
+
             Route::put('/spaerparts/models/edit', [SparePartController::class, 'updateSparepartModels']);
 
-            Route::get('/dashboard', [AuthController::class, 'indexAuth'])->name('auth.dashboard');
+            Route::get('/dashboard', [DashboardController::class, 'index'])->name('auth.dashboard');
 
 
             Route::get('/UserModel/index', [UserModelController::class, 'indexUserModels'])->name('UsersEquipment.index');
@@ -113,14 +115,14 @@ Route::group(
             Route::post('user/change-status/{id}', [UserController::class, 'UserActive'])->name('users.UserActive');
         });
         Route::prefix('cms')->middleware('auth:admin,user')->group(function () {
- 
 
 
-            
+
+
 
             Route::resource('/countries', CountryController::class);
             Route::resource('/cities', CityController::class);
-           
+
 
             Route::resource('/problem_status', ProblemStatusController::class);
             Route::post('/problem_status/change-status/{id}', [ProblemStatusController::class, 'ProblemStatusActive'])->name('ProblemStatus.status');
@@ -128,27 +130,32 @@ Route::group(
 
 
 
-        
-            Route::resource('problem',ProblemController::class);
+
+            Route::resource('problems',ProblemController::class);
             Route::resource('repairs',RepairController::class);
             Route::resource('repair_problems',RepairProblemController::class);
             Route::resource('repair_spare_part', RepairSparePartController::class);
 
 
-            Route::prefix('cms')->middleware('auth:user')->group(function () {
+            Route::get('repair_problem/{id}', [RepairProblemController::class, 'repairProblem'])->name('repair.problem');
+
+
+
+            Route::prefix('cms')->middleware(['auth:user'])->group(function () {
                 //customer
                 Route::get('/UserModel/index', [UserModelController::class, 'indexUserModels'])->name('UsersEquipment.index');
                 Route::get('/UserModel/create', [UserModelController::class, 'editUserModels'])->name('users.create-models');
                 Route::put('/UserModel/store', [UserModelController::class, 'updateUserModels'])->name('users.store-models');
             });
 
-            Route::prefix('cms')->middleware(['auth:user'])->group(function () {
+
+
+        });
+              Route::prefix('cms/')->middleware(['auth:user'])->group(function () {
                 Route::get('verify', [EmailVerificationController::class, 'notice'])->name('verification.notice');
                 Route::get('send-verification', [EmailVerificationController::class, 'send'])->name('verification.send');
                 Route::get('verify/{id}/{hash}', [EmailVerificationControllerr::class, 'verify'])->middleware('signed')->name('verification.verify');
             });
-
-        });
     }
 
 

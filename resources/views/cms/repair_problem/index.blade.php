@@ -100,7 +100,7 @@
                                     <td>
                                         <div class="d-flex  flex-shrink-0">
 
-                                            <a href="{{route('repair_problems.show', $repair->id )}}"
+                                            <a href="{{route('repair.problem',$repair->problem->id )}}"
                                                 class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                                 <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                                                 <span class="btn btn-info">

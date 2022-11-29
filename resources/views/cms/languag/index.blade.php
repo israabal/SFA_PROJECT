@@ -1,7 +1,7 @@
 @extends('cms.parent');
 @section('title',__('cms.language'))
 @section('page-lg',__('cms.home'))
-@section('main-pg-md',__('cms.content_Management'))
+@section('main-pg-md',__('cms.language_Management'))
 @section('page-md',__('cms.read_language'))
 @section('Content')
 <div class="d-flex flex-column flex-column-fluid">
@@ -117,7 +117,7 @@
 
                                         <!--end::Checkbox-->
                                         <!--begin::User=-->
-                                
+
                                         <td>{{ $language->lang_name  }}
                                         </td>
                                         <td>{{ $language->lang_code  }}
@@ -180,7 +180,7 @@
                                                     </span>
                                                     <!--end::Svg Icon-->
                                                 </a>
-                                            
+
                                             </div>
                                         </td>
                                         <!--end::Action=-->
@@ -198,7 +198,7 @@
                                 class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start">
 
                             </div>
-                            <div
+                            {{-- <div
                                 class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
                                 <div class="dataTables_paginate paging_simple_numbers" id="kt_table_users_paginate">
                                     <ul class="pagination">
@@ -220,7 +220,7 @@
                                                 class="page-link"><i class="next"></i></a></li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <!--end::Table-->

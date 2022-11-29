@@ -39,13 +39,13 @@
                         <div class="fv-row w-100 flex-md-root fv-plugins-icon-container" data-select2-id="select2-data-131-74d4">
                             <!--begin::Label-->
                             <label class="required form-label">{{__('cms.brands')}}</label>
-        
+
                             <select class="form-select mb-2 " name="tax" id="brand_id" >
                                 @foreach ($brands as $brand)
                                 <option value="{{$brand->id}}">{{$brand->name}}</option>
                                 @endforeach
                             </select>
-                               
+
                             <!--end::Select2-->
                             <!--begin::Description-->
                             <!--end::Description-->
@@ -57,13 +57,13 @@
                         <div class="fv-row w-100 flex-md-root fv-plugins-icon-container" data-select2-id="select2-data-131-74d4">
                             <!--begin::Label-->
                             <label class="required form-label">{{__('cms.categories')}}</label>
-        
+
                             <select class="form-select mb-2 " name="tax" id="category_id" >
                                 @foreach ($categories as $category)
                                 <option value="{{$category->id}}">{{$category->name}}</option>
                                 @endforeach
                             </select>
-                               
+
                             <!--end::Select2-->
                             <!--begin::Description-->
                             <!--end::Description-->
@@ -72,9 +72,9 @@
 
                     </div>
                 </div>
-      
+
                 <!--begin::Input group-->
-              
+
                 <!--end::Input group-->
                 <div class="row">
 
@@ -82,7 +82,7 @@
                            <div class="fv-row mb-7 fv-plugins-icon-container">
                         <!--begin::Label-->
                         <label class="fs-6 fw-semibold form-label mt-3">
-                            <span class="required">{{__('cms.name')}}</span>
+                            <span class="required">{{__('cms.model')}}</span>
                             <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" aria-label="Enter the contact's name." data-bs-original-title="Enter the contact's name." data-kt-initialized="1"></i>
                         </label>
                         <!--end::Label-->
@@ -92,34 +92,38 @@
                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                  </div>
 
-                  
+
 
 
                 </div>
                 <!--begin::Input group-->
-             
+
              <div class="row">
                 <div class="mb-7">
                     <label class="fs-6 fw-semibold mb-3">
                         <span>{{__('cms.image')}}</span>
-                        
+
                         <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" aria-label="Allowed file types: png, jpg, jpeg." data-bs-original-title="Allowed file types: png, jpg, jpeg." data-kt-initialized="1"></i>
                     </label>
-             
+
                     <div class="card card-flush py-4">
-                     
+
                         <div class="card-body  pt-0">
-                        
+
                             {{-- <style>.image-input-placeholder { background-image: url('assets/media/svg/files/blank-image.svg'); } [data-theme="dark"] .image-input-placeholder { background-image: url('assets/media/svg/files/blank-image-dark.svg'); }</style> --}}
                             <!--end::Image input placeholder-->
                             {{-- <div class="image-input image-input-empty image-input-outline image-input-placeholder mb-3" data-kt-image-input="true">
                                 <div class="image-input-wrapper w-150px h-150px"></div> --}}
-                             
-                                
+
+
                                     <input type="file" id="image" accept=".png, .jpg, .jpeg" multiple>
                                     <input type="hidden" name="avatar_remove">
-                   
-                            <div class="text-muted fs-7">Set the product image. Only *.png, *.jpg and *.jpeg image files are accepted</div>
+
+                            <div class="text-muted fs-7">
+                                {{__('cms.max_img')}}
+                              
+
+                            </div>
                                     {{-- </div> --}}
                          </div>
                     <!--end::Image input wrapper-->
@@ -172,11 +176,11 @@
 
  <script>
     $(function () { bsCustomFileInput.init() });
-  </script> 
+  </script>
 <script>
 
    function performStore() {
-    
+
         var formData = new FormData();
         formData.append('brand_id', document.getElementById('brand_id').value);
         formData.append('category_id', document.getElementById('category_id').value);
@@ -189,7 +193,7 @@
         formData.append('image_4', document.getElementById('image').files[3]);
         formData.append('image_5', document.getElementById('image').files[4]);
 
-       axios.post('/cms/smodels', formData)     
+       axios.post('/cms/smodels', formData)
        .then(function (response) {
            console.log(response);
            toastr.success(response.data.message);

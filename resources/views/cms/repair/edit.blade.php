@@ -47,7 +47,7 @@
                     </label>
                     <!--end::Label-->
                     <!--begin::Input-->
-                    <div class="col-lg-8 fv-row">
+                    <div class="col-lg-12 fv-row">
                         <select class="form-select form-select-solid form-select-lg" data-control="select2"
                             name="app_status" id="app_status" data-select2-id="select2-data-10-uyhn">
                             <option value="pending" @if( $repair->app_status == 'pending') selected
@@ -65,7 +65,7 @@
                         <div class="fv-plugins-message-container invalid-feedback"></div>
                         <!--end::Hint-->
                     </div>
-
+   </div>
                     <div class="row mb-6">
                         <!--begin::Label-->
                         <label class="col-lg-4 col-form-label required fw-semibold fs-6">
@@ -76,7 +76,7 @@
                         </label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <div class="col-lg-8 fv-row">
+                        <div class="col-lg-12 fv-row">
                             <select id="technecal_id" name=" technecal_id"
                                 class="form-select form-select-solid form-select-lg" data-control="select2"
                           data-select2-id="select2-data-10-uyhn">
@@ -109,7 +109,7 @@
                         </label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <div class="col-lg-8 fv-row">
+                        <div class="col-lg-12 fv-row">
                             <select id="problem_id" name=" problem_id"
                                 class="form-select form-select-solid form-select-lg" data-control="select2"
                                 data-select2-id="select2-data-10-uyhn">

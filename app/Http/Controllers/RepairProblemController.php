@@ -2,15 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Problem;
+use App\Models\ProblemStatus;
 use App\Models\Repair;
 use App\Models\RepairProblem;
 use App\Models\SparePart;
 use App\Models\SparePartModel;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class RepairProblemController extends Controller
 {
+    public function __construct()
+    {
+        // $this->authorizeResource(RepairProblem::class, 'repairProblem');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -21,9 +28,17 @@ class RepairProblemController extends Controller
 
         // $repairProblem = RepairProblem::withCount('SparePart')->get();
 
-        $repairs = Repair::where('technecal_id', auth('user')->user()->id)->withCount('spareparts')->get();
-        return response()->view('cms.repair_problem.index', compact('repairs'));
-    }
+
+        if(auth()->user()->can('repair-Spare-Parts')){
+            $problem=Problem::all();
+            // $repair_problem=RepairProblem::with('problem')->get();
+            $repairs = Repair::where('technecal_id', auth('user')->user()->id)->withCount('spareparts')->with('problem')->get();
+            return response()->view('cms.repair_problem.index', compact('repairs','problem'));
+
+        }else{
+            abort(403);
+        }
+}
 
     /**
      * Show the form for creating a new resource.
@@ -32,8 +47,32 @@ class RepairProblemController extends Controller
      */
     public function create()
     {
-    }
+        // $this->authorize('create', RepairProblem::class);
 
+        // $repair_problem=RepairProblem::with('problem')->get();
+        // // $problem=Problem::all();
+
+        // $users=User::where('user_type','technical')->get();
+        // $statuss=ProblemStatus::where('status',1)->get();
+
+        // return response()->view('cms.repair_problem.create',compact('users','repair_problem','statuss'));
+
+
+      }
+
+      public function repairProblem($id){
+        $this->authorize('create', RepairProblem::class);
+
+        $problem=Problem::where('id',$id)->first();
+
+        $repair_problem=RepairProblem::where('problem_id',$id)->first();
+      $repair=Repair::where('problem_id',$id)->first();
+
+        $statuss=ProblemStatus::where('status',1)->get();
+
+        return response()->view('cms.repair_problem.create',compact('repair_problem','repair_problem','statuss','problem','repair'));
+
+      }
     /**
      * Store a newly created resource in storage.
      *
@@ -49,14 +88,13 @@ class RepairProblemController extends Controller
             'app_status'=>'required',
         ]);
         if (!$validator->fails()) {
-            $repairProblem = RepairProblem::where('problems_id',$request->input('problem_id'))->first();
-
+            $repairProblem = RepairProblem::where('problem_id',$request->input('problem_id'))->first();
 if( $repairProblem==null){
     $repairProblem = new RepairProblem();
-    $repairProblem->problems_id = $request->input('problem_id');
+    $repairProblem->problem_id = $request->input('problem_id');
     $repairProblem->details = $request->input('details');
-    $repairProblem->app_status = $request->input('app_status');
-    $repairProblem->repairs_id = $request->input('repair_id');
+    $repairProblem->problem_status_id = $request->input('app_status');
+    $repairProblem->repair_id  = $request->input('repair_id');
     $isSaved = $repairProblem->save();
 
     return response()->json(
@@ -66,7 +104,7 @@ if( $repairProblem==null){
 }else{
 
     $repairProblem->details = $request->input('details');
-    $repairProblem->app_status = $request->input('app_status');
+    $repairProblem->problem_status_id = $request->input('app_status');
     $isSaved = $repairProblem->save();
 
     return response()->json(

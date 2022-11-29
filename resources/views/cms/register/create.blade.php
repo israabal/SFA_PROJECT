@@ -116,7 +116,7 @@ License: For each use you must have a valid license purchased only from above li
                             </div>
                             <!--begin::Heading-->
                             <!--begin::Input group=-->
-                           
+
                             <div class="fv-row mb-8">
                                 <!--begin::Email-->
                                 <input type="text" placeholder="{{__('cms.name')}}" name="name" id="name"
@@ -129,12 +129,12 @@ License: For each use you must have a valid license purchased only from above li
                                     autocomplete="off" class="form-control bg-transparent" />
                                 <!--end::Email-->
                             </div>
-                            <div class="fv-row mb-8">
+                            {{-- <div class="fv-row mb-8">
                                 <!--begin::Email-->
                                 <select class="form-select form-select-solid form-select-lg" data-control="select2" id="country_id" data-select2-id="select2-data-10-uyhn">
                             <option value="-1" data-select2-id="select2-data-12-0cmm">{{__('cms.choose')}}</option>
                             @foreach($countries as $country)
-                            <option value="{{$country->id}}"> 
+                            <option value="{{$country->id}}">
                                   @if (app()->getLocale()=='ar')
                                         {{$country->name_ar}}
                                         @else
@@ -143,23 +143,23 @@ License: For each use you must have a valid license purchased only from above li
                             @endforeach
                         </select>
                                 <!--end::Email-->
-                            </div>
-                          
-                            <div class="fv-row mb-8">
+                            </div> --}}
+
+                            {{-- <div class="fv-row mb-8">
                                 <!--begin::Email-->
-                         
+
                         <select class="form-select form-select-solid form-select-lg" data-control="select2" id="city_id" data-select2-id="select2-data-10-uyhn" disabled>
                             <option value="-1" selected>Select Country</option>
 
                         </select>
-                          
-                            </div>
-                            <div class="fv-row mb-8">
+
+                            </div> --}}
+                            {{-- <div class="fv-row mb-8">
                                 <!--begin::Email-->
                                 <input type="text" placeholder="{{__('cms.region')}}" name="region" id="region"
                                     autocomplete="off" class="form-control bg-transparent" />
                                 <!--end::Email-->
-                            </div>
+                            </div> --}}
                             <!--end::Input group=-->
                             <div class="fv-row mb-3">
                                 <!--begin::Password-->
@@ -169,7 +169,7 @@ License: For each use you must have a valid license purchased only from above li
                             </div>
                             <!--end::Input group=-->
                             <!--begin::Wrapper-->
-                          
+
                             <!--end::Wrapper-->
                             <!--begin::Submit button-->
                             <div class="d-grid mb-10">
@@ -257,16 +257,19 @@ function performStore() {
     var formData = new FormData();
     formData.append('name', document.getElementById('name').value);
     formData.append('email', document.getElementById('email').value);
-    formData.append('country_id', document.getElementById('country_id').value);
-    formData.append('city_id', document.getElementById('city_id').value);
-    formData.append('region', document.getElementById('region').value);
     formData.append('password', document.getElementById('password').value);
+
+    // formData.append('role_id', document.getElementById('role_id').value);
+
+    // formData.append('country_id', document.getElementById('country_id').value);
+    // formData.append('city_id', document.getElementById('city_id').value);
+    // formData.append('region', document.getElementById('region').value);
     axios.post('/registers/store', formData)
         .then(function(response) {
             console.log(response);
             toastr.success(response.data.message);
             document.getElementById('create-form').reset();
-            window.location.href = '/cms/verify';
+            window.location.href = '/cms/dashboard';
         })
         .catch(function(error) {
             console.log(error.response);

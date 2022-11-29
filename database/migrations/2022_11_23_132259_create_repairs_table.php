@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('repairs', function (Blueprint $table) {
             $table->id();
-            $table->enum('app_status',['pending', 'accepted', 'refused']);
+            $table->enum('app_status',['pending', 'accepted', 'refused'])->default('pending');
 
             $table->foreignId('problem_id')->nullable();
             $table->foreign('problem_id')->on('problems')->references('id')->cascadeOnDelete();
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->foreignId('technecal_id')->nullable();
             $table->foreign('technecal_id')->on('users')->references('id')->cascadeOnDelete();
             $table->timestamps();
-        
+
         });
     }
 

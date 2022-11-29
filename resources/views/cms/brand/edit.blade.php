@@ -50,20 +50,6 @@
                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                  </div>
 
-                    <div class="col-6">
-                        <div class="fv-row mb-7 fv-plugins-icon-container">
-                            <!--begin::Label-->
-                            <label class="fs-6 fw-semibold form-label mt-3">
-                                <span class="required">
-                                    {{__('cms.Serial_Number')}} </span>
-                                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" aria-label="Enter the contact's email." data-bs-original-title="Enter the contact's email." data-kt-initialized="1"></i>
-                            </label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <input type="number" class="form-control form-control-solid" id="code" value="{{$brand->code}}">
-                            <!--end::Input-->
-                        <div class="fv-plugins-message-container invalid-feedback"></div></div>
-                   </div>
 
 
                 </div>
@@ -78,7 +64,7 @@
                         <!--begin::Image input wrapper-->
                         <div class="card card-flush py-4">
                             <!--begin::Card header-->
-                  
+
                             <!--end::Card header-->
                             <!--begin::Card body-->
                             <div class="card-body  pt-0">
@@ -116,7 +102,7 @@
                             </div>
                             <!--end::Card body-->
                         </div>
-                   
+
                         <!--end::Image input wrapper-->
                     </div>
                 </div>
@@ -125,7 +111,7 @@
                     <!--begin::Switch-->
                     <label class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
                         <!--begin::Input-->
-                        <input class="form-check-input" id="active" type="checkbox" 
+                        <input class="form-check-input" id="active" type="checkbox"
                         @if($brand->active) checked @endif >
 
                         <!--end::Input-->
@@ -164,10 +150,10 @@
 </script>
 <script>
      function performUpdate(id) {
-   
+
    var formData = new FormData();
        formData.append('name',document.getElementById('name').value);
-       formData.append('code',document.getElementById('code').value);
+    //    formData.append('code',document.getElementById('code').value);
        formData.append('active', document.getElementById('active').checked ?1:0);
 
 

@@ -20,7 +20,7 @@
                 <!--end::Card title-->
                 <!--begin::Card toolbar-->
                 <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
-                
+
                     <!--begin::Add product-->
                     <a href="{{route('brands.create' )}}" class="btn btn-primary">{{__('cms.create_brand')}}</a>
                     <!--end::Add product-->
@@ -38,7 +38,7 @@
                         <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
 
                             <th class="min-w-200px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="Product: activate to sort column ascending" style="width: 206.828px;">{{__('cms.brands')}}</th>
-                            <th class="text-end min-w-70px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="Qty: activate to sort column ascending" style="width: 93.1875px;">{{__('cms.Serial_Number')}}</th>
+                            {{-- <th class="text-end min-w-70px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="Qty: activate to sort column ascending" style="width: 93.1875px;">{{__('cms.Serial_Number')}}</th> --}}
                             <th class="text-end min-w-100px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="SKU: activate to sort column ascending" style="width: 103.562px;">{{__('cms.JOINED_DATE')}}</th>
                             <th class="text-end sorting" tabindex="0" aria-controls="kt_table_users" rowspan="1" colspan="1" aria-label="Two-step: activate to sort column ascending" style="width: 125px;">{{__('cms.active')}}</th>
 
@@ -76,13 +76,14 @@
                             </td>
                             <!--end::Category=-->
                             <!--begin::SKU=-->
-                            <td class="text-end pe-0">
+                            {{-- <td class="text-end pe-0">
                                 <span class="fw-bold">{{$brand->code}}</span>
-                            </td>
+                            </td> --}}
                             <!--end::SKU=-->
                             <!--begin::Qty=-->
                             <td class="text-end pe-0" data-order="16">
-                                <span class="fw-bold ms-3">{{$brand->created_at}}</span>
+                                <span class="fw-bold ms-3">
+                                    {{date('D/m/Y', strtotime($brand->created_at))}}</span>
                             </td>
                             <td class="text-end pe-0"><span class="badge @if($brand->active) bg-success @else bg-danger @endif">{{$brand->active_status}}</span>
 

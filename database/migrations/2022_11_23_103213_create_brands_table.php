@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name',45);
             $table->string('image')->nullable();
-            $table->string('code');
+            // $table->string('code');
             $table->boolean('active')->default(true);
              $table->foreignId('admin_id')->constrained()->restrictOnDelete();
             $table->timestamps();

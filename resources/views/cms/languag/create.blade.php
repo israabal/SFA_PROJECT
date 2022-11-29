@@ -1,7 +1,7 @@
 @extends('cms.parent')
-@section('title',__('cms.subcategories'))
+@section('title',__('cms.categories'))
 @section('page-lg',__('cms.home'))
-@section('main-pg-md',__('cms.subcategories_Management'))
+@section('main-pg-md',__('cms.language_Management'))
 @section('page-md',__('cms.create_language'))
 @section('styles')
     	<!--begin::Vendor Stylesheets(used for this page only)-->
@@ -34,10 +34,10 @@
             <!--begin::Form-->
             <form id="create-form" class="form fv-plugins-bootstrap5 fv-plugins-framework" >
                 @csrf
-       
-      
+
+
                 <!--begin::Input group-->
-              
+
                 <!--end::Input group-->
                 <div class="row">
 
@@ -73,8 +73,8 @@
 
                 </div>
                 <!--begin::Input group-->
-             
-       
+
+
              <div class="d-flex justify-content-begin">
                 <!--begin::Switch-->
                 <label class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
@@ -122,11 +122,11 @@
 
  <script>
     $(function () { bsCustomFileInput.init() });
-  </script> 
+  </script>
 <script>
 
    function performStore() {
-    
+
         var formData = new FormData();
 
         formData.append('lang_name', document.getElementById('name').value);
@@ -134,8 +134,8 @@
         formData.append('active', document.getElementById('active').checked ? 1:0);
 
 
-       axios.post('/cms/languages', formData)    
-            
+       axios.post('/cms/languages', formData)
+
        .then(function (response) {
            console.log(response);
            toastr.success(response.data.message);

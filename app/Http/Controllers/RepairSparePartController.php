@@ -14,6 +14,11 @@ class RepairSparePartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->authorizeResource(RepairSparePart::class, 'repairSpairPart');
+    }
     public function index()
     {
         $spare_parts = SparePart::all();

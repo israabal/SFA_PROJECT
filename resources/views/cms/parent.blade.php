@@ -53,7 +53,7 @@ License: For each use you must have a valid license purchased only from above li
 		<!--begin::Theme mode setup on page load-->
 		<script>var defaultThemeMode = "light"; var themeMode; if ( document.documentElement ) { if ( document.documentElement.hasAttribute("data-theme-mode")) { themeMode = document.documentElement.getAttribute("data-theme-mode"); } else { if ( localStorage.getItem("data-theme") !== null ) { themeMode = localStorage.getItem("data-theme"); } else { themeMode = defaultThemeMode; } } if (themeMode === "system") { themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } document.documentElement.setAttribute("data-theme", themeMode); }</script>
 		<!--end::Theme mode setup on page load-->
-		
+
 
 
 		<div class="d-flex flex-column flex-root app-root" id="kt_app_root">
@@ -79,7 +79,7 @@ License: For each use you must have a valid license purchased only from above li
 						<!--end::sidebar mobile toggle-->
 						<!--begin::Mobile logo-->
 						<div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
-							<a href="../../demo1/dist/index.html" class="d-lg-none">
+							<a href="{{route('auth.dashboard')}}" class="d-lg-none">
 								<img alt="Logo" src="{{asset('cms/assets/media/logos/default-small.svg')}}" class="h-30px" />
 							</a>
 						</div>
@@ -99,12 +99,12 @@ License: For each use you must have a valid license purchased only from above li
 										</span>
 										<!--end:Menu link-->
 										<!--begin:Menu sub-->
-									
+
 										<!--end:Menu sub-->
 									</div>
 									<!--end:Menu item-->
 									<!--begin:Menu item-->
-								
+
 									<!--end:Menu item-->
 								</div>
 								<!--end::Menu-->
@@ -857,10 +857,10 @@ License: For each use you must have a valid license purchased only from above li
 								</div>
 								<!--end::Search-->
 								<!--begin::Activities-->
-							
+
 								<!--end::Notifications-->
 								<!--begin::Chat-->
-								
+
 								<!--end::My apps links-->
 								<!--begin::Theme mode-->
 								<div class="app-navbar-item ms-1 ms-lg-3">
@@ -962,7 +962,7 @@ License: For each use you must have a valid license purchased only from above li
 								<div class="app-navbar-item ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
 									<!--begin::Menu wrapper-->
 									<div class="cursor-pointer symbol symbol-35px symbol-md-40px" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-										<img src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" alt="user" />
+										<img src="{{Storage::url(auth()->user()->image)}}" alt="user" />
 									</div>
 									<!--begin::User account menu-->
 									<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px" data-kt-menu="true">
@@ -971,14 +971,16 @@ License: For each use you must have a valid license purchased only from above li
 											<div class="menu-content d-flex align-items-center px-3">
 												<!--begin::Avatar-->
 												<div class="symbol symbol-50px me-5">
-													<img alt="Logo" src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" />
+													<img alt="Logo" src="{{Storage::url(auth()->user()->image)}}" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Username-->
 												<div class="d-flex flex-column">
-													<div class="fw-bold d-flex align-items-center fs-5">Max Smith
-													<span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Pro</span></div>
-													<a href="#" class="fw-semibold text-muted text-hover-primary fs-7">max@kt.com</a>
+													<div class="fw-bold d-flex align-items-center fs-5">{{auth()->user()->name}}
+													</div>
+													<a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{auth()->user()->email}}</a>
+													<a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{auth()->user()->roles[0]->name ??''}}</a>
+
 												</div>
 												<!--end::Username-->
 											</div>
@@ -989,11 +991,11 @@ License: For each use you must have a valid license purchased only from above li
 										<!--end::Menu separator-->
 										<!--begin::Menu item-->
 										<div class="menu-item px-5">
-											<a href="../../demo1/dist/account/overview.html" class="menu-link px-5">{{__('cms.My_Profile')}}</a>
+											<a href="{{route('profile.edit')}}" class="menu-link px-5">{{__('cms.My_Profile')}}</a>
 										</div>
 										<!--end::Menu item-->
 										<!--begin::Menu item-->
-								
+
 										<!--end::Menu item-->
 										<!--begin::Menu separator-->
 										<!--end::Menu separator-->
@@ -1001,9 +1003,16 @@ License: For each use you must have a valid license purchased only from above li
 										<div class="menu-item px-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="left-start" data-kt-menu-offset="-15px, 0">
 											<a href="#" class="menu-link px-5">
 												<span class="menu-title position-relative">{{__('cms.language')}}
-												<span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">{{__('cms.english')}}
+												<span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">
+												@if (app()->isLocale('en'))
+												{{__('cms.english')}}
 												<img class="w-15px h-15px rounded-1 ms-2" src="{{asset('cms/assets/media/flags/united-states.svg')}}" alt="" /></span></span>
-											</a>
+											@else
+											{{__('cms.arabic')}}
+												<img class="w-15px h-15px rounded-1 ms-2" src="{{asset('cms/assets/media/flags/saudi-arabia.svg')}}" alt="" /></span></span>
+
+												@endif
+										</a>
 											<!--begin::Menu sub-->
 											<div class="menu-sub menu-sub-dropdown w-175px py-4">
 												<!--begin::Menu item-->
@@ -1023,7 +1032,7 @@ License: For each use you must have a valid license purchased only from above li
 												</div>
 												<!--end::Menu item-->
 												<!--begin::Menu item-->
-											
+
 												<!--end::Menu item-->
 											</div>
 											<!--end::Menu sub-->
@@ -1073,7 +1082,7 @@ License: For each use you must have a valid license purchased only from above li
 						<!--begin::Logo-->
 						<div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
 							<!--begin::Logo image-->
-							<a href="../../demo1/dist/index.html">
+							<a href="{{route('auth.dashboard')}}">
 								<img alt="Logo" src="{{asset('cms/assets/media/logos/default-dark.svg')}}" class="h-25px app-sidebar-logo-default" />
 								<img alt="Logo" src="{{asset('cms/assets/media/logos/default-small.svg')}}" class="h-20px app-sidebar-logo-minimize" />
 							</a>
@@ -1101,10 +1110,10 @@ License: For each use you must have a valid license purchased only from above li
 									<!--begin:Menu item-->
 									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 										<!--begin:Menu link-->
-									
+
 										<!--end:Menu link-->
 										<!--begin:Menu sub-->
-										
+
 										<!--end:Menu sub-->
 									</div>
 									<!--end:Menu item-->
@@ -1146,13 +1155,13 @@ License: For each use you must have a valid license purchased only from above li
 
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-											
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-										
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-											
+
 
 											<div class="menu-item">
 												<!--begin:Menu link-->
@@ -1164,17 +1173,17 @@ License: For each use you must have a valid license purchased only from above li
 												</a>
 												<!--end:Menu link-->
 											</div>
-										
+
 										</div>
 										@endcan
                                         @can('Create-Admin')
 
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-											
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-										
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 											<div class="menu-item">
@@ -1189,7 +1198,7 @@ License: For each use you must have a valid license purchased only from above li
 											</div>
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-										
+
 											<!--end:Menu item-->
 										</div>
 										@endcan
@@ -1222,10 +1231,10 @@ License: For each use you must have a valid license purchased only from above li
 
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-											
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-										
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 											<div class="menu-item">
@@ -1240,7 +1249,7 @@ License: For each use you must have a valid license purchased only from above li
 											</div>
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-										
+
 											<!--end:Menu item-->
 										</div>
 										@endcan
@@ -1248,10 +1257,10 @@ License: For each use you must have a valid license purchased only from above li
                                         @can('Create-User')
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-											
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-										
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 											<div class="menu-item">
@@ -1266,7 +1275,7 @@ License: For each use you must have a valid license purchased only from above li
 											</div>
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-										
+
 											<!--end:Menu item-->
 										</div>
 										@endcan
@@ -1288,11 +1297,11 @@ License: For each use you must have a valid license purchased only from above li
 									@endcanany
 
 
-								
 
 
 
-									
+
+
 									<!--end:Menu item-->
 									<!--begin:Menu item-->
 									@canany(['Create-Role','Read-Roles'])
@@ -1317,7 +1326,7 @@ License: For each use you must have a valid license purchased only from above li
 										<!--begin:Menu sub-->
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-		
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 
@@ -1357,7 +1366,7 @@ License: For each use you must have a valid license purchased only from above li
 										<!--end:Menu sub-->
 									</div>
 									@endcanany
-									@can(['Read-Permissions'])
+									@can('Read-Permissions')
 
 									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 										<!--begin:Menu link-->
@@ -1379,7 +1388,7 @@ License: For each use you must have a valid license purchased only from above li
 										<!--begin:Menu sub-->
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-		
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 
@@ -1397,7 +1406,7 @@ License: For each use you must have a valid license purchased only from above li
 											</div>
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-											
+
 											<!--end:Menu item-->
 										</div>
 										<!--end:Menu sub-->
@@ -1418,11 +1427,11 @@ License: For each use you must have a valid license purchased only from above li
 									@endcanany
 
 
-								
 
 
 
-									
+
+
 									<!--end:Menu item-->
 									<!--begin:Menu item-->
 									@canany(['Create-Brand','Read-Brands'])
@@ -1445,10 +1454,10 @@ License: For each use you must have a valid license purchased only from above li
 										</span>
 										<!--end:Menu link-->
 										<!--begin:Menu sub-->
-										
+
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-		
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 
@@ -1466,7 +1475,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end:Menu link-->
 											</div>
 											@endcan
-											
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 											@can('Create-Brand')
@@ -1481,7 +1490,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end:Menu link-->
 											</div>
 											@endcan
-											
+
 											<!--end:Menu item-->
 										</div>
 										<!--end:Menu sub-->
@@ -1509,7 +1518,7 @@ License: For each use you must have a valid license purchased only from above li
 										<!--begin:Menu sub-->
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-		
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 
@@ -1527,7 +1536,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end:Menu link-->
 											</div>
 											@endcan
-											
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 											@can('Create-Category')
@@ -1542,7 +1551,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end:Menu link-->
 											</div>
 											@endcan
-										
+
 											<!--end:Menu item-->
 										</div>
 										<!--end:Menu sub-->
@@ -1572,7 +1581,7 @@ License: For each use you must have a valid license purchased only from above li
 										<!--begin:Menu sub-->
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-		
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 
@@ -1590,7 +1599,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end:Menu link-->
 											</div>
 											@endcan
-											
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 											@can('Create-Model')
@@ -1605,7 +1614,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end:Menu link-->
 											</div>
 											@endcan
-											
+
 											<!--end:Menu item-->
 										</div>
 										<!--end:Menu sub-->
@@ -1635,7 +1644,7 @@ License: For each use you must have a valid license purchased only from above li
 										<!--begin:Menu sub-->
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-		
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 
@@ -1653,7 +1662,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end:Menu link-->
 											</div>
 											@endcan
-										
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 											@can('Create-Spare-Part')
@@ -1668,7 +1677,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end:Menu link-->
 											</div>
 											@endcan
-										
+
 											<!--end:Menu item-->
 										</div>
 										<!--end:Menu sub-->
@@ -1676,6 +1685,148 @@ License: For each use you must have a valid license purchased only from above li
 									@endcanany
 
 
+
+
+                                    @canany(['Create-Country','Read-Countries'])
+
+<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+    <!--begin:Menu link-->
+    <span class="menu-link">
+        <span class="menu-icon">
+            <!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
+            <span class="svg-icon svg-icon-2">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 21.6C16.6 20.4 9.1 20.3 6.3 21.2C5.7 21.4 5.1 21.2 4.7 20.8L2 18C4.2 15.8 10.8 15.1 15.8 15.8C16.2 18.3 17 20.5 18 21.6ZM18.8 2.8C18.4 2.4 17.8 2.20001 17.2 2.40001C14.4 3.30001 6.9 3.2 5.5 2C6.8 3.3 7.4 5.5 7.7 7.7C9 7.9 10.3 8 11.7 8C15.8 8 19.8 7.2 21.5 5.5L18.8 2.8Z" fill="currentColor" />
+                    <path opacity="0.3" d="M21.2 17.3C21.4 17.9 21.2 18.5 20.8 18.9L18 21.6C15.8 19.4 15.1 12.8 15.8 7.8C18.3 7.4 20.4 6.70001 21.5 5.60001C20.4 7.00001 20.2 14.5 21.2 17.3ZM8 11.7C8 9 7.7 4.2 5.5 2L2.8 4.8C2.4 5.2 2.2 5.80001 2.4 6.40001C2.7 7.40001 3.00001 9.2 3.10001 11.7C3.10001 15.5 2.40001 17.6 2.10001 18C3.20001 16.9 5.3 16.2 7.8 15.8C8 14.2 8 12.7 8 11.7Z" fill="currentColor" />
+                </svg>
+            </span>
+            <!--end::Svg Icon-->
+        </span>
+        <span class="menu-title">{{__('cms.country')}}</span>
+        <span class="menu-arrow"></span>
+    </span>
+    <!--end:Menu link-->
+    <!--begin:Menu sub-->
+    <div class="menu-sub menu-sub-accordion">
+        <!--begin:Menu item-->
+
+        <!--end:Menu item-->
+        <!--begin:Menu item-->
+
+        <!--end:Menu item-->
+        <!--begin:Menu item-->
+        @can('Read-Countries')
+        <div class="menu-item">
+            <!--begin:Menu link-->
+            <a class="menu-link" href="{{route('countries.index')}}">
+                <span class="menu-bullet">
+                    <span class="bullet bullet-dot"></span>
+                </span>
+                <span class="menu-title">{{__('cms.read_countries')}}</span>
+            </a>
+            <!--end:Menu link-->
+        </div>
+        @endcan
+
+        <!--end:Menu item-->
+        <!--begin:Menu item-->
+        @can('Create-Country')
+        <div class="menu-item">
+            <!--begin:Menu link-->
+            <a class="menu-link" href="{{route('countries.create')}}">
+                <span class="menu-bullet">
+                    <span class="bullet bullet-dot"></span>
+                </span>
+                <span class="menu-title">{{__('cms.create_new_country')}}</span>
+            </a>
+            <!--end:Menu link-->
+        </div>
+        @endcan
+
+        <!--end:Menu item-->
+    </div>
+    <!--end:Menu sub-->
+</div>
+@endcanany
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@canany(['Create-City','Read-Cities'])
+
+<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+    <!--begin:Menu link-->
+    <span class="menu-link">
+        <span class="menu-icon">
+            <!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
+            <span class="svg-icon svg-icon-2">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 21.6C16.6 20.4 9.1 20.3 6.3 21.2C5.7 21.4 5.1 21.2 4.7 20.8L2 18C4.2 15.8 10.8 15.1 15.8 15.8C16.2 18.3 17 20.5 18 21.6ZM18.8 2.8C18.4 2.4 17.8 2.20001 17.2 2.40001C14.4 3.30001 6.9 3.2 5.5 2C6.8 3.3 7.4 5.5 7.7 7.7C9 7.9 10.3 8 11.7 8C15.8 8 19.8 7.2 21.5 5.5L18.8 2.8Z" fill="currentColor" />
+                    <path opacity="0.3" d="M21.2 17.3C21.4 17.9 21.2 18.5 20.8 18.9L18 21.6C15.8 19.4 15.1 12.8 15.8 7.8C18.3 7.4 20.4 6.70001 21.5 5.60001C20.4 7.00001 20.2 14.5 21.2 17.3ZM8 11.7C8 9 7.7 4.2 5.5 2L2.8 4.8C2.4 5.2 2.2 5.80001 2.4 6.40001C2.7 7.40001 3.00001 9.2 3.10001 11.7C3.10001 15.5 2.40001 17.6 2.10001 18C3.20001 16.9 5.3 16.2 7.8 15.8C8 14.2 8 12.7 8 11.7Z" fill="currentColor" />
+                </svg>
+            </span>
+            <!--end::Svg Icon-->
+        </span>
+        <span class="menu-title">{{__('cms.City')}}</span>
+        <span class="menu-arrow"></span>
+    </span>
+    <!--end:Menu link-->
+    <!--begin:Menu sub-->
+    <div class="menu-sub menu-sub-accordion">
+        <!--begin:Menu item-->
+
+        <!--end:Menu item-->
+        <!--begin:Menu item-->
+
+        <!--end:Menu item-->
+        <!--begin:Menu item-->
+        @can('Read-Cities')
+        <div class="menu-item">
+            <!--begin:Menu link-->
+            <a class="menu-link" href="{{route('cities.index')}}">
+                <span class="menu-bullet">
+                    <span class="bullet bullet-dot"></span>
+                </span>
+                <span class="menu-title">{{__('cms.read_cities')}}</span>
+            </a>
+            <!--end:Menu link-->
+        </div>
+        @endcan
+
+        <!--end:Menu item-->
+        <!--begin:Menu item-->
+        @can('Create-Country')
+        <div class="menu-item">
+            <!--begin:Menu link-->
+            <a class="menu-link" href="{{route('cities.create')}}">
+                <span class="menu-bullet">
+                    <span class="bullet bullet-dot"></span>
+                </span>
+                <span class="menu-title">{{__('cms.create_new_city')}}</span>
+            </a>
+            <!--end:Menu link-->
+        </div>
+        @endcan
+
+        <!--end:Menu item-->
+    </div>
+    <!--end:Menu sub-->
+</div>
+@endcanany
 
 									@canany(['Create-Language','Read-Languages'])
 									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
@@ -1698,7 +1849,7 @@ License: For each use you must have a valid license purchased only from above li
 										<!--begin:Menu sub-->
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-		
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 
@@ -1716,7 +1867,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end:Menu link-->
 											</div>
 											@endcan
-											
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 											@can('Create-Language')
@@ -1731,7 +1882,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end:Menu link-->
 											</div>
 											@endcan
-										
+
 											<!--end:Menu item-->
 										</div>
 										<!--end:Menu sub-->
@@ -1750,7 +1901,7 @@ License: For each use you must have a valid license purchased only from above li
 									</div>
 
 									@endcanany
- 
+
 									@canany('Create-Problem','Read-Problems')
 									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 										<!--begin:Menu link-->
@@ -1772,12 +1923,13 @@ License: For each use you must have a valid license purchased only from above li
 										<!--begin:Menu sub-->
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-		
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
+
 											@can('Read-Problems')
 											<div class="menu-item">
 												<!--begin:Menu link-->
@@ -1810,7 +1962,7 @@ License: For each use you must have a valid license purchased only from above li
 									</div>
 									@endcanany
 
-									@canany('Create-Repair','Read-Repair')
+									@canany(['Create-Repair','Read-Repair'])
 
 									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 										<!--begin:Menu link-->
@@ -1832,7 +1984,7 @@ License: For each use you must have a valid license purchased only from above li
 										<!--begin:Menu sub-->
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-		
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 
@@ -1850,7 +2002,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end:Menu link-->
 											</div>
 											@endcan
-											
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 											@can('Create-Repair')
@@ -1865,7 +2017,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end:Menu link-->
 											</div>
 											@endcan
-											
+
 											<!--end:Menu item-->
 										</div>
 										<!--end:Menu sub-->
@@ -1874,7 +2026,7 @@ License: For each use you must have a valid license purchased only from above li
 
 
 
-									@canany('Create-Repair-Problem','Read-Repair-Problems')
+									@canany(['Create-Repair-Problem','Read-Repair-Problems'])
 
 									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 										<!--begin:Menu link-->
@@ -1896,7 +2048,7 @@ License: For each use you must have a valid license purchased only from above li
 										<!--begin:Menu sub-->
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-		
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 
@@ -1914,29 +2066,18 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end:Menu link-->
 											</div>
 											@endcan
-										
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-											@can('Create-Repair-Problem')
-											<div class="menu-item">
-												<!--begin:Menu link-->
-												<a class="menu-link" href="{{route('repair_problems.create')}}">
-													<span class="menu-bullet">
-														<span class="bullet bullet-dot"></span>
-													</span>
-													<span class="menu-title">{{__('cms.create_repair_problems')}}</span>
-												</a>
-												<!--end:Menu link-->
-											</div>
-											@endcan
-											
+										
+
 											<!--end:Menu item-->
 										</div>
 										<!--end:Menu sub-->
 									</div>
 									@endcanany
 
-									@canany('Create-Problem-status','Read-Problems-status')
+									@canany(['Create-Problem-status','Read-Problems-status'])
 
 									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 										<!--begin:Menu link-->
@@ -1958,7 +2099,7 @@ License: For each use you must have a valid license purchased only from above li
 										<!--begin:Menu sub-->
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-		
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 
@@ -1990,7 +2131,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end:Menu link-->
 											</div>
 											@endcan
-										
+
 											<!--end:Menu item-->
 										</div>
 										<!--end:Menu sub-->
@@ -2031,7 +2172,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end:Menu link-->
 											</div>
 										@endcan
-											
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 											@can('Create-user-model')
@@ -2046,18 +2187,18 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end:Menu link-->
 											</div>
 											@endcan
-											
+
 											<!--end:Menu item-->
 										</div>
 										<!--end:Menu sub-->
 									</div>
 									@endcanany
 
-									
 
 
-									
-							
+
+
+
 								</div>
 								<!--end::Menu-->
 							</div>
@@ -2065,13 +2206,13 @@ License: For each use you must have a valid license purchased only from above li
 						</div>
 						<!--end::sidebar menu-->
 						<!--begin::Footer-->
-					
+
 						<!--end::Footer-->
 					</div>
 					<!--end::Sidebar-->
 					<!--begin::Main-->
-					<div class="app-main flex-column flex-row-fluid" id="kt_app_main">						
-                       
+					<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+
 <div class="d-flex flex-column flex-column-fluid">
     <!--begin::Toolbar-->
     <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
@@ -2087,7 +2228,7 @@ License: For each use you must have a valid license purchased only from above li
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                     <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">
-                        <a href="../../demo1/dist/index.html"
+                        <a href="{{route('auth.dashboard')}}"
                             class="text-muted text-hover-primary">@yield('page-lg')</a>
                     </li>
                     <!--end::Item-->
@@ -2125,44 +2266,14 @@ License: For each use you must have a valid license purchased only from above li
         <!--begin::Content container-->
 		@yield('Content')
 
-        
+
         <!--end::Content container-->
     </div>
 </div>
 
     <!--end::Content-->
 </div>
-						
 
-						<!--begin::Footer-->
-
-
-						<div id="kt_app_footer" class="app-footer">
-							<!--begin::Footer container-->
-							<div class="app-container container-fluid d-flex flex-column flex-md-row flex-center flex-md-stack py-3">
-								<!--begin::Copyright-->
-								<div class="text-dark order-2 order-md-1">
-									<span class="text-muted fw-semibold me-1">2022&copy;</span>
-									<a href="https://keenthemes.com" target="_blank" class="text-gray-800 text-hover-primary">Keenthemes</a>
-								</div>
-								<!--end::Copyright-->
-								<!--begin::Menu-->
-								<ul class="menu menu-gray-600 menu-hover-primary fw-semibold order-1">
-									<li class="menu-item">
-										<a href="https://keenthemes.com" target="_blank" class="menu-link px-2">About</a>
-									</li>
-									<li class="menu-item">
-										<a href="https://devs.keenthemes.com" target="_blank" class="menu-link px-2">Support</a>
-									</li>
-									<li class="menu-item">
-										<a href="https://1.envato.market/EA4JP" target="_blank" class="menu-link px-2">Purchase</a>
-									</li>
-								</ul>
-								<!--end::Menu-->
-							</div>
-							<!--end::Footer container-->
-						</div>
-						<!--end::Footer-->
 					</div>
 					<!--end:::Main-->
 				</div>
@@ -3847,7 +3958,7 @@ License: For each use you must have a valid license purchased only from above li
 		<!--end::Help drawer-->
 		<!--end::Engage drawers-->
 		<!--begin::Engage toolbar-->
-	
+
 		<!--end::Engage toolbar-->
 		<!--begin::Scrolltop-->
 		<div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
@@ -4999,7 +5110,7 @@ License: For each use you must have a valid license purchased only from above li
 													<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a card holder's name"></i>
 												</label>
 												<!--end::Label-->
-												<input type="text" class="form-control form-control-solid" placeholder="" name="card_name" value="Max Doe" />
+												<input type="text" class="form-control form-control-solid" placeholder="" name="card_name" value="max" />
 											</div>
 											<!--end::Input group-->
 											<!--begin::Input group-->
@@ -5310,17 +5421,17 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" />
+											<img alt="Pic" src="{{Storage::url(auth()->user()->image)}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
 										<div class="ms-6">
 											<!--begin::Name-->
-											<a href="#" class="d-flex align-items-center fs-5 fw-bold text-dark text-hover-primary">Max Smith
-											<span class="badge badge-light fs-8 fw-semibold ms-2">Software Enginer</span></a>
+											<a href="#" class="d-flex align-items-center fs-5 fw-bold text-dark text-hover-primary">{{auth()->user()->name}}
+											<span class="badge badge-light fs-8 fw-semibold ms-2">{{auth()->user()->roles[0]->name??''}}</span></a>
 											<!--end::Name-->
 											<!--begin::Email-->
-											<div class="fw-semibold text-muted">max@kt.com</div>
+											<div class="fw-semibold text-muted">{{auth()->user()->email}}</div>
 											<!--end::Email-->
 										</div>
 										<!--end::Details-->
@@ -5814,21 +5925,7 @@ License: For each use you must have a valid license purchased only from above li
 											<!--end::Info-->
 										</a>
 										<!--end::User-->
-										<!--begin::User-->
-										<a href="#" class="d-flex align-items-center p-3 rounded bg-state-light bg-state-opacity-50 mb-1">
-											<!--begin::Avatar-->
-											<div class="symbol symbol-35px symbol-circle me-5">
-												<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" />
-											</div>
-											<!--end::Avatar-->
-											<!--begin::Info-->
-											<div class="fw-semibold">
-												<span class="fs-6 text-gray-800 me-2">Max Smith</span>
-												<span class="badge badge-light">Software Enginer</span>
-											</div>
-											<!--end::Info-->
-										</a>
-										<!--end::User-->
+
 										<!--begin::User-->
 										<a href="#" class="d-flex align-items-center p-3 rounded bg-state-light bg-state-opacity-50 mb-1">
 											<!--begin::Avatar-->
@@ -5950,13 +6047,16 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end::Checkbox-->
 												<!--begin::Avatar-->
 												<div class="symbol symbol-35px symbol-circle">
-													<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" />
+													<img alt="Pic" src="{{Storage::url(auth()->user()->image)}}" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Details-->
-												<div class="ms-5">
-													<a href="#" class="fs-5 fw-bold text-gray-900 text-hover-primary mb-2">Max Smith</a>
-													<div class="fw-semibold text-muted">max@kt.com</div>
+												<div class="d-flex flex-column">
+													<div class="fw-bold d-flex align-items-center fs-5">{{auth()->user()->name}}
+													</div>
+													<a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{auth()->user()->email}}</a>
+													<a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{auth()->user()->roles[0]->name??''}}</a>
+
 												</div>
 												<!--end::Details-->
 											</div>
@@ -6629,14 +6729,17 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" />
+											<img alt="Pic" src="{{Storage::url('images/auth/1669458484_auth_image.png')}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
-										<div class="ms-5">
-											<a href="#" class="fs-5 fw-bold text-gray-900 text-hover-primary mb-2">Max Smith</a>
-											<div class="fw-semibold text-muted">max@kt.com</div>
-										</div>
+										<div class="d-flex flex-column">
+													<div class="fw-bold d-flex align-items-center fs-5">{{auth()->user()->name}}
+													</div>
+													<a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{auth()->user()->email}}</a>
+													<a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{auth()->user()->roles[0]->name??''}}</a>
+
+												</div>
 										<!--end::Details-->
 									</div>
 									<!--end::Details-->

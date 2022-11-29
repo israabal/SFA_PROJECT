@@ -47,9 +47,10 @@
                     </label>
                     <!--end::Label-->
                     <!--begin::Input-->
-                    <div class="col-lg-8 fv-row">
+                    <div class="col-lg-12 fv-row">
                         <select class="form-select form-select-solid form-select-lg" data-control="select2"
-                            name="app_status" id="app_status" data-select2-id="select2-data-10-uyhn">
+                        data-select2-id="select2-data-10-uyhn"
+                            name="app_status" id="app_status" >
                             <option selected disabled data-select2-id="select2-data-12-0cmm">{{__('cms.choose')}}</option>
                             <option value="pending"> {{__('cms.pending')}}</option>
                             <option value="accepted"> {{__('cms.accepted')}} </option>
@@ -68,13 +69,16 @@
                             <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"
                                 aria-label="Enter the user name." data-bs-original-title="Enter the user name."
                                 data-kt-initialized="1"></i>
-                        </label>
+                        </label></div>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <div class="col-lg-8 fv-row">
-                            <select id="technecal_id" name=" technecal_id"
-                                class="form-select form-select-solid form-select-lg" data-control="select2"
-                          data-select2-id="select2-data-10-uyhn">
+                        <div class="col-lg-12 fv-row">
+                            <select
+                            class="form-select form-select-solid form-select-lg" data-control="select2"
+                            data-select2-id="select2-data-10-uyhn"
+
+                            id="technecal_id" name=" technecal_id"
+                              >
                                 @foreach ($users as $user)
                                 <option data-kt-flag="flags/indonesia.svg" value="{{ $user->id }}">{{$user->name}}
                                 </option>
@@ -104,7 +108,7 @@
                         </label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <div class="col-lg-8 fv-row">
+                        <div class="col-lg-12 fv-row">
                             <select id="problem_id" name=" problem_id"
                                 class="form-select form-select-solid form-select-lg" data-control="select2"
                                 data-select2-id="select2-data-10-uyhn">

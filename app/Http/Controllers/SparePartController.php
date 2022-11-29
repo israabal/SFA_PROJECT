@@ -18,8 +18,16 @@ class SparePartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        // $this->authorizeResource(SparePart::class, 'sparpart');
+    }
     public function index()
     {
+
+        $this->authorize('viewAny', SparePart::class);
+
         $spareparts = SparePart::withCount('smodels')->withCount('spareparttranslation')->get();
 
         return response()->view('cms.spare_part.index', ['spareparts' => $spareparts]);     }
@@ -31,6 +39,8 @@ class SparePartController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', SparePart::class);
+
         $languages=Language::all();
         $models = SModel::where('active', '=', true)->get();
        return response()->view('cms.spare_part.create', ['models' => $models,'languages'=>$languages]);
@@ -44,6 +54,8 @@ class SparePartController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', SparePart::class);
+
         $validator = Validator($request->all(), [
             'oem_part_number' => 'required|string|min:3',
             'katun_part_number' => 'required|string|min:3',
@@ -91,7 +103,7 @@ class SparePartController extends Controller
                     'over_view'=>$request->input('over_view'),
                     'language_id'=>$request->input('language_id'),
                     'spare_part_id'=>$request->input('spare_part_id'),
-                
+
                 ],);
             return response()->json(
                 ['message' => $isSaved ? 'Saved successfully' : 'Save failed!'],
@@ -109,7 +121,7 @@ class SparePartController extends Controller
     public function SparepartDetails(Request $request,  $id)
     {
         $sparepart=SparePart::Where('id',$id)->first();
-  
+
         return response()->view('cms.spare_part.sparepart-details', ['sparepart' => $sparepart]);
     }
     public function editSparepartModels(Request $request,  $id)
@@ -141,7 +153,7 @@ class SparePartController extends Controller
         ]);
 
         if (!$validator->fails()) {
-            $sparePartModels=SparePartModel::where('s_model_id',$request->get('s_model_id'))->where('spare_part_id',$request->get('sparePart_id'))->first();      
+            $sparePartModels=SparePartModel::where('s_model_id',$request->get('s_model_id'))->where('spare_part_id',$request->get('sparePart_id'))->first();
             if ($sparePartModels==null) {
                 $this->addModels($request->get('sparePart_id'),$request->get('s_model_id'));
             } else {
@@ -195,6 +207,8 @@ class SparePartController extends Controller
     public function edit($id)
     {
         $sparePart=SparePart::where('id',$id)->first();
+        $this->authorize('update', $sparePart);
+
 
         $languages = Language::where('active', '=', true)->get();
         return response()->view('cms.spare_part.edit', ['sparePart' => $sparePart, 'languages' => $languages]);
@@ -217,8 +231,6 @@ class SparePartController extends Controller
             'price'=>'required|string|min:3',
             'value'=>'required|string|min:3',
             'unit'=>'required|string|min:3',
-
-
             'language_id'=>'required|numeric|exists:languages,id',
             'image_1' =>'nullable', 'image|mimes:png,jpg,jpeg',
             'image_2' => 'nullable', 'image|mimes:png,jpg,jpeg',
@@ -233,6 +245,8 @@ class SparePartController extends Controller
 
         if (!$validator->fails()) {
             $sparePart=SparePart::where('id',$id)->first();
+            $this->authorize('update', $sparePart);
+
 
             $sparePart->oem_part_number = $request->input('oem_part_number');
             $sparePart->katun_part_number = $request->input('katun_part_number');
@@ -255,7 +269,7 @@ class SparePartController extends Controller
                     'name'=>$request->input('name'),
                     'over_view'=>$request->input('over_view'),
                     'language_id'=>$request->input('language_id'),
-                
+
                 ],);
             return response()->json(
                 ['message' => $isSaved ? 'Updated successfully' : 'Updated failed!'],
@@ -276,16 +290,18 @@ class SparePartController extends Controller
     public function destroy($id)
     {
         $sparePart=SparePart::where('id',$id)->first();
+        $this->authorize('delete', $sparePart);
+
 
         $deleted = $sparePart->delete();
         if ($deleted) {
             $this->deleteImages($sparePart);
         }
-     
+
         return response()->json(
             ['message' => $deleted ? __('cms.Deleted_successfully') : __('cms.Delete_failed!')],
             $deleted ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST
-        ); 
+        );
        }
 
 
@@ -296,7 +312,7 @@ class SparePartController extends Controller
                $image->delete();
            }
        }
-   
+
        private function saveImage(Request $request, SparePart $sparePart, String $key, bool $update = false)
        {
            if ($request->hasFile($key)) {
@@ -310,7 +326,7 @@ class SparePartController extends Controller
                }
                $imageName = time() . '_' . str_replace(' ', '', $sparePart->name) . "_model_$key." . $request->file($key)->extension();
                $request->file($key)->storePubliclyAs('spareParts', $imageName, ['disk' => 'public']);
-   
+
                $image = new Image();
                $image->name = $imageName;
                $image->url = 'spareParts/' . $imageName;

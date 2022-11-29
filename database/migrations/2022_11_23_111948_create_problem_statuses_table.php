@@ -14,6 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('problem_statuses', function (Blueprint $table) {
+            $table->id();
             $table->string('name_en');
             $table->string('name_ar');
             $table->boolean('status')->default(true);
