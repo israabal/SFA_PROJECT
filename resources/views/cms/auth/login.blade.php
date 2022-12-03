@@ -151,7 +151,9 @@ License: For each use you must have a valid license purchased only from above li
                                 </button>
                             </div>
                             <!--end::Submit button-->
+                            <a href="{{ route('customer.register') }}">{{ __('cms.register_now') }}</a>
                         </form>
+
                         <!--end::Form-->
                     </div>
                     <!--end::Card body-->

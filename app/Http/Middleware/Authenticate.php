@@ -12,11 +12,18 @@ class Authenticate extends Middleware
      * @param  \Illuminate\Http\Request  $request
      * @return string|null
      */
-    protected function redirectTo($request)
-    {
-        $guard = session('guard')??'admin';
-        if (!$request->expectsJson()) {
-            return route('cms.login', $guard);
-        }
-    }
+
+
+
+        protected function redirectTo($request)
+{
+    $guard = session('guard')??'admin';
+
+if (! $request->expectsJson()) {
+
+     return route('cms.login' ,$guard, app()->getLocale()); //getLocale probably return empty value
+
+ }
 }
+    }
+

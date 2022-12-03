@@ -157,7 +157,7 @@ return [
     'value' => 'Value',
     'unit' => 'Unit',
     'used' => 'USED',
-
+'Sign_Up'=>'Sign Up',
     'problem' => 'problem',
     'problem_list' => 'Problem List',
     'create_problem' => 'Create Problem',
@@ -166,7 +166,7 @@ return [
     'edit_problem' => 'Edit Problem',
     'details' => 'Details',
     'repair_problems' => 'Repair Problems',
-
+'register_now'=>'register now',
     'repair' => 'Repair',
     'repair_list' => 'Repair List',
     'create_repair' => 'Create Repair',

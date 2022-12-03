@@ -283,7 +283,7 @@
                                           <tr class="odd">
                                               <td>{{$loop->index+1}}</td>
                                               <td>
-                                                  <span class="fw-bold">{{$repair->user->name}}</span>
+                                                  <span class="fw-bold">{{$repair->user->name??''}}</span>
                                               </td>
                                               <td> {{$repair->problem->details ??'لا يوجد تفاصيل'}}</td>
 
@@ -450,16 +450,16 @@
                           <div class="card-title">
                           </div>
 
-                          <div class="card-toolbar flex-row-fluid  gap-5">
+                          <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
+                            <button type="button" class="btn btn-primary"
+                            data-bs-toggle="modal"
+                             data-bs-target="#kt_modal_add_customer">{{__('cms.create_problem')}} </button>
 
-                              <!--begin::Add product-->
-                              {{-- <a onclick="performStore()"
-                    class="btn btn-primary">{{__('cms.create_problem')}} </a> --}}
 
+                            <!--begin::Add product-->
 
-                              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer">{{__('cms.create_problem')}} </button>
-                              <!--end::Add product-->
-                          </div>
+                            <!--end::Add product-->
+                        </div>
                           <!--end::Card toolbar-->
                       </div>
                       <!--end::Card header-->
@@ -474,6 +474,7 @@
                                           <!--begin::Table row-->
                                           <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                               <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users" rowspan="1" colspan="1" aria-label="User: activate to sort column ascending" style="width: 206.375px;">#</th>
+                                              <th>{{__('cms.choose')}}</th>
 
                                               <th class="min-w-200px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="Product: activate to sort column ascending" style="width: 206.828px;">{{__('cms.product_model')}}</th>
 
@@ -488,9 +489,10 @@
                                       <tbody class="fw-semibold text-gray-600">
                                           <tr class="odd">
                                               <td>{{$loop->index+1}}</td>
+
                                               <td>
                                                   <div class="form-group clearfix align-middle">
-                                                      <div class="icheck-success d-inline" id="model_id">
+                                                      <div class="icheck-success d-inline" id="model_id" >
                                                           <input class="form-check-input " type="checkbox" id="model_{{$user_model->id}}">
                                                           <label class="form-check-label ms-3" for="model_{{$user_model->id}}"></label>
                                                       </div>

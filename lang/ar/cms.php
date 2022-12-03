@@ -37,7 +37,7 @@ return [
     'spareparts' => 'قطع الغيار',
     'read_sparepart' => 'قراءة قطع الغيار',
     'create_language' => ' اضافة لغة',
-
+    'register_now'=>'انشاء حساب جديد',
     'customer' => 'الزبائن',
     'user_model' => 'نموذج المستخدم',
     'active' => 'فعال',

@@ -1904,7 +1904,7 @@ License: For each use you must have a valid license purchased only from above li
 
 
 
-									@canany(['Create-Repair','Read-Repair'])
+									@canany(['Read-Repair'])
 
 									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 										<!--begin:Menu link-->
@@ -1947,18 +1947,7 @@ License: For each use you must have a valid license purchased only from above li
 
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-											@can('Create-Repair')
-											<div class="menu-item">
-												<!--begin:Menu link-->
-												<a class="menu-link" href="{{route('repairs.create')}}">
-													<span class="menu-bullet">
-														<span class="bullet bullet-dot"></span>
-													</span>
-													<span class="menu-title">{{__('cms.create_repairs')}}</span>
-												</a>
-												<!--end:Menu link-->
-											</div>
-											@endcan
+
 
 											<!--end:Menu item-->
 										</div>
@@ -2162,7 +2151,7 @@ License: For each use you must have a valid license purchased only from above li
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item">
-                        <span class="bullet bg-gray-400 w-5px h-2px">@yield('main-pg-md')</span>
+                        <span class="bullet bg-gray-400 w-5px h-2px"></span>
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->

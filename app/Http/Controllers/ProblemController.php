@@ -24,7 +24,10 @@ class ProblemController extends Controller
     }
     public function index()
     {
-        $problems=Problem::withCount('models')->get();
+
+        $id=auth('user')->user()->id;
+        $problems = Problem::Where('user_id',$id)->withCount('models')->get();
+        // $problems=Problem::withCount('models')->where(auth('user')->user()->id,'user_id')->get();
         $this->authorize('viewAny', Problem::class);
 
 
@@ -66,6 +69,10 @@ class ProblemController extends Controller
             $problem = new Problem();
             $problem->details=$request->input('description');
             $problem->user_id = auth('user')->user()->id;
+            $problem->country_id = auth('user')->user()->country_id;
+            $problem->city_id = auth('user')->user()->city_id;
+
+
             $isSaved=$problem->save();
             if( $isSaved){
                 foreach ($request->input('models') as $model_id) {
