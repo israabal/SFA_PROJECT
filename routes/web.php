@@ -80,6 +80,10 @@ Route::group(
         Route::prefix('cms')->middleware(['auth:user,admin'])->group(function () {
             Route::resource('/smodels', SModelController::class);
             Route::resource('/spareparts', SparePartController::class);
+
+
+
+
             Route::get('/UserModel/category/{id}/brand/{branId}', [CategoryController::class, 'getModel']);
 
 
@@ -106,6 +110,9 @@ Route::group(
             Route::resource('/brands', BrandController::class);
             Route::resource('/users', UserController::class);
 
+
+
+
             Route::resource('roles', RoleController::class);
 
             Route::resource('permissions/role', RolePermissionController::class);
@@ -113,9 +120,11 @@ Route::group(
             Route::resource('languages', LanguageController::class);
 
 
+
             Route::post('user/change-status/{id}', [UserController::class, 'UserActive'])->name('users.UserActive');
         });
         Route::prefix('cms')->middleware('auth:admin,user')->group(function () {
+
 
 
 
@@ -132,13 +141,13 @@ Route::group(
 
 
 
+
             Route::resource('problems',ProblemController::class);
             Route::resource('repairs',RepairController::class);
             Route::resource('repair_problems',RepairProblemController::class);
             Route::resource('repair_spare_part', RepairSparePartController::class);
 
-
-            Route::get('repair_problem/{id}', [RepairProblemController::class, 'repairProblem'])->name('repair.problem');
+                        Route::get('repair_problem/{id}', [RepairProblemController::class, 'repairProblem'])->name('repair.problem');
 
 
 
@@ -152,11 +161,13 @@ Route::group(
 
 
         });
-              Route::prefix('cms/')->middleware(['auth:user'])->group(function () {
-                Route::get('verify', [EmailVerificationController::class, 'notice'])->name('verification.notice');
-                Route::get('send-verification', [EmailVerificationController::class, 'send'])->name('verification.send');
-                Route::get('verify/{id}/{hash}', [EmailVerificationControllerr::class, 'verify'])->middleware('signed')->name('verification.verify');
-            });
+
+            //   Route::prefix('cms/')->middleware(['auth:user'])->group(function () {
+            //     Route::get('verify', [EmailVerificationController::class, 'notice'])->name('verification.notice');
+            //     Route::get('send-verification', [EmailVerificationController::class, 'send'])->name('verification.send');
+            //     Route::get('verify/{id}/{hash}', [EmailVerificationControllerr::class, 'verify'])->middleware('signed')->name('verification.verify');
+            // });
+
     }
 
 

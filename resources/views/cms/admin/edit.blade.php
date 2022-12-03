@@ -72,6 +72,41 @@
                     <!--end::Image input wrapper-->
                 </div>
                 <!--end::Input group-->
+                   <!--begin::Input group-->
+
+   <div class="col-6">
+    <div class="fv-row mb-7 fv-plugins-icon-container">
+        <!--begin::Label-->
+        <label class="fs-6 fw-semibold form-label mt-3">
+            <span class="required">
+                {{__('cms.guard_name')}} </span>
+</div>
+
+    <!--end::Label-->
+    <!--begin::Col-->
+    <div class="col-lg-12 fv-row">
+        <!--begin::Input-->
+        <select id="role_id"  class=" form-select form-select-solid form-select-lg" data-control="select2"
+        data-select2-id="select2-data-10-uyhn"
+        name="role_id" aria-label={{__('cms.role')}} data-control="select2" data-placeholder={{__('cms.roles')}}>
+           <option  value="">{{__('cms.roles')}} </option>
+           @foreach ($roles as $role)
+           <option  data-kt-flag="flags/indonesia.svg" value="{{ $role->id }}">{{$role->name}}</option>
+
+           @endforeach
+
+       </select>
+
+
+        <!--end::Input-->
+        <!--begin::Hint-->
+        <div class="form-text">"{{__('cms.select-guard')}}"</div>
+        <!--end::Hint-->
+    </div>
+    <!--end::Col-->
+</div>
+<!--end::Input group-->
+
                 <!--begin::Input group-->
                 <div class="fv-row mb-7 fv-plugins-icon-container">
                     <!--begin::Label-->
@@ -84,7 +119,7 @@
                     <input type="text" class="form-control form-control-solid" id="name" value="{{$admin->name}}">
                     <!--end::Input-->
                 <div class="fv-plugins-message-container invalid-feedback"></div></div>
-            
+
                 <div class="fv-row mb-7 fv-plugins-icon-container">
                     <!--begin::Label-->
                     <label class="fs-6 fw-semibold form-label mt-3">
@@ -101,7 +136,7 @@
                     <!--begin::Switch-->
                     <label class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
                         <!--begin::Input-->
-                        <input class="form-check-input" id="active" type="checkbox" 
+                        <input class="form-check-input" id="active" type="checkbox"
                         @if($admin->active) checked @endif >
 
                         <!--end::Input-->
@@ -140,11 +175,13 @@
 </script>
 <script>
      function performUpdate(id) {
-   
+
    var formData = new FormData();
        formData.append('name',document.getElementById('name').value);
        formData.append('email',document.getElementById('email').value);
        formData.append('active', document.getElementById('active').checked ?1:0);
+       formData.append('role_id', document.getElementById('role_id').value);
+
 
        if(document.getElementById('admin_image').files[0] != undefined) {
            formData.append('image',document.getElementById('admin_image').files[0]);

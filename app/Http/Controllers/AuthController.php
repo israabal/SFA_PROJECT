@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,20 +30,40 @@ class AuthController extends Controller
         }
     }
     public function login(Request $request)
+
     {
         $validator = Validator($request->all(), [
             'email' => 'required|string',
             'password' => 'required|string|min:3',
             'remember' => 'required|boolean',
-        ]);
 
+        ]);
         $guard = session('guard');
         $credentials = ['email' => $request->get('email'), 'password' => $request->get('password')];
         if (!$validator->fails()) {
-            if (Auth::guard($guard)->attempt($credentials, $request->get('remember'))) {
-                return response()->json(['message' => 'Logged in successfully'], Response::HTTP_OK);
+if($guard =='user'){
+    $user=User::where('email', $request->get('email'))->first();
+
+}else{
+    $user=Admin::where('email', $request->get('email'))->first();
+
+}
+            if ($user->status) {
+
+                if (Auth::guard($guard)->attempt($credentials, $request->get('remember'))) {
+                    if (auth('user')->user()->user_type == 'customers' && auth('user')->user()->start == false) {
+                        // return response()->view('cms.profile.profile_view');
+                        return response()->json(Response::HTTP_CREATED);
+                    } else {
+
+                        return response()->json(['message' => 'Logged in successfully'], Response::HTTP_OK);
+                    }
+                } else {
+                    return response()->json(['message' => 'Error credentials, please try again'], Response::HTTP_BAD_REQUEST);
+                }
+
             } else {
-                return response()->json(['message' => 'Error credentials, please try again'], Response::HTTP_BAD_REQUEST);
+                return response()->json(['message' => 'You Are Blocked In System'], Response::HTTP_BAD_REQUEST);
             }
         } else {
             return response()->json(['message' => $validator->getMessageBag()->first()], Response::HTTP_BAD_REQUEST);

@@ -21,7 +21,8 @@ class ProblemPolicy
     {
         return $user->hasPermissionTo('Read-Problems')
         ? $this->allow()
-        : $this->deny('You have no permission for this action'); 
+        : $this->deny('You have no permission for this action');
+
     }
 
     /**
@@ -46,7 +47,8 @@ class ProblemPolicy
     {
             return $user->hasPermissionTo('Create-Problem')
             ? $this->allow()
-            : $this->deny('You have no permission for this action'); 
+            : $this->deny('You have no permission for this action');
+
       }
 
     /**
@@ -60,8 +62,9 @@ class ProblemPolicy
     {
             return $user->hasPermissionTo('Update-Problem')
             ? $this->allow()
-            : $this->deny('You have no permission for this action'); 
-        
+            : $this->deny('You have no permission for this action');
+
+
              }
 
     /**
@@ -76,7 +79,8 @@ class ProblemPolicy
         return $user->hasPermissionTo('Delete-Problem')
         ? $this->allow()
         : $this->deny();
-    
+
+
     }
 
     /**

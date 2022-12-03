@@ -53,7 +53,7 @@ License: For each use you must have a valid license purchased only from above li
 		<!--begin::Theme mode setup on page load-->
 		<script>var defaultThemeMode = "light"; var themeMode; if ( document.documentElement ) { if ( document.documentElement.hasAttribute("data-theme-mode")) { themeMode = document.documentElement.getAttribute("data-theme-mode"); } else { if ( localStorage.getItem("data-theme") !== null ) { themeMode = localStorage.getItem("data-theme"); } else { themeMode = defaultThemeMode; } } if (themeMode === "system") { themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } document.documentElement.setAttribute("data-theme", themeMode); }</script>
 		<!--end::Theme mode setup on page load-->
-		
+
 
 
 		<div class="d-flex flex-column flex-root app-root" id="kt_app_root">
@@ -79,7 +79,7 @@ License: For each use you must have a valid license purchased only from above li
 						<!--end::sidebar mobile toggle-->
 						<!--begin::Mobile logo-->
 						<div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
-							<a href="../../demo1/dist/index.html" class="d-lg-none">
+							<a href="{{route('auth.dashboard')}}" class="d-lg-none">
 								<img alt="Logo" src="{{asset('cms/assets/media/logos/default-small.svg')}}" class="h-30px" />
 							</a>
 						</div>
@@ -99,12 +99,12 @@ License: For each use you must have a valid license purchased only from above li
 										</span>
 										<!--end:Menu link-->
 										<!--begin:Menu sub-->
-									
+
 										<!--end:Menu sub-->
 									</div>
 									<!--end:Menu item-->
 									<!--begin:Menu item-->
-								
+
 									<!--end:Menu item-->
 								</div>
 								<!--end::Menu-->
@@ -857,10 +857,10 @@ License: For each use you must have a valid license purchased only from above li
 								</div>
 								<!--end::Search-->
 								<!--begin::Activities-->
-							
+
 								<!--end::Notifications-->
 								<!--begin::Chat-->
-								
+
 								<!--end::My apps links-->
 								<!--begin::Theme mode-->
 								<div class="app-navbar-item ms-1 ms-lg-3">
@@ -962,7 +962,7 @@ License: For each use you must have a valid license purchased only from above li
 								<div class="app-navbar-item ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
 									<!--begin::Menu wrapper-->
 									<div class="cursor-pointer symbol symbol-35px symbol-md-40px" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-										<img src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" alt="user" />
+										<img src="{{Storage::url(auth()->user()->image)}}" alt="user" />
 									</div>
 									<!--begin::User account menu-->
 									<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px" data-kt-menu="true">
@@ -971,14 +971,16 @@ License: For each use you must have a valid license purchased only from above li
 											<div class="menu-content d-flex align-items-center px-3">
 												<!--begin::Avatar-->
 												<div class="symbol symbol-50px me-5">
-													<img alt="Logo" src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" />
+													<img alt="Logo" src="{{Storage::url(auth()->user()->image)}}" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Username-->
 												<div class="d-flex flex-column">
-													<div class="fw-bold d-flex align-items-center fs-5">Max Smith
-													<span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Pro</span></div>
-													<a href="#" class="fw-semibold text-muted text-hover-primary fs-7">max@kt.com</a>
+													<div class="fw-bold d-flex align-items-center fs-5">{{auth()->user()->name}}
+													</div>
+													<a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{auth()->user()->email}}</a>
+													<a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{auth()->user()->roles[0]->name ??''}}</a>
+
 												</div>
 												<!--end::Username-->
 											</div>
@@ -989,11 +991,11 @@ License: For each use you must have a valid license purchased only from above li
 										<!--end::Menu separator-->
 										<!--begin::Menu item-->
 										<div class="menu-item px-5">
-											<a href="../../demo1/dist/account/overview.html" class="menu-link px-5">{{__('cms.My_Profile')}}</a>
+											<a href="{{route('profile.edit')}}" class="menu-link px-5">{{__('cms.My_Profile')}}</a>
 										</div>
 										<!--end::Menu item-->
 										<!--begin::Menu item-->
-								
+
 										<!--end::Menu item-->
 										<!--begin::Menu separator-->
 										<!--end::Menu separator-->
@@ -1001,9 +1003,16 @@ License: For each use you must have a valid license purchased only from above li
 										<div class="menu-item px-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="left-start" data-kt-menu-offset="-15px, 0">
 											<a href="#" class="menu-link px-5">
 												<span class="menu-title position-relative">{{__('cms.language')}}
-												<span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">{{__('cms.english')}}
+												<span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">
+												@if (app()->isLocale('en'))
+												{{__('cms.english')}}
 												<img class="w-15px h-15px rounded-1 ms-2" src="{{asset('cms/assets/media/flags/united-states.svg')}}" alt="" /></span></span>
-											</a>
+											@else
+											{{__('cms.arabic')}}
+												<img class="w-15px h-15px rounded-1 ms-2" src="{{asset('cms/assets/media/flags/saudi-arabia.svg')}}" alt="" /></span></span>
+
+												@endif
+										</a>
 											<!--begin::Menu sub-->
 											<div class="menu-sub menu-sub-dropdown w-175px py-4">
 												<!--begin::Menu item-->
@@ -1023,7 +1032,7 @@ License: For each use you must have a valid license purchased only from above li
 												</div>
 												<!--end::Menu item-->
 												<!--begin::Menu item-->
-											
+
 												<!--end::Menu item-->
 											</div>
 											<!--end::Menu sub-->
@@ -1073,7 +1082,7 @@ License: For each use you must have a valid license purchased only from above li
 						<!--begin::Logo-->
 						<div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
 							<!--begin::Logo image-->
-							<a href="../../demo1/dist/index.html">
+							<a href="{{route('auth.dashboard')}}">
 								<img alt="Logo" src="{{asset('cms/assets/media/logos/default-dark.svg')}}" class="h-25px app-sidebar-logo-default" />
 								<img alt="Logo" src="{{asset('cms/assets/media/logos/default-small.svg')}}" class="h-20px app-sidebar-logo-minimize" />
 							</a>
@@ -1101,14 +1110,16 @@ License: For each use you must have a valid license purchased only from above li
 									<!--begin:Menu item-->
 									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 										<!--begin:Menu link-->
-									
+
 										<!--end:Menu link-->
 										<!--begin:Menu sub-->
-										
+
 										<!--end:Menu sub-->
 									</div>
 									<!--end:Menu item-->
 									<!--begin:Menu item-->
+									@canany(['Create-Admin','Create-User','Read-Users','Read-Admins'])
+
 									<div class="menu-item pt-5">
 										<!--begin:Menu content-->
 										<div class="menu-content">
@@ -1116,8 +1127,12 @@ License: For each use you must have a valid license purchased only from above li
 										</div>
 										<!--end:Menu content-->
 									</div>
+									@endcanany
+
 									<!--end:Menu item-->
 									<!--begin:Menu item-->
+									@canany(['Create-Admin', 'Read-Admins'])
+
 									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 										<!--begin:Menu link-->
 										<span class="menu-link">
@@ -1136,14 +1151,18 @@ License: For each use you must have a valid license purchased only from above li
 										</span>
 										<!--end:Menu link-->
 										<!--begin:Menu sub-->
+										@can('Read-Admins')
+
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-											
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-										
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
+
+
 											<div class="menu-item">
 												<!--begin:Menu link-->
 												<a class="menu-link" href="{{route('admins.index')}}" >
@@ -1154,18 +1173,17 @@ License: For each use you must have a valid license purchased only from above li
 												</a>
 												<!--end:Menu link-->
 											</div>
-											<!--end:Menu item-->
-											<!--begin:Menu item-->
-										
-											<!--end:Menu item-->
+
 										</div>
+										@endcan
+                                        @can('Create-Admin')
 
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-											
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-										
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 											<div class="menu-item">
@@ -1180,12 +1198,16 @@ License: For each use you must have a valid license purchased only from above li
 											</div>
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-										
+
 											<!--end:Menu item-->
 										</div>
+										@endcan
+
 										<!--end:Menu sub-->
 									</div>
+									@endcanany
 
+									@canany(['Create-User', 'Read-Users'])
 
 									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 										<!--begin:Menu link-->
@@ -1205,12 +1227,14 @@ License: For each use you must have a valid license purchased only from above li
 										</span>
 										<!--end:Menu link-->
 										<!--begin:Menu sub-->
+										@can('Read-Users')
+
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-											
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-										
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 											<div class="menu-item">
@@ -1225,16 +1249,18 @@ License: For each use you must have a valid license purchased only from above li
 											</div>
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-										
+
 											<!--end:Menu item-->
 										</div>
+										@endcan
 
+                                        @can('Create-User')
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-											
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-										
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 											<div class="menu-item">
@@ -1249,13 +1275,17 @@ License: For each use you must have a valid license purchased only from above li
 											</div>
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-										
+
 											<!--end:Menu item-->
 										</div>
+										@endcan
+
 										<!--end:Menu sub-->
 									</div>
+									@endcanany
 
 
+									@canany(['Create-Role','Read-Roles','Read-Permissions'])
 
 									<div class="menu-item pt-5">
 										<!--begin:Menu content-->
@@ -1264,15 +1294,18 @@ License: For each use you must have a valid license purchased only from above li
 										</div>
 										<!--end:Menu content-->
 									</div>
+									@endcanany
 
 
-								
 
 
 
-									
+
+
 									<!--end:Menu item-->
 									<!--begin:Menu item-->
+									@canany(['Create-Role','Read-Roles'])
+
 									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 										<!--begin:Menu link-->
 										<span class="menu-link">
@@ -1293,12 +1326,14 @@ License: For each use you must have a valid license purchased only from above li
 										<!--begin:Menu sub-->
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-		
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
+											@can('Read-Roles')
+
 											<div class="menu-item">
 												<!--begin:Menu link-->
 												<a class="menu-link" href="{{route('roles.index')}}">
@@ -1309,8 +1344,11 @@ License: For each use you must have a valid license purchased only from above li
 												</a>
 												<!--end:Menu link-->
 											</div>
+											@endcan
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
+											@can('Create-Role')
+
 											<div class="menu-item">
 												<!--begin:Menu link-->
 												<a class="menu-link" href="{{route('roles.create')}}">
@@ -1321,10 +1359,15 @@ License: For each use you must have a valid license purchased only from above li
 												</a>
 												<!--end:Menu link-->
 											</div>
+											@endcan
+
 											<!--end:Menu item-->
 										</div>
 										<!--end:Menu sub-->
 									</div>
+									@endcanany
+									@can('Read-Permissions')
+
 									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 										<!--begin:Menu link-->
 										<span class="menu-link">
@@ -1345,7 +1388,7 @@ License: For each use you must have a valid license purchased only from above li
 										<!--begin:Menu sub-->
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-		
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 
@@ -1363,13 +1406,17 @@ License: For each use you must have a valid license purchased only from above li
 											</div>
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-											
+
 											<!--end:Menu item-->
 										</div>
 										<!--end:Menu sub-->
 									</div>
-									
-							
+									@endcan
+
+									@canany(['Create-Brand','Create-Spare-Part','Create-Category','Create-Model','Create-Language' ,
+									'Read-Brands','Read-Spare-Parts','Read-Models','Read-Languages','Read-Categories'
+									])
+
 									<div class="menu-item pt-5">
 										<!--begin:Menu content-->
 										<div class="menu-content">
@@ -1377,15 +1424,80 @@ License: For each use you must have a valid license purchased only from above li
 										</div>
 										<!--end:Menu content-->
 									</div>
+									@endcanany
 
 
-								
 
 
 
-									
+
+
 									<!--end:Menu item-->
 									<!--begin:Menu item-->
+									@canany(['Create-Brand','Read-Brands'])
+
+									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+										<!--begin:Menu link-->
+										<span class="menu-link">
+											<span class="menu-icon">
+												<!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
+												<span class="svg-icon svg-icon-2">
+													<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<path d="M18 21.6C16.6 20.4 9.1 20.3 6.3 21.2C5.7 21.4 5.1 21.2 4.7 20.8L2 18C4.2 15.8 10.8 15.1 15.8 15.8C16.2 18.3 17 20.5 18 21.6ZM18.8 2.8C18.4 2.4 17.8 2.20001 17.2 2.40001C14.4 3.30001 6.9 3.2 5.5 2C6.8 3.3 7.4 5.5 7.7 7.7C9 7.9 10.3 8 11.7 8C15.8 8 19.8 7.2 21.5 5.5L18.8 2.8Z" fill="currentColor" />
+														<path opacity="0.3" d="M21.2 17.3C21.4 17.9 21.2 18.5 20.8 18.9L18 21.6C15.8 19.4 15.1 12.8 15.8 7.8C18.3 7.4 20.4 6.70001 21.5 5.60001C20.4 7.00001 20.2 14.5 21.2 17.3ZM8 11.7C8 9 7.7 4.2 5.5 2L2.8 4.8C2.4 5.2 2.2 5.80001 2.4 6.40001C2.7 7.40001 3.00001 9.2 3.10001 11.7C3.10001 15.5 2.40001 17.6 2.10001 18C3.20001 16.9 5.3 16.2 7.8 15.8C8 14.2 8 12.7 8 11.7Z" fill="currentColor" />
+													</svg>
+												</span>
+												<!--end::Svg Icon-->
+											</span>
+											<span class="menu-title">{{__('cms.brands')}}</span>
+											<span class="menu-arrow"></span>
+										</span>
+										<!--end:Menu link-->
+										<!--begin:Menu sub-->
+
+										<div class="menu-sub menu-sub-accordion">
+											<!--begin:Menu item-->
+
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+											@can('Read-Brands')
+											<div class="menu-item">
+												<!--begin:Menu link-->
+												<a class="menu-link" href="{{route('brands.index')}}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+													<span class="menu-title">{{__('cms.brands_list')}}</span>
+												</a>
+												<!--end:Menu link-->
+											</div>
+											@endcan
+
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+											@can('Create-Brand')
+											<div class="menu-item">
+												<!--begin:Menu link-->
+												<a class="menu-link" href="{{route('brands.create')}}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+													<span class="menu-title">{{__('cms.create_brand')}}</span>
+												</a>
+												<!--end:Menu link-->
+											</div>
+											@endcan
+
+											<!--end:Menu item-->
+										</div>
+										<!--end:Menu sub-->
+									</div>
+									@endcanany
+									@canany(['Create-Category','Read-Categories'])
+
 									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 										<!--begin:Menu link-->
 										<span class="menu-link">
@@ -1406,12 +1518,13 @@ License: For each use you must have a valid license purchased only from above li
 										<!--begin:Menu sub-->
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-		
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
+											@can('Read-Categories')
 											<div class="menu-item">
 												<!--begin:Menu link-->
 												<a class="menu-link" href="{{route('categories.index')}}">
@@ -1422,8 +1535,11 @@ License: For each use you must have a valid license purchased only from above li
 												</a>
 												<!--end:Menu link-->
 											</div>
+											@endcan
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
+											@can('Create-Category')
 											<div class="menu-item">
 												<!--begin:Menu link-->
 												<a class="menu-link" href="{{route('categories.create')}}">
@@ -1434,64 +1550,16 @@ License: For each use you must have a valid license purchased only from above li
 												</a>
 												<!--end:Menu link-->
 											</div>
+											@endcan
+
 											<!--end:Menu item-->
 										</div>
 										<!--end:Menu sub-->
 									</div>
-									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-										<!--begin:Menu link-->
-										<span class="menu-link">
-											<span class="menu-icon">
-												<!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
-												<span class="svg-icon svg-icon-2">
-													<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-														<path d="M18 21.6C16.6 20.4 9.1 20.3 6.3 21.2C5.7 21.4 5.1 21.2 4.7 20.8L2 18C4.2 15.8 10.8 15.1 15.8 15.8C16.2 18.3 17 20.5 18 21.6ZM18.8 2.8C18.4 2.4 17.8 2.20001 17.2 2.40001C14.4 3.30001 6.9 3.2 5.5 2C6.8 3.3 7.4 5.5 7.7 7.7C9 7.9 10.3 8 11.7 8C15.8 8 19.8 7.2 21.5 5.5L18.8 2.8Z" fill="currentColor" />
-														<path opacity="0.3" d="M21.2 17.3C21.4 17.9 21.2 18.5 20.8 18.9L18 21.6C15.8 19.4 15.1 12.8 15.8 7.8C18.3 7.4 20.4 6.70001 21.5 5.60001C20.4 7.00001 20.2 14.5 21.2 17.3ZM8 11.7C8 9 7.7 4.2 5.5 2L2.8 4.8C2.4 5.2 2.2 5.80001 2.4 6.40001C2.7 7.40001 3.00001 9.2 3.10001 11.7C3.10001 15.5 2.40001 17.6 2.10001 18C3.20001 16.9 5.3 16.2 7.8 15.8C8 14.2 8 12.7 8 11.7Z" fill="currentColor" />
-													</svg>
-												</span>
-												<!--end::Svg Icon-->
-											</span>
-											<span class="menu-title">{{__('cms.subcategories')}}</span>
-											<span class="menu-arrow"></span>
-										</span>
-										<!--end:Menu link-->
-										<!--begin:Menu sub-->
-										<div class="menu-sub menu-sub-accordion">
-											<!--begin:Menu item-->
-		
-											<!--end:Menu item-->
-											<!--begin:Menu item-->
-
-											<!--end:Menu item-->
-											<!--begin:Menu item-->
-											<div class="menu-item">
-												<!--begin:Menu link-->
-												<a class="menu-link" href="{{route('subcategories.index')}}">
-													<span class="menu-bullet">
-														<span class="bullet bullet-dot"></span>
-													</span>
-													<span class="menu-title">{{__('cms.subcategories_list')}}</span>
-												</a>
-												<!--end:Menu link-->
-											</div>
-											<!--end:Menu item-->
-											<!--begin:Menu item-->
-											<div class="menu-item">
-												<!--begin:Menu link-->
-												<a class="menu-link" href="{{route('subcategories.create')}}">
-													<span class="menu-bullet">
-														<span class="bullet bullet-dot"></span>
-													</span>
-													<span class="menu-title">{{__('cms.create_subcategory')}}</span>
-												</a>
-												<!--end:Menu link-->
-											</div>
-											<!--end:Menu item-->
-										</div>
-										<!--end:Menu sub-->
-									</div>
+									@endcanany
 
 
+									@canany(['Create-Model','Read-Models'])
 
 									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 										<!--begin:Menu link-->
@@ -1513,15 +1581,16 @@ License: For each use you must have a valid license purchased only from above li
 										<!--begin:Menu sub-->
 										<div class="menu-sub menu-sub-accordion">
 											<!--begin:Menu item-->
-		
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
 
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
+											@can('Read-Models')
 											<div class="menu-item">
 												<!--begin:Menu link-->
-												<a class="menu-link" href="{{route('productmodels.index')}}">
+												<a class="menu-link" href="{{route('smodels.index')}}">
 													<span class="menu-bullet">
 														<span class="bullet bullet-dot"></span>
 													</span>
@@ -1529,11 +1598,14 @@ License: For each use you must have a valid license purchased only from above li
 												</a>
 												<!--end:Menu link-->
 											</div>
+											@endcan
+
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
+											@can('Create-Model')
 											<div class="menu-item">
 												<!--begin:Menu link-->
-												<a class="menu-link" href="{{route('productmodels.create')}}">
+												<a class="menu-link" href="{{route('smodels.create')}}">
 													<span class="menu-bullet">
 														<span class="bullet bullet-dot"></span>
 													</span>
@@ -1541,19 +1613,509 @@ License: For each use you must have a valid license purchased only from above li
 												</a>
 												<!--end:Menu link-->
 											</div>
+											@endcan
+
 											<!--end:Menu item-->
 										</div>
 										<!--end:Menu sub-->
 									</div>
+									@endcanany
+
+
+									@canany(['Create-Spare-Part','Read-Spare-Parts'])
+
+									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+										<!--begin:Menu link-->
+										<span class="menu-link">
+											<span class="menu-icon">
+												<!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
+												<span class="svg-icon svg-icon-2">
+													<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<path d="M18 21.6C16.6 20.4 9.1 20.3 6.3 21.2C5.7 21.4 5.1 21.2 4.7 20.8L2 18C4.2 15.8 10.8 15.1 15.8 15.8C16.2 18.3 17 20.5 18 21.6ZM18.8 2.8C18.4 2.4 17.8 2.20001 17.2 2.40001C14.4 3.30001 6.9 3.2 5.5 2C6.8 3.3 7.4 5.5 7.7 7.7C9 7.9 10.3 8 11.7 8C15.8 8 19.8 7.2 21.5 5.5L18.8 2.8Z" fill="currentColor" />
+														<path opacity="0.3" d="M21.2 17.3C21.4 17.9 21.2 18.5 20.8 18.9L18 21.6C15.8 19.4 15.1 12.8 15.8 7.8C18.3 7.4 20.4 6.70001 21.5 5.60001C20.4 7.00001 20.2 14.5 21.2 17.3ZM8 11.7C8 9 7.7 4.2 5.5 2L2.8 4.8C2.4 5.2 2.2 5.80001 2.4 6.40001C2.7 7.40001 3.00001 9.2 3.10001 11.7C3.10001 15.5 2.40001 17.6 2.10001 18C3.20001 16.9 5.3 16.2 7.8 15.8C8 14.2 8 12.7 8 11.7Z" fill="currentColor" />
+													</svg>
+												</span>
+												<!--end::Svg Icon-->
+											</span>
+											<span class="menu-title">{{__('cms.spareparts')}}</span>
+											<span class="menu-arrow"></span>
+										</span>
+										<!--end:Menu link-->
+										<!--begin:Menu sub-->
+										<div class="menu-sub menu-sub-accordion">
+											<!--begin:Menu item-->
+
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+											@can('Read-Spare-Parts')
+											<div class="menu-item">
+												<!--begin:Menu link-->
+												<a class="menu-link" href="{{route('spareparts.index')}}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+													<span class="menu-title">{{__('cms.read_sparepart')}}</span>
+												</a>
+												<!--end:Menu link-->
+											</div>
+											@endcan
+
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+											@can('Create-Spare-Part')
+											<div class="menu-item">
+												<!--begin:Menu link-->
+												<a class="menu-link" href="{{route('spareparts.create')}}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+													<span class="menu-title">{{__('cms.create_new_spare_part')}}</span>
+												</a>
+												<!--end:Menu link-->
+											</div>
+											@endcan
+
+											<!--end:Menu item-->
+										</div>
+										<!--end:Menu sub-->
+									</div>
+									@endcanany
 
 
 
 
-									
+                                    @canany(['Create-Country','Read-Countries'])
+
+<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+    <!--begin:Menu link-->
+    <span class="menu-link">
+        <span class="menu-icon">
+            <!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
+            <span class="svg-icon svg-icon-2">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 21.6C16.6 20.4 9.1 20.3 6.3 21.2C5.7 21.4 5.1 21.2 4.7 20.8L2 18C4.2 15.8 10.8 15.1 15.8 15.8C16.2 18.3 17 20.5 18 21.6ZM18.8 2.8C18.4 2.4 17.8 2.20001 17.2 2.40001C14.4 3.30001 6.9 3.2 5.5 2C6.8 3.3 7.4 5.5 7.7 7.7C9 7.9 10.3 8 11.7 8C15.8 8 19.8 7.2 21.5 5.5L18.8 2.8Z" fill="currentColor" />
+                    <path opacity="0.3" d="M21.2 17.3C21.4 17.9 21.2 18.5 20.8 18.9L18 21.6C15.8 19.4 15.1 12.8 15.8 7.8C18.3 7.4 20.4 6.70001 21.5 5.60001C20.4 7.00001 20.2 14.5 21.2 17.3ZM8 11.7C8 9 7.7 4.2 5.5 2L2.8 4.8C2.4 5.2 2.2 5.80001 2.4 6.40001C2.7 7.40001 3.00001 9.2 3.10001 11.7C3.10001 15.5 2.40001 17.6 2.10001 18C3.20001 16.9 5.3 16.2 7.8 15.8C8 14.2 8 12.7 8 11.7Z" fill="currentColor" />
+                </svg>
+            </span>
+            <!--end::Svg Icon-->
+        </span>
+        <span class="menu-title">{{__('cms.country')}}</span>
+        <span class="menu-arrow"></span>
+    </span>
+    <!--end:Menu link-->
+    <!--begin:Menu sub-->
+    <div class="menu-sub menu-sub-accordion">
+        <!--begin:Menu item-->
+
+        <!--end:Menu item-->
+        <!--begin:Menu item-->
+
+        <!--end:Menu item-->
+        <!--begin:Menu item-->
+        @can('Read-Countries')
+        <div class="menu-item">
+            <!--begin:Menu link-->
+            <a class="menu-link" href="{{route('countries.index')}}">
+                <span class="menu-bullet">
+                    <span class="bullet bullet-dot"></span>
+                </span>
+                <span class="menu-title">{{__('cms.read_countries')}}</span>
+            </a>
+            <!--end:Menu link-->
+        </div>
+        @endcan
+
+        <!--end:Menu item-->
+        <!--begin:Menu item-->
+        @can('Create-Country')
+        <div class="menu-item">
+            <!--begin:Menu link-->
+            <a class="menu-link" href="{{route('countries.create')}}">
+                <span class="menu-bullet">
+                    <span class="bullet bullet-dot"></span>
+                </span>
+                <span class="menu-title">{{__('cms.create_new_country')}}</span>
+            </a>
+            <!--end:Menu link-->
+        </div>
+        @endcan
+
+        <!--end:Menu item-->
+    </div>
+    <!--end:Menu sub-->
+</div>
+@endcanany
 
 
-									
-							
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@canany(['Create-City','Read-Cities'])
+
+<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+    <!--begin:Menu link-->
+    <span class="menu-link">
+        <span class="menu-icon">
+            <!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
+            <span class="svg-icon svg-icon-2">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 21.6C16.6 20.4 9.1 20.3 6.3 21.2C5.7 21.4 5.1 21.2 4.7 20.8L2 18C4.2 15.8 10.8 15.1 15.8 15.8C16.2 18.3 17 20.5 18 21.6ZM18.8 2.8C18.4 2.4 17.8 2.20001 17.2 2.40001C14.4 3.30001 6.9 3.2 5.5 2C6.8 3.3 7.4 5.5 7.7 7.7C9 7.9 10.3 8 11.7 8C15.8 8 19.8 7.2 21.5 5.5L18.8 2.8Z" fill="currentColor" />
+                    <path opacity="0.3" d="M21.2 17.3C21.4 17.9 21.2 18.5 20.8 18.9L18 21.6C15.8 19.4 15.1 12.8 15.8 7.8C18.3 7.4 20.4 6.70001 21.5 5.60001C20.4 7.00001 20.2 14.5 21.2 17.3ZM8 11.7C8 9 7.7 4.2 5.5 2L2.8 4.8C2.4 5.2 2.2 5.80001 2.4 6.40001C2.7 7.40001 3.00001 9.2 3.10001 11.7C3.10001 15.5 2.40001 17.6 2.10001 18C3.20001 16.9 5.3 16.2 7.8 15.8C8 14.2 8 12.7 8 11.7Z" fill="currentColor" />
+                </svg>
+            </span>
+            <!--end::Svg Icon-->
+        </span>
+        <span class="menu-title">{{__('cms.City')}}</span>
+        <span class="menu-arrow"></span>
+    </span>
+    <!--end:Menu link-->
+    <!--begin:Menu sub-->
+    <div class="menu-sub menu-sub-accordion">
+        <!--begin:Menu item-->
+
+        <!--end:Menu item-->
+        <!--begin:Menu item-->
+
+        <!--end:Menu item-->
+        <!--begin:Menu item-->
+        @can('Read-Cities')
+        <div class="menu-item">
+            <!--begin:Menu link-->
+            <a class="menu-link" href="{{route('cities.index')}}">
+                <span class="menu-bullet">
+                    <span class="bullet bullet-dot"></span>
+                </span>
+                <span class="menu-title">{{__('cms.read_cities')}}</span>
+            </a>
+            <!--end:Menu link-->
+        </div>
+        @endcan
+
+        <!--end:Menu item-->
+        <!--begin:Menu item-->
+        @can('Create-Country')
+        <div class="menu-item">
+            <!--begin:Menu link-->
+            <a class="menu-link" href="{{route('cities.create')}}">
+                <span class="menu-bullet">
+                    <span class="bullet bullet-dot"></span>
+                </span>
+                <span class="menu-title">{{__('cms.create_new_city')}}</span>
+            </a>
+            <!--end:Menu link-->
+        </div>
+        @endcan
+
+        <!--end:Menu item-->
+    </div>
+    <!--end:Menu sub-->
+</div>
+@endcanany
+
+									@canany(['Create-Language','Read-Languages'])
+									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+										<!--begin:Menu link-->
+										<span class="menu-link">
+											<span class="menu-icon">
+												<!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
+												<span class="svg-icon svg-icon-2">
+													<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<path d="M18 21.6C16.6 20.4 9.1 20.3 6.3 21.2C5.7 21.4 5.1 21.2 4.7 20.8L2 18C4.2 15.8 10.8 15.1 15.8 15.8C16.2 18.3 17 20.5 18 21.6ZM18.8 2.8C18.4 2.4 17.8 2.20001 17.2 2.40001C14.4 3.30001 6.9 3.2 5.5 2C6.8 3.3 7.4 5.5 7.7 7.7C9 7.9 10.3 8 11.7 8C15.8 8 19.8 7.2 21.5 5.5L18.8 2.8Z" fill="currentColor" />
+														<path opacity="0.3" d="M21.2 17.3C21.4 17.9 21.2 18.5 20.8 18.9L18 21.6C15.8 19.4 15.1 12.8 15.8 7.8C18.3 7.4 20.4 6.70001 21.5 5.60001C20.4 7.00001 20.2 14.5 21.2 17.3ZM8 11.7C8 9 7.7 4.2 5.5 2L2.8 4.8C2.4 5.2 2.2 5.80001 2.4 6.40001C2.7 7.40001 3.00001 9.2 3.10001 11.7C3.10001 15.5 2.40001 17.6 2.10001 18C3.20001 16.9 5.3 16.2 7.8 15.8C8 14.2 8 12.7 8 11.7Z" fill="currentColor" />
+													</svg>
+												</span>
+												<!--end::Svg Icon-->
+											</span>
+											<span class="menu-title">{{__('cms.language')}}</span>
+											<span class="menu-arrow"></span>
+										</span>
+										<!--end:Menu link-->
+										<!--begin:Menu sub-->
+										<div class="menu-sub menu-sub-accordion">
+											<!--begin:Menu item-->
+
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+											@can('Read-Languages')
+											<div class="menu-item">
+												<!--begin:Menu link-->
+												<a class="menu-link" href="{{route('languages.index')}}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+													<span class="menu-title">{{__('cms.read_language')}}</span>
+												</a>
+												<!--end:Menu link-->
+											</div>
+											@endcan
+
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+											@can('Create-Language')
+											<div class="menu-item">
+												<!--begin:Menu link-->
+												<a class="menu-link" href="{{route('languages.create')}}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+													<span class="menu-title">{{__('cms.create_language')}}</span>
+												</a>
+												<!--end:Menu link-->
+											</div>
+											@endcan
+
+											<!--end:Menu item-->
+										</div>
+										<!--end:Menu sub-->
+									</div>
+									@endcanany
+
+									@canany(['Create-Problem','Create-Repair','Create-Repair-Problem','Create-Problem-status' ,
+									'Read-Problems','Read-Repair','Read-Repair-Problems','Read-Problems-status'
+									])
+									<div class="menu-item pt-5">
+										<!--begin:Menu content-->
+										<div class="menu-content">
+											<span class="menu-heading fw-bold text-uppercase fs-7">{{__('cms.problem_management')}}</span>
+										</div>
+										<!--end:Menu content-->
+									</div>
+
+									@endcanany
+
+
+
+									@canany(['Read-Repair'])
+
+									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+										<!--begin:Menu link-->
+										<span class="menu-link">
+											<span class="menu-icon">
+												<!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
+												<span class="svg-icon svg-icon-2">
+													<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<path d="M18 21.6C16.6 20.4 9.1 20.3 6.3 21.2C5.7 21.4 5.1 21.2 4.7 20.8L2 18C4.2 15.8 10.8 15.1 15.8 15.8C16.2 18.3 17 20.5 18 21.6ZM18.8 2.8C18.4 2.4 17.8 2.20001 17.2 2.40001C14.4 3.30001 6.9 3.2 5.5 2C6.8 3.3 7.4 5.5 7.7 7.7C9 7.9 10.3 8 11.7 8C15.8 8 19.8 7.2 21.5 5.5L18.8 2.8Z" fill="currentColor" />
+														<path opacity="0.3" d="M21.2 17.3C21.4 17.9 21.2 18.5 20.8 18.9L18 21.6C15.8 19.4 15.1 12.8 15.8 7.8C18.3 7.4 20.4 6.70001 21.5 5.60001C20.4 7.00001 20.2 14.5 21.2 17.3ZM8 11.7C8 9 7.7 4.2 5.5 2L2.8 4.8C2.4 5.2 2.2 5.80001 2.4 6.40001C2.7 7.40001 3.00001 9.2 3.10001 11.7C3.10001 15.5 2.40001 17.6 2.10001 18C3.20001 16.9 5.3 16.2 7.8 15.8C8 14.2 8 12.7 8 11.7Z" fill="currentColor" />
+													</svg>
+												</span>
+												<!--end::Svg Icon-->
+											</span>
+											<span class="menu-title">{{__('cms.repairs')}}</span>
+											<span class="menu-arrow"></span>
+										</span>
+										<!--end:Menu link-->
+										<!--begin:Menu sub-->
+										<div class="menu-sub menu-sub-accordion">
+											<!--begin:Menu item-->
+
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+											@can('Read-Repair')
+											<div class="menu-item">
+												<!--begin:Menu link-->
+												<a class="menu-link" href="{{route('repairs.index')}}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+													<span class="menu-title">{{__('cms.repairs_list')}}</span>
+												</a>
+												<!--end:Menu link-->
+											</div>
+											@endcan
+
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+
+
+											<!--end:Menu item-->
+										</div>
+										<!--end:Menu sub-->
+									</div>
+									@endcanany
+
+
+
+									@canany(['Create-Repair-Problem','Read-Repair-Problems'])
+
+									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+										<!--begin:Menu link-->
+										<span class="menu-link">
+											<span class="menu-icon">
+												<!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
+												<span class="svg-icon svg-icon-2">
+													<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<path d="M18 21.6C16.6 20.4 9.1 20.3 6.3 21.2C5.7 21.4 5.1 21.2 4.7 20.8L2 18C4.2 15.8 10.8 15.1 15.8 15.8C16.2 18.3 17 20.5 18 21.6ZM18.8 2.8C18.4 2.4 17.8 2.20001 17.2 2.40001C14.4 3.30001 6.9 3.2 5.5 2C6.8 3.3 7.4 5.5 7.7 7.7C9 7.9 10.3 8 11.7 8C15.8 8 19.8 7.2 21.5 5.5L18.8 2.8Z" fill="currentColor" />
+														<path opacity="0.3" d="M21.2 17.3C21.4 17.9 21.2 18.5 20.8 18.9L18 21.6C15.8 19.4 15.1 12.8 15.8 7.8C18.3 7.4 20.4 6.70001 21.5 5.60001C20.4 7.00001 20.2 14.5 21.2 17.3ZM8 11.7C8 9 7.7 4.2 5.5 2L2.8 4.8C2.4 5.2 2.2 5.80001 2.4 6.40001C2.7 7.40001 3.00001 9.2 3.10001 11.7C3.10001 15.5 2.40001 17.6 2.10001 18C3.20001 16.9 5.3 16.2 7.8 15.8C8 14.2 8 12.7 8 11.7Z" fill="currentColor" />
+													</svg>
+												</span>
+												<!--end::Svg Icon-->
+											</span>
+											<span class="menu-title">{{__('cms.repair_problems')}}</span>
+											<span class="menu-arrow"></span>
+										</span>
+										<!--end:Menu link-->
+										<!--begin:Menu sub-->
+										<div class="menu-sub menu-sub-accordion">
+											<!--begin:Menu item-->
+
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+											@can('Read-Repair-Problems')
+											<div class="menu-item">
+												<!--begin:Menu link-->
+												<a class="menu-link" href="{{route('repair_problems.index')}}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+													<span class="menu-title">{{__('cms.repair_problems_list')}}</span>
+												</a>
+												<!--end:Menu link-->
+											</div>
+											@endcan
+
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+
+
+											<!--end:Menu item-->
+										</div>
+										<!--end:Menu sub-->
+									</div>
+									@endcanany
+
+									@canany(['Create-Problem-status','Read-Problems-status'])
+
+									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+										<!--begin:Menu link-->
+										<span class="menu-link">
+											<span class="menu-icon">
+												<!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
+												<span class="svg-icon svg-icon-2">
+													<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<path d="M18 21.6C16.6 20.4 9.1 20.3 6.3 21.2C5.7 21.4 5.1 21.2 4.7 20.8L2 18C4.2 15.8 10.8 15.1 15.8 15.8C16.2 18.3 17 20.5 18 21.6ZM18.8 2.8C18.4 2.4 17.8 2.20001 17.2 2.40001C14.4 3.30001 6.9 3.2 5.5 2C6.8 3.3 7.4 5.5 7.7 7.7C9 7.9 10.3 8 11.7 8C15.8 8 19.8 7.2 21.5 5.5L18.8 2.8Z" fill="currentColor" />
+														<path opacity="0.3" d="M21.2 17.3C21.4 17.9 21.2 18.5 20.8 18.9L18 21.6C15.8 19.4 15.1 12.8 15.8 7.8C18.3 7.4 20.4 6.70001 21.5 5.60001C20.4 7.00001 20.2 14.5 21.2 17.3ZM8 11.7C8 9 7.7 4.2 5.5 2L2.8 4.8C2.4 5.2 2.2 5.80001 2.4 6.40001C2.7 7.40001 3.00001 9.2 3.10001 11.7C3.10001 15.5 2.40001 17.6 2.10001 18C3.20001 16.9 5.3 16.2 7.8 15.8C8 14.2 8 12.7 8 11.7Z" fill="currentColor" />
+													</svg>
+												</span>
+												<!--end::Svg Icon-->
+											</span>
+											<span class="menu-title">{{__('cms.problem_status')}}</span>
+											<span class="menu-arrow"></span>
+										</span>
+										<!--end:Menu link-->
+										<!--begin:Menu sub-->
+										<div class="menu-sub menu-sub-accordion">
+											<!--begin:Menu item-->
+
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+											@can('Read-Problems-status')
+											<div class="menu-item">
+												<!--begin:Menu link-->
+												<a class="menu-link" href="{{route('problem_status.index')}}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+													<span class="menu-title">{{__('cms.read_problem_status')}}</span>
+												</a>
+												<!--end:Menu link-->
+											</div>
+											@endcan
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+											@can('Create-Problem-status')
+											<div class="menu-item">
+												<!--begin:Menu link-->
+												<a class="menu-link" href="{{route('problem_status.create')}}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+													<span class="menu-title">{{__('cms.create_problem_status')}}</span>
+												</a>
+												<!--end:Menu link-->
+											</div>
+											@endcan
+
+											<!--end:Menu item-->
+										</div>
+										<!--end:Menu sub-->
+									</div>
+									@endcanany
+
+
+
+
+
+
+
+                                    @can('Read-Problems')
+<div class="menu-item">
+	<!--begin:Menu link-->
+	<a class="menu-link" href="{{route('problems.index')}}" target="blank">
+		<span class="menu-icon">
+			<!--begin::Svg Icon | path: icons/duotune/abstract/abs027.svg-->
+			<span class="svg-icon svg-icon-2">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path opacity="0.3" d="M21.25 18.525L13.05 21.825C12.35 22.125 11.65 22.125 10.95 21.825L2.75 18.525C1.75 18.125 1.75 16.725 2.75 16.325L4.04999 15.825L10.25 18.325C10.85 18.525 11.45 18.625 12.05 18.625C12.65 18.625 13.25 18.525 13.85 18.325L20.05 15.825L21.35 16.325C22.35 16.725 22.35 18.125 21.25 18.525ZM13.05 16.425L21.25 13.125C22.25 12.725 22.25 11.325 21.25 10.925L13.05 7.62502C12.35 7.32502 11.65 7.32502 10.95 7.62502L2.75 10.925C1.75 11.325 1.75 12.725 2.75 13.125L10.95 16.425C11.65 16.725 12.45 16.725 13.05 16.425Z" fill="currentColor"></path>
+					<path d="M11.05 11.025L2.84998 7.725C1.84998 7.325 1.84998 5.925 2.84998 5.525L11.05 2.225C11.75 1.925 12.45 1.925 13.15 2.225L21.35 5.525C22.35 5.925 22.35 7.325 21.35 7.725L13.05 11.025C12.45 11.325 11.65 11.325 11.05 11.025Z" fill="currentColor"></path>
+				</svg>
+			</span>
+			<!--end::Svg Icon-->
+		</span>
+		<span class="menu-title">{{__('cms.problems')}}</span>
+	</a>
+	<!--end:Menu link-->
+</div>
+@endcan
+
+
+@can('Create-user-model')
+<div class="menu-item">
+	<!--begin:Menu link-->
+	<a class="menu-link" href="{{route('users.create-models')}}" target="blank">
+		<span class="menu-icon">
+			<!--begin::Svg Icon | path: icons/duotune/abstract/abs027.svg-->
+			<span class="svg-icon svg-icon-2">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path opacity="0.3" d="M21.25 18.525L13.05 21.825C12.35 22.125 11.65 22.125 10.95 21.825L2.75 18.525C1.75 18.125 1.75 16.725 2.75 16.325L4.04999 15.825L10.25 18.325C10.85 18.525 11.45 18.625 12.05 18.625C12.65 18.625 13.25 18.525 13.85 18.325L20.05 15.825L21.35 16.325C22.35 16.725 22.35 18.125 21.25 18.525ZM13.05 16.425L21.25 13.125C22.25 12.725 22.25 11.325 21.25 10.925L13.05 7.62502C12.35 7.32502 11.65 7.32502 10.95 7.62502L2.75 10.925C1.75 11.325 1.75 12.725 2.75 13.125L10.95 16.425C11.65 16.725 12.45 16.725 13.05 16.425Z" fill="currentColor"></path>
+					<path d="M11.05 11.025L2.84998 7.725C1.84998 7.325 1.84998 5.925 2.84998 5.525L11.05 2.225C11.75 1.925 12.45 1.925 13.15 2.225L21.35 5.525C22.35 5.925 22.35 7.325 21.35 7.725L13.05 11.025C12.45 11.325 11.65 11.325 11.05 11.025Z" fill="currentColor"></path>
+				</svg>
+			</span>
+			<!--end::Svg Icon-->
+		</span>
+		<span class="menu-title">{{__('cms.create_model')}}</span>
+	</a>
+	<!--end:Menu link-->
+</div>
+@endcan
+
 								</div>
 								<!--end::Menu-->
 							</div>
@@ -1561,13 +2123,13 @@ License: For each use you must have a valid license purchased only from above li
 						</div>
 						<!--end::sidebar menu-->
 						<!--begin::Footer-->
-					
+
 						<!--end::Footer-->
 					</div>
 					<!--end::Sidebar-->
 					<!--begin::Main-->
-					<div class="app-main flex-column flex-row-fluid" id="kt_app_main">						
-                       
+					<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+
 <div class="d-flex flex-column flex-column-fluid">
     <!--begin::Toolbar-->
     <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
@@ -1583,7 +2145,7 @@ License: For each use you must have a valid license purchased only from above li
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                     <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">
-                        <a href="../../demo1/dist/index.html"
+                        <a href="{{route('auth.dashboard')}}"
                             class="text-muted text-hover-primary">@yield('page-lg')</a>
                     </li>
                     <!--end::Item-->
@@ -1621,44 +2183,14 @@ License: For each use you must have a valid license purchased only from above li
         <!--begin::Content container-->
 		@yield('Content')
 
-        
+
         <!--end::Content container-->
     </div>
 </div>
 
     <!--end::Content-->
 </div>
-						
 
-						<!--begin::Footer-->
-
-
-						<div id="kt_app_footer" class="app-footer">
-							<!--begin::Footer container-->
-							<div class="app-container container-fluid d-flex flex-column flex-md-row flex-center flex-md-stack py-3">
-								<!--begin::Copyright-->
-								<div class="text-dark order-2 order-md-1">
-									<span class="text-muted fw-semibold me-1">2022&copy;</span>
-									<a href="https://keenthemes.com" target="_blank" class="text-gray-800 text-hover-primary">Keenthemes</a>
-								</div>
-								<!--end::Copyright-->
-								<!--begin::Menu-->
-								<ul class="menu menu-gray-600 menu-hover-primary fw-semibold order-1">
-									<li class="menu-item">
-										<a href="https://keenthemes.com" target="_blank" class="menu-link px-2">About</a>
-									</li>
-									<li class="menu-item">
-										<a href="https://devs.keenthemes.com" target="_blank" class="menu-link px-2">Support</a>
-									</li>
-									<li class="menu-item">
-										<a href="https://1.envato.market/EA4JP" target="_blank" class="menu-link px-2">Purchase</a>
-									</li>
-								</ul>
-								<!--end::Menu-->
-							</div>
-							<!--end::Footer container-->
-						</div>
-						<!--end::Footer-->
 					</div>
 					<!--end:::Main-->
 				</div>
@@ -2396,7 +2928,7 @@ License: For each use you must have a valid license purchased only from above li
 								<div class="d-flex align-items-center mb-2">
 									<!--begin::Avatar-->
 									<div class="symbol symbol-35px symbol-circle">
-										<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-25.jpg')}}" />
+										<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-25.jpg')}}" />
 									</div>
 									<!--end::Avatar-->
 									<!--begin::Details-->
@@ -2428,7 +2960,7 @@ License: For each use you must have a valid license purchased only from above li
 									<!--end::Details-->
 									<!--begin::Avatar-->
 									<div class="symbol symbol-35px symbol-circle">
-										<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" />
+										<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" />
 									</div>
 									<!--end::Avatar-->
 								</div>
@@ -2448,7 +2980,7 @@ License: For each use you must have a valid license purchased only from above li
 								<div class="d-flex align-items-center mb-2">
 									<!--begin::Avatar-->
 									<div class="symbol symbol-35px symbol-circle">
-										<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-25.jpg')}}" />
+										<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-25.jpg')}}" />
 									</div>
 									<!--end::Avatar-->
 									<!--begin::Details-->
@@ -2480,7 +3012,7 @@ License: For each use you must have a valid license purchased only from above li
 									<!--end::Details-->
 									<!--begin::Avatar-->
 									<div class="symbol symbol-35px symbol-circle">
-										<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" />
+										<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" />
 									</div>
 									<!--end::Avatar-->
 								</div>
@@ -2500,7 +3032,7 @@ License: For each use you must have a valid license purchased only from above li
 								<div class="d-flex align-items-center mb-2">
 									<!--begin::Avatar-->
 									<div class="symbol symbol-35px symbol-circle">
-										<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-25.jpg')}}" />
+										<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-25.jpg')}}" />
 									</div>
 									<!--end::Avatar-->
 									<!--begin::Details-->
@@ -2533,7 +3065,7 @@ License: For each use you must have a valid license purchased only from above li
 									<!--end::Details-->
 									<!--begin::Avatar-->
 									<div class="symbol symbol-35px symbol-circle">
-										<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" />
+										<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" />
 									</div>
 									<!--end::Avatar-->
 								</div>
@@ -2553,7 +3085,7 @@ License: For each use you must have a valid license purchased only from above li
 								<div class="d-flex align-items-center mb-2">
 									<!--begin::Avatar-->
 									<div class="symbol symbol-35px symbol-circle">
-										<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-25.jpg')}}" />
+										<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-25.jpg')}}" />
 									</div>
 									<!--end::Avatar-->
 									<!--begin::Details-->
@@ -2585,7 +3117,7 @@ License: For each use you must have a valid license purchased only from above li
 									<!--end::Details-->
 									<!--begin::Avatar-->
 									<div class="symbol symbol-35px symbol-circle">
-										<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" />
+										<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" />
 									</div>
 									<!--end::Avatar-->
 								</div>
@@ -2605,7 +3137,7 @@ License: For each use you must have a valid license purchased only from above li
 								<div class="d-flex align-items-center mb-2">
 									<!--begin::Avatar-->
 									<div class="symbol symbol-35px symbol-circle">
-										<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-25.jpg')}}" />
+										<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-25.jpg')}}" />
 									</div>
 									<!--end::Avatar-->
 									<!--begin::Details-->
@@ -3333,6 +3865,53 @@ License: For each use you must have a valid license purchased only from above li
 							<!--end::Info-->
 						</div>
 						<!--end::Link-->
+
+
+
+
+
+
+
+
+                        @can('Read-Repair')
+								<div class="menu-item">
+									<!--begin:Menu link-->
+									<a class="menu-link" href="{{route('repairs.index')}}" target="blank">
+										<span class="menu-icon">
+											<!--begin::Svg Icon | path: icons/duotune/abstract/abs027.svg-->
+											<span class="svg-icon svg-icon-2">
+												<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<path opacity="0.3" d="M21.25 18.525L13.05 21.825C12.35 22.125 11.65 22.125 10.95 21.825L2.75 18.525C1.75 18.125 1.75 16.725 2.75 16.325L4.04999 15.825L10.25 18.325C10.85 18.525 11.45 18.625 12.05 18.625C12.65 18.625 13.25 18.525 13.85 18.325L20.05 15.825L21.35 16.325C22.35 16.725 22.35 18.125 21.25 18.525ZM13.05 16.425L21.25 13.125C22.25 12.725 22.25 11.325 21.25 10.925L13.05 7.62502C12.35 7.32502 11.65 7.32502 10.95 7.62502L2.75 10.925C1.75 11.325 1.75 12.725 2.75 13.125L10.95 16.425C11.65 16.725 12.45 16.725 13.05 16.425Z" fill="currentColor"></path>
+													<path d="M11.05 11.025L2.84998 7.725C1.84998 7.325 1.84998 5.925 2.84998 5.525L11.05 2.225C11.75 1.925 12.45 1.925 13.15 2.225L21.35 5.525C22.35 5.925 22.35 7.325 21.35 7.725L13.05 11.025C12.45 11.325 11.65 11.325 11.05 11.025Z" fill="currentColor"></path>
+												</svg>
+											</span>
+											<!--end::Svg Icon-->
+										</span>
+										<span class="menu-title">{{__('cms.repair_list')}}</span>
+									</a>
+									<!--end:Menu link-->
+								</div>
+								@endcan
+
+								@can('Read-Repair-Problems')
+								<div class="menu-item">
+									<!--begin:Menu link-->
+									<a class="menu-link" href="{{route('repair_problems.index')}}" target="blank">
+										<span class="menu-icon">
+											<!--begin::Svg Icon | path: icons/duotune/abstract/abs027.svg-->
+											<span class="svg-icon svg-icon-2">
+												<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<path opacity="0.3" d="M21.25 18.525L13.05 21.825C12.35 22.125 11.65 22.125 10.95 21.825L2.75 18.525C1.75 18.125 1.75 16.725 2.75 16.325L4.04999 15.825L10.25 18.325C10.85 18.525 11.45 18.625 12.05 18.625C12.65 18.625 13.25 18.525 13.85 18.325L20.05 15.825L21.35 16.325C22.35 16.725 22.35 18.125 21.25 18.525ZM13.05 16.425L21.25 13.125C22.25 12.725 22.25 11.325 21.25 10.925L13.05 7.62502C12.35 7.32502 11.65 7.32502 10.95 7.62502L2.75 10.925C1.75 11.325 1.75 12.725 2.75 13.125L10.95 16.425C11.65 16.725 12.45 16.725 13.05 16.425Z" fill="currentColor"></path>
+													<path d="M11.05 11.025L2.84998 7.725C1.84998 7.325 1.84998 5.925 2.84998 5.525L11.05 2.225C11.75 1.925 12.45 1.925 13.15 2.225L21.35 5.525C22.35 5.925 22.35 7.325 21.35 7.725L13.05 11.025C12.45 11.325 11.65 11.325 11.05 11.025Z" fill="currentColor"></path>
+												</svg>
+											</span>
+											<!--end::Svg Icon-->
+										</span>
+										<span class="menu-title">{{__('cms.repair_problems_list')}}</span>
+									</a>
+									<!--end:Menu link-->
+								</div>
+								@endcan
 					</div>
 					<!--end::Content-->
 				</div>
@@ -3343,7 +3922,7 @@ License: For each use you must have a valid license purchased only from above li
 		<!--end::Help drawer-->
 		<!--end::Engage drawers-->
 		<!--begin::Engage toolbar-->
-	
+
 		<!--end::Engage toolbar-->
 		<!--begin::Scrolltop-->
 		<div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
@@ -4495,7 +5074,7 @@ License: For each use you must have a valid license purchased only from above li
 													<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a card holder's name"></i>
 												</label>
 												<!--end::Label-->
-												<input type="text" class="form-control form-control-solid" placeholder="" name="card_name" value="Max Doe" />
+												<input type="text" class="form-control form-control-solid" placeholder="" name="card_name" value="max" />
 											</div>
 											<!--end::Input group-->
 											<!--begin::Input group-->
@@ -4738,7 +5317,7 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-6.jpg')}}" />
+											<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-6.jpg')}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -4806,17 +5385,17 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" />
+											<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{Storage::url(auth()->user()->image)}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
 										<div class="ms-6">
 											<!--begin::Name-->
-											<a href="#" class="d-flex align-items-center fs-5 fw-bold text-dark text-hover-primary">Max Smith
-											<span class="badge badge-light fs-8 fw-semibold ms-2">Software Enginer</span></a>
+											<a href="#" class="d-flex align-items-center fs-5 fw-bold text-dark text-hover-primary">{{auth()->user()->name}}
+											<span class="badge badge-light fs-8 fw-semibold ms-2">{{auth()->user()->roles[0]->name??''}}</span></a>
 											<!--end::Name-->
 											<!--begin::Email-->
-											<div class="fw-semibold text-muted">max@kt.com</div>
+											<div class="fw-semibold text-muted">{{auth()->user()->email}}</div>
 											<!--end::Email-->
 										</div>
 										<!--end::Details-->
@@ -4840,7 +5419,7 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-5.jpg')}}" />
+											<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-5.jpg')}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -4874,7 +5453,7 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{asset('assets/media/avatars/300-25.jpg')}}" />
+											<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('assets/media/avatars/300-25.jpg')}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -4942,7 +5521,7 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-9.jpg')}}" />
+											<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-9.jpg')}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -5044,7 +5623,7 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-23.jpg')}}" />
+											<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-23.jpg')}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -5106,13 +5685,18 @@ License: For each use you must have a valid license purchased only from above li
 									<!--end::Stats-->
 								</div>
 								<!--end::User-->
+
+
+
+
+
 								<!--begin::User-->
 								<div class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
 									<!--begin::Details-->
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-12.jpg')}}" />
+											<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-12.jpg')}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -5284,7 +5868,7 @@ License: For each use you must have a valid license purchased only from above li
 										<a href="#" class="d-flex align-items-center p-3 rounded bg-state-light bg-state-opacity-50 mb-1">
 											<!--begin::Avatar-->
 											<div class="symbol symbol-35px symbol-circle me-5">
-												<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-6.jpg')}}" />
+												<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-6.jpg')}}" />
 											</div>
 											<!--end::Avatar-->
 											<!--begin::Info-->
@@ -5310,26 +5894,12 @@ License: For each use you must have a valid license purchased only from above li
 											<!--end::Info-->
 										</a>
 										<!--end::User-->
+
 										<!--begin::User-->
 										<a href="#" class="d-flex align-items-center p-3 rounded bg-state-light bg-state-opacity-50 mb-1">
 											<!--begin::Avatar-->
 											<div class="symbol symbol-35px symbol-circle me-5">
-												<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" />
-											</div>
-											<!--end::Avatar-->
-											<!--begin::Info-->
-											<div class="fw-semibold">
-												<span class="fs-6 text-gray-800 me-2">Max Smith</span>
-												<span class="badge badge-light">Software Enginer</span>
-											</div>
-											<!--end::Info-->
-										</a>
-										<!--end::User-->
-										<!--begin::User-->
-										<a href="#" class="d-flex align-items-center p-3 rounded bg-state-light bg-state-opacity-50 mb-1">
-											<!--begin::Avatar-->
-											<div class="symbol symbol-35px symbol-circle me-5">
-												<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-5.jpg')}}" />
+												<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-5.jpg')}}" />
 											</div>
 											<!--end::Avatar-->
 											<!--begin::Info-->
@@ -5344,7 +5914,7 @@ License: For each use you must have a valid license purchased only from above li
 										<a href="#" class="d-flex align-items-center p-3 rounded bg-state-light bg-state-opacity-50 mb-1">
 											<!--begin::Avatar-->
 											<div class="symbol symbol-35px symbol-circle me-5">
-												<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-25.jpg')}}" />
+												<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-25.jpg')}}" />
 											</div>
 											<!--end::Avatar-->
 											<!--begin::Info-->
@@ -5374,7 +5944,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end::Checkbox-->
 												<!--begin::Avatar-->
 												<div class="symbol symbol-35px symbol-circle">
-													<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-6.jpg')}}" />
+													<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-6.jpg')}}" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Details-->
@@ -5446,13 +6016,16 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end::Checkbox-->
 												<!--begin::Avatar-->
 												<div class="symbol symbol-35px symbol-circle">
-													<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" />
+													<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{Storage::url(auth()->user()->image)}}" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Details-->
-												<div class="ms-5">
-													<a href="#" class="fs-5 fw-bold text-gray-900 text-hover-primary mb-2">Max Smith</a>
-													<div class="fw-semibold text-muted">max@kt.com</div>
+												<div class="d-flex flex-column">
+													<div class="fw-bold d-flex align-items-center fs-5">{{auth()->user()->name}}
+													</div>
+													<a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{auth()->user()->email}}</a>
+													<a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{auth()->user()->roles[0]->name??''}}</a>
+
 												</div>
 												<!--end::Details-->
 											</div>
@@ -5482,7 +6055,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end::Checkbox-->
 												<!--begin::Avatar-->
 												<div class="symbol symbol-35px symbol-circle">
-													<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-5.jpg')}}" />
+													<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-5.jpg')}}" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Details-->
@@ -5518,7 +6091,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end::Checkbox-->
 												<!--begin::Avatar-->
 												<div class="symbol symbol-35px symbol-circle">
-													<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-25.jpg')}}" />
+													<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-25.jpg')}}" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Details-->
@@ -5590,7 +6163,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end::Checkbox-->
 												<!--begin::Avatar-->
 												<div class="symbol symbol-35px symbol-circle">
-													<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-9.jpg')}}" />
+													<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-9.jpg')}}" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Details-->
@@ -5698,7 +6271,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end::Checkbox-->
 												<!--begin::Avatar-->
 												<div class="symbol symbol-35px symbol-circle">
-													<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-23.jpg')}}" />
+													<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-23.jpg')}}" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Details-->
@@ -5770,7 +6343,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end::Checkbox-->
 												<!--begin::Avatar-->
 												<div class="symbol symbol-35px symbol-circle">
-													<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-12.jpg')}}" />
+													<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-12.jpg')}}" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Details-->
@@ -5842,7 +6415,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end::Checkbox-->
 												<!--begin::Avatar-->
 												<div class="symbol symbol-35px symbol-circle">
-													<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-13.jpg')}}" />
+													<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-13.jpg')}}" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Details-->
@@ -5914,7 +6487,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end::Checkbox-->
 												<!--begin::Avatar-->
 												<div class="symbol symbol-35px symbol-circle">
-													<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-21.jpg')}}" />
+													<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-21.jpg')}}" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Details-->
@@ -6069,7 +6642,7 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-6.jpg')}}" />
+											<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-6.jpg')}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -6125,14 +6698,17 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" />
+											<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{Storage::url('images/auth/1669458484_auth_image.png')}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
-										<div class="ms-5">
-											<a href="#" class="fs-5 fw-bold text-gray-900 text-hover-primary mb-2">Max Smith</a>
-											<div class="fw-semibold text-muted">max@kt.com</div>
-										</div>
+										<div class="d-flex flex-column">
+													<div class="fw-bold d-flex align-items-center fs-5">{{auth()->user()->name}}
+													</div>
+													<a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{auth()->user()->email}}</a>
+													<a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{auth()->user()->roles[0]->name??''}}</a>
+
+												</div>
 										<!--end::Details-->
 									</div>
 									<!--end::Details-->
@@ -6153,7 +6729,7 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-5.jpg')}}" />
+											<img alt=" src="{{asset('cms/assets/media/avatars/300-5.jpg')}}"" src="{{asset('cms/assets/media/avatars/300-5.jpg')}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -6181,7 +6757,7 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-25.jpg')}}" />
+											<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-25.jpg')}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -6237,7 +6813,7 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-9.jpg')}}" />
+											<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-9.jpg')}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -6321,7 +6897,7 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-23.jpg')}}" />
+											<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-23.jpg')}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -6377,7 +6953,7 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-12.jpg')}}" />
+											<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-12.jpg')}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -6433,7 +7009,7 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-13.jpg')}}" />
+											<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-13.jpg')}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -6489,7 +7065,7 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-21.jpg')}}" />
+											<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-21.jpg')}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->

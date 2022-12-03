@@ -77,22 +77,27 @@
                 <!--begin::Input group-->
 
    <!--begin::Input group-->
-   <div class="row mb-6">
-    <!--begin::Label-->
-    <label  for="name" class="col-lg-4 col-form-label required fw-semibold fs-6">{{__('cms.guard_name')}} </label>
+
+   <div class="col-6">
+    <div class="fv-row mb-7 fv-plugins-icon-container">
+        <!--begin::Label-->
+        <label class="fs-6 fw-semibold form-label mt-3">
+            <span class="required">
+                {{__('cms.guard_name')}} </span>
+</div>
+
     <!--end::Label-->
     <!--begin::Col-->
-    <div class="col-lg-8 fv-row">
+    <div class="col-lg-12 fv-row">
         <!--begin::Input-->
-        <select id="role_id"
-        name="role_id" aria-label={{__('cms.role')}} data-control="select2" data-placeholder={{__('cms.roles')}}class="form-select form-select-solid form-select-lg">
-           <option value="">{{__('cms.roles')}} </option>
+        <select id="role_id"  class="form-select form-select-solid form-select-lg" data-control="select2"
+        data-select2-id="select2-data-10-uyhn"
+        name="role_id" aria-label={{__('cms.role')}} data-control="select2" data-placeholder={{__('cms.roles')}}>
+           <option  value="">{{__('cms.roles')}} </option>
            @foreach ($roles as $role)
-           <option data-kt-flag="flags/indonesia.svg" value="{{ $role->id }}">{{$role->name}}</option>
+           <option  data-kt-flag="flags/indonesia.svg" value="{{ $role->id }}">{{$role->name}}</option>
 
            @endforeach
-           {{-- <option data-kt-flag="flags/indonesia.svg" value="client">{{__('cms.client')}}</option>
-           <option data-kt-flag="flags/malaysia.svg" value="technical">{{__('cms.technical')}}</option> --}}
 
        </select>
 
@@ -105,29 +110,6 @@
     <!--end::Col-->
 </div>
 <!--end::Input group-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -166,31 +148,6 @@
                                     <!--end::Inputs-->
                                 </label>
                                 <!--end::Label-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -279,6 +236,8 @@
             console.log(response);
             toastr.success(response.data.message);
             document.getElementById('create-form').reset();
+            window.location.href = '/cms/admins';
+
         })
         .catch(function (error) {
             console.log(error.response);

@@ -16,7 +16,8 @@ class ProblemStatusPolicy
      * @param  \App\Models\Admin  $admin
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(Admin $admin)
+    public function viewAny( $admin)
+
     {
         return $admin->hasPermissionTo('Read-Problems-status')
         ? $this->allow()
@@ -44,7 +45,7 @@ class ProblemStatusPolicy
     {
         return $admin->hasPermissionTo('Create-Problem-status')
         ? $this->allow()
-        : $this->deny('You have no permission for this action');   
+        : $this->deny('You have no permission for this action');
         }
 
     /**
@@ -71,7 +72,7 @@ class ProblemStatusPolicy
     {
         return $admin->hasPermissionTo('Delete-Problem-status')
         ? $this->allow()
-        : $this->deny('You have no permission for this action');  
+        : $this->deny('You have no permission for this action');
         }
 
     /**

@@ -10,7 +10,10 @@ use Symfony\Component\HttpFoundation\Response;
 class RolePermissionController extends Controller
 {
 
-
+    public function __construct()
+    {
+        // $this->authorizeResource(Permission::class, 'permission');
+    }
 
     /**
      * Display a listing of the resource.
@@ -52,6 +55,9 @@ class RolePermissionController extends Controller
             if ($role->hasPermissionTo($permission)) {
                 $role->revokePermissionTo($permission);
             } else {
+
+
+
                 $role->givePermissionTo($permission);
             }
 

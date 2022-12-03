@@ -40,6 +40,10 @@ class permissionSeeder extends Seeder
         Permission::create(['name'=> 'Delete-Country','guard_name'=> 'admin' ]);
 
 
+
+
+
+
         Permission::create(['name'=> 'Create-City','guard_name'=> 'admin' ]);
         Permission::create(['name'=> 'Read-Cities','guard_name'=> 'admin' ]);
         Permission::create(['name'=> 'Update-City','guard_name'=> 'admin' ]);
@@ -52,24 +56,79 @@ class permissionSeeder extends Seeder
 
 
 
-        Permission::create(['name'=> 'Create-SubCategory','guard_name'=> 'admin' ]);
-        Permission::create(['name'=> 'Read-SubCategories','guard_name'=> 'admin' ]);
-        Permission::create(['name'=> 'Update-SubCategory','guard_name'=> 'admin' ]);
-        Permission::create(['name'=> 'Delete-SubCategory','guard_name'=> 'admin' ]);
+        Permission::create(['name'=> 'Create-Brand','guard_name'=> 'admin' ]);
+        Permission::create(['name'=> 'Read-Brands','guard_name'=> 'admin' ]);
+        Permission::create(['name'=> 'Update-Brand','guard_name'=> 'admin' ]);
+        Permission::create(['name'=> 'Delete-Brand','guard_name'=> 'admin' ]);
 
 
 
-        Permission::create(['name'=> 'Create-Product','guard_name'=> 'admin' ]);
-        Permission::create(['name'=> 'Read-Products','guard_name'=> 'admin' ]);
-        Permission::create(['name'=> 'Update-Product','guard_name'=> 'admin' ]);
-        Permission::create(['name'=> 'Delete-Product','guard_name'=> 'admin' ]);
+        Permission::create(['name'=> 'Create-Spare-Part','guard_name'=> 'admin' ]);
+        Permission::create(['name'=> 'Read-Spare-Parts','guard_name'=> 'admin' ]);
+        Permission::create(['name'=> 'Update-Spare-Part','guard_name'=> 'admin' ]);
+        Permission::create(['name'=> 'Delete-Spare-Part','guard_name'=> 'admin' ]);
 
 
-        Permission::create(['name'=> 'Create-TradeMark','guard_name'=> 'admin' ]);
-        Permission::create(['name'=> 'Read-TradeMarks','guard_name'=> 'admin' ]);
-        Permission::create(['name'=> 'Update-TradeMark','guard_name'=> 'admin' ]);
-        Permission::create(['name'=> 'Delete-TradeMark','guard_name'=> 'admin' ]);
+        Permission::create(['name'=> 'Create-Model','guard_name'=> 'admin' ]);
+        Permission::create(['name'=> 'Read-Models','guard_name'=> 'admin' ]);
+        Permission::create(['name'=> 'Update-Model','guard_name'=> 'admin' ]);
+        Permission::create(['name'=> 'Delete-Model','guard_name'=> 'admin' ]);
 
         Permission::create(['name'=> 'Read-Permissions','guard_name'=> 'admin' ]);
+
+
+
+
+        Permission::create(['name'=> 'Create-Language','guard_name'=> 'admin' ]);
+        Permission::create(['name'=> 'Read-Languages','guard_name'=> 'admin' ]);
+        Permission::create(['name'=> 'Update-Language','guard_name'=> 'admin' ]);
+        Permission::create(['name'=> 'Delete-Language','guard_name'=> 'admin' ]);
+
+
+
+
+    
+
+
+        Permission::create(['name'=> 'Create-Problem','guard_name'=> 'user' ]);
+        Permission::create(['name'=> 'Read-Problems','guard_name'=> 'user' ]);
+        Permission::create(['name'=> 'Update-Problem','guard_name'=> 'user' ]);
+        Permission::create(['name'=> 'Delete-Problem','guard_name'=> 'user' ]);
+
+
+        Permission::create(['name'=> 'Create-Repair','guard_name'=> 'user' ]);
+        Permission::create(['name'=> 'Read-Repair','guard_name'=> 'user' ]);
+        Permission::create(['name'=> 'Update-Repair','guard_name'=> 'user' ]);
+        Permission::create(['name'=> 'Delete-Repair','guard_name'=> 'user' ]);
+
+        Permission::create(['name'=> 'Create-Repair-Problem','guard_name'=> 'user' ]);
+        Permission::create(['name'=> 'Read-Repair-Problems','guard_name'=> 'user' ]);
+        Permission::create(['name'=> 'Update-Repair-Problem','guard_name'=> 'user' ]);
+        Permission::create(['name'=> 'Delete-Repair-Problem','guard_name'=> 'user' ]);
+
+
+        Permission::create(['name'=> 'Create-Problem-status','guard_name'=> 'admin' ]);
+        Permission::create(['name'=> 'Read-Problems-status','guard_name'=> 'admin' ]);
+        Permission::create(['name'=> 'Update-Problem-status','guard_name'=> 'admin' ]);
+        Permission::create(['name'=> 'Delete-Problem-status','guard_name'=> 'admin' ]);
+
+
+
+
+        Permission::create(['name'=> 'Create-user-model','guard_name'=> 'user' ]);
+        Permission::create(['name'=> 'Read-user-models','guard_name'=> 'user' ]);
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

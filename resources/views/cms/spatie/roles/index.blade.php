@@ -73,7 +73,7 @@
 
                                 <td>
                                     <a href="{{route('role.show',$role->id)}}"
-                                        class="btn btn-app bg-info">
+                                        class="btn btn-app bg-">
                                         ( {{$role->permissions_count}})
                                         {{__('cms.permission')}}
                                     </a>
