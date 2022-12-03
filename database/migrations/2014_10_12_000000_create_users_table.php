@@ -22,11 +22,9 @@ return new class extends Migration
             $table->string('image')->default('not-found')->nullable();
             $table->enum('user_type',['agent', 'technical', 'customers']);
 
-
-
-
             $table->string('region')->nullable();
             $table->boolean('status')->default(true);
+
             $table->rememberToken();
             $table->timestamps();
             $table->SoftDeletes();

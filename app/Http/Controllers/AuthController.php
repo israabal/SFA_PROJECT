@@ -35,20 +35,20 @@ class AuthController extends Controller
         $validator = Validator($request->all(), [
             'email' => 'required|string',
             'password' => 'required|string|min:3',
-            // 'remember' => 'required|boolean',
+            'remember' => 'required|boolean',
+
         ]);
         $guard = session('guard');
         $credentials = ['email' => $request->get('email'), 'password' => $request->get('password')];
         if (!$validator->fails()) {
-            /*if($guard =='user'){
+if($guard =='user'){
     $user=User::where('email', $request->get('email'))->first();
 
 }else{
     $user=Admin::where('email', $request->get('email'))->first();
 
 }
-dd($user);*/
-            if (true /*$user->status*/) {
+            if ($user->status) {
 
                 if (Auth::guard($guard)->attempt($credentials, $request->get('remember'))) {
                     if (auth('user')->user()->user_type == 'customers' && auth('user')->user()->start == false) {
@@ -61,6 +61,7 @@ dd($user);*/
                 } else {
                     return response()->json(['message' => 'Error credentials, please try again'], Response::HTTP_BAD_REQUEST);
                 }
+
             } else {
                 return response()->json(['message' => 'You Are Blocked In System'], Response::HTTP_BAD_REQUEST);
             }

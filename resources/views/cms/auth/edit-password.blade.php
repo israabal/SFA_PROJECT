@@ -115,6 +115,7 @@ function performUpdate() {
 
     };
     axios.post('/auth/updatePassword', data).then(function(response) {
+
             console.log('200');
             window.location.href = '/cms/dashboard';
         })

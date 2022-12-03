@@ -49,10 +49,12 @@ class UserController extends Controller
             'name' => 'required|string|min:3',
             'email' => 'required|email|unique:users,email',
             'user_type' => 'required',
+
             'country_id' => 'required',
             'city_id' => 'required',
             'region' => 'required|string|min:3',
          'user_role'=>'required|numeric|exists:roles,id',
+
 
             'image' => 'required|image|mimes:png,jpg,jpeg',
         ]);
@@ -64,6 +66,7 @@ class UserController extends Controller
             $user->country_id = $request->input('country_id');
             $user->city_id = $request->input('city_id');
             $user->region = $request->input('region');
+
             $user->password = Hash::make(Str::random(8));
             $user->admin_id=auth()->user()->getAuthIdentifier();
             if ($request->hasFile('image')) {
@@ -123,16 +126,19 @@ class UserController extends Controller
             // 'city_id' => 'required',
             // 'region' => 'required|string|min:3',
             // 'image' => 'nullable', 'image|mimes:png,jpg,jpeg',
+
         ]);
         if (!$validator->fails()) {
             $user = User::findOrFail($id);
             $user->name = $request->input('name');
             $user->email = $request->input('email');
             $user->user_type = $request->input('user_type');
+
             $user->country_id = $request->input('country_id');
             $user->city_id = $request->input('city_id');
             $user->region = $request->input('region');
             $user->admin_id=auth()->user()->getAuthIdentifier();
+
 
 
             if ($request->hasFile('image')) {

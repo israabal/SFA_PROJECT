@@ -9,21 +9,22 @@ class SparePart extends Model
 {
     use HasFactory;
 
+
     public function getActiveStatusAttribute()
     {
-        
+
        return $this->active ? 'Active' : 'InActive';
     }
     public function getNameAttribute()
     {
-        
+
        return $this->spareparttranslation->first()->name??'';
     }
 
 
     public function getOverViewAttribute()
     {
-        
+
        return $this->spareparttranslation->first()->over_view??'';
     }
     public function spareparttranslation(){
@@ -50,4 +51,5 @@ class SparePart extends Model
     {
         return $this->images()->first()->url;
     }
+
 }

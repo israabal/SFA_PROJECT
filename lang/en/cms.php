@@ -12,7 +12,7 @@ return [
     'user_model' => 'user model',
     'add_technical' => 'Add Technical',
     'region' => 'Region',
-    'sc'=>' Select City',
+    'sc' => ' Select City',
 
     'users' => 'Users',
     'user_create' => 'Create User',
@@ -125,6 +125,8 @@ return [
     'create_success' => 'Created Success',
     'create_failed' => 'Created Failed',
 
+
+
     'Updated_success' => 'Updated Successfully  ',
     'Updated_failed' => ' Updated failed!',
     'Deleted_successfully' => 'Deleted successfully',
@@ -157,7 +159,7 @@ return [
     'value' => 'Value',
     'unit' => 'Unit',
     'used' => 'USED',
-'Sign_Up'=>'Sign Up',
+    'Sign_Up' => 'Sign Up',
     'problem' => 'problem',
     'problem_list' => 'Problem List',
     'create_problem' => 'Create Problem',
@@ -166,7 +168,7 @@ return [
     'edit_problem' => 'Edit Problem',
     'details' => 'Details',
     'repair_problems' => 'Repair Problems',
-'register_now'=>'register now',
+    'register_now' => 'register now',
     'repair' => 'Repair',
     'repair_list' => 'Repair List',
     'create_repair' => 'Create Repair',
@@ -257,6 +259,6 @@ return [
     'software maintenance' => ' software maintenance',
     'not suitable for use' => '  not suitable for use',
     'used' => 'used',
-    'information'=>'information',
-    'count'=>'count'
+    'information' => 'information',
+    'count' => 'count'
 ];

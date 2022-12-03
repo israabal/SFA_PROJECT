@@ -21,9 +21,9 @@ class RepairProblemPolicy
     {
         return $user->hasPermissionTo('Read-Repair-Problems')
         ? $this->allow()
-        : $this->deny('You have no permission for this action');
-       }
+                : $this->deny('You have no permission for this action');
 
+            }  
     /**
      * Determine whether the user can view the model.
      *
@@ -36,6 +36,7 @@ class RepairProblemPolicy
         return $user->hasPermissionTo('Read-Spare-Parts')
         ? $this->allow()
         : $this->deny('You have no permission for this action');      }
+
 
     /**
      * Determine whether the user can create models.

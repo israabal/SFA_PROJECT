@@ -126,6 +126,7 @@ License: For each use you must have a valid license purchased only from above li
                             </div>
                             <!--end::Input group=-->
                             <!--begin::Wrapper-->
+
                             <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
                                 <div>
                                     <label class="form-check form-check-sm form-check-custom form-check-solid">
@@ -181,27 +182,24 @@ License: For each use you must have a valid license purchased only from above li
 <!--end::Body-->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-    function login() {
-        let data = {
-            email: document.getElementById('email').value,
-            password: document.getElementById('password').value,
-            remember: document.getElementById('remember').checked,
-        };
-        axios.post('/login', data).then(function(response) {
-                console.log(response.data);
-                if (response.data == 201) {
-                    window.location.href = '/auth/profileEdit';
+function login() {
+    let data = {
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value,
+        remember: document.getElementById('remember').checked,
+    };
 
-                } else {
-                    window.location.href = '/cms/dashboard';
-                }
-            })
-            .catch(function(error) {
-                console.log(error);
-                toastr.error(error.response.data.message)
-            });
-    }
+    axios.post('/cms/login', data).then(function(response) {
+            console.log('200');
+            window.location.href = '/home';
+        })
+        .catch(function(error) {
+            console.log(error);
+            toastr.error(error.response.data.message)
+        });
+}
 </script>
+
 </body>
 <!--end::Body-->
 
