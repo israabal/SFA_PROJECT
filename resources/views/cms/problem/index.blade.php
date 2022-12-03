@@ -1,7 +1,7 @@
 @extends('cms.parent');
-@section('title',__('cms.problem'))
+@section('title',__('cms.problems'))
 @section('page-lg',__('cms.home'))
-@section('main-pg-md',__('cms.problem'))
+@section('main-pg-md',__('cms.problems'))
 @section('page-md',__('cms.problem_list'))
 @section('Content')
 <div id="kt_app_content" class="app-content flex-column-fluid">
@@ -20,12 +20,9 @@
                 <!--end::Card title-->
                 <!--begin::Card toolbar-->
                 <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
-                    {{-- @can('Create-problem') --}}
 
-                    <!--begin::Add product-->
-                    <a href="{{route('problems.create' )}}" class="btn btn-primary">{{__('cms.create_problem')}}</a>
-                    <!--end::Add product-->
-                    {{-- @endcan --}}
+                    <a href="{{route('UsersEquipment.index')}}" class="btn btn-primary">{{__('cms.create_problem')}}</a>
+
                 </div>
                 <!--end::Card toolbar-->
             </div>
@@ -44,22 +41,8 @@
                              {{-- <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users"  aria-label="Two-step: activate to sort column ascending" style="width: 125px;">{{__('cms.user')}}</th> --}}
 
 
+                            <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users"  aria-label="Joined Date: activate to sort column ascending"  > {{__('cms.details')}}</th>
                             <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users"  aria-label="Joined Date: activate to sort column ascending"  >{{__('cms.model')}}</th>
-
-
-
-                            <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users"  aria-label="Joined Date: activate to sort column ascending"  >{{__('cms.log')}}</th>
-
-
-                            <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users"  aria-label="Joined Date: activate to sort column ascending"  >{{__('cms.lat')}}</th>
-
-                            <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users"  aria-label="Joined Date: activate to sort column ascending" ></th>
-
-
-                            <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users"  aria-label="Joined Date: activate to sort column ascending"  >      {{__('cms.details')}}</th>
-
-
-
 
                             <th class="text-end min-w-100px sorting_disabled"  aria-label="Actions" style="width: 100px;">{{__('cms.actions')}}</th></tr>
                         <!--end::Table row-->
@@ -75,46 +58,17 @@
 
 
 
-                        {{-- <td class="d-flex align-items-center">
-                            <!--begin:: Avatar -->
-
-                            <!--end::Avatar-->
-                            <!--begin::User details-->
-                            <div class="d-flex flex-column">
-                                <a href="../../demo1/dist/apps/user-management/users/view.html" class="text-gray-800 text-hover-primary mb-1">  {{ $problem->user->user_type ??'NULL' }}</a>
-                                </div>
-                            <!--begin::User details-->
-                        </td> --}}
-
-                        <!--end::Two step=-->
-                        <!--begin::Joined-->
-                        <td> {{Auth::user()->name}}</td>
-                        {{-- <td> {{$problem->models->name}}</td> --}}
-
-                        <td> {{$problem->d_log}}</td>
-                        <td>   {{$problem->d_lat}}</td>
-
-                        <td >
-                            <span class="fw-bold">{{$problem->app_status}}</span>
-                        </td>
-
                         <td>   {{$problem->details}}</td>
 
-{{--
-                        <td ><span class="badge @if($problem->active) bg-success @else bg-danger @endif">{{$problem->active_status}}</span>
- --}}
+                        <td class="btn btn-app bg-warning " style="color: black"> {{$problem->models_count}}</td>
 
 
-
-
-                            <!--end::SKU=-->
-                            <!--begin::Qty=-->
 
 
                             <td>
                                 <div class="d-flex justify-content-end flex-shrink-0">
 
-                                    <a  href="{{route('problems.edit', $problem->id )}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                    {{-- <a  href="{{route('problems.edit', $problem->id )}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                         <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                                         <span class="svg-icon svg-icon-3">
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -123,7 +77,22 @@
                                             </svg>
                                         </span>
                                         <!--end::Svg Icon-->
-                                    </a>
+                                    </a> --}}
+
+
+                                    {{-- @if($problem->status==1)
+                                    <a onclick="changeStatus('{{$problem->id}}')"
+                                        class="btn btn-icon btn btn-danger btn-active-color-primary btn-sm"
+                                        title=" فعال الان">
+                                        <i class="fa-solid fa-lock"></i> </a>
+                                    @else
+                                    <a onclick="changeStatus('{{$problem->id}}')"
+                                        class="btn btn-icon btn btn-success btn-active-color-primary btn-sm"
+                                        title="غير فعال">
+                                        <i class="fa-solid fa-unlock"></i>
+                                        @endif
+                                    </a> --}}
+
                                     <a href="#" onclick="confirmDelete('{{$problem->id}}', this)"  class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
                                         <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                                         <span class="svg-icon svg-icon-3">

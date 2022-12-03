@@ -26,7 +26,6 @@ class DashboardController extends Controller
         $model = SModel::all()->count();
         $problems = Problem::all();
         $problem = $problems->count();
-        $problms = Problem::latest()->limit(10)->get();
         $usermodel = UserModel::all()->count();
         if (auth('admin')->check()) {
             return response()->view('cms.dashboard.dashboard', [
@@ -37,18 +36,23 @@ class DashboardController extends Controller
         } else {
 
             if (auth('user')->user()->user_type == 'agent') {
+                $repairs = Repair::latest()->where('agent_id',auth('user')->user()->id)->limit(10)->simplePaginate(5);;
+                $problem=Problem::where( 'country_id' , auth('user')->user()->country_id)->count();
+                $repair = Repair::latest()->where('agent_id',auth('user')->user()->id)->count();
+                // $users=User::where('user_type','technical')->get();
 
                 return response()->view('cms.dashboard.dashboard', [
-                    'problms' => $problms,
+                    'repairs' => $repairs , 'problem' => $problem,'repair' => $repair
                 ]);
             } elseif (auth('user')->user()->user_type == 'technical') {
-                $rep = Repair::where('technecal_id', auth('user')->user()->id)->latest()->limit(10)->get();
-                return response()->view('cms.dashboard.dashboard', ['rep' => $rep]);
+                $problem=Problem::all();
+                $repairs = Repair::where('technecal_id', auth('user')->user()->id)->withCount('spareparts')->with('problem')->get();
+                return response()->view('cms.dashboard.dashboard', ['problem' => $problem , 'repairs'=>$repairs]);
             } else {
-
-                $probl = Problem::where('user_id', auth('user')->user()->id)->latest()->limit(10)->get();
-
-                return response()->view('cms.dashboard.dashboard', ['probl' => $probl]);
+                $id=auth('user')->user()->id;
+                $user_models = UserModel::Where('user_id',$id)->get();
+                return response()->view('cms.dashboard.dashboard', ['user_models' => $user_models]);
+              
             }
         }
     }

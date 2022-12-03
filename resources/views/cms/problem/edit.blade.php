@@ -1,5 +1,5 @@
 @extends('cms.parent')
-@section('title',__('cms.problem'))
+@section('title',__('cms.problems'))
 @section('page-lg',__('cms.home'))
 @section('main-pg-md',__('cms.problem_management'))
 @section('page-md',__('cms.edit_problem'))

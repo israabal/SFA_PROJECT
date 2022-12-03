@@ -1902,65 +1902,7 @@ License: For each use you must have a valid license purchased only from above li
 
 									@endcanany
 
-									@canany('Create-Problem','Read-Problems')
-									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-										<!--begin:Menu link-->
-										<span class="menu-link">
-											<span class="menu-icon">
-												<!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
-												<span class="svg-icon svg-icon-2">
-													<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-														<path d="M18 21.6C16.6 20.4 9.1 20.3 6.3 21.2C5.7 21.4 5.1 21.2 4.7 20.8L2 18C4.2 15.8 10.8 15.1 15.8 15.8C16.2 18.3 17 20.5 18 21.6ZM18.8 2.8C18.4 2.4 17.8 2.20001 17.2 2.40001C14.4 3.30001 6.9 3.2 5.5 2C6.8 3.3 7.4 5.5 7.7 7.7C9 7.9 10.3 8 11.7 8C15.8 8 19.8 7.2 21.5 5.5L18.8 2.8Z" fill="currentColor" />
-														<path opacity="0.3" d="M21.2 17.3C21.4 17.9 21.2 18.5 20.8 18.9L18 21.6C15.8 19.4 15.1 12.8 15.8 7.8C18.3 7.4 20.4 6.70001 21.5 5.60001C20.4 7.00001 20.2 14.5 21.2 17.3ZM8 11.7C8 9 7.7 4.2 5.5 2L2.8 4.8C2.4 5.2 2.2 5.80001 2.4 6.40001C2.7 7.40001 3.00001 9.2 3.10001 11.7C3.10001 15.5 2.40001 17.6 2.10001 18C3.20001 16.9 5.3 16.2 7.8 15.8C8 14.2 8 12.7 8 11.7Z" fill="currentColor" />
-													</svg>
-												</span>
-												<!--end::Svg Icon-->
-											</span>
-											<span class="menu-title">{{__('cms.problems')}}</span>
-											<span class="menu-arrow"></span>
-										</span>
-										<!--end:Menu link-->
-										<!--begin:Menu sub-->
-										<div class="menu-sub menu-sub-accordion">
-											<!--begin:Menu item-->
 
-											<!--end:Menu item-->
-											<!--begin:Menu item-->
-
-											<!--end:Menu item-->
-											<!--begin:Menu item-->
-
-											@can('Read-Problems')
-											<div class="menu-item">
-												<!--begin:Menu link-->
-												<a class="menu-link" href="{{route('problems.index')}}">
-													<span class="menu-bullet">
-														<span class="bullet bullet-dot"></span>
-													</span>
-													<span class="menu-title">{{__('cms.problem_list')}}</span>
-												</a>
-												<!--end:Menu link-->
-											</div>
-											@endcan
-											<!--end:Menu item-->
-											<!--begin:Menu item-->
-											@can('Create-Problem')
-											<div class="menu-item">
-												<!--begin:Menu link-->
-												<a class="menu-link" href="{{route('problems.create')}}">
-													<span class="menu-bullet">
-														<span class="bullet bullet-dot"></span>
-													</span>
-													<span class="menu-title">{{__('cms.create_problem')}}</span>
-												</a>
-												<!--end:Menu link-->
-											</div>
-											@endcan
-											<!--end:Menu item-->
-										</div>
-										<!--end:Menu sub-->
-									</div>
-									@endcanany
 
 									@canany(['Create-Repair','Read-Repair'])
 
@@ -2069,7 +2011,7 @@ License: For each use you must have a valid license purchased only from above li
 
 											<!--end:Menu item-->
 											<!--begin:Menu item-->
-										
+
 
 											<!--end:Menu item-->
 										</div>
@@ -2139,65 +2081,51 @@ License: For each use you must have a valid license purchased only from above li
 									@endcanany
 
 
-									@canany('Create-user-model','Read-user-models')
-
-									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-										<!--begin:Menu link-->
-										<span class="menu-link">
-											<span class="menu-icon">
-												<!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
-												<span class="svg-icon svg-icon-2">
-													<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-														<path d="M18 21.6C16.6 20.4 9.1 20.3 6.3 21.2C5.7 21.4 5.1 21.2 4.7 20.8L2 18C4.2 15.8 10.8 15.1 15.8 15.8C16.2 18.3 17 20.5 18 21.6ZM18.8 2.8C18.4 2.4 17.8 2.20001 17.2 2.40001C14.4 3.30001 6.9 3.2 5.5 2C6.8 3.3 7.4 5.5 7.7 7.7C9 7.9 10.3 8 11.7 8C15.8 8 19.8 7.2 21.5 5.5L18.8 2.8Z" fill="currentColor" />
-														<path opacity="0.3" d="M21.2 17.3C21.4 17.9 21.2 18.5 20.8 18.9L18 21.6C15.8 19.4 15.1 12.8 15.8 7.8C18.3 7.4 20.4 6.70001 21.5 5.60001C20.4 7.00001 20.2 14.5 21.2 17.3ZM8 11.7C8 9 7.7 4.2 5.5 2L2.8 4.8C2.4 5.2 2.2 5.80001 2.4 6.40001C2.7 7.40001 3.00001 9.2 3.10001 11.7C3.10001 15.5 2.40001 17.6 2.10001 18C3.20001 16.9 5.3 16.2 7.8 15.8C8 14.2 8 12.7 8 11.7Z" fill="currentColor" />
-													</svg>
-												</span>
-												<!--end::Svg Icon-->
-											</span>
-											<span class="menu-title">{{__('cms.user_model')}}</span>
-											<span class="menu-arrow"></span>
-										</span>
-										<!--end:Menu link-->
-										<!--begin:Menu sub-->
-										<div class="menu-sub menu-sub-accordion">
-										@can('Read-user-models')
-										<div class="menu-item">
-												<!--begin:Menu link-->
-												<a class="menu-link" href="{{route('UsersEquipment.index')}}">
-													<span class="menu-bullet">
-														<span class="bullet bullet-dot"></span>
-													</span>
-													<span class="menu-title">{{__('cms.read_user_models')}}</span>
-												</a>
-												<!--end:Menu link-->
-											</div>
-										@endcan
-
-											<!--end:Menu item-->
-											<!--begin:Menu item-->
-											@can('Create-user-model')
-											<div class="menu-item">
-												<!--begin:Menu link-->
-												<a class="menu-link" href="{{route('users.create-models')}}">
-													<span class="menu-bullet">
-														<span class="bullet bullet-dot"></span>
-													</span>
-													<span class="menu-title">{{__('cms.create_user_models')}}</span>
-												</a>
-												<!--end:Menu link-->
-											</div>
-											@endcan
-
-											<!--end:Menu item-->
-										</div>
-										<!--end:Menu sub-->
-									</div>
-									@endcanany
 
 
 
 
 
+                                    @can('Read-Problems')
+<div class="menu-item">
+	<!--begin:Menu link-->
+	<a class="menu-link" href="{{route('problems.index')}}" target="blank">
+		<span class="menu-icon">
+			<!--begin::Svg Icon | path: icons/duotune/abstract/abs027.svg-->
+			<span class="svg-icon svg-icon-2">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path opacity="0.3" d="M21.25 18.525L13.05 21.825C12.35 22.125 11.65 22.125 10.95 21.825L2.75 18.525C1.75 18.125 1.75 16.725 2.75 16.325L4.04999 15.825L10.25 18.325C10.85 18.525 11.45 18.625 12.05 18.625C12.65 18.625 13.25 18.525 13.85 18.325L20.05 15.825L21.35 16.325C22.35 16.725 22.35 18.125 21.25 18.525ZM13.05 16.425L21.25 13.125C22.25 12.725 22.25 11.325 21.25 10.925L13.05 7.62502C12.35 7.32502 11.65 7.32502 10.95 7.62502L2.75 10.925C1.75 11.325 1.75 12.725 2.75 13.125L10.95 16.425C11.65 16.725 12.45 16.725 13.05 16.425Z" fill="currentColor"></path>
+					<path d="M11.05 11.025L2.84998 7.725C1.84998 7.325 1.84998 5.925 2.84998 5.525L11.05 2.225C11.75 1.925 12.45 1.925 13.15 2.225L21.35 5.525C22.35 5.925 22.35 7.325 21.35 7.725L13.05 11.025C12.45 11.325 11.65 11.325 11.05 11.025Z" fill="currentColor"></path>
+				</svg>
+			</span>
+			<!--end::Svg Icon-->
+		</span>
+		<span class="menu-title">{{__('cms.problems')}}</span>
+	</a>
+	<!--end:Menu link-->
+</div>
+@endcan
+
+
+@can('Create-user-model')
+<div class="menu-item">
+	<!--begin:Menu link-->
+	<a class="menu-link" href="{{route('users.create-models')}}" target="blank">
+		<span class="menu-icon">
+			<!--begin::Svg Icon | path: icons/duotune/abstract/abs027.svg-->
+			<span class="svg-icon svg-icon-2">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path opacity="0.3" d="M21.25 18.525L13.05 21.825C12.35 22.125 11.65 22.125 10.95 21.825L2.75 18.525C1.75 18.125 1.75 16.725 2.75 16.325L4.04999 15.825L10.25 18.325C10.85 18.525 11.45 18.625 12.05 18.625C12.65 18.625 13.25 18.525 13.85 18.325L20.05 15.825L21.35 16.325C22.35 16.725 22.35 18.125 21.25 18.525ZM13.05 16.425L21.25 13.125C22.25 12.725 22.25 11.325 21.25 10.925L13.05 7.62502C12.35 7.32502 11.65 7.32502 10.95 7.62502L2.75 10.925C1.75 11.325 1.75 12.725 2.75 13.125L10.95 16.425C11.65 16.725 12.45 16.725 13.05 16.425Z" fill="currentColor"></path>
+					<path d="M11.05 11.025L2.84998 7.725C1.84998 7.325 1.84998 5.925 2.84998 5.525L11.05 2.225C11.75 1.925 12.45 1.925 13.15 2.225L21.35 5.525C22.35 5.925 22.35 7.325 21.35 7.725L13.05 11.025C12.45 11.325 11.65 11.325 11.05 11.025Z" fill="currentColor"></path>
+				</svg>
+			</span>
+			<!--end::Svg Icon-->
+		</span>
+		<span class="menu-title">{{__('cms.create_model')}}</span>
+	</a>
+	<!--end:Menu link-->
+</div>
+@endcan
 
 								</div>
 								<!--end::Menu-->
@@ -2234,7 +2162,7 @@ License: For each use you must have a valid license purchased only from above li
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item">
-                        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                        <span class="bullet bg-gray-400 w-5px h-2px">@yield('main-pg-md')</span>
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
@@ -3011,7 +2939,7 @@ License: For each use you must have a valid license purchased only from above li
 								<div class="d-flex align-items-center mb-2">
 									<!--begin::Avatar-->
 									<div class="symbol symbol-35px symbol-circle">
-										<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-25.jpg')}}" />
+										<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-25.jpg')}}" />
 									</div>
 									<!--end::Avatar-->
 									<!--begin::Details-->
@@ -3043,7 +2971,7 @@ License: For each use you must have a valid license purchased only from above li
 									<!--end::Details-->
 									<!--begin::Avatar-->
 									<div class="symbol symbol-35px symbol-circle">
-										<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" />
+										<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" />
 									</div>
 									<!--end::Avatar-->
 								</div>
@@ -3063,7 +2991,7 @@ License: For each use you must have a valid license purchased only from above li
 								<div class="d-flex align-items-center mb-2">
 									<!--begin::Avatar-->
 									<div class="symbol symbol-35px symbol-circle">
-										<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-25.jpg')}}" />
+										<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-25.jpg')}}" />
 									</div>
 									<!--end::Avatar-->
 									<!--begin::Details-->
@@ -3095,7 +3023,7 @@ License: For each use you must have a valid license purchased only from above li
 									<!--end::Details-->
 									<!--begin::Avatar-->
 									<div class="symbol symbol-35px symbol-circle">
-										<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" />
+										<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" />
 									</div>
 									<!--end::Avatar-->
 								</div>
@@ -3115,7 +3043,7 @@ License: For each use you must have a valid license purchased only from above li
 								<div class="d-flex align-items-center mb-2">
 									<!--begin::Avatar-->
 									<div class="symbol symbol-35px symbol-circle">
-										<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-25.jpg')}}" />
+										<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-25.jpg')}}" />
 									</div>
 									<!--end::Avatar-->
 									<!--begin::Details-->
@@ -3148,7 +3076,7 @@ License: For each use you must have a valid license purchased only from above li
 									<!--end::Details-->
 									<!--begin::Avatar-->
 									<div class="symbol symbol-35px symbol-circle">
-										<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" />
+										<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" />
 									</div>
 									<!--end::Avatar-->
 								</div>
@@ -3168,7 +3096,7 @@ License: For each use you must have a valid license purchased only from above li
 								<div class="d-flex align-items-center mb-2">
 									<!--begin::Avatar-->
 									<div class="symbol symbol-35px symbol-circle">
-										<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-25.jpg')}}" />
+										<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-25.jpg')}}" />
 									</div>
 									<!--end::Avatar-->
 									<!--begin::Details-->
@@ -3200,7 +3128,7 @@ License: For each use you must have a valid license purchased only from above li
 									<!--end::Details-->
 									<!--begin::Avatar-->
 									<div class="symbol symbol-35px symbol-circle">
-										<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" />
+										<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-1.jpg')}}" />
 									</div>
 									<!--end::Avatar-->
 								</div>
@@ -3220,7 +3148,7 @@ License: For each use you must have a valid license purchased only from above li
 								<div class="d-flex align-items-center mb-2">
 									<!--begin::Avatar-->
 									<div class="symbol symbol-35px symbol-circle">
-										<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-25.jpg')}}" />
+										<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-25.jpg')}}" />
 									</div>
 									<!--end::Avatar-->
 									<!--begin::Details-->
@@ -3948,6 +3876,53 @@ License: For each use you must have a valid license purchased only from above li
 							<!--end::Info-->
 						</div>
 						<!--end::Link-->
+
+
+
+
+
+
+
+
+                        @can('Read-Repair')
+								<div class="menu-item">
+									<!--begin:Menu link-->
+									<a class="menu-link" href="{{route('repairs.index')}}" target="blank">
+										<span class="menu-icon">
+											<!--begin::Svg Icon | path: icons/duotune/abstract/abs027.svg-->
+											<span class="svg-icon svg-icon-2">
+												<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<path opacity="0.3" d="M21.25 18.525L13.05 21.825C12.35 22.125 11.65 22.125 10.95 21.825L2.75 18.525C1.75 18.125 1.75 16.725 2.75 16.325L4.04999 15.825L10.25 18.325C10.85 18.525 11.45 18.625 12.05 18.625C12.65 18.625 13.25 18.525 13.85 18.325L20.05 15.825L21.35 16.325C22.35 16.725 22.35 18.125 21.25 18.525ZM13.05 16.425L21.25 13.125C22.25 12.725 22.25 11.325 21.25 10.925L13.05 7.62502C12.35 7.32502 11.65 7.32502 10.95 7.62502L2.75 10.925C1.75 11.325 1.75 12.725 2.75 13.125L10.95 16.425C11.65 16.725 12.45 16.725 13.05 16.425Z" fill="currentColor"></path>
+													<path d="M11.05 11.025L2.84998 7.725C1.84998 7.325 1.84998 5.925 2.84998 5.525L11.05 2.225C11.75 1.925 12.45 1.925 13.15 2.225L21.35 5.525C22.35 5.925 22.35 7.325 21.35 7.725L13.05 11.025C12.45 11.325 11.65 11.325 11.05 11.025Z" fill="currentColor"></path>
+												</svg>
+											</span>
+											<!--end::Svg Icon-->
+										</span>
+										<span class="menu-title">{{__('cms.repair_list')}}</span>
+									</a>
+									<!--end:Menu link-->
+								</div>
+								@endcan
+
+								@can('Read-Repair-Problems')
+								<div class="menu-item">
+									<!--begin:Menu link-->
+									<a class="menu-link" href="{{route('repair_problems.index')}}" target="blank">
+										<span class="menu-icon">
+											<!--begin::Svg Icon | path: icons/duotune/abstract/abs027.svg-->
+											<span class="svg-icon svg-icon-2">
+												<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<path opacity="0.3" d="M21.25 18.525L13.05 21.825C12.35 22.125 11.65 22.125 10.95 21.825L2.75 18.525C1.75 18.125 1.75 16.725 2.75 16.325L4.04999 15.825L10.25 18.325C10.85 18.525 11.45 18.625 12.05 18.625C12.65 18.625 13.25 18.525 13.85 18.325L20.05 15.825L21.35 16.325C22.35 16.725 22.35 18.125 21.25 18.525ZM13.05 16.425L21.25 13.125C22.25 12.725 22.25 11.325 21.25 10.925L13.05 7.62502C12.35 7.32502 11.65 7.32502 10.95 7.62502L2.75 10.925C1.75 11.325 1.75 12.725 2.75 13.125L10.95 16.425C11.65 16.725 12.45 16.725 13.05 16.425Z" fill="currentColor"></path>
+													<path d="M11.05 11.025L2.84998 7.725C1.84998 7.325 1.84998 5.925 2.84998 5.525L11.05 2.225C11.75 1.925 12.45 1.925 13.15 2.225L21.35 5.525C22.35 5.925 22.35 7.325 21.35 7.725L13.05 11.025C12.45 11.325 11.65 11.325 11.05 11.025Z" fill="currentColor"></path>
+												</svg>
+											</span>
+											<!--end::Svg Icon-->
+										</span>
+										<span class="menu-title">{{__('cms.repair_problems_list')}}</span>
+									</a>
+									<!--end:Menu link-->
+								</div>
+								@endcan
 					</div>
 					<!--end::Content-->
 				</div>
@@ -5353,7 +5328,7 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-6.jpg')}}" />
+											<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-6.jpg')}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -5421,7 +5396,7 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{Storage::url(auth()->user()->image)}}" />
+											<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{Storage::url(auth()->user()->image)}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -5455,7 +5430,7 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-5.jpg')}}" />
+											<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-5.jpg')}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -5489,7 +5464,7 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{asset('assets/media/avatars/300-25.jpg')}}" />
+											<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('assets/media/avatars/300-25.jpg')}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -5557,7 +5532,7 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-9.jpg')}}" />
+											<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-9.jpg')}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -5659,7 +5634,7 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-23.jpg')}}" />
+											<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-23.jpg')}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -5721,13 +5696,18 @@ License: For each use you must have a valid license purchased only from above li
 									<!--end::Stats-->
 								</div>
 								<!--end::User-->
+
+
+
+
+
 								<!--begin::User-->
 								<div class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
 									<!--begin::Details-->
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-12.jpg')}}" />
+											<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-12.jpg')}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -5899,7 +5879,7 @@ License: For each use you must have a valid license purchased only from above li
 										<a href="#" class="d-flex align-items-center p-3 rounded bg-state-light bg-state-opacity-50 mb-1">
 											<!--begin::Avatar-->
 											<div class="symbol symbol-35px symbol-circle me-5">
-												<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-6.jpg')}}" />
+												<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-6.jpg')}}" />
 											</div>
 											<!--end::Avatar-->
 											<!--begin::Info-->
@@ -5930,7 +5910,7 @@ License: For each use you must have a valid license purchased only from above li
 										<a href="#" class="d-flex align-items-center p-3 rounded bg-state-light bg-state-opacity-50 mb-1">
 											<!--begin::Avatar-->
 											<div class="symbol symbol-35px symbol-circle me-5">
-												<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-5.jpg')}}" />
+												<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-5.jpg')}}" />
 											</div>
 											<!--end::Avatar-->
 											<!--begin::Info-->
@@ -5945,7 +5925,7 @@ License: For each use you must have a valid license purchased only from above li
 										<a href="#" class="d-flex align-items-center p-3 rounded bg-state-light bg-state-opacity-50 mb-1">
 											<!--begin::Avatar-->
 											<div class="symbol symbol-35px symbol-circle me-5">
-												<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-25.jpg')}}" />
+												<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-25.jpg')}}" />
 											</div>
 											<!--end::Avatar-->
 											<!--begin::Info-->
@@ -5975,7 +5955,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end::Checkbox-->
 												<!--begin::Avatar-->
 												<div class="symbol symbol-35px symbol-circle">
-													<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-6.jpg')}}" />
+													<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-6.jpg')}}" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Details-->
@@ -6047,7 +6027,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end::Checkbox-->
 												<!--begin::Avatar-->
 												<div class="symbol symbol-35px symbol-circle">
-													<img alt="Pic" src="{{Storage::url(auth()->user()->image)}}" />
+													<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{Storage::url(auth()->user()->image)}}" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Details-->
@@ -6086,7 +6066,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end::Checkbox-->
 												<!--begin::Avatar-->
 												<div class="symbol symbol-35px symbol-circle">
-													<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-5.jpg')}}" />
+													<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-5.jpg')}}" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Details-->
@@ -6122,7 +6102,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end::Checkbox-->
 												<!--begin::Avatar-->
 												<div class="symbol symbol-35px symbol-circle">
-													<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-25.jpg')}}" />
+													<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-25.jpg')}}" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Details-->
@@ -6194,7 +6174,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end::Checkbox-->
 												<!--begin::Avatar-->
 												<div class="symbol symbol-35px symbol-circle">
-													<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-9.jpg')}}" />
+													<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-9.jpg')}}" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Details-->
@@ -6302,7 +6282,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end::Checkbox-->
 												<!--begin::Avatar-->
 												<div class="symbol symbol-35px symbol-circle">
-													<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-23.jpg')}}" />
+													<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-23.jpg')}}" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Details-->
@@ -6374,7 +6354,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end::Checkbox-->
 												<!--begin::Avatar-->
 												<div class="symbol symbol-35px symbol-circle">
-													<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-12.jpg')}}" />
+													<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-12.jpg')}}" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Details-->
@@ -6446,7 +6426,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end::Checkbox-->
 												<!--begin::Avatar-->
 												<div class="symbol symbol-35px symbol-circle">
-													<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-13.jpg')}}" />
+													<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-13.jpg')}}" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Details-->
@@ -6518,7 +6498,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end::Checkbox-->
 												<!--begin::Avatar-->
 												<div class="symbol symbol-35px symbol-circle">
-													<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-21.jpg')}}" />
+													<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-21.jpg')}}" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Details-->
@@ -6673,7 +6653,7 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-6.jpg')}}" />
+											<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-6.jpg')}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -6729,7 +6709,7 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{Storage::url('images/auth/1669458484_auth_image.png')}}" />
+											<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{Storage::url('images/auth/1669458484_auth_image.png')}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -6760,7 +6740,7 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-5.jpg')}}" />
+											<img alt=" src="{{asset('cms/assets/media/avatars/300-5.jpg')}}"" src="{{asset('cms/assets/media/avatars/300-5.jpg')}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -6788,7 +6768,7 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-25.jpg')}}" />
+											<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-25.jpg')}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -6844,7 +6824,7 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-9.jpg')}}" />
+											<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-9.jpg')}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -6928,7 +6908,7 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-23.jpg')}}" />
+											<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-23.jpg')}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -6984,7 +6964,7 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-12.jpg')}}" />
+											<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-12.jpg')}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -7040,7 +7020,7 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-13.jpg')}}" />
+											<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-13.jpg')}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -7096,7 +7076,7 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="{{asset('cms/assets/media/avatars/300-21.jpg')}}" />
+											<img alt="{{ asset('cms/assets/media/avatars/user.webp') }}" src="{{asset('cms/assets/media/avatars/300-21.jpg')}}" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->

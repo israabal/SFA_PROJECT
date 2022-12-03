@@ -24,10 +24,12 @@ class RepairController extends Controller
     {
 
         $this->authorize('viewAny', Repair::class);
-
-        $users=User::where('user_type', 'technical')->get();
+        $problem=Problem::where( 'country_id' , auth('user')->user()->country_id)->simplePaginate(5);
+      
+        $users=User::where('user_type', 'technical')->where('country_id', auth('user')->user()->country_id)->get();
+        // dd($users);
         $repair=Repair::with('problem')->get();
-        return response()->view('cms.repair.index', compact( 'users','repair'));
+        return response()->view('cms.repair.index', ['users' => $users,'problem' => $problem]);
 }
 
     /**
@@ -55,26 +57,19 @@ class RepairController extends Controller
      */
     public function store(Request $request)
     {
-
-        //
         $this->authorize('create', Repair::class);
-
         $validator = Validator($request->all(), [
             'problem_id' => 'required',
             'technecal_id' => 'required',
-            'app_status'=> 'required ',
-            // 'product_models_id'=>'required',
-            // 'image' => 'required|image|mimes:png,jpg,jpeg',
-        ]);
-        if (!$validator->fails()) {
+ ]);
+if (!$validator->fails()) {
             $repair=Repair::where('problem_id',$request->get('problem_id'))->first();
 if($repair==null){
     $repair = new Repair();
     $repair->problem_id = $request->input('problem_id');
     $repair->technecal_id = $request->input('technecal_id');
-    $repair->app_status = $request->input('app_status');
+    $repair->agent_id=auth('user')->user()->id;
     $isSaved = $repair ->save();
-
     return response()->json(
         ['message' => $isSaved ? __('cms.create_success') : __('cms.create_failed')],
         $isSaved ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST
@@ -86,17 +81,11 @@ if($repair==null){
         Response::HTTP_BAD_REQUEST,
     );
 }
-
-
-    }
-    else {
+}else {
         return response()->json(
             ['message' => $validator->getMessageBag()->first()],
             Response::HTTP_BAD_REQUEST,
         );
-
-
-
  }
 }
     /**

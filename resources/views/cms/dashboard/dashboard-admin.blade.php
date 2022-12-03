@@ -7,7 +7,7 @@
     <div class="col-xl-4">
         <!--begin::Statistics Widget 5-->
         <a href="#" class="card bg-danger hoverable card-xl-stretch mb-xl-8">
-           
+
             <!--begin::Body-->
             <div class="card-body">
                 <!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm002.svg-->
@@ -29,7 +29,7 @@
     <div class="col-xl-4">
         <!--begin::Statistics Widget 5-->
         <a href="#" class="card bg-danger hoverable card-xl-stretch mb-xl-8">
-           
+
             <!--begin::Body-->
             <div class="card-body">
                 <!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm002.svg-->
@@ -51,7 +51,7 @@
     <div class="col-xl-4">
         <!--begin::Statistics Widget 5-->
         <a href="#" class="card bg-danger hoverable card-xl-stretch mb-xl-8">
-           
+
             <!--begin::Body-->
             <div class="card-body">
                 <!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm002.svg-->
@@ -70,8 +70,8 @@
         <!--end::Statistics Widget 5-->
     </div>
 
- 
-   
+
+
 </div>
 
 <div class="row g-5 g-xl-8">
@@ -91,7 +91,7 @@
                         </g>
                     </svg>
                 </span>
-              
+
                 <!--end::Svg Icon-->
                 <div class="text-white fw-bold fs-2 mb-2 mt-5">{{__('cms.spare_part')}}</div>
                 <div class="fw-semibold text-white">{{$spare_part->count()}}</div>
@@ -134,7 +134,7 @@
                     </svg>
                 </span>
                 <!--end::Svg Icon-->
-                <div class="text-white fw-bold fs-2 mb-2 mt-5">{{__('cms.problem')}}</div>
+                <div class="text-white fw-bold fs-2 mb-2 mt-5">{{__('cms.problems')}}</div>
                 <div class="fw-semibold text-white">{{$problem->count()}}</div>
             </div>
             <!--end::Body-->
@@ -240,8 +240,8 @@
                 <div class="card-body pt-2">
                     <!--begin::Item-->
                     @foreach ($user as $all_user)
-                        
-                   
+
+
                     <div class="d-flex align-items-center mb-7">
                         <!--begin::Avatar-->
                         <div class="symbol symbol-50px me-5">
@@ -251,7 +251,7 @@
                         <a href="#" class="text-dark fw-bold text-hover-primary fs-6">{{$all_user->name ?? ''}}</a>
                             <span class="text-muted d-block fw-bold">{{$all_user->user_type}}</span>
                         </div>
-                        <!--end::Avatar-->    
+                        <!--end::Avatar-->
                     </div>
                     @endforeach
                     <!--end::Item-->
@@ -271,7 +271,7 @@
             <div class="card-header border-0 pt-5">
                 <!--begin::List Widget 2-->
                 <h3 class="card-title align-items-start flex-column">
-                <span class="card-label fw-bold text-dark">{{__('cms.problem')}}</span>
+                <span class="card-label fw-bold text-dark">{{__('cms.problems')}}</span>
                 <span class="text-muted mt-1 fw-semibold fs-7">{{__('cms.last_problem')}}</span>
                 </h3>
                 <div class="card-toolbar">
@@ -293,14 +293,14 @@
                 <!--end::Header-->
                 <!--begin::Body-->
                 @foreach ($problems as $problm )
-                    
+
                 <div class="card-body pt-2">
                 <div class="d-flex align-items-center mb-7">
                         <!--begin::Avatar-->
                         <div class="symbol symbol-50px me-5">
                             <span class="text-dark fw-bold text-hover-primary fs-6">{{__('cms.username')}}</span>
                         </div>
-                      
+
                         <div class="flex-grow-1">
                         <span class="text-dark fw-bold text-hover-primary fs-6" style="margin-left:65px;">{{__('cms.ModelName')}}</span>
                         </div>
@@ -314,13 +314,13 @@
                         <div class="symbol symbol-50px me-5">
                             <span class="text-dark fw-bold text-hover-primary fs-6">{{$problm->user->name ?? ''}}</span>
                         </div>
-                      
+
                         <div class="flex-grow-1">
                         <span class="text-dark fw-bold text-hover-primary fs-6" style="margin-left:65px;">{{$problm->sModel->name ?? ''}}</span>
                         </div>
                         <!--end::Text-->
                     </div>
-                 
+
                 </div>
                 @endforeach
                 <!--end::Body-->
@@ -340,7 +340,7 @@
                 <h3 class="card-title align-items-start flex-column">
                 <span class="card-label fw-bold text-dark">{{__('cms.model')}}</span>
                 </h3>
-                   
+
                 <div class="card-toolbar">
                     <!--begin::Menu-->
                     <!--begin::Svg Icon | path: icons/duotune/general/gen024.svg-->
@@ -366,7 +366,7 @@
                         <div class="symbol symbol-50px me-5">
                         <span class="text-dark fw-bold text-hover-primary fs-6">{{__('cms.model_name')}}</span>
                         </div>
-                       
+
                         <div class="flex-grow-1">
                         <span style="margin-left: 67px;" class="text-dark fw-bold text-hover-primary fs-6">{{__('cms.brand_name')}}</span>
                             <span class="text-muted d-block fw-bold"></span>
@@ -374,14 +374,14 @@
                         <!--end::Text-->
                     </div>
                     @foreach ($s_model  as $s_models)
-                        
-                  
+
+
                     <div class="d-flex align-items-center mb-7">
                         <!--begin::Avatar-->
                         <div class="symbol symbol-50px me-5">
                         <span class="text-dark fw-bold text-hover-primary fs-6">{{$s_models->name ?? ''}}</span>
                         </div>
-                       
+
                         <div class="flex-grow-1">
                         <span style="margin-left: 67px;" class="text-dark fw-bold text-hover-primary fs-6">{{$s_models->brand->name ?? ''}}</span>
                             <span class="text-muted d-block fw-bold"></span>

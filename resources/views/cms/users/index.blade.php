@@ -123,7 +123,7 @@
                                                 <a href="">
                                                     <div class="symbol-label">
                                                         <img src="{{Storage::url($user->image ?? '')}}"
-                                                            alt="{{__('cms.image_not_found')}}" class="w-100">
+                                                            alt="{{ asset('cms/assets/media/avatars/user.webp') }}" class="w-100">
                                                     </div>
                                                 </a>
                                             </div>
@@ -222,7 +222,7 @@
                             <div
                                 class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start">
                             </div>
-                         
+
                         </div>
                     </div>
                     <!--end::Table-->

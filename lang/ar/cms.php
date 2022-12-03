@@ -222,5 +222,10 @@ return [
    'software maintenance'=>'صيانة برمجية',
    'not suitable for use'=>'غير صالح للاستخدام',
    'user_type' => 'نوع المستخدم',
-
+   'information'=>'معلومات',
+   'used'=>'مستخدمة',
+   'add_technical'=>'إضافة تقني',
+   'region'=>'المنطقة',
+'information'=>'معلومات ',
+'count'=>'العدد'
 ];

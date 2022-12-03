@@ -82,7 +82,7 @@
                                     <i class="bi bi-pencil-fill fs-7"></i>
                                     <!--begin::Inputs-->
                                     <input type="file" id="auth_image" name="auth_image" accept=".png, .jpg, .jpeg">
-                                    <input type="hidden" name="avatar_remove" value="{{auth()->user()->image}}">
+                                    <input type="hidden" name="avatar_remove" value="{{auth()->user()->image ?? ''}}">
                                     <!--end::Inputs-->
                                 </label>
                                 <!--end::Edit-->
@@ -117,21 +117,89 @@
         </div>
         <!--end::Input group-->
         <!--begin::Input group-->
-        <div class="fv-row mb-7 fv-plugins-icon-container">
-            <!--begin::Label-->
-            <label class="fs-6 fw-semibold form-label mt-3">
-                <span class="required">{{__('cms.name')}}</span>
-                <i class=" fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"
-                    aria-label="Enter the contact's name." data-bs-original-title="Enter the contact's name."
-                    data-kt-initialized="1"></i>
-            </label>
-            <!--end::Label-->
-            <!--begin::Input-->
-            <input type="text" class="form-control form-control-solid" name="name" id="name"
-                value="{{auth()->user()->name}}">
-            <!--end::Input-->
-            <div class="fv-plugins-message-container invalid-feedback"></div>
-        </div>
+        <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-2 col-form-label fw-semibold fs-6">
+                        <span class="required">{{__('cms.name')}}
+                        </span>
+                        <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" aria-label="Enter the contact's email." data-kt-initialized="1"></i>
+                    </label>
+                    <div class="col-lg-8 fv-row">
+
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        <input type="text" class="form-control form-control-solid" name="name" id="name" value="{{auth()->user()->name}}">
+                        <!--end::Input-->
+                        <div class="fv-plugins-message-container invalid-feedback"></div>
+                    </div>
+                </div>
+        <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-2 col-form-label  fw-semibold fs-6">
+                        <span class="required">{{__('cms.country')}}</span>
+                        <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" data-kt-initialized="1"></i>
+                    </label>
+
+                    <div class="col-lg-8 fv-row">
+                        <select class="form-select form-select-solid form-select-lg" data-control="select2" id="country_id" data-select2-id="select2-data-10-uyhn">
+                            <option value="-1" data-select2-id="select2-data-12-0cmm" >{{__('cms.choose')}}</option>
+                            @foreach($countries as $country)
+                            <option value="{{$country->id}}" {{ $country->id == auth()->user()->country_id ? 'selected': ''}}>
+                                @if (app()->getLocale()=='ar')
+                                {{$country->name_ar}}
+                                @else
+                                {{$country->name_en}}
+                                @endif
+                            </option>
+                            @endforeach
+                        </select>
+                        <!--end::Input-->
+                        <div class="fv-plugins-message-container invalid-feedback"></div>
+                        <!--end::Hint-->
+                    </div>
+                </div>
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-2 col-form-label  fw-semibold fs-6">
+                        <span class="required">{{__('cms.city')}}</span>
+                        <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" data-kt-initialized="1"></i>
+                    </label>
+
+                    <div class="col-lg-8 fv-row">
+                        <select class="form-select form-select-solid form-select-lg" data-control="select2" id="city_id" data-select2-id="select2-data-10-uyhn" disabled>
+                            <option value="-1" selected>{{__('cms.choose')}}</option>
+                            @foreach($cities as $city)
+                            <option value="{{$city->id}}" {{ $city->id == auth()->user()->city_id ? 'selected': ''}}>
+                            @if (app()->getLocale()=='ar')
+                                        {{$city->name_ar}}
+                                        @else
+                                        {{$city->name_en}}
+                                        @endif
+                                        </option>
+                            @endforeach
+                        </select>
+                        <!--end::Input-->
+                        <div class="fv-plugins-message-container invalid-feedback"></div>
+                        <!--end::Hint-->
+                    </div>
+                </div>
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-2 col-form-label fw-semibold fs-6">
+                        <span class="required">{{__('cms.region')}}
+                        </span>
+                        <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" aria-label="Enter the contact's email." data-kt-initialized="1"></i>
+                    </label>
+                    <div class="col-lg-8 fv-row">
+
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        <input type="text" class="form-control form-control-solid" id="region" value="{{auth()->user()->region}}">
+                        <!--end::Input-->
+                        <div class="fv-plugins-message-container invalid-feedback"></div>
+                    </div>
+                </div>
+
         <!--end::Separator-->
         <!--begin::Action buttons-->
         <div class="d-flex justify-content-end">
@@ -157,16 +225,57 @@
 @section('scripts')
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-$(function() {
-    bsCustomFileInput.init()
-});
+    $(function() {
+        bsCustomFileInput.init()
+    });
+</script>
+<script type="text/javascript">
+    $('#country_id').on('change', function() {
+        if (this.value == -1) {
+            $('#city_id').empty();
+            $("#city_id").append('<option value=-1>Select Country</option>');
+            $('#city_id').attr('disabled', true);
+        } else {
+            getCity(this.value);
+
+        }
+    });
+
+    function getCity(country_id) {
+
+        var locale = document.getElementsByTagName("html")[0].getAttribute("lang");
+
+        axios.get('/country/' + country_id)
+            .then(function(response) {
+                console.log(response);
+                console.log(response.data.cities);
+                $('#city_id').empty();
+                if (response.data.cities.length > 0) {
+                    $.each(response.data.cities, function(i, item) {
+                        console.log('Id: ' + item['id']);
+                        if (locale == 'ar') {
+                            $('#city_id').append(new Option(item['name_ar'], item['id']));
+                        } else {
+                            $('#city_id').append(new Option(item['name_en'], item['id']));
+                        }
+                        $('#city_id').attr('disabled', false);
+                    });
+                } else {
+                    $('#city_id').empty();
+                    $('#city_id').attr('disabled', true);
+                }
+            })
+            .catch(function(error) {});
+    }
 </script>
 <script>
 function performUpdate() {
     var formData = new FormData();
     formData.append('name', document.getElementById('name').value);
-
-    if (document.getElementById('auth_image').files[0] != undefined) {
+    formData.append('country_id', document.getElementById('country_id').value);
+    formData.append('city_id', document.getElementById('city_id').value);
+    formData.append('region', document.getElementById('region').value);
+if (document.getElementById('auth_image').files[0] != undefined) {
         formData.append('image', document.getElementById('auth_image').files[0]);
     }
     formData.append('_method', 'PUT');
@@ -174,8 +283,8 @@ function performUpdate() {
         .then(function(response) {
             console.log(response);
             toastr.success(response.data.message);
-            window.location.href = '/auth/profileEdit';
-        })
+            window.location.href = '/cms/dashboard';
+                })
         .catch(function(error) {
             console.log(error.response);
             toastr.error(error.response.data.message);

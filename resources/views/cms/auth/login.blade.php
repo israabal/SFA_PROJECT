@@ -17,15 +17,12 @@ License: For each use you must have a valid license purchased only from above li
     <base href="../../../" />
     <title></title>
     <meta charset="utf-8" />
-    <meta name="description"
-        content="The most advanced Bootstrap Admin Theme on Themeforest trusted by 100,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue, Asp.Net Core, Rails, Spring, Blazor, Django, Flask & Laravel versions. Grab your copy now and get life-time updates for free." />
-    <meta name="keywords"
-        content="metronic, bootstrap, bootstrap 5, angular, VueJs, React, Asp.Net Core, Rails, Spring, Blazor, Django, Flask & Laravel starter kits, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
+    <meta name="description" content="The most advanced Bootstrap Admin Theme on Themeforest trusted by 100,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue, Asp.Net Core, Rails, Spring, Blazor, Django, Flask & Laravel versions. Grab your copy now and get life-time updates for free." />
+    <meta name="keywords" content="metronic, bootstrap, bootstrap 5, angular, VueJs, React, Asp.Net Core, Rails, Spring, Blazor, Django, Flask & Laravel starter kits, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="article" />
-    <meta property="og:title"
-        content="Metronic | Bootstrap HTML, VueJS, React, Angular, Asp.Net Core, Rails, Spring, Blazor, Django, Flask & Laravel Admin Dashboard Theme" />
+    <meta property="og:title" content="Metronic | Bootstrap HTML, VueJS, React, Angular, Asp.Net Core, Rails, Spring, Blazor, Django, Flask & Laravel Admin Dashboard Theme" />
     <meta property="og:url" content="https://keenthemes.com/metronic" />
     <meta property="og:site_name" content="Keenthemes | Metronic" />
     <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
@@ -49,36 +46,36 @@ License: For each use you must have a valid license purchased only from above li
 <body id="kt_body" class="app-blank app-blank bgi-size-cover bgi-position-center bgi-no-repeat">
     <!--begin::Theme mode setup on page load-->
     <script>
-    var defaultThemeMode = "light";
-    var themeMode;
-    if (document.documentElement) {
-        if (document.documentElement.hasAttribute("data-theme-mode")) {
-            themeMode = document.documentElement.getAttribute("data-theme-mode");
-        } else {
-            if (localStorage.getItem("data-theme") !== null) {
-                themeMode = localStorage.getItem("data-theme");
+        var defaultThemeMode = "light";
+        var themeMode;
+        if (document.documentElement) {
+            if (document.documentElement.hasAttribute("data-theme-mode")) {
+                themeMode = document.documentElement.getAttribute("data-theme-mode");
             } else {
-                themeMode = defaultThemeMode;
+                if (localStorage.getItem("data-theme") !== null) {
+                    themeMode = localStorage.getItem("data-theme");
+                } else {
+                    themeMode = defaultThemeMode;
+                }
             }
+            if (themeMode === "system") {
+                themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+            }
+            document.documentElement.setAttribute("data-theme", themeMode);
         }
-        if (themeMode === "system") {
-            themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-        }
-        document.documentElement.setAttribute("data-theme", themeMode);
-    }
     </script>
     <!--end::Theme mode setup on page load-->
     <!--begin::Root-->
     <div class="d-flex flex-column flex-root" id="kt_app_root">
         <!--begin::Page bg image-->
         <style>
-        body {
-            background-image: url('{{asset('cms/assets/media/auth/bg4.jpg')}}');
-        }
+            body {
+                background-image: url('{{asset('cms/assets/media/auth/bg4.jpg')}}');
+            }
 
-        [data-theme="dark"] body {
-            background-image: url('{{asset('cms/assets/media/auth/bg4-dark.jpg')}}');
-        }
+            [data-theme="dark"] body {
+                background-image: url('{{asset('cms/assets/media/auth/bg4-dark.jpg')}}');
+            }
         </style>
         <!--end::Page bg image-->
         <!--begin::Authentication - Sign-in -->
@@ -118,15 +115,13 @@ License: For each use you must have a valid license purchased only from above li
                             <!--begin::Input group=-->
                             <div class="fv-row mb-8">
                                 <!--begin::Email-->
-                                <input type="text" placeholder="{{__('cms.email')}}" name="email" id="email"
-                                    autocomplete="off" class="form-control bg-transparent" />
+                                <input type="text" placeholder="{{__('cms.email')}}" name="email" id="email" autocomplete="off" class="form-control bg-transparent" />
                                 <!--end::Email-->
                             </div>
                             <!--end::Input group=-->
                             <div class="fv-row mb-3">
                                 <!--begin::Password-->
-                                <input type="password" placeholder="{{__('cms.password')}}" name="password"
-                                    id="password" autocomplete="off" class="form-control bg-transparent" />
+                                <input type="password" placeholder="{{__('cms.password')}}" name="password" id="password" autocomplete="off" class="form-control bg-transparent" />
                                 <!--end::Password-->
                             </div>
                             <!--end::Input group=-->
@@ -134,14 +129,12 @@ License: For each use you must have a valid license purchased only from above li
                             <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
                                 <div>
                                     <label class="form-check form-check-sm form-check-custom form-check-solid">
-                                        <input id="remember" class="form-check-input" type="checkbox" value="2"
-                                            checked="checked">
+                                        <input id="remember" class="form-check-input" type="checkbox" value="2" checked="checked">
                                         <span class="form-check-label">{{__('cms.remember_me')}}</span>
                                     </label>
                                 </div>
                                 <!--begin::Link-->
-                                <a href="{{route('password.request',$guard)}}"
-                                    class="link-primary">{{__('cms.Forgot_Password')}}?</a>
+                                <a href="{{route('password.request',$guard)}}" class="link-primary">{{__('cms.Forgot_Password')}}?</a>
                                 <!--end::Link-->
                             </div>
                             <!--end::Wrapper-->
@@ -172,7 +165,7 @@ License: For each use you must have a valid license purchased only from above li
     <!--end::Root-->
     <!--begin::Javascript-->
     <script>
-    var hostUrl = "cms/assets/";
+        var hostUrl = "cms/assets/";
     </script>
     <!--begin::Global Javascript Bundle(mandatory for all pages)-->
     <script src="{{asset('cms/assets/plugins/global/plugins.bundle.js')}}"></script>
@@ -186,21 +179,26 @@ License: For each use you must have a valid license purchased only from above li
 <!--end::Body-->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-function login() {
-    let data = {
-        email: document.getElementById('email').value,
-        password: document.getElementById('password').value,
-        remember: document.getElementById('remember').checked,
-    };
-    axios.post('/login', data).then(function(response) {
-            console.log('200');
-            window.location.href = '/cms/dashboard';
-        })
-        .catch(function(error) {
-            console.log(error);
-            toastr.error(error.response.data.message)
-        });
-}
+    function login() {
+        let data = {
+            email: document.getElementById('email').value,
+            password: document.getElementById('password').value,
+            remember: document.getElementById('remember').checked,
+        };
+        axios.post('/login', data).then(function(response) {
+                console.log(response.data);
+                if (response.data == 201) {
+                    window.location.href = '/auth/profileEdit';
+
+                } else {
+                    window.location.href = '/cms/dashboard';
+                }
+            })
+            .catch(function(error) {
+                console.log(error);
+                toastr.error(error.response.data.message)
+            });
+    }
 </script>
 </body>
 <!--end::Body-->

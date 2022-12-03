@@ -51,8 +51,13 @@ dd($user);*/
             if (true /*$user->status*/) {
 
                 if (Auth::guard($guard)->attempt($credentials, $request->get('remember'))) {
+                    if (auth('user')->user()->user_type == 'customers' && auth('user')->user()->start == false) {
+                        // return response()->view('cms.profile.profile_view');
+                        return response()->json(Response::HTTP_CREATED);
+                    } else {
 
-                    return response()->json(['message' => 'Logged in successfully'], Response::HTTP_OK);
+                        return response()->json(['message' => 'Logged in successfully'], Response::HTTP_OK);
+                    }
                 } else {
                     return response()->json(['message' => 'Error credentials, please try again'], Response::HTTP_BAD_REQUEST);
                 }

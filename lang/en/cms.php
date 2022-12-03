@@ -10,7 +10,9 @@ return [
 
     'customer' => 'customers',
     'user_model' => 'user model',
-
+    'add_technical' => 'Add Technical',
+    'region' => 'Region',
+    'sc'=>' Select City',
 
     'users' => 'Users',
     'user_create' => 'Create User',
@@ -200,6 +202,7 @@ return [
     'last_user' => 'Last User',
     'ModelName' => 'Model_Name',
     'username' => 'User_Name',
+    'information' => 'information',
 
 
     'problem_status_Management' => 'Problem Status Management',
@@ -242,15 +245,18 @@ return [
     'create_problem_status' => 'create problem status',
     'max_img ' => ' max 5 image /Set the  image. Only *.png, *.jpg and *.jpeg image files are accepted',
 
-   'read_countries'=>'read countries',
-   'create_new_country'=>'create new country',
-   'City'=>'city',
-   'read_cities'=>'read cities',
-   'cities_Management'=>'cities Management ',
-   'cities_list'=>'cities list ',
-   'country_en'=>'COUNTRY ENglish',
-   'Spare parts maintenance'=>' Spare parts maintenance ',
-   'no maintenance required'=>'no maintenance required ',
-   'software maintenance'=>' software maintenance',
-   'not suitable for use'=>'  not suitable for use',
+    'read_countries' => 'read countries',
+    'create_new_country' => 'create new country',
+    'City' => 'city',
+    'read_cities' => 'read cities',
+    'cities_Management' => 'cities Management ',
+    'cities_list' => 'cities list ',
+    'country_en' => 'COUNTRY ENglish',
+    'Spare parts maintenance' => ' Spare parts maintenance ',
+    'no maintenance required' => 'no maintenance required ',
+    'software maintenance' => ' software maintenance',
+    'not suitable for use' => '  not suitable for use',
+    'used' => 'used',
+    'information'=>'information',
+    'count'=>'count'
 ];

@@ -269,7 +269,7 @@ function performStore() {
             console.log(response);
             toastr.success(response.data.message);
             document.getElementById('create-form').reset();
-            window.location.href = '/cms/dashboard';
+            window.location.href = '/login/user';
         })
         .catch(function(error) {
             console.log(error.response);

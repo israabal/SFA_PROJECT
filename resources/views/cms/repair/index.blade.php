@@ -10,196 +10,180 @@
         <!--begin::Products-->
         <div class="card card-flush">
             <!--begin::Card header-->
-            <div class="card-header align-items-center py-5 gap-2 gap-md-5">
-                <!--begin::Card title-->
-                <div class="card-title">
-                    <!--begin::Search-->
 
-                    <!--end::Search-->
-                </div>
-                <!--end::Card title-->
-                <!--begin::Card toolbar-->
-                <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
-                    {{-- @can('Create-repair') --}}
-
-                    <!--begin::Add product-->
-                    <a href="{{route('repairs.create' )}}" class="btn btn-primary">{{__('cms.create_repair')}}</a>
-                    <!--end::Add product-->
-                    {{-- @endcan --}}
-                </div>
-                <!--end::Card toolbar-->
-            </div>
             <!--end::Card header-->
             <!--begin::Card body-->
             <div class="card-body pt-0">
                 <!--begin::Table-->
-                <div id="kt_ecommerce_products_table_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer"><div class="table-responsive"><table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer" id="kt_ecommerce_products_table">
-                    <!--begin::Table head-->
-                    <thead>
-                        <!--begin::Table row-->
-                        <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
+                <div id="kt_ecommerce_products_table_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                    <div class="table-responsive">
+                        <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer" id="kt_ecommerce_products_table">
+                            <!--begin::Table head-->
+                            <thead>
+                                <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
+                                    <th class="min-w-125px sorting fs-4" tabindex="0" aria-controls="kt_table_users" aria-label="Two-step: activate to sort column ascending">#</th>
+                                    <th class="min-w-125px sorting fs-4" tabindex="0" aria-controls="kt_table_users" aria-label="Two-step: activate to sort column ascending">{{__('cms.username')}}</th>
+                                    <th class="min-w-125px sorting fs-4" tabindex="0" aria-controls="kt_table_users" aria-label="Two-step: activate to sort column ascending">{{__('cms.problem_details')}}</th>
+                                    <th class="min-w-125px sorting fs-4" tabindex="0" aria-controls="kt_table_users" aria-label="Joined Date: activate to sort column ascending">{{__('cms.add_technical')}}</th>
+                                </tr>
+                                <!--end::Table row-->
+                            </thead>
+                            <!--end::Table head-->
+                            <!--begin::Table body-->
+                            <tbody class="fw-semibold text-gray-600">
+                                @foreach ($problem as $problems)
+                                <tr class="odd">
+                                    <td>{{$loop->index+1}}</td>
+                                    <td> {{$problems->user->name}}</td>
+
+                                    <td>{{ $problems->details ??'NULL' }}</td>
+
+                                    <td>
+                                        <div class="text-left mb-1">
+                                            <!--begin::Link-->
+                                            <a class="btn btn-info font-weight-bolder font-size-sm" data-target="#create-form" value="{{ $problems->id }}" data-bs-target="#kt_modal_new_address_{{$problems->id}}" data-bs-toggle="modal">{{__('cms.add_technical')}}</a>
+                                        </div>
+                                        <!-- Begin Models -->
+                                        <div class="modal fade" id="kt_modal_new_address_{{$problems->id}}" tabindex="-1" style="display: none; padding-left: 0px;" aria-modal="true" role="dialog">
+                                            <!--begin::Modal dialog-->
+                                            <div class="modal-dialog modal-dialog-centered mw-650px">
+                                                <!--begin::Modal content-->
+                                                <div class="modal-content">
+                                                    <!--begin::Form-->
+                                                    <form>
+                                                        <!--begin::Modal header-->
+                                                        @csrf
+                                                        <input type="hidden" id="problem_id" value="{{ $problems->id }}" />
+                                                        <div class="modal-header" id="kt_modal_new_address_header">
+                                                            <h2>{{__('cms.add_technical')}}</h2>
+
+                                                            <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                                                <span class="svg-icon svg-icon-1">
+                                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor"></rect>
+                                                                        <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor"></rect>
+                                                                    </svg>
+                                                                </span>
+                                                                <!--end::Svg Icon-->
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-body py-10 px-lg-17">
+                                                            <div class="scroll-y me-n7 pe-7" id="kt_modal_new_address_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_new_address_header" data-kt-scroll-wrappers="#kt_modal_new_address_scroll" data-kt-scroll-offset="300px" style="max-height: 34px;">
+                                                                <div class="d-flex flex-column mb-5 fv-row fv-plugins-icon-container">
+                                                                    <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
+                                                                        <span class="required">{{__('cms.technical')}}</span>
+                                                                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" data-kt-initialized="1"></i>
+                                                                    </label>
+                                                                    <select class="form-select form-select-solid form-select-lg" data-control="select2" data-select2-id="select2-data-10-uyhn" id="technecal_id" name="technecal_id">
+                                                                        @foreach ($users as $user)
+                                                                        <option data-kt-flag="flags/indonesia.svg" value="{{ $user->id }}">{{$user->name}}
+                                                                        </option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                    <!--end::Select-->
+                                                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                                                </div>
+
+                                                            </div>
+                                                            <!--end::Scroll-->
+                                                        </div>
+
+                                                        <div class="modal-footer flex-center">
+
+                                                            <!--begin::Button-->
+                                                            <button type="submit" onclick="performStore('{{$problems->id}}')" id="kt_modal_new_address_submit" class="btn btn-primary">
+                                                                <span class="indicator-label">{{__('cms.save')}}</span>
+                                                                <span class="indicator-progress">{{__('cms.Please_wait')}}...
+                                                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                                            </button>
+                                                            <!--end::Button-->
+                                                        </div>
+                                                        <!--end::Modal footer-->
+                                                    </form>
+                                                    <!--end::Form-->
+                                                </div>
+                                            </div>
+                                        </div>
 
 
-
-                             <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users" aria-label="Two-step: activate to sort column ascending">{{__('cms.problem_details')}}</th>
-
-
-                            <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users" aria-label="Joined Date: activate to sort column ascending" >{{__('cms.technical')}}</th>
-
-
-
-
-                            <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users" aria-label="Joined Date: activate to sort column ascending" >{{__('cms.Status')}}</th>
-
-
-
-
-
-
-
-                            <th class="text-end min-w-100px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" >{{__('cms.actions')}}</th></tr>
-                        <!--end::Table row-->
-                    </thead>
-                    <!--end::Table head-->
-                    <!--begin::Table body-->
-                    <tbody class="fw-semibold text-gray-600">
-                        @foreach ($repair as $repair)
-
-
-                    <tr class="odd">
-
-
-
-
-                        <td class="d-flex align-items-center">
-                            <!--begin:: Avatar -->
-
-                            <!--end::Avatar-->
-                            <!--begin::User details-->
-                            <div class="d-flex flex-column">
-                                <a href="../../demo1/dist/apps/user-management/users/view.html" class="text-gray-800 text-hover-primary mb-1">  {{ $repair->problem->details ??'NULL' }}
-
-
-
-                                </a>
-
-                                </div>
-                            <!--begin::User details-->
-                        </td>
-
-                        <!--end::Two step=-->
-                        <!--begin::Joined-->
-                        <td> {{Auth::user()->name}}</td>
-
-
-                        <td >
-                            <span class="fw-bold">{{$repair->app_status}}</span>
-                        </td>
-
-
-
-                        <td ><span class="badge @if($repair->active) bg-success @else bg-danger @endif">{{$repair->active_status}}</span>
-
-
-
-
-
-                            <!--end::SKU=-->
-                            <!--begin::Qty=-->
-
-
-                            <td>
-                                <div class="d-flex justify-content-end flex-shrink-0">
-
-                                    <a  href="{{route('repairs.edit', $repair->id )}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-                                        <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
-                                        <span class="svg-icon svg-icon-3">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path opacity="0.3" d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.0825 1.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.9962 6.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.06399 20.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.7934 2.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z" fill="currentColor"></path>
-                                                <path d="M5.574 21.3L3.692 21.928C3.46591 22.0032 3.22334 22.0141 2.99144 21.9594C2.75954 21.9046 2.54744 21.7864 2.3789 21.6179C2.21036 21.4495 2.09202 21.2375 2.03711 21.0056C1.9822 20.7737 1.99289 20.5312 2.06799 20.3051L2.696 18.422L5.574 21.3ZM4.13499 14.105L9.891 19.861L19.245 10.507L13.489 4.75098L4.13499 14.105Z" fill="currentColor"></path>
-                                            </svg>
-                                        </span>
-                                        <!--end::Svg Icon-->
-                                    </a>
-                                    <a href="#" onclick="confirmDelete('{{$repair->id}}', this)"  class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
-                                        <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
-                                        <span class="svg-icon svg-icon-3">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="currentColor"></path>
-                                                <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="currentColor"></path>
-                                                <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="currentColor"></path>
-                                            </svg>
-                                        </span>
-                                        <!--end::Svg Icon-->
-                                    </a>
-                                </div>
-                            </td>
-                            <!--end::Action=-->
-                        </tr>
-                        @endforeach
-                     </tbody>
-                    <!--end::Table body-->
-                </table>
-            </div>
-            <div class="row">
-                <div class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start">
+                                    </td>
+                                    <!--end::Action=-->
+                                </tr>
+                                @endforeach
+                            </tbody>
+                            <!--end::Table body-->
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start">
+                        </div>
+                        <div class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
+                            <div class="dataTables_paginate paging_simple_numbers" id="kt_table_users_paginate">
+                                <ul class="pagination">
+                                    <li class="paginate_button page-item previous disabled" id="kt_table_users_previous"><a href="#" aria-controls="kt_table_users" data-dt-idx="0" tabindex="0" class="page-link"><i class="previous"></i></a></li>
+                                    <li class="paginate_button page-item active"><a href="#" aria-controls="kt_table_users" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
+                                    <li class="paginate_button page-item "><a href="#" aria-controls="kt_table_users" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
+                                    <li class="paginate_button page-item "><a href="#" aria-controls="kt_table_users" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
+                                    <li class="paginate_button page-item next" id="kt_table_users_next"><a href="#" aria-controls="kt_table_users" data-dt-idx="4" tabindex="0" class="page-link"><i class="next"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    {{ $problem->links() }}
                 </div>
+            </div>
+        </div>
+        <!--end::Table-->
+    </div>
 
-            </div>
-        </div>
-    </div>
-                <!--end::Table-->
-            </div>
-            <!--end::Card body-->
-        </div>
-        <!--end::Products-->
-    </div>
-    <!--end::Content container-->
+
+
+    <!--end::Card body-->
 </div>
+
+
 @endsection
 @section('scripts')
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{asset('cms/assets/plugins/global/plugins.bundle.js')}}"></script>
+<script src="{{asset('cms/assets/js/scripts.bundle.js')}}"></script>
+<script src="{{asset('cms/assets/js/custom/utilities/modals/new-address.js')}}"></script>
+<script src="{{asset('cms/assets/js/widgets.bundle.js')}}"></script>
+<script src="{{asset('cms/assets/js/custom/widgets.js')}}"></script>
+<script src="{{asset('cms/assets/js/custom/apps/chat/chat.js')}}"></script>
+<script src="https:://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{asset('cms/assets/js/custom/utilities/modals/upgrade-plan.js')}}"></script>
+<script src="{{asset('cms/assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+<script src="{{asset('cms/assets/plugins/custom/vis-timeline/vis-timeline.bundle.js')}}"></script>
+<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/radar.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
 
 <script>
-    function confirmDelete(id, reference) {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            cancelButtonColor: '#d33',
-            confirmButtonColor: '#3085d6',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-        if (result.isConfirmed) {
-            performDelete(id, reference);
-        }
-        });
-    }
+    $(form.querySelector('[name="technecal_id"]')).select2().on('change', function() {
+        validator.revalidateField('technecal_id');
+    });
+</script>
+<script>
+    function performStore(id) {
+        axios.post('/cms/repairs', {
+                problem_id: id,
+                technecal_id: document.getElementById('technecal_id').value,
 
-    function performDelete(id, reference) {
-        axios.delete('/cms/repairs/'+id)
-        .then(function (response) {
-            console.log(response);
-            toastr.success(response.data.message);
-            reference.closest('tr').remove();
-            // showMessage(response.data.message);
-        })
-        .catch(function (error) {
-            console.log(error.response);
-            toastr.error(error.response.data.message);
-            // showMessage(error.response.data.message);
-        });
+            })
+            .then(function(response) {
+                console.log(response);
+                toastr.success(response.data.message);
+                document.getElementById('insert-form').reset();
+                window.location.href = '/cms/repairs'
+            })
+            .catch(function(error) {
+                console.log(error.response);
+                toastr.error(error.response.data.message);
+            });
     }
-
-    function showMessage(data) {
-        Swal.fire(
-            data.title,
-            data.text,
-            data.icon
-        );
-}
 </script>
 
 @endsection
-

@@ -17,7 +17,7 @@ class RepairSparePartController extends Controller
 
     public function __construct()
     {
-        $this->authorizeResource(RepairSparePart::class, 'repairSpairPart');
+        // $this->authorizeResource(RepairSparePart::class, 'repairSpairPart');
     }
     public function index()
     {

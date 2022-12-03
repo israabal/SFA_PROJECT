@@ -30,7 +30,8 @@ class SparePartController extends Controller
 
         $spareparts = SparePart::withCount('smodels')->withCount('spareparttranslation')->get();
 
-        return response()->view('cms.spare_part.index', ['spareparts' => $spareparts]);     }
+        return response()->view('cms.spare_part.index', ['spareparts' => $spareparts]);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -41,10 +42,10 @@ class SparePartController extends Controller
     {
         $this->authorize('create', SparePart::class);
 
-        $languages=Language::all();
+        $languages = Language::all();
         $models = SModel::where('active', '=', true)->get();
-       return response()->view('cms.spare_part.create', ['models' => $models,'languages'=>$languages]);
-     }
+        return response()->view('cms.spare_part.create', ['models' => $models, 'languages' => $languages]);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -60,13 +61,13 @@ class SparePartController extends Controller
             'oem_part_number' => 'required|string|min:3',
             'katun_part_number' => 'required|string|min:3',
             'local_number' => 'required|string|min:3',
-            'over_view'=>'required|string|min:3',
-            'price'=>'required|string|min:3',
-            'value'=>'required|string|min:3',
-            'unit'=>'required|string|min:3',
+            'over_view' => 'required|string|min:3',
+            'price' => 'required|string|min:3',
+            'value' => 'required|string|min:3',
+            'unit' => 'required|string|min:3',
 
 
-            'language_id'=>'required|numeric|exists:languages,id',
+            'language_id' => 'required|numeric|exists:languages,id',
 
             'image_1' => 'required|image|mimes:png,jpg,jpeg',
             'image_2' => 'nullable', 'image|mimes:png,jpg,jpeg',
@@ -97,19 +98,19 @@ class SparePartController extends Controller
                 $this->saveImage($request, $spare_part, 'image_5');
             }
 
-             $spare_part->spareparttranslation()->create(
+            $spare_part->spareparttranslation()->create(
                 [
-                    'name'=>$request->input('name'),
-                    'over_view'=>$request->input('over_view'),
-                    'language_id'=>$request->input('language_id'),
-                    'spare_part_id'=>$request->input('spare_part_id'),
+                    'name' => $request->input('name'),
+                    'over_view' => $request->input('over_view'),
+                    'language_id' => $request->input('language_id'),
+                    'spare_part_id' => $request->input('spare_part_id'),
 
-                ],);
+                ],
+            );
             return response()->json(
                 ['message' => $isSaved ? 'Saved successfully' : 'Save failed!'],
                 $isSaved ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST
             );
-
         } else {
             return response()->json(['message' => $validator->getMessageBag()->first()], Response::HTTP_BAD_REQUEST);
         }
@@ -120,14 +121,14 @@ class SparePartController extends Controller
 
     public function SparepartDetails(Request $request,  $id)
     {
-        $sparepart=SparePart::Where('id',$id)->first();
+        $sparepart = SparePart::Where('id', $id)->first();
 
         return response()->view('cms.spare_part.sparepart-details', ['sparepart' => $sparepart]);
     }
     public function editSparepartModels(Request $request,  $id)
     {
-        $sparepart=SparePart::Where('id',$id)->first();
-        $smodels = SModel::where('active',1)->get();
+        $sparepart = SparePart::Where('id', $id)->first();
+        $smodels = SModel::where('active', 1)->get();
         $sparepart_models = $sparepart->smodels;
         if (count($sparepart_models) > 0) {
             foreach ($smodels as $smodel) {
@@ -153,12 +154,13 @@ class SparePartController extends Controller
         ]);
 
         if (!$validator->fails()) {
-            $sparePartModels=SparePartModel::where('s_model_id',$request->get('s_model_id'))->where('spare_part_id',$request->get('sparePart_id'))->first();
-            if ($sparePartModels==null) {
-                $this->addModels($request->get('sparePart_id'),$request->get('s_model_id'));
+            $sparePartModels = SparePartModel::where('s_model_id', $request->get('s_model_id'))->where('spare_part_id', $request->get('sparePart_id'))->first();
+            if ($sparePartModels == null) {
+                $this->addModels($request->get('sparePart_id'), $request->get('s_model_id'));
             } else {
 
-                $this->deleteModels($sparePartModels);            }
+                $this->deleteModels($sparePartModels);
+            }
             return response()->json(
                 ['message' => 'Models updated successfully'],
                 Response::HTTP_OK
@@ -173,12 +175,12 @@ class SparePartController extends Controller
 
 
 
-    public function addModels($spare_part_id,$s_model_id)
+    public function addModels($spare_part_id, $s_model_id)
     {
-            $spaerpart_model = new SparePartModel();
-            $spaerpart_model->spare_part_id = $spare_part_id;
-            $spaerpart_model->s_model_id = $s_model_id;
-            $isSaved = $spaerpart_model->save();
+        $spaerpart_model = new SparePartModel();
+        $spaerpart_model->spare_part_id = $spare_part_id;
+        $spaerpart_model->s_model_id = $s_model_id;
+        $isSaved = $spaerpart_model->save();
     }
 
 
@@ -206,7 +208,7 @@ class SparePartController extends Controller
      */
     public function edit($id)
     {
-        $sparePart=SparePart::where('id',$id)->first();
+        $sparePart = SparePart::where('id', $id)->first();
         $this->authorize('update', $sparePart);
 
 
@@ -227,12 +229,12 @@ class SparePartController extends Controller
             'oem_part_number' => 'required|string|min:3',
             'katun_part_number' => 'required|string|min:3',
             'local_number' => 'required|string|min:3',
-            'over_view'=>'required|string|min:3',
-            'price'=>'required|string|min:3',
-            'value'=>'required|string|min:3',
-            'unit'=>'required|string|min:3',
-            'language_id'=>'required|numeric|exists:languages,id',
-            'image_1' =>'nullable', 'image|mimes:png,jpg,jpeg',
+            'over_view' => 'required|string|min:3',
+            'price' => 'required|string|min:3',
+            'value' => 'required|string|min:3',
+            'unit' => 'required|string|min:3',
+            'language_id' => 'required|numeric|exists:languages,id',
+            'image_1' => 'nullable', 'image|mimes:png,jpg,jpeg',
             'image_2' => 'nullable', 'image|mimes:png,jpg,jpeg',
             'image_3' => 'nullable', 'image|mimes:png,jpg,jpeg',
             'image_4' => 'nullable', 'image|mimes:png,jpg,jpeg',
@@ -244,7 +246,7 @@ class SparePartController extends Controller
 
 
         if (!$validator->fails()) {
-            $sparePart=SparePart::where('id',$id)->first();
+            $sparePart = SparePart::where('id', $id)->first();
             $this->authorize('update', $sparePart);
 
 
@@ -264,18 +266,18 @@ class SparePartController extends Controller
                 $this->saveImage($request, $sparePart, 'image_5');
             }
 
-             $sparePart->spareparttranslation()->update(
+            $sparePart->spareparttranslation()->update(
                 [
-                    'name'=>$request->input('name'),
-                    'over_view'=>$request->input('over_view'),
-                    'language_id'=>$request->input('language_id'),
+                    'name' => $request->input('name'),
+                    'over_view' => $request->input('over_view'),
+                    'language_id' => $request->input('language_id'),
 
-                ],);
+                ],
+            );
             return response()->json(
                 ['message' => $isSaved ? 'Updated successfully' : 'Updated failed!'],
                 $isSaved ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST
             );
-
         } else {
             return response()->json(['message' => $validator->getMessageBag()->first()], Response::HTTP_BAD_REQUEST);
         }
@@ -289,7 +291,7 @@ class SparePartController extends Controller
      */
     public function destroy($id)
     {
-        $sparePart=SparePart::where('id',$id)->first();
+        $sparePart = SparePart::where('id', $id)->first();
         $this->authorize('delete', $sparePart);
 
 
@@ -302,35 +304,35 @@ class SparePartController extends Controller
             ['message' => $deleted ? __('cms.Deleted_successfully') : __('cms.Delete_failed!')],
             $deleted ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST
         );
-       }
+    }
 
 
-       private function deleteImages(SparePart $sparePart)
-       {
-           foreach ($sparePart->images as $image) {
-               Storage::disk('public')->delete('spareParts/' . $image->name);
-               $image->delete();
-           }
-       }
+    private function deleteImages(SparePart $sparePart)
+    {
+        foreach ($sparePart->images as $image) {
+            Storage::disk('public')->delete('spareParts/' . $image->name);
+            $image->delete();
+        }
+    }
 
-       private function saveImage(Request $request, SparePart $sparePart, String $key, bool $update = false)
-       {
-           if ($request->hasFile($key)) {
-               if ($update) {
-                   foreach ($sparePart->images as $image) {
-                       if (str_contains($image->name, $key)) {
-                           Storage::disk('public')->delete('spareParts/' . $image->name);
-                           $image->delete();
-                       }
-                   }
-               }
-               $imageName = time() . '_' . str_replace(' ', '', $sparePart->name) . "_model_$key." . $request->file($key)->extension();
-               $request->file($key)->storePubliclyAs('spareParts', $imageName, ['disk' => 'public']);
+    private function saveImage(Request $request, SparePart $sparePart, String $key, bool $update = false)
+    {
+        if ($request->hasFile($key)) {
+            if ($update) {
+                foreach ($sparePart->images as $image) {
+                    if (str_contains($image->name, $key)) {
+                        Storage::disk('public')->delete('spareParts/' . $image->name);
+                        $image->delete();
+                    }
+                }
+            }
+            $imageName = time() . '_' . str_replace(' ', '', $sparePart->name) . "_model_$key." . $request->file($key)->extension();
+            $request->file($key)->storePubliclyAs('spareParts', $imageName, ['disk' => 'public']);
 
-               $image = new Image();
-               $image->name = $imageName;
-               $image->url = 'spareParts/' . $imageName;
-               $sparePart->images()->save($image);
-           }
-       }
+            $image = new Image();
+            $image->name = $imageName;
+            $image->url = 'spareParts/' . $imageName;
+            $sparePart->images()->save($image);
+        }
+    }
 }

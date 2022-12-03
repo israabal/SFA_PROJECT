@@ -59,20 +59,49 @@ class RepairProblemController extends Controller
 
 
       }
+// قطع الغيار مع الحالة والتفاصيل في المعلومات
+
 
       public function repairProblem($id){
         $this->authorize('create', RepairProblem::class);
 
         $problem=Problem::where('id',$id)->first();
+        $repair=Repair::where('problem_id',$id)->first();
+        $spareParts = SparePart::all();
+        $repair_spareParts = $repair->spareparts;
 
         $repair_problem=RepairProblem::where('problem_id',$id)->first();
-      $repair=Repair::where('problem_id',$id)->first();
+
 
         $statuss=ProblemStatus::where('status',1)->get();
+        if (count($repair_spareParts) > 0) {
+            foreach ($spareParts as $smodel) {
+                $smodel->setAttribute('assigned', false);
+                foreach ($repair_spareParts as $sparepart_model) {
+                    if ($smodel->id == $sparepart_model->id) {
+                        $smodel->setAttribute('assigned', true);
+                    }
+                }
+            }
+        }
 
-        return response()->view('cms.repair_problem.create',compact('repair_problem','repair_problem','statuss','problem','repair'));
+        return response()->view('cms.repair_problem.create',compact('repair_problem',
+        'repair_problem','statuss','problem','repair','spareParts'));
 
       }
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**
      * Store a newly created resource in storage.
      *

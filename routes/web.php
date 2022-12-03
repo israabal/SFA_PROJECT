@@ -82,6 +82,9 @@ Route::group(
             Route::resource('/spareparts', SparePartController::class);
 
 
+            Route::get('/UserModel/category/{id}/brand/{branId}', [CategoryController::class, 'getModel']);
+
+
             Route::get('/sparepartss/{spareparts}/models/edit', [SparePartController::class, 'editSparepartModels'])->name('spareparts.edit-models');
             Route::get('/sparepartss/{spareparts}/details', [SparePartController::class, 'SparepartDetails'])->name('spareparts.details');
 
@@ -93,7 +96,7 @@ Route::group(
 
             Route::get('/UserModel/index', [UserModelController::class, 'indexUserModels'])->name('UsersEquipment.index');
             Route::get('/UserModel/create', [UserModelController::class, 'editUserModels'])->name('users.create-models');
-            Route::put('/UserModel/store', [UserModelController::class, 'updateUserModels'])->name('users.store-models');
+            Route::post('/UserModel/store', [UserModelController::class, 'updateUserModels'])->name('users.store-models');
 
 
         });
@@ -104,6 +107,8 @@ Route::group(
             Route::resource('/categories', CategoryController::class);
             Route::resource('/brands', BrandController::class);
             Route::resource('/users', UserController::class);
+
+
 
             Route::resource('roles', RoleController::class);
 
@@ -135,10 +140,7 @@ Route::group(
             Route::resource('repairs',RepairController::class);
             Route::resource('repair_problems',RepairProblemController::class);
             Route::resource('repair_spare_part', RepairSparePartController::class);
-
-
-            Route::get('repair_problem/{id}', [RepairProblemController::class, 'repairProblem'])->name('repair.problem');
-
+                        Route::get('repair_problem/{id}', [RepairProblemController::class, 'repairProblem'])->name('repair.problem');
 
 
             Route::prefix('cms')->middleware(['auth:user'])->group(function () {
@@ -151,11 +153,11 @@ Route::group(
 
 
         });
-              Route::prefix('cms/')->middleware(['auth:user'])->group(function () {
-                Route::get('verify', [EmailVerificationController::class, 'notice'])->name('verification.notice');
-                Route::get('send-verification', [EmailVerificationController::class, 'send'])->name('verification.send');
-                Route::get('verify/{id}/{hash}', [EmailVerificationControllerr::class, 'verify'])->middleware('signed')->name('verification.verify');
-            });
+            //   Route::prefix('cms/')->middleware(['auth:user'])->group(function () {
+            //     Route::get('verify', [EmailVerificationController::class, 'notice'])->name('verification.notice');
+            //     Route::get('send-verification', [EmailVerificationController::class, 'send'])->name('verification.send');
+            //     Route::get('verify/{id}/{hash}', [EmailVerificationControllerr::class, 'verify'])->middleware('signed')->name('verification.verify');
+            // });
     }
 
 

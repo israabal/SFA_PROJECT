@@ -152,13 +152,7 @@
         });
     }
 
-    // function showMessage(data) {
-    //     Swal.fire(
-    //         data.title,
-    //         data.text,
-    //         data.icon
-    //     );
-    // }
+   
 </script>
 
 @endsection

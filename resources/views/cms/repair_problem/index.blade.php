@@ -1,7 +1,7 @@
 @extends('cms.parent');
-@section('title',__('cms.repair_problem'))
+@section('title',__('cms.repair_problems'))
 @section('page-lg',__('cms.home'))
-@section('repair_problem-pg-md',__('cms.repair_problem'))
+@section('repair_problem-pg-md',__('cms.repair_problems'))
 @section('page-md',__('cms.repair_problem_list'))
 @section('Content')
 <div id="kt_app_content" class="app-content flex-column-fluid">
@@ -104,7 +104,7 @@
                                                 class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                                 <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                                                 <span class="btn btn-info">
-                                                    informarion
+                                                    {{ __('cms.information') }}
                                                 </span>
                                                 <!--end::Svg Icon-->
                                             </a>
@@ -119,7 +119,7 @@
                                                 class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                                 <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                                                 <span class="btn btn-info">
-                                                   Count:{{ $repair->spareparts_count }}
+                                                   {{ __('cms.count') }}:{{ $repair->spareparts_count }}
                                                 </span>
                                                 <!--end::Svg Icon-->
                                             </a>
@@ -154,6 +154,13 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
+
+
+
+
+
+
+
     function confirmDelete(id, reference) {
         Swal.fire({
             title: 'Are you sure?',
