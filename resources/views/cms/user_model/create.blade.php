@@ -2,7 +2,7 @@
 @section('title',__('cms.models'))
 @section('page-lg',__('cms.home'))
 @section('main-pg-md',__('cms.models_Management'))
-@section('page-md',__('cms.add_new_model'))
+@section('page-md',__('cms.create_model'))
 @section('styles')
 <link href="{{asset('cms/assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
 <!--end::Vendor Stylesheets-->

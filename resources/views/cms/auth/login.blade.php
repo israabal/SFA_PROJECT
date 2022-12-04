@@ -189,9 +189,9 @@ function login() {
         remember: document.getElementById('remember').checked,
     };
 
-    axios.post('/cms/login', data).then(function(response) {
+    axios.post('/login', data).then(function(response) {
             console.log('200');
-            window.location.href = '/home';
+            window.location.href = '/cms/dashboard';
         })
         .catch(function(error) {
             console.log(error);

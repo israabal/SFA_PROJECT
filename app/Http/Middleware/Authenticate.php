@@ -15,15 +15,15 @@ class Authenticate extends Middleware
 
 
 
-        protected function redirectTo($request)
-{
-    $guard = session('guard')??'admin';
+    protected function redirectTo($request)
+    {
+        $guard = session('guard')??'admin';
 
-if (! $request->expectsJson()) {
+        if (! $request->expectsJson()) {
+            return route('cms.login', $guard, ['lang' => app()->getLocale()]);
 
-     return route('cms.login' ,$guard, app()->getLocale()); //getLocale probably return empty value
 
- }
-}
+            //  return route('cms.login' ,$guard, app()->getLocale()); //getLocale probably return empty value
+        }
     }
-
+}
