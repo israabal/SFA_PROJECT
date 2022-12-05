@@ -44,7 +44,7 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         $validator = Validator($request->all(), [
-            'name' => 'required|string|min:3',
+            'name' => 'required|string',
             //    'code' => 'required|string|min:2',
             'active' => 'required | boolean',
             'image' => 'required|image|mimes:png,jpg,jpeg',

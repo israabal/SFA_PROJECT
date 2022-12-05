@@ -23,7 +23,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return response()->view('cms.category.index', ['categories' => $categories]);  
+        return response()->view('cms.category.index', ['categories' => $categories]);
       }
 
 
@@ -52,19 +52,19 @@ class CategoryController extends Controller
 
            'image' => 'required|image|mimes:png,jpg,jpeg',
 
-         
+
        ]);
 
        if (!$validator->fails()) {
-        
+
            $category = new Category();
            $category->name = $request->input('name');
            $category->code = $request->input('code');
            $category->active = $request->input('active');
 
-           
+
            if ($request->hasFile('image')) {
-            
+
                $file = $request->file('image');
                $imagetitle =  time().'_category_image.' . $file->getClientOriginalExtension();
                $status = $request->file('image')->storePubliclyAs('images/categories', $imagetitle);
@@ -72,9 +72,9 @@ class CategoryController extends Controller
                $category->image = $imagePath;}
 
 
-         
+
                $isSaved = $request->user()->categories()->save($category);
-      
+
 
            return response()->json(
                ['message' => $isSaved ? 'Saved successfully' : 'Save failed!'],
@@ -97,15 +97,15 @@ class CategoryController extends Controller
     // public function show(Category $category)
     // {
     //     $models=$category->models;
-    //     return response()->json(['message'=> 'dd', 'data'=>$models]);  
+    //     return response()->json(['message'=> 'dd', 'data'=>$models]);
     // }
     public function getModel($id,$brandId)
     {
         $models=SModel::Where('category_id',$id)->where('brand_id',$brandId)->get();
-        return response()->json(['message'=> 'dd', 'data'=>$models]);    
+        return response()->json(['message'=> 'dd', 'data'=>$models]);
     }
 
-    
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -114,7 +114,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return response()->view('cms.category.edit', ['category' => $category]);  
+        return response()->view('cms.category.edit', ['category' => $category]);
     }
 
     /**
