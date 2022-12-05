@@ -1,10 +1,8 @@
 @extends('cms.parent');
-
 @section('title',__('cms.spareparts'))
 @section('page-lg',__('cms.home'))
 @section('main-pg-md',__('cms.spare_part_Management'))
 @section('page-md',__('cms.read_sparepart'))
-
 @section('Content')
 <div id="kt_app_content" class="app-content flex-column-fluid">
     <!--begin::Content container-->
@@ -16,17 +14,15 @@
                 <!--begin::Card title-->
                 <div class="card-title">
                     <!--begin::Search-->
-
+                
                     <!--end::Search-->
                 </div>
                 <!--end::Card title-->
                 <!--begin::Card toolbar-->
                 <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
-
+                
                     <!--begin::Add product-->
-
                     <a href="{{route('spareparts.create' )}}" class="btn btn-primary">{{__('cms.create_new_spare_part')}}</a>
-
                     <!--end::Add product-->
                 </div>
                 <!--end::Card toolbar-->
@@ -40,8 +36,7 @@
                     <thead>
                         <!--begin::Table row-->
                         <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-
-
+                        
                             {{-- <th class="min-w-200px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="Product: activate to sort column ascending" style="width: 206.828px;">{{__('cms.spareparts')}}</th> --}}
                             <th class=" min-w-70px sorting" tabindex="0" aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1" aria-label="Qty: activate to sort column ascending" style="width: 93.1875px;">{{__('cms.spareparts')}}</th>
 
@@ -58,7 +53,6 @@
 
 
                             <th class=" min-w-70px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 99.5938px;">{{__('cms.actions')}}</th></tr>
-
                         <!--end::Table row-->
                     </thead>
                     <!--end::Table head-->
@@ -66,14 +60,13 @@
                     <tbody class="fw-semibold text-gray-600">
                         @foreach ($spareparts as $sparepart)
 
-
+                  
                     <tr class="odd">
 
                             <!--begin::Checkbox-->
-
+                         
                             <!--end::Checkbox-->
                             <!--begin::Category=-->
-
                             {{-- <td class="">
                                 <span class="fw-bold">{{$sparepart->name}}</span>
                             </td> --}}
@@ -95,7 +88,7 @@
                                     </div>
                                 </div>
                             </td>
-
+                        
                             <td class="">
                                 <span class="fw-bold">{{$sparepart->oem_part_number}}</span>
                             </td>
@@ -114,22 +107,19 @@
                                 <a href="{{route('spareparts.edit-models',$sparepart->id)}}"
                                     class="btn btn-app bg-info ">
                                      {{$sparepart->smodels_count}}
-
+                                        
                                 </a>
                             </td>
                             <!--end::SKU=-->
                             <!--begin::Qty=-->
+                          
+                   
 
-
-
-
-
+              
                             <td>
                                 <div class="d-flex justify-content-end flex-shrink-0">
-
-
+                                    
                                     <a  href="{{route('spareparts.edit', $sparepart->id )}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-
                                         <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                                         <span class="svg-icon svg-icon-3">
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -139,9 +129,7 @@
                                         </span>
                                         <!--end::Svg Icon-->
                                     </a>
-
                                     <a href="#" onclick="confirmDelete('{{$sparepart->id}}', this)"  class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-
                                         <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                                         <span class="svg-icon svg-icon-3">
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -155,7 +143,6 @@
 
 
 
-
                                     <a href="{{route('spareparts.details',$sparepart->id)}}"  class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" data-toggle="tooltip" title="More actions">
                                         <!--begin::Svg Icon | path: icons/duotune/coding/cod001.svg-->
                                         <span class="svg-icon svg-icon-2">
@@ -166,8 +153,7 @@
                                         </span>
                                         <!--end::Svg Icon-->
                                     </a>
-
-
+                                
                                 </div>
                             </td>
                             <!--end::Action=-->
@@ -180,7 +166,7 @@
             <div class="row">
                 <div class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start">
                 </div>
-
+               
             </div>
         </div>
     </div>
@@ -217,7 +203,6 @@
         axios.delete('/cms/spareparts/'+id)
         .then(function (response) {
             console.log(response);
-
             toastr.success(response.data.message);
             reference.closest('tr').remove();
             // showMessage(response.data);
@@ -230,7 +215,6 @@
     }
 
 
-
 </script>
-
+    
 @endsection

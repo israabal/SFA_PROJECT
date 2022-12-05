@@ -23,21 +23,28 @@ class RepairProblemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-
+        $problem=Problem::all();
         // $repairProblem = RepairProblem::withCount('SparePart')->get();
+        if (auth('user-api')->check()) {
+            $repairs = Repair::where('technecal_id', auth('user-api')->user()->id)->withCount('spareparts')->with('problem')->get();
 
+            return response()->json(['data'=>$problem,$repairs,
+             'status'=>true
+            ,'message'=>'success']);
+            # code...
+           }else{
+    if (auth()->user()->can('repair-Spare-Parts')) {
 
-        if(auth()->user()->can('repair-Spare-Parts')){
-            $problem=Problem::all();
-            // $repair_problem=RepairProblem::with('problem')->get();
-            $repairs = Repair::where('technecal_id', auth('user')->user()->id)->withCount('spareparts')->with('problem')->get();
-            return response()->view('cms.repair_problem.index', compact('repairs','problem'));
+        // $repair_problem=RepairProblem::with('problem')->get();
+        $repairs = Repair::where('technecal_id', auth('user')->user()->id)->withCount('spareparts')->with('problem')->get();
 
-        }else{
-            abort(403);
-        }
+        return response()->view('cms.repair_problem.index', compact('repairs', 'problem'));
+    } else {
+        abort(403);
+    }
+}
 }
 
     /**
@@ -89,13 +96,6 @@ class RepairProblemController extends Controller
         'repair_problem','statuss','problem','repair','spareParts'));
 
       }
-
-
-
-
-
-
-
 
 
 
@@ -160,20 +160,11 @@ if( $repairProblem==null){
      */
     public function show($id)
     {
+        
         $repair = Repair::where('id', $id)->first();
-
-
-        // $spareParts=SparePartModel::where('s_model_id',$repair->problem->model->id)->with('sparePart')->get();
-
-
-        $spareParts = SparePart::all();
-
-
+        $spareParts=SparePartModel::where('s_model_id',$repair->problem->model->id)->with('sparePart')->get();
+        // $spareParts = SparePart::all();
        $repair_spareParts = $repair->spareparts;
-
-
-
-
         if (count($repair_spareParts) > 0) {
             foreach ($spareParts as $smodel) {
                 $smodel->setAttribute('assigned', false);

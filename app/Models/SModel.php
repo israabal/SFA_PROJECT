@@ -18,7 +18,7 @@ class SModel extends Model
 
     public function getActiveStatusAttribute()
     {
-        
+
        return $this->active ? 'Active' : 'InActive';
     }
     public function admin(){
@@ -44,6 +44,6 @@ class SModel extends Model
     }
     public function getMainImageAttribute()
     {
-        return $this->images()->first()->url;
+        return $this->images()->first();
     }
 }
